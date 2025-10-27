@@ -2417,3 +2417,9 @@ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
     * Failure *
     * * * * * *
 _/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2025-10-27 16:52:01,616 [main] INFO  (DfRefreshResourceProcess#show():295) - /===========================================================================
+2025-10-27 16:52:01,622 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Refreshing [dbflute-hands-on] by http://localhost:8386/
+2025-10-27 16:52:01,698 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Retrying refreshing by secondary URL http://localhost:8387/ for dbflute-hands-on
+2025-10-27 16:52:01,742 [main] INFO  (DfRefreshResourceProcess#show():295) -  => success of the retry refreshing: 8387 for dbflute-hands-on
+2025-10-27 16:52:01,742 [main] INFO  (DfRefreshResourceProcess#show():295) - ==========/
+2025-10-27 16:52:01,745 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - [Final Message]: 00m00s258ms
