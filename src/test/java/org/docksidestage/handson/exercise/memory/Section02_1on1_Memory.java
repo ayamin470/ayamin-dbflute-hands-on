@@ -1,20 +1,7 @@
-package org.docksidestage.handson.exercise;
+package org.docksidestage.handson.exercise.memory;
 import org.docksidestage.handson.unit.UnitContainerTestCase;
 
-public class HandsOn02Test extends UnitContainerTestCase {
-
-    public void test_existsTestData() throws Exception {
-        // ## Arrange ##
-        int count = memberBhv.selectCount(cb -> {
-        });
-
-        // ## Act ##
-
-        // ## Assert ##
-
-        assertTrue(count > 0);
-
-    }
+public class Section02_1on1_Memory extends UnitContainerTestCase {
 }
 
 // #1on1: section2のReplaceSchemaのエラー
@@ -224,9 +211,3 @@ public class HandsOn02Test extends UnitContainerTestCase {
 //
 // A-6. それでもわからない場合はデバッガを起動
 //
-
-// TODO ayamin [読み物課題] 問題分析と問題解決を分けることがハマらない第一歩 by jflute (2025/12/02)
-// https://jflute.hatenadiary.jp/entry/20170712/analysissolving
-
-// memo:
-// "解読スキルってのは、それはそれで細かくはコツがある。" の内訳とかはハンズオンの中でおいおい // (2025/12/02)
