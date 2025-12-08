@@ -2,6 +2,19 @@ package org.docksidestage.handson.exercise;
 import org.docksidestage.handson.unit.UnitContainerTestCase;
 
 public class HandsOn02Test extends UnitContainerTestCase {
+
+    public void test_existsTestData() throws Exception {
+        // ## Arrange ##
+        int count = memberBhv.selectCount(cb -> {
+        });
+
+        // ## Act ##
+
+        // ## Assert ##
+
+        assertTrue(count > 0);
+
+    }
 }
 
 // #1on1: section2のReplaceSchemaのエラー

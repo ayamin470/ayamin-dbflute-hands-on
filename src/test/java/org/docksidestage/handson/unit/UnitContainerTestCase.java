@@ -40,7 +40,7 @@ import org.docksidestage.handson.dbflute.exentity.Purchase;
 public abstract class UnitContainerTestCase extends ContainerTestCase {
 
     @Resource
-    private MemberBhv memberBhv;
+    public MemberBhv memberBhv;
     @Resource
     private PurchaseBhv purchaseBhv;
 
