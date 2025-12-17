@@ -1,6 +1,20 @@
 package org.docksidestage.handson.exercise;
 import org.docksidestage.handson.unit.UnitContainerTestCase;
 
+// #1on1: DBFluteの基本を復習 (2025/12/17)
+// ReplaceSchemaとは？
+// JDBCとは？Docとは？Generateとは？
+
+// #1on1: ドキュメントの読み方、全部読むべきページだとしたときに、読み飛ばしがないか？
+// 目次のリンクなどから確認する習慣を (2025/12/17)
+// ザラ見が悪いわけではなく、ザラ見したことを記憶しておいて、また戻ってこれるように。
+// 見逃しても戻ってこれるなら結果オーライ。
+
+// #1on1: 思考の整理 (2025/12/17)
+// 踊り場をいっぱい作って、「いったんロジックを整理しよう」みたいな習慣。
+// 「いまわたし何がわかんないんだっけ？」ってのを自分に言い聞かせる習慣。
+// + 考えていることをメモする(テクニックの一つ)
+
 public class HandsOn02Test extends UnitContainerTestCase {
 
     public void test_existsTestData() throws Exception {

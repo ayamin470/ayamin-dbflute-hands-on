@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.dbflute.cbean.result.ListResultBean;
 import org.docksidestage.handson.dbflute.exbhv.MemberBhv;
 import org.docksidestage.handson.dbflute.exentity.Member;
 import org.docksidestage.handson.dbflute.exentity.MemberSecurity;
@@ -22,14 +23,27 @@ import org.docksidestage.handson.unit.UnitContainerTestCase;
  *  (XLog@log():43) - ===========/ [00m00s339ms (4) first={1, Stojkovic, Pixy, FML, 2007-12-01T11:01:10, 1965-03-03, 2025-11-28T09:40:35, sea, 2025-11-28T09:40:35, land, 0}@388f0878]
  */
 
+// TODO ayamin section2のCBのエクササイズを先にやりましょう by jflute (2025/12/17)
+
+// TODO ayamin javadocお願いします by jflute (2025/12/17)
  public class HandsOn03Test extends UnitContainerTestCase {
     @Resource
     private MemberBhv memberBhv;
 
+    /**
+     * [1] 会員名称がS①で始まる1968年1月1日②以前に生まれた会員を検索
+
+        会員ステータスも取得する
+        生年月日の昇順で並べる
+        会員が1968/01/01以前であることをアサート
+
+     ※"以前" の解釈は、"その日ぴったりも含む" で。 
+     */
     public void test会員名がSで始まりかつ1968年以前生まれの人を探す() {
         // 検索条件の日付を用意
         LocalDate targetDate = LocalDate.of(1968, 1, 1);
 
+        // TODO ayamin 要件漏れがあるので、実装を追加しましょう by jflute (2025/12/17)
         List<Member> memberList = memberBhv.selectList(cb -> {
             // ① 会員名がSから始まる
             cb.query().setMemberName_LikeSearch("S", op -> op.likePrefix());
@@ -38,16 +52,21 @@ import org.docksidestage.handson.unit.UnitContainerTestCase;
             cb.query().setBirthdate_LessEqual(targetDate);
         });
 
+        // #1on1: 今後は、assH + 補完 => assertHasAnyElement() をぜひ使ってください。 (2025/12/17)
         // --- 検証 ---
         assertFalse(memberList.isEmpty());
 
         for (Member member : memberList) {
             // 両方の条件を満たしているか確認
             assertTrue(member.getMemberName().startsWith("S"));
-            assertTrue(member.getBirthdate().isBefore(targetDate.plusDays(1))); // 1/1”以前”、つまり1/2未満
+            // TODO ayamin ループの回数分、1/2のインスタンスが毎回作られるのをどうにかしたい by jflute (2025/12/17)
+            // (このケースがどうのこうのではなく、こういうことに気を使える視野を持って欲しい)
+            LocalDate ichigatufutsuka = targetDate.plusDays(1); // plusした新しいインスタンスを戻してる by jflute
+            assertTrue(member.getBirthdate().isBefore(ichigatufutsuka)); // 1/1”以前”、つまり1/2未満
         }
     }
 
+    // TODO ayamin "自分用のメモ実装" って書いておきましょう by jflute (2025/12/17)
     public void test会員名がSから始まる人を探す() {
 
         // 新しくcbを作成し、会員名がSから始まる人を検索する
@@ -75,17 +94,29 @@ import org.docksidestage.handson.unit.UnitContainerTestCase;
         }
     }
 
+    // TODO ayamin "会員ステータスがFMLの会員" って言っちゃうと、絞り込みを新たに追加している by jflute (2025/12/17)
+    // 会員ステータスのFMLなどのコード値を取得するって話だったらわかるけど...
     /**
+     * [2] 会員ステータスと会員セキュリティ情報も取得して会員を検索
+
+        若い順で並べる。生年月日がない人は会員IDの昇順で並ぶようにする
+        会員ステータスと会員セキュリティ情報が存在することをアサート
+
+    ※カージナリティを意識しましょう 
+     *
      * カージナリティ：検索のピンポイント性的な指標
      * 例：会員ID＞会員の生年月日＞会員ステータス
      */
-
     public void test会員ステータスがFMLの会員のLOGIN_PASSWORDを検索() {
         // 会員ステータスと会員セキュリティ情報も取得して会員を検索
         // 若い順で並べる。生年月日がない人は会員IDの昇順で並ぶようにする
         // 会員ステータスと会員セキュリティ情報が存在することをアサート
         List<Member> memberList = memberBhv.selectList(cb -> {
-            cb.query().setMemberStatusCode_Equal_Formalized();
+            // #1on1: これは余計な絞込条件なのでコメントアウト (2025/12/17)
+            //cb.query().setMemberStatusCode_Equal_Formalized();
+            // 一方で、ネット上のサンプルSchemaHTMLを見てしまっていた。
+            // 一方で一方で、せめてこう間違えって欲しい。
+            //  e.g. cb.query().setMemberStatusCode_Equal("Formalized");
 
             for (Member member : memberList) {
                 MemberSecurity security = member.getMemberSecurityAsOne();
@@ -98,8 +129,6 @@ import org.docksidestage.handson.unit.UnitContainerTestCase;
                 assertNotNull(loginPassword);
             }
         });
-
     }
-
 }
 
