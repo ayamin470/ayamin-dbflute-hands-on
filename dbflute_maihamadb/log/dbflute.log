@@ -4932,3 +4932,36 @@ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
  Take Finally: success=0, failure=0 (in 1 files) - 00m00s004ms
   o take-finally.sql
 _/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2026-01-14 10:19:42,442 [main] INFO  (DfIntroTask#begin():52) - +------------------------------------------+
+2026-01-14 10:19:42,443 [main] INFO  (DfIntroTask#begin():53) - |                                          |
+2026-01-14 10:19:42,444 [main] INFO  (DfIntroTask#begin():54) - |                   Intro                  |
+2026-01-14 10:19:42,444 [main] INFO  (DfIntroTask#begin():55) - |                                          |
+2026-01-14 10:19:42,444 [main] INFO  (DfIntroTask#begin():56) - +------------------------------------------+
+2026-01-14 10:19:42,461 [main] INFO  (DfAbstractTask#preparePublicProperties():280) - ...Loading https://dbflute.org/meta/public.properties
+2026-01-14 10:19:42,845 [main] INFO  (DfIntroTask#doExecute():87) - ...Downloading DBFlute Intro to ../dbflute-intro.jar
+2026-01-14 10:19:42,845 [main] INFO  (DfIntroTask#doExecute():88) -     from https://github.com/dbflute/dbflute-intro/releases/download/dbflute-intro-0.6.0/dbflute-intro.jar
+2026-01-14 10:19:45,517 [main] INFO  (DfRefreshResourceProcess#show():295) - /===========================================================================
+2026-01-14 10:19:45,517 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Refreshing [dbflute-hands-on] by http://localhost:8386/
+2026-01-14 10:19:45,519 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Retrying refreshing by default secondary URL http://localhost:8387/
+2026-01-14 10:19:45,519 [main] INFO  (DfRefreshResourceProcess#show():295) - Failed to refresh the resources (continued): url=http://localhost:8386/, cause=ConnectException(Connection refused)
+2026-01-14 10:19:45,519 [main] INFO  (DfRefreshResourceProcess#show():295) - ==========/
+2026-01-14 10:19:45,522 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m03s077ms
+
+  DBFLUTE_CLIENT: {maihamadb}
+    database  = mysql
+    language  = java
+    container = lasta_di
+    package   = org.docksidestage.handson.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    schema = {maihamadb.$$NoNameSchema$$ as main}
+    user   = maihamadb
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {df-intro}
