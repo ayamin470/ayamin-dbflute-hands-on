@@ -1,6 +1,5 @@
 package org.docksidestage.handson.exercise;
 import javax.annotation.Resource;
-
 import org.dbflute.cbean.result.ListResultBean;
 import org.docksidestage.handson.dbflute.exbhv.MemberBhv;
 import org.docksidestage.handson.dbflute.exentity.Member;
@@ -20,10 +19,8 @@ public class HandsOn02Test extends UnitContainerTestCase {
         //TODO done 絞込み条件なしのシンプルな検索処理を実装してみましょう
 
         // ## Arrange ##
-
         // ## Act ##
         int count = memberBhv.selectCount(cb -> {
-
         });
 
         // ## Assert ##
@@ -47,13 +44,13 @@ public class HandsOn02Test extends UnitContainerTestCase {
         // ## Assert ##
         //検索結果が空ではないこと
         assertHasAnyElement(memberList);
-
         //会員名がSから始まること
         for (Member member : memberList) {
             String memberName = member.getMemberName();
             log("検索された会員: " + memberName);
             assertTrue(memberName.startsWith("S"));
         }
+
     }
 
 
