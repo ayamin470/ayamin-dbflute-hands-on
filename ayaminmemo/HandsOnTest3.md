@@ -1,5 +1,5 @@
 ### set up select
-https://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/setupselect/index.html
+- https://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/setupselect/index.html
 
 ### Docタスクの実行
 - dbflute_maihamadbディレクトリで``./manage.sh``を実行 
@@ -13,6 +13,16 @@ https://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/setupselect
     └── doc/
     ├── schema-maihamadb.html  <-- これ
 ````
+
+### カージナリティ(Cardinality)
+- テーブル同士の「1対1」や「1対多」といった対応関係(数)のこと
+- DBfluteでは「n対1」なのか「多対1」なのかでメソッドが変わる(Asoneがつくかどうか)
+
+### OptinalEnitity
+- DBfluteでは、基点テーブルから親テーブルにデータを取りにいく時、中身が存在するか分からないので、OptionalEntity型で検索結果を返す仕組みになっている
+- MemberStatusは基本的にDB上には存在する(はず)。が、setupSelectを書き忘れるとmember.getMemberStatus()がnullになって、ぬるぽになる、それを防ぐ
+
+### .map .orelse
 
 ### 進捗memo
 - 1時間で1問 

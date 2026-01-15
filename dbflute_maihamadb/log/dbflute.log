@@ -4965,3 +4965,89 @@ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
     repsEnvType      = ut
     refreshProject   = $$AutoDetect$$
 _/_/_/_/_/_/_/_/_/_/ {df-intro}
+2026-01-15 10:18:18,702 [main] INFO  (DfReplaceSchemaTask#begin():94) - +------------------------------------------+
+2026-01-15 10:18:18,703 [main] INFO  (DfReplaceSchemaTask#begin():95) - |                                          |
+2026-01-15 10:18:18,703 [main] INFO  (DfReplaceSchemaTask#begin():96) - |              ReplaceSchema               |
+2026-01-15 10:18:18,705 [main] INFO  (DfReplaceSchemaTask#begin():99) - |               (AlterCheck)               |
+2026-01-15 10:18:18,705 [main] INFO  (DfReplaceSchemaTask#begin():104) - |                                          |
+2026-01-15 10:18:18,705 [main] INFO  (DfReplaceSchemaTask#begin():105) - +------------------------------------------+
+2026-01-15 10:18:18,706 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():423) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2026-01-15 10:18:30,681 [main] INFO  (DfReplaceSchemaTask#begin():110) - *The execution of ReplaceSchema was cancelled.
+2026-01-15 10:18:30,697 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m11s990ms *Abort
+
+  DBFLUTE_CLIENT: {maihamadb}
+    database  = mysql
+    language  = java
+    container = lasta_di
+    package   = org.docksidestage.handson.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+    * * * * * * *
+    * Cancelled *
+    * * * * * * *
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2026-01-15 10:18:47,314 [main] INFO  (TorqueDocumentationTask#begin():193) - +------------------------------------------+
+2026-01-15 10:18:47,315 [main] INFO  (TorqueDocumentationTask#begin():194) - |                                          |
+2026-01-15 10:18:47,315 [main] INFO  (TorqueDocumentationTask#begin():195) - |                   Doc                    |
+2026-01-15 10:18:47,315 [main] INFO  (TorqueDocumentationTask#begin():203) - |                                          |
+2026-01-15 10:18:47,315 [main] INFO  (TorqueDocumentationTask#begin():204) - +------------------------------------------+
+2026-01-15 10:18:47,324 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2026-01-15 10:18:47,324 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2026-01-15 10:18:47,324 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+2026-01-15 10:18:47,324 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = maihamadb
+2026-01-15 10:18:47,325 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():265) - 
+2026-01-15 10:18:47,325 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():266) - * * * * * * * * * * *
+2026-01-15 10:18:47,325 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():267) - *                   *
+2026-01-15 10:18:47,325 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():268) - *    Schema HTML    *
+2026-01-15 10:18:47,325 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():269) - *                   *
+2026-01-15 10:18:47,325 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():270) - * * * * * * * * * * *
+2026-01-15 10:18:47,341 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2026-01-15 10:18:47,376 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2026-01-15 10:18:47,377 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2026-01-15 10:18:47,377 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2026-01-15 10:18:47,377 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2026-01-15 10:18:47,377 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2026-01-15 10:18:47,378 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2026-01-15 10:18:47,378 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2026-01-15 10:18:47,378 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2026-01-15 10:18:47,379 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2026-01-15 10:18:47,384 [main] INFO  (DfClsDeploymentInitializer#initializeClassificationDeployment():67) - ...Initializing ClassificationDeployment: project=maihamadb
+2026-01-15 10:18:47,405 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():253) - generator.parse("doc/ControlDocument.vm", ctx);
+2026-01-15 10:18:47,408 [main] INFO  (DfFlutistLog4JLogSystem#init():45) - ...Suppressing velocity.log, which is unneeded for also debug
+2026-01-15 10:18:47,445 [main] INFO  (Database#doEnableDocumentOutputDirectory():1241) - ...Setting up documentOutputDirectory: ./output/doc
+2026-01-15 10:18:47,448 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():242) - ...Loading schema history
+2026-01-15 10:18:47,456 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():246) -  -> found history: count=1
+2026-01-15 10:18:47,474 [main] INFO  (DfSchemaHtmlDataArrangeQuery#getArrangeQueryTableMap():50) -  
+2026-01-15 10:18:47,475 [main] INFO  (DfSchemaHtmlDataArrangeQuery#getArrangeQueryTableMap():51) - ...Setting up arrange queries for documents (ArrangeQueryDoc)
+2026-01-15 10:18:47,489 [main] INFO  (DfArrangeQueryDocSetupper#doExtractArrangeQuery():106) -  -> no arrange query
+2026-01-15 10:18:47,583 [main] INFO  (DfRefreshResourceProcess#show():295) - /===========================================================================
+2026-01-15 10:18:47,584 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Refreshing [dbflute-hands-on] by http://localhost:8386/
+2026-01-15 10:18:47,597 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Retrying refreshing by default secondary URL http://localhost:8387/
+2026-01-15 10:18:47,598 [main] INFO  (DfRefreshResourceProcess#show():295) - Failed to refresh the resources (continued): url=http://localhost:8386/, cause=ConnectException(Connection refused)
+2026-01-15 10:18:47,598 [main] INFO  (DfRefreshResourceProcess#show():295) - ==========/
+2026-01-15 10:18:47,599 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s289ms
+
+  DBFLUTE_CLIENT: {maihamadb}
+    database  = mysql
+    language  = java
+    container = lasta_di
+    package   = org.docksidestage.handson.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    schema = {maihamadb.$$NoNameSchema$$ as main}
+    user   = maihamadb
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Doc}
