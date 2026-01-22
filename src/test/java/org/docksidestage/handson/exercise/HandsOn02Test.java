@@ -50,8 +50,72 @@ public class HandsOn02Test extends UnitContainerTestCase {
             log("検索された会員: " + memberName);
             assertTrue(memberName.startsWith("S"));
         }
+    }
+    public void test_会員IDが1の会員を検索() {
+        //会員IDが1の会員を検索
+        //一件検索として検索すること
+        //会員IDが1であることをアサート
+
+        // ## Arrange ##
+        // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            // 会員IDが1に等しい条件を設定
+            cb.query().setMemberId_Equal(1);
+        });
+
+        // ## Assert ##
+        assertHasAnyElement(memberList);
+        for (Member member : memberList) {
+            log("検索された会員: " + member.getMemberName() + ", ID=" + member.getMemberId());
+            assertEquals(1, member.getMemberId());
+        }
+    }
+
+    public void test_会員IDを99999で検索() {
+        //会員IDが1の会員を検索
+        //一件検索として検索すること
+        //会員IDが1であることをアサート
+
+        // ## Arrange ##
+        // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            // 会員IDが1に等しい条件を設定
+            cb.query().setMemberId_Equal(99999);
+        });
+
+        // ## Assert ##
+        assertHasAnyElement(memberList);
+
+        for (Member member : memberList) {
+            log("検索された会員: " + member.getMemberName() + ", ID=" + member.getMemberId());
+
+            assertEquals(99999, member.getMemberId());
+        }
+    }
+
+    public void test_生年月日がない会員を検索(){
+        //更新日時の降順で並べる
+        //生年月日がないことをアサート
+
+        // ## Arrange ##
+        // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            cb.query().setBirthdate_IsNull();
+            cb.query().addOrderBy_UpdateDatetime_Desc();
+        });
+
+        // ## Assert ##
+        assertHasAnyElement(memberList);
+        for (Member member : memberList) {
+            log("検索された会員: " + member.getMemberName()
+                    + ", 生年月日=" + member.getBirthdate()
+                    + ", 更新日時=" + member.getUpdateDatetime());
+            assertNull(member.getBirthdate());
+        }
+
 
     }
 
 
 }
+
