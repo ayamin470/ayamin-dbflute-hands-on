@@ -31,11 +31,11 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
-            // TODO ayamin 実装順序は、データの取得、絞り込み、並び替え by jflute (2026/01/16)
+            // TODO done ayamin 実装順序は、データの取得、絞り込み、並び替え by jflute (2026/01/16)
             //  => http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/effective.html#implorder
+            cb.setupSelect_MemberStatus(); //(setupSelect:会員テーブル(member_status)を取得)
             cb.query().setMemberName_LikeSearch("S", op -> op.likePrefix()); //Sから始まる人を検索
             cb.query().setBirthdate_LessEqual(targetDate); //生まれが基準日以前を検索
-            cb.setupSelect_MemberStatus(); //(setupSelect:会員テーブル(member_status)を取得)
             cb.query().addOrderBy_Birthdate_Asc(); //昇順
         });
 
@@ -48,8 +48,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
             log("検索された会員: " + member.getMemberName() + ", 生年月日: " + birthdate);
             // #1on1: afterにして否定にするのGood (2026/01/16)
             //assertTrue(birthdate.isBefore(targetDate) || birthdate.isEqual(targetDate));
-            // TODO ayamin assertFalse()を使っちゃいましょう by jflute (2026/01/16)
-            assertTrue(!birthdate.isAfter(targetDate));
+            // TODO done ayamin assertFalse()を使っちゃいましょう by jflute (2026/01/16)
+            assertFalse(birthdate.isAfter(targetDate));
         }
     }
 

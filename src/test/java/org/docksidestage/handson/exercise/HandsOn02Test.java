@@ -24,9 +24,9 @@ public class HandsOn02Test extends UnitContainerTestCase {
         });
 
         // ## Assert ##
-        // TODO ayamin どうせログ出すなら、assertより前に出して、assertで落ちた時に見られるようにしよう by jflute (2026/01/16)
-        assertTrue(count > 0);
+        // TODO done ayamin どうせログ出すなら、assertより前に出して、assertで落ちた時に見られるようにしよう by jflute (2026/01/16)
         log("会員の総数: " + count);
+        assertTrue(count > 0);
     }
 
     public void test_会員名称がSで始まる会員を検索() {
@@ -53,6 +53,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
             assertTrue(memberName.startsWith("S"));
         }
     }
+    // TODO done ayamin 続きのエクササイズもぜひどうぞ by jflute (2026/01/16)
     public void test_会員IDが1の会員を検索() {
         //会員IDが1の会員を検索
         //一件検索として検索すること
@@ -90,7 +91,6 @@ public class HandsOn02Test extends UnitContainerTestCase {
 
         for (Member member : memberList) {
             log("検索された会員: " + member.getMemberName() + ", ID=" + member.getMemberId());
-
             assertEquals(99999, member.getMemberId());
         }
     }
@@ -130,7 +130,5 @@ public class HandsOn02Test extends UnitContainerTestCase {
         // setMemberName_LikeSearch("S%", op -> op.likePrefix()); // "S%" で始まる人
         //  → where dfloc.MEMBER_NAME like 'S|%%' escape '|' 
     }
-    
-    // TODO ayamin 続きのエクササイズもぜひどうぞ by jflute (2026/01/16)
 }
 
