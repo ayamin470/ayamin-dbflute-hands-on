@@ -13,6 +13,7 @@ import org.docksidestage.handson.unit.UnitContainerTestCase;
  * @author ayamin
  * @author jflute
  */
+// TODO ayami.hatano コード補完：https://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/howto.html#completion  (2026/01/27)
 public class HandsOn03Test extends UnitContainerTestCase {
 
     @Resource
@@ -99,6 +100,28 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // 必ず存在する1:1なのか？
             // いないかもしれない1:1なのか？
             // を気にしてみてください。
+        }
+    }
+
+    public void test_会員セキュリティ情報のリマインダ質問で2という文字が含まれている会員を検索() {
+        // [3] 会員セキュリティ情報のリマインダ質問で2という文字が含まれている会員を検索
+        // 会員セキュリティ情報のデータ自体は要らない
+        // (Actでの検索は本番でも実行されることを想定し、テスト都合でパフォーマンス劣化させないこと)
+        // リマインダ質問に2が含まれていることをアサート
+        // アサートするために別途検索処理を入れても誰も文句は言わない
+
+        //memo:ER図から、MEMBER_IDがPK = FKである(黒い丸がついていない)ので、setupselectが使える
+        //memo:reminderAnswerはなぜかString型で入ってる
+        //memo:for文のgetReminderAnswerは冗長かも、変数に入れちゃう方がいいかも
+        ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            cb.setupSelect_MemberSecurityAsOne();
+            cb.query().queryMemberSecurityAsOne().setReminderAnswer_Equal("2");
+        });
+
+        assertHasAnyElement(memberList);
+        for (Member member : memberList) {
+            log("検索された会員: " + member.getMemberName() + " 回答: " + member.getMemberSecurityAsOne().get().getReminderAnswer());
+            assertEquals("2", member.getMemberSecurityAsOne().get().getReminderAnswer());
         }
     }
 }
