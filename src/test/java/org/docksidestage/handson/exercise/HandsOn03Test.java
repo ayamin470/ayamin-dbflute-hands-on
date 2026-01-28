@@ -3,8 +3,8 @@ import java.time.LocalDate;
 import javax.annotation.Resource;
 
 import org.dbflute.cbean.result.ListResultBean;
-import org.dbflute.optional.OptionalEntity;
 import org.docksidestage.handson.dbflute.exbhv.MemberBhv;
+import org.docksidestage.handson.dbflute.exbhv.MemberStatusBhv;
 import org.docksidestage.handson.dbflute.exentity.Member;
 import org.docksidestage.handson.dbflute.exentity.MemberStatus;
 import org.docksidestage.handson.unit.UnitContainerTestCase;
@@ -18,6 +18,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
     @Resource
     private MemberBhv memberBhv;
+    @Resource
+    private MemberStatusBhv memberStatusBhv;
 
     public void test_会員名称がSで始まる1968年1月1日以前に生まれた会員を検索(){
         //[1] 会員名称がSで始まる1968年1月1日以前に生まれた会員を検索
@@ -113,15 +115,41 @@ public class HandsOn03Test extends UnitContainerTestCase {
         //memo:ER図から、MEMBER_IDがPK = FKである(黒い丸がついていない)ので、setupselectが使える
         //memo:reminderAnswerはなぜかString型で入ってる
         //memo:for文のgetReminderAnswerは冗長かも、変数に入れちゃう方がいいかも
+
+        // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             cb.setupSelect_MemberSecurityAsOne();
             cb.query().queryMemberSecurityAsOne().setReminderAnswer_Equal("2");
         });
 
+        // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
             log("検索された会員: " + member.getMemberName() + " 回答: " + member.getMemberSecurityAsOne().get().getReminderAnswer());
             assertEquals("2", member.getMemberSecurityAsOne().get().getReminderAnswer());
         }
     }
-}
+
+    public void test_会員ステータスの表示順カラムで会員を並べて検索(){
+        //[4] 会員ステータスの表示順カラムで会員を並べて検索
+        //会員ステータスの "表示順" カラムの昇順で並べる
+        //会員ステータスのデータ自体は要らない
+        //その次には、会員の会員IDの降順で並べる
+        //会員ステータスのデータが取れていないことをアサート
+        //会員が会員ステータスごとに固まって並んでいることをアサート (順序は問わない)
+
+        //memo:setupSelectせずに会員ステータスを調べるにはどうしたら良いか？(setupSelectはJOINとSELECT両方やっている気がする)▶︎cb.query()だけやる？
+        //memo:固まっていることをアサートするにはどうするか？▶︎一度変数に入れて、次に見たものがnullまたは同じものだったらアウト、みたいにしたい
+
+        // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
+            cb.query().addOrderBy_MemberId_Desc();
+        });
+
+        // ## Assert ##
+        assertHasAnyElement(memberList);
+        // TODO ayami.hatano この下をやってね (2026/01/28)
+
+        }
+    }
