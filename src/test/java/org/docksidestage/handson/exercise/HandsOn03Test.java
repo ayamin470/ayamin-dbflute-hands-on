@@ -1,5 +1,8 @@
 package org.docksidestage.handson.exercise;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.dbflute.cbean.result.ListResultBean;
@@ -116,6 +119,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
         //memo:reminderAnswerはなぜかString型で入ってる
         //memo:for文のgetReminderAnswerは冗長かも、変数に入れちゃう方がいいかも
 
+        // TODO ayami.hatano 会員セキュリティ情報のデータ自体は要らない (2026/01/29)
+        // TODO ayami.hatano handson02 も要件を満たしているか確認する (2026/01/29)
+        // TODO ayami.hatano [6]まで解き切る (2026/01/29)
+
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             cb.setupSelect_MemberSecurityAsOne();
@@ -132,9 +139,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
     public void test_会員ステータスの表示順カラムで会員を並べて検索(){
         //[4] 会員ステータスの表示順カラムで会員を並べて検索
-        //会員ステータスの "表示順" カラムの昇順で並べる
-        //会員ステータスのデータ自体は要らない
-        //その次には、会員の会員IDの降順で並べる
+        //済：会員ステータスの "表示順" カラムの昇順で並べる
+        //済：会員ステータスのデータ自体は要らない
+        //済：その次には、会員の会員IDの降順で並べる
         //会員ステータスのデータが取れていないことをアサート
         //会員が会員ステータスごとに固まって並んでいることをアサート (順序は問わない)
 
@@ -149,7 +156,35 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
-        // TODO ayami.hatano この下をやってね (2026/01/28)
+        List<String> historyStatusList = new ArrayList<>();
+        String previousStatusCode = null;
 
+        for (Member member : memberList) {
+            assertFalse(member.getMemberStatus().isPresent());
+
+            String currentStatusCode = member.getMemberStatusCode();
+            log("検索された会員: " + member.getMemberName() + ", 会員ID: " + member.getMemberId() + ", ステータス: " + member.getMemberStatusCode());
+
+            if (previousStatusCode != null && !currentStatusCode.equals(previousStatusCode)) {
+
+                if (historyStatusList.contains(currentStatusCode)) {
+                    fail("会員ステータスが固まって表示されていません: " + currentStatusCode + " が再登場しました");
+                }
+            }
+
+            historyStatusList.add(currentStatusCode);
+            previousStatusCode = currentStatusCode;
         }
     }
+
+    public void test_生年月日が存在する会員の購入を検索() {
+        //[5]会員名称と会員ステータス名称と商品名を取得する(ログ出力)
+        //購入日時の降順、購入価格の降順、商品IDの昇順、会員IDの昇順で並べる
+        //OrderBy がたくさん追加されていることをログで目視確認すること
+        //購入に紐づく会員の生年月日が存在することをアサート
+
+
+    }
+
+
+}
