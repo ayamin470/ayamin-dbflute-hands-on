@@ -37,9 +37,12 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
-            // TODO done ayamin 実装順序は、データの取得、絞り込み、並び替え by jflute (2026/01/16)
+            // done ayamin 実装順序は、データの取得、絞り込み、並び替え by jflute (2026/01/16)
             //  => http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/effective.html#implorder
             cb.setupSelect_MemberStatus(); //(setupSelect:会員テーブル(member_status)を取得)
+            // #1on1: 前方一致想定のものがユーザー入力で部分一致になったら攻撃の穴になる (2026/01/30)
+            // なので、like検索もワイルドカードが入力されたときは、単なる文字として扱うようにエスケープする。
+            // DBFluteのConditionBeanは、それを自動でエスケープされるようになっている。
             cb.query().setMemberName_LikeSearch("S", op -> op.likePrefix()); //Sから始まる人を検索
             cb.query().setBirthdate_LessEqual(targetDate); //生まれが基準日以前を検索
             cb.query().addOrderBy_Birthdate_Asc(); //昇順
@@ -54,7 +57,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             log("検索された会員: " + member.getMemberName() + ", 生年月日: " + birthdate);
             // #1on1: afterにして否定にするのGood (2026/01/16)
             //assertTrue(birthdate.isBefore(targetDate) || birthdate.isEqual(targetDate));
-            // TODO done ayamin assertFalse()を使っちゃいましょう by jflute (2026/01/16)
+            // done ayamin assertFalse()を使っちゃいましょう by jflute (2026/01/16)
             assertFalse(birthdate.isAfter(targetDate));
         }
     }
@@ -126,6 +129,11 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             cb.setupSelect_MemberSecurityAsOne();
+            // TODO ayamin 要件の対象カラムを間違えている (指差し確認しましょう) by jflute (2026/01/30)
+            // TODO ayamin なのでUnitTestも落ちてる (実行してgreenを確認確認しましょう) by jflute (2026/01/30)
+            // #1on1: 関連テーブル側(1:1)のカラムでの絞り込みのやり方Good (2026/01/30)
+            // cb.query()... は基点テーブルのカラムの絞り込みなので、
+            // cb.query().queryMemberSecurityAsOne()... query,queryで繋げることで関連テーブルの絞り込みができる。
             cb.query().queryMemberSecurityAsOne().setReminderAnswer_Equal("2");
         });
 
@@ -136,7 +144,25 @@ public class HandsOn03Test extends UnitContainerTestCase {
             assertEquals("2", member.getMemberSecurityAsOne().get().getReminderAnswer());
         }
     }
+    // #1on1: 自然言語大事。特にjavatryに比べて世界観が業務的な表現が多くなった。 (2026/01/30)
+    // 正確にプログラムを書くためには、要件の自然言語の解釈を正しくすることが大事。
+    // どれだけ立派なプログラムを書いても、要件と違っていたらバグだし価値がない。
+    // 要件に合ったプログラムを書くから、お金がもらえる。
+    // 要件に合ったプログラムを書ける人 (間違えない人) は仕事ができる人と言っても過言では無い。
+    //
+    // 要件をしっかり読めるようになるためには、日本語力以外に何かあるか？
+    // (2という文字が含まれている、の意味がわからなかった話)
+    // o 日本語表現を知っていれば(慣れていれば)、読み飛ばさない
+    // o 一方で、わからないこと曖昧なこと(表現)を、読み飛ばさずに調べることができたら...
+    // 1とか2という選択肢のことかな？って自分の中で推測で先に進んじゃった。
+    // 推測は悪く無い、でも推測は推測のままで進めて、後で推測を確証する工程を忘れないこと。
+    // でないと、推測がどこかで勝手に確定事項に自然と変わってしまう。
+    // TODO ayamin [読み物課題] 自分の中でデマを広げさせない by jflute (2026/01/30)
+    // https://jflute.hatenadiary.jp/entry/20110619/nodema
+    // TODO ayamin [読み物課題] 論理的矛盾が発生したら、思い込み前提を探す by jflute (2026/01/30)
+    // https://jflute.hatenadiary.jp/entry/20180831/contradictionstep
 
+    // TODO jflute 次回1on1ここから (2026/01/30)
     public void test_会員ステータスの表示順カラムで会員を並べて検索(){
         //[4] 会員ステータスの表示順カラムで会員を並べて検索
         //済：会員ステータスの "表示順" カラムの昇順で並べる

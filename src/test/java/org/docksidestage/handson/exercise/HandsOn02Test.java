@@ -24,7 +24,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
         });
 
         // ## Assert ##
-        // TODO done ayamin どうせログ出すなら、assertより前に出して、assertで落ちた時に見られるようにしよう by jflute (2026/01/16)
+        // done ayamin どうせログ出すなら、assertより前に出して、assertで落ちた時に見られるようにしよう by jflute (2026/01/16)
         log("会員の総数: " + count);
         assertTrue(count > 0);
     }
@@ -53,7 +53,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
             assertTrue(memberName.startsWith("S"));
         }
     }
-    // TODO done ayamin 続きのエクササイズもぜひどうぞ by jflute (2026/01/16)
+    // done ayamin 続きのエクササイズもぜひどうぞ by jflute (2026/01/16)
     public void test_会員IDが1の会員を検索() {
         //会員IDが1の会員を検索
         //一件検索として検索すること
@@ -61,6 +61,15 @@ public class HandsOn02Test extends UnitContainerTestCase {
 
         // ## Arrange ##
         // ## Act ##
+        // #1on1: PK制約、PrimaryKey制約、Constraint、PrimaryなKeyであることをチェックしている。 (2026/01/30)
+        // PrimaryなKeyというのは、メインで一意にレコードを特定できるキーのこと。それを保証している。
+        // (すでに1番が存在しているのに、新たに1番を登録しようとするとエラーになるようになっている)
+        // #1on1: であれば、この検索は絶対に1件しか取れないので...リストで取得する必要があるだろうか？ (2026/01/30)
+        // 必要はないかもしれないけど動作はする。でも、可読性的に「複数来るのかな!?」って紛らわしい。
+        // 案1: get(0)でもいいかもだけどなかったときの配慮が乏しい...し、結局DBFluteの中で無駄にListを作ってしまている。
+        // 案2: DBFluteで複数件ではなく一件だけ検索したいのどうすればいい？ってググったりAIに聞く。
+        // プログラム全体に言える話で、複数件と一件の処理では事務的な処理が変わってくるので、常に意識しておいて欲しい。
+        // (「0」と「1」と「2以降」の3種類、これらは扱いが全然違う)
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             // 会員IDが1に等しい条件を設定
             cb.query().setMemberId_Equal(1);
@@ -69,6 +78,8 @@ public class HandsOn02Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
+            // TODO ayamin リファクタリングトレーニング、getMemberId()を変数に抽出してみましょう by jflute (2026/01/30)
+            // IntelliJだと、control+T でリファクタリングメニューが出てきて、変数抽出があるはず。
             log("検索された会員: " + member.getMemberName() + ", ID=" + member.getMemberId());
             assertEquals(1, member.getMemberId());
         }
@@ -77,11 +88,13 @@ public class HandsOn02Test extends UnitContainerTestCase {
     public void test_会員IDを99999で検索() {
         //会員IDが1の会員を検索
         //一件検索として検索すること
+        // TODO ayamin コメントが 1 になってる1 by jflute (2026/01/30)
         //会員IDが1であることをアサート
 
         // ## Arrange ##
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            // TODO ayamin コメントが 1 になってる2 by jflute (2026/01/30)
             // 会員IDが1に等しい条件を設定
             cb.query().setMemberId_Equal(99999);
         });
@@ -102,6 +115,11 @@ public class HandsOn02Test extends UnitContainerTestCase {
         // ## Arrange ##
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            // #1on1 _Equal(null) と _IsNull() の違い (2026/01/30)
+            // ConditionBean的には、もうデフォルトでは null をそもそも指定できない(実行時例外)。
+            // SQL的には、「where BIRTHDATE = null」 と 「where BIRTHDATE is null」 の違い。
+            // BIRTHDATE = null は、nullだろうがなんだろうが絶対にヒットしない。(絶対に0件)
+            // null は値では無い。空っぽという状態を示すもの。なので、SQLでは is null という決め。
             cb.query().setBirthdate_IsNull();
             cb.query().addOrderBy_UpdateDatetime_Desc();
         });
@@ -109,6 +127,8 @@ public class HandsOn02Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
+            // TODO ayamin BIRTHDATEは主役だし、2箇所で登場しているから、変数抽出してみましょう by jflute (2026/01/30)
+            // IntelliJだと、control+T でリファクタリングメニューが出てきて、変数抽出があるはず。
             log("検索された会員: " + member.getMemberName()
                     + ", 生年月日=" + member.getBirthdate()
                     + ", 更新日時=" + member.getUpdateDatetime());
