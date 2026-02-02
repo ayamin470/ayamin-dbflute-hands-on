@@ -7,8 +7,10 @@ import javax.annotation.Resource;
 
 import org.dbflute.cbean.result.ListResultBean;
 import org.docksidestage.handson.dbflute.exbhv.MemberBhv;
+import org.docksidestage.handson.dbflute.exbhv.MemberSecurityBhv;
 import org.docksidestage.handson.dbflute.exbhv.MemberStatusBhv;
 import org.docksidestage.handson.dbflute.exentity.Member;
+import org.docksidestage.handson.dbflute.exentity.MemberSecurity;
 import org.docksidestage.handson.dbflute.exentity.MemberStatus;
 import org.docksidestage.handson.unit.UnitContainerTestCase;
 
@@ -22,7 +24,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     @Resource
     private MemberBhv memberBhv;
     @Resource
-    private MemberStatusBhv memberStatusBhv;
+    private MemberSecurityBhv memberSecurityBhv;
 
     public void test_会員名称がSで始まる1968年1月1日以前に生まれた会員を検索(){
         //[1] 会員名称がSで始まる1968年1月1日以前に生まれた会員を検索
@@ -122,26 +124,28 @@ public class HandsOn03Test extends UnitContainerTestCase {
         //memo:reminderAnswerはなぜかString型で入ってる
         //memo:for文のgetReminderAnswerは冗長かも、変数に入れちゃう方がいいかも
 
-        // TODO ayami.hatano 会員セキュリティ情報のデータ自体は要らない (2026/01/29)
+        // TODO done ayami.hatano 2という「文字が含まれている」に注意 (2026/01/29)
+        // TODO done ayami.hatano 会員セキュリティ情報のデータ自体は要らない (2026/01/29)
         // TODO ayami.hatano handson02 も要件を満たしているか確認する (2026/01/29)
-        // TODO ayami.hatano [6]まで解き切る (2026/01/29)
+        // TODO ayami.hatano 曖昧性に気づくには？▶︎推測のまま動かない▶︎推測をしていることを自覚する、推測を確証する工程を踏む (2026/01/30)
+        // TODO done ayamin 要件の対象カラムを間違えている (指差し確認しましょう) by jflute (2026/01/30)
+        // TODO done なのでUnitTestも落ちてる (実行してgreenを確認確認しましょう) by jflute (2026/01/30)
+        // TODO ayami.hatano linter使ってみる (2026/02/02)
+        // #1on1: 関連テーブル側(1:1)のカラムでの絞り込みのやり方Good (2026/01/30)
+        // cb.query()... は基点テーブルのカラムの絞り込みなので、
+        // cb.query().queryMemberSecurityAsOne()... query,queryで繋げることで関連テーブルの絞り込みができる。
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
-            cb.setupSelect_MemberSecurityAsOne();
-            // TODO ayamin 要件の対象カラムを間違えている (指差し確認しましょう) by jflute (2026/01/30)
-            // TODO ayamin なのでUnitTestも落ちてる (実行してgreenを確認確認しましょう) by jflute (2026/01/30)
-            // #1on1: 関連テーブル側(1:1)のカラムでの絞り込みのやり方Good (2026/01/30)
-            // cb.query()... は基点テーブルのカラムの絞り込みなので、
-            // cb.query().queryMemberSecurityAsOne()... query,queryで繋げることで関連テーブルの絞り込みができる。
-            cb.query().queryMemberSecurityAsOne().setReminderAnswer_Equal("2");
+            cb.query().queryMemberSecurityAsOne().setReminderQuestion_LikeSearch("2", op -> op.likeContain());
         });
-
         // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
-            log("検索された会員: " + member.getMemberName() + " 回答: " + member.getMemberSecurityAsOne().get().getReminderAnswer());
-            assertEquals("2", member.getMemberSecurityAsOne().get().getReminderAnswer());
+            memberSecurityBhv.selectByPK(member.getMemberId()).alwaysPresent(security -> {
+                log("検索された会員: " + member.getMemberName() + " " + security.getReminderQuestion());
+                assertTrue(security.getReminderQuestion().contains("2"));
+            });
         }
     }
     // #1on1: 自然言語大事。特にjavatryに比べて世界観が業務的な表現が多くなった。 (2026/01/30)
