@@ -56,6 +56,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
     // done ayamin 続きのエクササイズもぜひどうぞ by jflute (2026/01/16)
     public void test_会員IDが1の会員を検索(){
         //あるはずだけど、もしID1の会員がいなかったらエラーにしたいので、.alwaysPresentを使った
+        // TODO ayami.hatano .alwaysPresentと.ifPresentの中身見る (2026/02/06)
         memberBhv.selectEntity(cb -> cb.acceptPK(1)).alwaysPresent(member -> {
             Integer memberId = member.getMemberId();
             Integer memberName = member.getMemberId();
@@ -70,7 +71,6 @@ public class HandsOn02Test extends UnitContainerTestCase {
             log("検索された会員: " + member.getMemberName());
             assertEquals(Integer.valueOf(1), member.getMemberId());
         });
-
     }
 
     public void test_思い出_会員IDが1の会員を検索() {
