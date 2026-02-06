@@ -54,7 +54,26 @@ public class HandsOn02Test extends UnitContainerTestCase {
         }
     }
     // done ayamin 続きのエクササイズもぜひどうぞ by jflute (2026/01/16)
-    public void test_会員IDが1の会員を検索() {
+    public void test_会員IDが1の会員を検索(){
+        //あるはずだけど、もしID1の会員がいなかったらエラーにしたいので、.alwaysPresentを使った
+        memberBhv.selectEntity(cb -> cb.acceptPK(1)).alwaysPresent(member -> {
+            Integer memberId = member.getMemberId();
+            Integer memberName = member.getMemberId();
+            log("検索された会員: " + memberName + ", ID: " + memberId);
+
+            assertEquals(Integer.valueOf(1), memberId);
+        });
+    }
+
+    public void test_ifPresent_成功してほしくないが成功する() {
+        memberBhv.selectEntity(cb -> cb.acceptPK(9999)).ifPresent(member -> {
+            log("検索された会員: " + member.getMemberName());
+            assertEquals(Integer.valueOf(1), member.getMemberId());
+        });
+
+    }
+
+    public void test_思い出_会員IDが1の会員を検索() {
         //会員IDが1の会員を検索
         //一件検索として検索すること
         //会員IDが1であることをアサート
@@ -78,7 +97,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
-            // TODO ayamin リファクタリングトレーニング、getMemberId()を変数に抽出してみましょう by jflute (2026/01/30)
+            // TODO done ayamin リファクタリングトレーニング、getMemberId()を変数に抽出してみましょう by jflute (2026/01/30)
             // IntelliJだと、control+T でリファクタリングメニューが出てきて、変数抽出があるはず。
             log("検索された会員: " + member.getMemberName() + ", ID=" + member.getMemberId());
             assertEquals(1, member.getMemberId());
@@ -86,16 +105,16 @@ public class HandsOn02Test extends UnitContainerTestCase {
     }
 
     public void test_会員IDを99999で検索() {
-        //会員IDが1の会員を検索
+        //会員IDが99999の会員を検索
         //一件検索として検索すること
-        // TODO ayamin コメントが 1 になってる1 by jflute (2026/01/30)
-        //会員IDが1であることをアサート
+        // TODO done ayamin コメントが 1 になってる1 by jflute (2026/01/30)
+        //会員IDが99999であることをアサート
 
         // ## Arrange ##
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             // TODO ayamin コメントが 1 になってる2 by jflute (2026/01/30)
-            // 会員IDが1に等しい条件を設定
+            // 会員IDが99999に等しい条件を設定
             cb.query().setMemberId_Equal(99999);
         });
 
