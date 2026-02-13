@@ -1,4 +1,7 @@
 package org.docksidestage.handson.exercise;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.annotation.Resource;
 
 import org.dbflute.cbean.result.ListResultBean;
@@ -99,8 +102,9 @@ public class HandsOn02Test extends UnitContainerTestCase {
         for (Member member : memberList) {
             // TODO done ayamin リファクタリングトレーニング、getMemberId()を変数に抽出してみましょう by jflute (2026/01/30)
             // IntelliJだと、control+T でリファクタリングメニューが出てきて、変数抽出があるはず。
-            log("検索された会員: " + member.getMemberName() + ", ID=" + member.getMemberId());
-            assertEquals(1, member.getMemberId());
+             Integer id = member.getMemberId();
+            log("検索された会員: " + member.getMemberName() + "検索されたMEMBERID:"+ id);
+            assertEquals(1, id);
         }
     }
 
@@ -146,12 +150,14 @@ public class HandsOn02Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
-            // TODO ayamin BIRTHDATEは主役だし、2箇所で登場しているから、変数抽出してみましょう by jflute (2026/01/30)
+            // TODO done ayamin BIRTHDATEは主役だし、2箇所で登場しているから、変数抽出してみましょう by jflute (2026/01/30)
             // IntelliJだと、control+T でリファクタリングメニューが出てきて、変数抽出があるはず。
-            log("検索された会員: " + member.getMemberName()
-                    + ", 生年月日=" + member.getBirthdate()
-                    + ", 更新日時=" + member.getUpdateDatetime());
-            assertNull(member.getBirthdate());
+            String memberName = member.getMemberName();
+            LocalDate birthdate = member.getBirthdate();
+            LocalDateTime updateDate = member.getUpdateDatetime();
+
+            log("検索された会員: " + memberName + ", 生年月日=" + birthdate + ", 更新日時=" + updateDate);
+            assertNull(birthdate);
         }
 
 
