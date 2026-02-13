@@ -120,17 +120,23 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // (Actでの検索は本番でも実行されることを想定し、テスト都合でパフォーマンス劣化させないこと)
         // リマインダ質問に2が含まれていることをアサート
         // アサートするために別途検索処理を入れても誰も文句は言わない
+        // #1on1: 検索のデータの大きな目的３つ (2026/02/13)
+        // select: データを持ってくる
+        //  where: データを絞り込む
+        //  order: データで並び替える
+        // セキュリティ情報は、そのうちの "データを持ってくる" が不要であるとのこと。
+        // ただ、会員の一覧を絞り込むために "データを絞り込む" のところで必要。
 
         //memo:ER図から、MEMBER_IDがPK = FKである(黒い丸がついていない)ので、setupselectが使える
         //memo:reminderAnswerはなぜかString型で入ってる
         //memo:for文のgetReminderAnswerは冗長かも、変数に入れちゃう方がいいかも
 
-        // TODO done ayami.hatano 2という「文字が含まれている」に注意 (2026/01/29)
-        // TODO done ayami.hatano 会員セキュリティ情報のデータ自体は要らない (2026/01/29)
+        // done ayami.hatano 2という「文字が含まれている」に注意 (2026/01/29)
+        // done ayami.hatano 会員セキュリティ情報のデータ自体は要らない (2026/01/29)
         // TODO ayami.hatano handson02 も要件を満たしているか確認する (2026/01/29)
         // TODO ayami.hatano 曖昧性に気づくには？▶︎推測のまま動かない▶︎推測をしていることを自覚する、推測を確証する工程を踏む (2026/01/30)
-        // TODO done ayamin 要件の対象カラムを間違えている (指差し確認しましょう) by jflute (2026/01/30)
-        // TODO done なのでUnitTestも落ちてる (実行してgreenを確認確認しましょう) by jflute (2026/01/30)
+        // done ayamin 要件の対象カラムを間違えている (指差し確認しましょう) by jflute (2026/01/30)
+        // done なのでUnitTestも落ちてる (実行してgreenを確認確認しましょう) by jflute (2026/01/30)
         // TODO ayami.hatano linter使ってみる (2026/02/02)
         // #1on1: 関連テーブル側(1:1)のカラムでの絞り込みのやり方Good (2026/01/30)
         // cb.query()... は基点テーブルのカラムの絞り込みなので、
@@ -144,6 +150,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
             memberSecurityBhv.selectByPK(member.getMemberId()).alwaysPresent(security -> {
+                // TODO ayamin getReminderQuestion()を抽出してみましょう (IntelliJのcontrol+Tで抽出) by jflute (2026/02/13)
                 log("検索された会員: " + member.getMemberName() + " " + security.getReminderQuestion());
                 assertTrue(security.getReminderQuestion().contains("2"));
             });
@@ -162,14 +169,17 @@ public class HandsOn03Test extends UnitContainerTestCase {
     // 1とか2という選択肢のことかな？って自分の中で推測で先に進んじゃった。
     // 推測は悪く無い、でも推測は推測のままで進めて、後で推測を確証する工程を忘れないこと。
     // でないと、推測がどこかで勝手に確定事項に自然と変わってしまう。
-    // TODO done ayamin [読み物課題] 自分の中でデマを広げさせない by jflute (2026/01/30)
+    // done ayamin [読み物課題] 自分の中でデマを広げさせない by jflute (2026/01/30)
     // https://jflute.hatenadiary.jp/entry/20110619/nodema
-    // TODO done ayamin [読み物課題] 論理的矛盾が発生したら、思い込み前提を探す by jflute (2026/01/30)
+    // done ayamin [読み物課題] 論理的矛盾が発生したら、思い込み前提を探す by jflute (2026/01/30)
     // https://jflute.hatenadiary.jp/entry/20180831/contradictionstep
 
     // TODO jflute 次回1on1ここから (2026/01/30)
-    // TODO ayami.hatano 聞く：「会員ステータスのデータ自体は要らない」場合、どのようにクエリを書くべき？ (2026/02/13)
+    // done ayami.hatano 聞く：「会員ステータスのデータ自体は要らない」場合、どのようにクエリを書くべき？ (2026/02/13)
     // cb.query().queryMemberStatus()では、CQ(検索条件のオブジェクト)が返ってきているので、これを使うと良さそう
+    // #1on1: selectの目的が不要と言うことで、setupSelect_MemberStatus()を呼ばなければOK (2026/02/13)
+    // orderの目的を達成するために会員ステータスは(一時的に)必要なので、なので queryMemberStatus() をする。
+    // SQLで言うと、fromでjoinした会員ステータスを、select句では使わず、order by句だけで使う。
     public void test_会員ステータスの表示順カラムで会員を並べて検索(){
         //[4] 会員ステータスの表示順カラムで会員を並べて検索
         //済：会員ステータスの "表示順" カラムの昇順で並べる
@@ -180,12 +190,18 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            // #1on1: assertのロジックが合ってるかどうか？のために一時的にActを壊して実行も大切 (2026/02/13)
             cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
             cb.query().addOrderBy_MemberId_Desc();
         });
 
         // ## Assert ##
         assertHasAnyElement(memberList);
+        // TODO ayamin Setで十分。重複のないリストを使ってみましょう by jflute (2026/02/13)
+        // 今まで登場してきた全一覧じゃなく、今まで登場してきた種類一覧で良い。
+        // #1on1: 最初の時は、長めの変数名でわかりやすくでOK。慣れてくると自然に減らせるので (2026/02/13)
+        // 最初から短めに寄せて増やしていくのは、何が必要なのか？何が不要なのか？が学びにくい。
+        // TODO ayamin StatusCodeってCodeであることをわかりやすくしてるなら、ここもStatusCodeListでは？ by jflute (2026/02/13)
         List<String> historyStatusList = new ArrayList<>();
         String previousStatusCode = null;
 
@@ -196,7 +212,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
             log("検索された会員: " + member.getMemberName() + ", 会員ID: " + member.getMemberId() + ", ステータス: " + member.getMemberStatusCode());
 
             if (previousStatusCode != null && !currentStatusCode.equals(previousStatusCode)) {
-
+                // TODO ayamin ifがtrueだったらOUT, ってことは、そのifの条件がfalseでなきゃいけないってこと by jflute (2026/02/13)
+                // ってことは、contains()の戻り値が false であるはず、というアサートでも良いのでは？
+                // わかやすさの許容範囲内であれば、短い方が良い。
+                // 別に今の実装が悪いわけではなく、コードの変化を体験するトレーニングとして。
                 if (historyStatusList.contains(currentStatusCode)) {
                     fail("会員ステータスが固まって表示されていません: " + currentStatusCode + " が再登場しました");
                 }
@@ -205,5 +224,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
             historyStatusList.add(currentStatusCode);
             previousStatusCode = currentStatusCode;
         }
+        log(historyStatusList);
+        
+        // TODO jflute ↑次回1on1にて、違うやり方のふぉろー (2026/02/13)
+        
+        // #1on1: リーダブルコード読んでるって、すごい！ (2026/02/13)
     }
 }

@@ -1,6 +1,7 @@
 package org.docksidestage.handson.exercise;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.function.Consumer;
 
 import javax.annotation.Resource;
 
@@ -60,6 +61,34 @@ public class HandsOn02Test extends UnitContainerTestCase {
     public void test_会員IDが1の会員を検索(){
         //あるはずだけど、もしID1の会員がいなかったらエラーにしたいので、.alwaysPresentを使った
         // TODO ayami.hatano .alwaysPresentと.ifPresentの中身見る (2026/02/06)
+        // #1on1: Optional@ifPresent() :: あったらコールバック呼ぶけど、なかったら何もしない
+        //  public void ifPresent(Consumer<? super T> consumer) {
+        //      if (value != null) { // 中身があったら
+        //          consumer.accept(value); // コールバックを呼ぶ
+        //      }
+        //      // なかったら素通りで何もしない
+        //  }
+        //
+        // OptionalEntity@alwaysPresent() :: あったらコールバック呼ぶけど、なかったら例外throw
+        //  if (_obj == null) { // 中身がなかったら
+        //      _thrower.throwNotFoundException(); // ここで例外がthrowされて処理が止まる
+        //  objLambda.accept(_obj); // ここは中身が必ず存在するケース、コールバックを呼ぶ
+        //
+        //   ↓↓ (ifPresent()と比較しやすいように書き換えると...)
+        //
+        //  if (_obj != null) { // 中身があったら
+        //      objLambda.accept(_obj); // コールバックを呼ぶ
+        //  } else { // ifPresent()にはないelse
+        //      _thrower.throwNotFoundException(); // ここで例外がthrowされて処理が止まる
+        //  }
+        //
+        // DBFluteのifPresent()の戻り値は？ → orElse()を呼ぶだけのインターフェース
+        // これは、DBFluteオリジナルの拡張。
+        //
+        // Optionalの中の実装は、全然大したことはやってない。
+        // けど、それで「ないかもしれない」という概念がオブジェクトになって、安全な実装できる。
+        // そういう目に見えない頭の中だけで存在する「概念」という言われるものもオブジェクトになる。
+        //
         memberBhv.selectEntity(cb -> cb.acceptPK(1)).alwaysPresent(member -> {
             Integer memberId = member.getMemberId();
             Integer memberName = member.getMemberId();
@@ -73,6 +102,8 @@ public class HandsOn02Test extends UnitContainerTestCase {
         memberBhv.selectEntity(cb -> cb.acceptPK(9999)).ifPresent(member -> {
             log("検索された会員: " + member.getMemberName());
             assertEquals(Integer.valueOf(1), member.getMemberId());
+        }).orElse(() -> {
+            log("Not found");
         });
     }
 
@@ -100,9 +131,9 @@ public class HandsOn02Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
-            // TODO done ayamin リファクタリングトレーニング、getMemberId()を変数に抽出してみましょう by jflute (2026/01/30)
+            // done ayamin リファクタリングトレーニング、getMemberId()を変数に抽出してみましょう by jflute (2026/01/30)
             // IntelliJだと、control+T でリファクタリングメニューが出てきて、変数抽出があるはず。
-             Integer id = member.getMemberId();
+            Integer id = member.getMemberId();
             log("検索された会員: " + member.getMemberName() + "検索されたMEMBERID:"+ id);
             assertEquals(1, id);
         }
@@ -111,13 +142,13 @@ public class HandsOn02Test extends UnitContainerTestCase {
     public void test_会員IDを99999で検索() {
         //会員IDが99999の会員を検索
         //一件検索として検索すること
-        // TODO done ayamin コメントが 1 になってる1 by jflute (2026/01/30)
+        // done ayamin コメントが 1 になってる1 by jflute (2026/01/30)
         //会員IDが99999であることをアサート
 
         // ## Arrange ##
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
-            // TODO ayamin コメントが 1 になってる2 by jflute (2026/01/30)
+            // done ayamin コメントが 1 になってる2 by jflute (2026/01/30)
             // 会員IDが99999に等しい条件を設定
             cb.query().setMemberId_Equal(99999);
         });
@@ -150,13 +181,14 @@ public class HandsOn02Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
-            // TODO done ayamin BIRTHDATEは主役だし、2箇所で登場しているから、変数抽出してみましょう by jflute (2026/01/30)
+            // done ayamin BIRTHDATEは主役だし、2箇所で登場しているから、変数抽出してみましょう by jflute (2026/01/30)
             // IntelliJだと、control+T でリファクタリングメニューが出てきて、変数抽出があるはず。
+            // #1on1: 大事な行を観やすくするためのテクニックの一つ (2026/02/13)
             String memberName = member.getMemberName();
             LocalDate birthdate = member.getBirthdate();
-            LocalDateTime updateDate = member.getUpdateDatetime();
+            LocalDateTime updateDatetime = member.getUpdateDatetime();
 
-            log("検索された会員: " + memberName + ", 生年月日=" + birthdate + ", 更新日時=" + updateDate);
+            log("検索された会員: " + memberName + ", 生年月日=" + birthdate + ", 更新日時=" + updateDatetime);
             assertNull(birthdate);
         }
 
