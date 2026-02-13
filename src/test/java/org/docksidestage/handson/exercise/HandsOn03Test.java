@@ -9,9 +9,8 @@ import org.dbflute.cbean.result.ListResultBean;
 import org.docksidestage.handson.dbflute.exbhv.MemberBhv;
 import org.docksidestage.handson.dbflute.exbhv.MemberSecurityBhv;
 import org.docksidestage.handson.dbflute.exbhv.MemberStatusBhv;
-import org.docksidestage.handson.dbflute.exentity.Member;
-import org.docksidestage.handson.dbflute.exentity.MemberSecurity;
-import org.docksidestage.handson.dbflute.exentity.MemberStatus;
+import org.docksidestage.handson.dbflute.exbhv.PurchaseBhv;
+import org.docksidestage.handson.dbflute.exentity.*;
 import org.docksidestage.handson.unit.UnitContainerTestCase;
 
 /**
@@ -25,6 +24,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
     private MemberBhv memberBhv;
     @Resource
     private MemberSecurityBhv memberSecurityBhv;
+    @Resource
+    private PurchaseBhv purchaseBhv;
 
     public void test_会員名称がSで始まる1968年1月1日以前に生まれた会員を検索(){
         //[1] 会員名称がSで始まる1968年1月1日以前に生まれた会員を検索
@@ -161,22 +162,21 @@ public class HandsOn03Test extends UnitContainerTestCase {
     // 1とか2という選択肢のことかな？って自分の中で推測で先に進んじゃった。
     // 推測は悪く無い、でも推測は推測のままで進めて、後で推測を確証する工程を忘れないこと。
     // でないと、推測がどこかで勝手に確定事項に自然と変わってしまう。
-    // TODO ayamin [読み物課題] 自分の中でデマを広げさせない by jflute (2026/01/30)
+    // TODO done ayamin [読み物課題] 自分の中でデマを広げさせない by jflute (2026/01/30)
     // https://jflute.hatenadiary.jp/entry/20110619/nodema
-    // TODO ayamin [読み物課題] 論理的矛盾が発生したら、思い込み前提を探す by jflute (2026/01/30)
+    // TODO done ayamin [読み物課題] 論理的矛盾が発生したら、思い込み前提を探す by jflute (2026/01/30)
     // https://jflute.hatenadiary.jp/entry/20180831/contradictionstep
 
     // TODO jflute 次回1on1ここから (2026/01/30)
+    // TODO ayami.hatano 聞く：「会員ステータスのデータ自体は要らない」場合、どのようにクエリを書くべき？ (2026/02/13)
+    // cb.query().queryMemberStatus()では、CQ(検索条件のオブジェクト)が返ってきているので、これを使うと良さそう
     public void test_会員ステータスの表示順カラムで会員を並べて検索(){
         //[4] 会員ステータスの表示順カラムで会員を並べて検索
         //済：会員ステータスの "表示順" カラムの昇順で並べる
         //済：会員ステータスのデータ自体は要らない
         //済：その次には、会員の会員IDの降順で並べる
-        //会員ステータスのデータが取れていないことをアサート
-        //会員が会員ステータスごとに固まって並んでいることをアサート (順序は問わない)
-
-        //memo:setupSelectせずに会員ステータスを調べるにはどうしたら良いか？(setupSelectはJOINとSELECT両方やっている気がする)▶︎cb.query()だけやる？
-        //memo:固まっていることをアサートするにはどうするか？▶︎一度変数に入れて、次に見たものがnullまたは同じものだったらアウト、みたいにしたい
+        //済：会員ステータスのデータが取れていないことをアサート
+        //済：会員が会員ステータスごとに固まって並んでいることをアサート (順序は問わない)
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
@@ -206,15 +206,4 @@ public class HandsOn03Test extends UnitContainerTestCase {
             previousStatusCode = currentStatusCode;
         }
     }
-
-    public void test_生年月日が存在する会員の購入を検索() {
-        //[5]会員名称と会員ステータス名称と商品名を取得する(ログ出力)
-        //購入日時の降順、購入価格の降順、商品IDの昇順、会員IDの昇順で並べる
-        //OrderBy がたくさん追加されていることをログで目視確認すること
-        //購入に紐づく会員の生年月日が存在することをアサート
-
-
-    }
-
-
 }
