@@ -1,6 +1,7 @@
 package org.docksidestage.handson.exercise;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -136,7 +137,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // done ayami.hatano 2という「文字が含まれている」に注意 (2026/01/29)
         // done ayami.hatano 会員セキュリティ情報のデータ自体は要らない (2026/01/29)
-        // TODO done ayami.hatano 曖昧性に気づくには？▶︎推測のまま動かない▶︎推測をしていることを自覚する、推測を確証する工程を踏む (2026/01/30)
+        // done ayami.hatano 曖昧性に気づくには？▶︎推測のまま動かない▶︎推測をしていることを自覚する、推測を確証する工程を踏む (2026/01/30)
         // done ayamin 要件の対象カラムを間違えている (指差し確認しましょう) by jflute (2026/01/30)
         // done なのでUnitTestも落ちてる (実行してgreenを確認確認しましょう) by jflute (2026/01/30)
         // #1on1: 関連テーブル側(1:1)のカラムでの絞り込みのやり方Good (2026/01/30)
@@ -151,7 +152,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
             memberSecurityBhv.selectByPK(member.getMemberId()).alwaysPresent(security -> {
-                // TODO dobe ayamin getReminderQuestion()を抽出してみましょう (IntelliJのcontrol+Tで抽出) by jflute (2026/02/13)
+                // dobe ayamin getReminderQuestion()を抽出してみましょう (IntelliJのcontrol+Tで抽出) by jflute (2026/02/13)
                 String reminderQuestion = security.getReminderQuestion();
                 log("検索された会員: " + member.getMemberName() + " " + reminderQuestion);
                 assertTrue(reminderQuestion.contains("2"));
@@ -204,11 +205,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         Set<String> historyStatusCodeSet = new HashSet<>();
         String previousStatusCode = null;
-        // TODO done ayamin Setで十分。重複のないリストを使ってみましょう by jflute (2026/02/13)
+        // done ayamin Setで十分。重複のないリストを使ってみましょう by jflute (2026/02/13)
         // setは重複するデータを保持できないルール。
         // 「これまでに登場したステータスの種類を記憶しておき、後で再登場しないかチェックする」という目的に対して、setの方がパフォーマンス観点で良いし、コード見ただけでやりたいことわかる
-        // TODO done ayamin StatusCodeってCodeであることをわかりやすくしてるなら、ここもStatusCodeListでは？ by jflute (2026/02/13)
-
+        // done ayamin StatusCodeってCodeであることをわかりやすくしてるなら、ここもStatusCodeListでは？ by jflute (2026/02/13)
 
         for (Member member : memberList) {
             assertFalse(member.getMemberStatus().isPresent());
@@ -216,7 +216,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             String currentStatusCode = member.getMemberStatusCode();
             log("検索された会員: " + member.getMemberName() + ", 会員ID: " + member.getMemberId() + ", ステータス: " + member.getMemberStatusCode());
 
-            // TODO done ayamin ifがtrueだったらOUT, ってことは、そのifの条件がfalseでなきゃいけないってこと by jflute (2026/02/13)
+            // done ayamin ifがtrueだったらOUT, ってことは、そのifの条件がfalseでなきゃいけないってこと by jflute (2026/02/13)
             // ってことは、contains()の戻り値が false であるはず、というアサートでも良いのでは？
             // わかやすさの許容範囲内であれば、短い方が良い。
             // 別に今の実装が悪いわけではなく、コードの変化を体験するトレーニングとして。
@@ -231,10 +231,25 @@ public class HandsOn03Test extends UnitContainerTestCase {
         }
         log(historyStatusCodeSet);
         
-        // TODO jflute ↑次回1on1にて、違うやり方のふぉろー (2026/02/13)
-
+        // done jflute ↑次回1on1にて、違うやり方のふぉろー (2026/02/13)
+        // #1on1: 違うやり方のふぉろー:
+        // あやみんさんのやり方:
+        // AABBCCと並んでて、切りかわったタイミングで、新しいコードが今までに登場してないはず、をつどチェック。
+        // つまり、AABBACC だったら、2回目のAでOUT。
+        //
+        // AABBCCと並んでて、切りかわったタイミングの数と、全体で登場したステータスの種類数を比較して、
+        // 「切りかわったタイミングの数 + 1」==「全体で登場したステータスの種類数」のはず。
+        //
+        // AABBCC => タイミングの数は2, 種類数は3, つまり 2+1 = 3
+        // AABBACC => タイミングの数は3, 種類数は3, つまり 3+1 = 3 でOUT
+        //
+        // 前者がプログラミング的なチェック
+        // 後者がデータ分析的なチェック (データの特徴を探す)
     }
-        // TODO ayami.hatano  setupsecectはテーブルのすべてのカラムを取得するので使えない (2026/02/17)
+    
+    // TODO ayamin 3-5がない。一度ひながただけ作ってて、自分で消している by jflute (2026/02/27)
+    
+        // TODO ayami.hatano  setupSelectはテーブルのすべてのカラムを取得するので使えない (2026/02/17)
         // TODO ayami.hatano 1行ずつ確認するやつ、まだやっていない (2026/02/17)
     public void test_2005年10月の1日から3日までに正式会員になった会員を検索() {
         // [6] 2005年10月の1日から3日までに正式会員になった会員を検索
@@ -250,16 +265,27 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         String fromDateString = "2005/10/01";
         String toDateString = "2005/10/03";
+        // #1on1: 文字列日付を、日付オブジェクトに変換するオーソドックスなやり方は、DateTimeFormatter:
+        //  e.g. DateTimeFormatter.ofPattern("yyyy/MM/dd").parse(fromDateString);
+        // ↑形式を意識して、特定して変換するのが一般的。
+        // ただ、DBFluteが提供している HandyDate だと、まあ楽に変換できる。ここではOK。
+        // ↑HandyDate は色々な形式を吸収するもの。(ハイフンもスラッシュも両方受け付ける)
         LocalDateTime fromDate = new HandyDate(fromDateString).getLocalDateTime();
         LocalDateTime toDate = new HandyDate(toDateString).getLocalDateTime();
         String keyword = "vi";
 
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            // #1on1: SpecifyColumnの使い所 (2026/02/27)
+            // 共通カラムなどを除外するメソッドもある。現場でも使われているっぽい？
+            //  e.g. cb.specify().exceptRecordMetaColumn();
+            //
+            // #1on1: CHAR, VARCHARの違い (2026/02/27)
             cb.setupSelect_MemberStatus();
             cb.specify().specifyMemberStatus().columnMemberStatusName();
 
             //compareAsDate()よって、Toの条件を1日ずらし、< '2005-10-04 00:00:00'（10月4日の0時0分0秒より前、つまり10月3日の23時59分59秒まで）という条件のSQLを組み立ててくれている
             //要は、DBに保存されているジフン病の情報を切り捨てる働き
+            // #1on1: DateFromToの仕組みのお話まで (2026/02/27)
             cb.query().setFormalizedDatetime_FromTo(fromDate, toDate, op -> op.compareAsDate());
             cb.query().setMemberName_LikeSearch(keyword, op -> op.likeContain());
         });
@@ -274,14 +300,33 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
             log("検索された会員: " + memberName + ", 正式会員日時: " + formalizedDatetime + ", ステータス: " + memberStatusName);
 
+            // TODO ayamin 実行してみて例外が発生するので確認を by jflute (2026/02/27)
             assertNotNull(memberStatusCode.getMemberStatusCode());
             assertNotNull(memberStatusName);
             assertNull(memberStatusCode.getDescription());
             assertNull(memberStatusCode.getDisplayOrder());
 
             assertTrue(memberName.contains(keyword));
-            assertTrue(formalizedDatetime.isAfter(fromDate.minusSeconds(1)));
-            LocalDateTime nextDayOfToDate = toDate.plusDays(1);
+
+            // TODO ayamin "9/30 23:59:59.000" は対象外、"9/30 23:59:59.001" は対象になる by jflute (2026/02/27)
+            // formalizedDatetimeがミリ秒があるカラムだった場合に、↑のようなことが起きる。
+            // ハンズオンとしては、MySQLのDATETIMEを使っているので、ミリ秒が存在しないから、大丈夫なんだけど...
+            // あまりそこに依存したプログラムを書かない方が無難。後から DATETIME(3) とかミリ秒を追加する可能性も。
+            // じゃあ、-1するのは秒じゃなくてミリ秒だったらいい？厳密には、ナノ秒とか想定するとキリがない。
+            // ミリ秒を意識したロジックというのは、そういうジレンマに陥りやすい。
+            // なので、isAfter || isEqual で判定しちゃった方が世話ないかも。(その方がfromDateの日付操作が要らなくなる)
+            //  e.g. assertTrue(formalizedDatetime.isAfter(fromDate)   // 10/1 00:00:01以降が対象
+            //               || formalizedDatetime.isEqual(fromDate)); // 10/1 00:00:00ぴったりが対象
+            //
+            // SQLだったら <, <= で含む含まないを簡単に制御
+            // DBFluteでの LessThan, LessEqual で含む含まないを制御
+            // でも、LocalDateTimeさんは、isBefore(), isAfter() とか含むニュアンスのメソッドがない。
+            //
+            // TODO ayamin nextDayOfToDate は、ループごとに変わる値ではないので... by jflute (2026/02/27)
+            // plusDays(1)をループの外に持っていきましょう。(毎ループやる必要はない)
+            // UnitTestだから普段はめくじら立てないけど、トレーニングとしては意識しておきましょうということで。
+            assertTrue(formalizedDatetime.isAfter(fromDate.minusSeconds(1))); // e.g. 9/30 23:59:59
+            LocalDateTime nextDayOfToDate = toDate.plusDays(1); // e.g. 10/4
             assertTrue(formalizedDatetime.isBefore(nextDayOfToDate));
         }
     }

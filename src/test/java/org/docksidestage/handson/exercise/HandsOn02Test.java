@@ -60,7 +60,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
     // done ayamin 続きのエクササイズもぜひどうぞ by jflute (2026/01/16)
     public void test_会員IDが1の会員を検索(){
         //あるはずだけど、もしID1の会員がいなかったらエラーにしたいので、.alwaysPresentを使った
-        // TODO done ayami.hatano .alwaysPresentと.ifPresentの中身見る (2026/02/06)
+        // done ayami.hatano .alwaysPresentと.ifPresentの中身見る (2026/02/06)
         // #1on1: Optional@ifPresent() :: あったらコールバック呼ぶけど、なかったら何もしない
         //  public void ifPresent(Consumer<? super T> consumer) {
         //      if (value != null) { // 中身があったら
