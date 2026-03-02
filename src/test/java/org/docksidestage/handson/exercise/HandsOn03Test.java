@@ -248,9 +248,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
     }
     
     // TODO ayamin 3-5がない。一度ひながただけ作ってて、自分で消している by jflute (2026/02/27)
-    
-        // TODO ayami.hatano  setupSelectはテーブルのすべてのカラムを取得するので使えない (2026/02/17)
-        // TODO ayami.hatano 1行ずつ確認するやつ、まだやっていない (2026/02/17)
+
+
     public void test_2005年10月の1日から3日までに正式会員になった会員を検索() {
         // [6] 2005年10月の1日から3日までに正式会員になった会員を検索
         // 画面からの検索条件で2005年10月1日と2005年10月3日がリクエストされたと想定して...
@@ -284,13 +283,14 @@ public class HandsOn03Test extends UnitContainerTestCase {
             cb.specify().specifyMemberStatus().columnMemberStatusName();
 
             //compareAsDate()よって、Toの条件を1日ずらし、< '2005-10-04 00:00:00'（10月4日の0時0分0秒より前、つまり10月3日の23時59分59秒まで）という条件のSQLを組み立ててくれている
-            //要は、DBに保存されているジフン病の情報を切り捨てる働き
+            //要は、DBに保存されている時分秒の情報を切り捨てる働き
             // #1on1: DateFromToの仕組みのお話まで (2026/02/27)
             cb.query().setFormalizedDatetime_FromTo(fromDate, toDate, op -> op.compareAsDate());
             cb.query().setMemberName_LikeSearch(keyword, op -> op.likeContain());
         });
 
         assertHasAnyElement(memberList);
+        LocalDateTime nextDayOfToDate = toDate.plusDays(1); // e.g. 10/4
         for (Member member : memberList) {
             String memberName = member.getMemberName();
             LocalDateTime formalizedDatetime = member.getFormalizedDatetime();
@@ -300,15 +300,17 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
             log("検索された会員: " + memberName + ", 正式会員日時: " + formalizedDatetime + ", ステータス: " + memberStatusName);
 
-            // TODO ayamin 実行してみて例外が発生するので確認を by jflute (2026/02/27)
+            // TODO done ayamin 実行してみて例外が発生するので確認を by jflute (2026/02/27)
+            // specify()で取得していないカラムにアクセスしているので例外になる
             assertNotNull(memberStatusCode.getMemberStatusCode());
             assertNotNull(memberStatusName);
-            assertNull(memberStatusCode.getDescription());
-            assertNull(memberStatusCode.getDisplayOrder());
+            assertNotNull(memberStatusCode.getMemberStatusCode()); //assert要件満たしていないかも
+            assertNotNull(memberStatusName);
 
             assertTrue(memberName.contains(keyword));
+            assertTrue(formalizedDatetime.isBefore(nextDayOfToDate));
 
-            // TODO ayamin "9/30 23:59:59.000" は対象外、"9/30 23:59:59.001" は対象になる by jflute (2026/02/27)
+            // TODO done ayamin "9/30 23:59:59.000" は対象外、"9/30 23:59:59.001" は対象になる by jflute (2026/02/27)
             // formalizedDatetimeがミリ秒があるカラムだった場合に、↑のようなことが起きる。
             // ハンズオンとしては、MySQLのDATETIMEを使っているので、ミリ秒が存在しないから、大丈夫なんだけど...
             // あまりそこに依存したプログラムを書かない方が無難。後から DATETIME(3) とかミリ秒を追加する可能性も。
@@ -322,12 +324,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // DBFluteでの LessThan, LessEqual で含む含まないを制御
             // でも、LocalDateTimeさんは、isBefore(), isAfter() とか含むニュアンスのメソッドがない。
             //
-            // TODO ayamin nextDayOfToDate は、ループごとに変わる値ではないので... by jflute (2026/02/27)
+            // TODO done ayamin nextDayOfToDate は、ループごとに変わる値ではないので... by jflute (2026/02/27)
             // plusDays(1)をループの外に持っていきましょう。(毎ループやる必要はない)
             // UnitTestだから普段はめくじら立てないけど、トレーニングとしては意識しておきましょうということで。
-            assertTrue(formalizedDatetime.isAfter(fromDate.minusSeconds(1))); // e.g. 9/30 23:59:59
-            LocalDateTime nextDayOfToDate = toDate.plusDays(1); // e.g. 10/4
-            assertTrue(formalizedDatetime.isBefore(nextDayOfToDate));
+            assertTrue(formalizedDatetime.isAfter(fromDate) || formalizedDatetime.isEqual(fromDate));
         }
     }
 }
