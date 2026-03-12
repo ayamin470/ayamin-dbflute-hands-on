@@ -247,7 +247,39 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // 後者がデータ分析的なチェック (データの特徴を探す)
     }
     
-    // TODO ayamin 3-5がない。一度ひながただけ作ってて、自分で消している by jflute (2026/02/27)
+    // TODO done ayamin 3-5がない。一度ひながただけ作ってて、自分で消している by jflute (2026/02/27)
+    public void test_生年月日が存在する会員の購入を検索() {
+        // [5] 生年月日が存在する会員の購入を検索
+        // 会員名称と会員ステータス名称と商品名を取得する(ログ出力)
+        // 購入日時の降順、購入価格の降順、商品IDの昇順、会員IDの昇順で並べる
+        // OrderBy がたくさん追加されていることをログで目視確認すること
+        // 購入に紐づく会員の生年月日が存在することをアサート
+
+        // ## Act ##
+        ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb -> {
+            cb.setupSelect_Product();
+            cb.query().queryMember().setBirthdate_IsNotNull();
+            cb.query().addOrderBy_PurchaseDatetime_Desc();
+            cb.query().addOrderBy_PurchasePrice_Desc();
+            cb.query().addOrderBy_ProductId_Asc();
+            cb.query().addOrderBy_MemberId_Asc();
+        });
+
+        // ## Assert ##
+        //memo:起点はmemberテーブル、purchase.getMember().get() で関連先 member を取り出して member 変数に入れておく
+        //member.getMemberName() で名前が取れる
+        //member.getMemberStatus().get().getMemberStatusName() でさらに関連先 MEMBER_STATUSテーブルの情報を取得
+        assertHasAnyElement(purchaseList);
+        for (Purchase purchase : purchaseList) {
+            Member member = purchase.getMember().get();
+            String memberName = member.getMemberName();
+            String memberStatusName = member.getMemberStatus().get().getMemberStatusName();
+            String productName = purchase.getProduct().get().getProductName();
+
+            log("検索された購入: 会員名称=" + memberName + ", 会員ステータス名称=" + memberStatusName + ", 商品名=" + productName);
+            assertNotNull(member.getBirthdate());
+        }
+    }
 
 
     public void test_2005年10月の1日から3日までに正式会員になった会員を検索() {
@@ -328,6 +360,55 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // plusDays(1)をループの外に持っていきましょう。(毎ループやる必要はない)
             // UnitTestだから普段はめくじら立てないけど、トレーニングとしては意識しておきましょうということで。
             assertTrue(formalizedDatetime.isAfter(fromDate) || formalizedDatetime.isEqual(fromDate));
+        }
+    }
+
+    public void test_正式会員になってから一週間以内の購入を検索() {
+        // [7] 正式会員になってから一週間以内の購入を検索
+        // 会員と会員ステータス、会員セキュリティ情報も一緒に取得
+        // 商品と商品ステータス、商品カテゴリ、さらに上位の商品カテゴリも一緒に取得
+        // 上位の商品カテゴリ名が取得できていることをアサート
+        // 購入日時が正式会員になってから一週間以内であることをアサート
+
+        // memo:自己参照＝同じテーブルへの外部キー参照
+        // PRODUCT_CATEGORY.PARENT_CATEGORY_CODE が、同じ PRODUCT_CATEGORY テーブルの PRODUCT_CATEGORY_CODE を参照する つまり行(レコード)同士に親子関係がある
+        // FK制約により、PARENT_CATEGORY_CODE が非nullなら、参照先の親カテゴリ行が必ず存在していないと登録できない
+        // でも、最上位カテゴリは PARENT_CATEGORY_CODE = null(そりゃそうだ)
+
+        // ## Act ##
+        ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb -> {
+            cb.setupSelect_Member().withMemberStatus();
+            cb.setupSelect_Member().withMemberSecurityAsOne();
+            cb.setupSelect_Product().withProductStatus();
+            cb.setupSelect_Product().withProductCategory().withProductCategorySelf();
+
+            cb.query().queryMember().setFormalizedDatetime_IsNotNull();
+
+            // 購入日時が正式会員日時以降かつ正式会員日時の7日後以下の条件を作成
+            // convert()メソッドを呼び出し、そのメソッドの引数にaddDayを入れることで、"一週間以内"を表現
+            cb.columnQuery(purchaseColumnCb -> purchaseColumnCb.specify().columnPurchaseDatetime())
+                    .greaterEqual(purchaseColumnCb -> purchaseColumnCb.specify().specifyMember().columnFormalizedDatetime());
+            cb.columnQuery(purchaseColumnCb -> purchaseColumnCb.specify().columnPurchaseDatetime())
+                    .lessEqual(purchaseColumnCb -> purchaseColumnCb.specify().specifyMember().columnFormalizedDatetime()).convert(op -> op.addDay(7));
+        });
+
+        // ## Assert ##
+        assertHasAnyElement(purchaseList);
+        for (Purchase purchase : purchaseList) {
+            Member member = purchase.getMember().get();
+            assertTrue(member.getMemberStatus().isPresent());
+            assertTrue(member.getMemberSecurityAsOne().isPresent());
+
+            Product product = purchase.getProduct().get();
+            assertTrue(product.getProductStatus().isPresent());
+            assertTrue(product.getProductCategory().isPresent());
+            ProductCategory parentCategory = product.getProductCategory().get().getProductCategorySelf().get();
+            assertNotNull(parentCategory.getProductCategoryName());
+
+            LocalDateTime purchaseDatetime = purchase.getPurchaseDatetime();
+            LocalDateTime formalizedDatetime = member.getFormalizedDatetime();
+            assertFalse(purchaseDatetime.isBefore(formalizedDatetime));
+            assertFalse(purchaseDatetime.isAfter(formalizedDatetime.plusDays(7)));
         }
     }
 }
