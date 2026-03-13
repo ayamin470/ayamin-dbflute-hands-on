@@ -247,7 +247,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // 後者がデータ分析的なチェック (データの特徴を探す)
     }
     
-    // TODO done ayamin 3-5がない。一度ひながただけ作ってて、自分で消している by jflute (2026/02/27)
+    // done ayamin 3-5がない。一度ひながただけ作ってて、自分で消している by jflute (2026/02/27)
     public void test_生年月日が存在する会員の購入を検索() {
         // [5] 生年月日が存在する会員の購入を検索
         // 会員名称と会員ステータス名称と商品名を取得する(ログ出力)
@@ -256,6 +256,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // 購入に紐づく会員の生年月日が存在することをアサート
 
         // ## Act ##
+        // #1on1: 今までのエクササイズに比べて、基点テーブルが変わった (2026/03/13)
+        // "生年月日が存在する会員" の "購入" を "検索" → 助詞大事
+        // 基点テーブル、SQLで言うとfrom句に最初のテーブル。
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb -> {
             cb.setupSelect_Product();
             cb.query().queryMember().setBirthdate_IsNotNull();
@@ -271,6 +274,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         //member.getMemberStatus().get().getMemberStatusName() でさらに関連先 MEMBER_STATUSテーブルの情報を取得
         assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
+            // #1on1: 変数に出してるのみやすくなるのでGood (2026/03/13)
             Member member = purchase.getMember().get();
             String memberName = member.getMemberName();
             String memberStatusName = member.getMemberStatus().get().getMemberStatusName();
@@ -332,8 +336,35 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
             log("検索された会員: " + memberName + ", 正式会員日時: " + formalizedDatetime + ", ステータス: " + memberStatusName);
 
-            // TODO done ayamin 実行してみて例外が発生するので確認を by jflute (2026/02/27)
+            // done ayamin 実行してみて例外が発生するので確認を by jflute (2026/02/27)
             // specify()で取得していないカラムにアクセスしているので例外になる
+            //
+            // TODO ayamin DisplayOrder, Description がSpecifyColumnしてないカラムであることをアサートしましょう by jflute (2026/03/13)
+            // 元々の assertNull() のコードが「捌いた」コミットで消されている。
+            //-            assertNull(memberStatusCode.getDescription());
+            //-            assertNull(memberStatusCode.getDisplayOrder());
+            //
+            // SpecifyColumnしてないカラムをgetしたとき...
+            //  A. 取ってないから null が戻る
+            //  B. 取ってないから get しちゃダメよと例外がthrowされる
+            //
+            // 実際に実行してみると、NonSpecifiedColumnAccessException が throw された。
+            //  e.g. assertNull(memberStatusCode.getDescription());
+            // なので、DBFluteは "B" の挙動を採用している。(デフォルトではってこと)
+            //
+            // ここでは、SpecifyColumnしてないカラムであることをアサートしたかったわけで...
+            // "A" だったら、assertNull() でよかったんだけど、
+            // "B" なので、getしたら "B" であることをアサートする。
+            //
+            // つまり、例外がthrowされることをアサートしたい。
+            // UnitTestはgreenにならないといけない。
+            // getで例外がthrowされたらgreenになるように。例外が発生しなかったらredになるように。
+            //
+            // hint: JUnitの green, red って何で決まってるか？
+            // 例外が発生したらredのイメージだけど...throwした瞬間にredってわけじゃなく...
+            // throwされて誰もcatchせず、test_メソッド自体がその例外で中断した場合にred。
+
+            // TODO ayamin 同じ二行が二倍になっている (コード自体は悪くない) by jflute (2026/03/13)
             assertNotNull(memberStatusCode.getMemberStatusCode());
             assertNotNull(memberStatusName);
             assertNotNull(memberStatusCode.getMemberStatusCode()); //assert要件満たしていないかも
@@ -342,7 +373,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             assertTrue(memberName.contains(keyword));
             assertTrue(formalizedDatetime.isBefore(nextDayOfToDate));
 
-            // TODO done ayamin "9/30 23:59:59.000" は対象外、"9/30 23:59:59.001" は対象になる by jflute (2026/02/27)
+            // done ayamin "9/30 23:59:59.000" は対象外、"9/30 23:59:59.001" は対象になる by jflute (2026/02/27)
             // formalizedDatetimeがミリ秒があるカラムだった場合に、↑のようなことが起きる。
             // ハンズオンとしては、MySQLのDATETIMEを使っているので、ミリ秒が存在しないから、大丈夫なんだけど...
             // あまりそこに依存したプログラムを書かない方が無難。後から DATETIME(3) とかミリ秒を追加する可能性も。
@@ -356,7 +387,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // DBFluteでの LessThan, LessEqual で含む含まないを制御
             // でも、LocalDateTimeさんは、isBefore(), isAfter() とか含むニュアンスのメソッドがない。
             //
-            // TODO done ayamin nextDayOfToDate は、ループごとに変わる値ではないので... by jflute (2026/02/27)
+            // done ayamin nextDayOfToDate は、ループごとに変わる値ではないので... by jflute (2026/02/27)
             // plusDays(1)をループの外に持っていきましょう。(毎ループやる必要はない)
             // UnitTestだから普段はめくじら立てないけど、トレーニングとしては意識しておきましょうということで。
             assertTrue(formalizedDatetime.isAfter(fromDate) || formalizedDatetime.isEqual(fromDate));
@@ -382,14 +413,31 @@ public class HandsOn03Test extends UnitContainerTestCase {
             cb.setupSelect_Product().withProductStatus();
             cb.setupSelect_Product().withProductCategory().withProductCategorySelf();
 
+            // TODO ayamin "正式会員になってから...の購入" ってことで、恐らくまず存在するものだけに絞るってしたのかな？ by jflute (2026/03/13)
+            // どちらかというと、assertするのに存在するものだけにしないといけないと思った by あやみん
+            // 結論としては、入ってても結果変わらないし、入れなくても結果変わらない。
+            // columnQuery側で「dfloc.PURCHASE_DATETIME >= dfrel_0.FORMALIZED_DATETIME」とかやってるので...
+            // FORMALIZED_DATETIME が null のレコードは、この条件でfalseになって結果から除外される。
+            // だから、ここでのIsNotNullをわざわざやらなくても結果は変わらない。
+            // (他の条件で、自然と「存在すること前提」になってる場合、書かないことが多い)
             cb.query().queryMember().setFormalizedDatetime_IsNotNull();
 
             // 購入日時が正式会員日時以降かつ正式会員日時の7日後以下の条件を作成
             // convert()メソッドを呼び出し、そのメソッドの引数にaddDayを入れることで、"一週間以内"を表現
+            // TODO ayamin 変数名 purchaseColumnCb を colCB にしちゃってOK by jflute (2026/03/13)
+            // #1on1: columnQuery自体はレアではあるが、そこに辿り着くための検索ロジカルシンキングの体験が大事 (2026/03/13)
             cb.columnQuery(purchaseColumnCb -> purchaseColumnCb.specify().columnPurchaseDatetime())
                     .greaterEqual(purchaseColumnCb -> purchaseColumnCb.specify().specifyMember().columnFormalizedDatetime());
             cb.columnQuery(purchaseColumnCb -> purchaseColumnCb.specify().columnPurchaseDatetime())
                     .lessEqual(purchaseColumnCb -> purchaseColumnCb.specify().specifyMember().columnFormalizedDatetime()).convert(op -> op.addDay(7));
+
+            // #1on1: SQL関数周りのDBMSの方言の話 (2026/03/13)
+            // MySQL: date_add(dfrel_0.FORMALIZED_DATETIME, interval 7 day)
+            // Oracle: FOO_DATE + 1
+            // ConditionBeanがDBMSの違いを吸収してくれている。
+            // O/Rマッパーの一つの役割、そういったところを頑張ってくれている。
+            // 必ずDBMS依存しないコードを書かないといけないというわけではないが...
+            // できるだけ書かない方が、書くのも楽だし、いざってときに楽になる。
         });
 
         // ## Assert ##
@@ -407,8 +455,19 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
             LocalDateTime purchaseDatetime = purchase.getPurchaseDatetime();
             LocalDateTime formalizedDatetime = member.getFormalizedDatetime();
+            
+            // #1on1: アサートの論理、否定側にするかどうか？ (2026/03/13)
+            // 許容範囲内ではあるけど、コメントが一言あると嬉しいかも。
+            // (ちなみに、HandyDateを使ってもOK)
+
+            // スコープ外ではないことをアサートしている
             assertFalse(purchaseDatetime.isBefore(formalizedDatetime));
             assertFalse(purchaseDatetime.isAfter(formalizedDatetime.plusDays(7)));
+
+            // 逆のパターン:
+            // スコープ内であることをアサートしている
+            //assertTrue(purchaseDatetime.isAfter(formalizedDatetime) || purchaseDatetime.isEqual(formalizedDatetime));
+            //assertTrue(purchaseDatetime.isBefore(formalizedDatetime.plusDays(7)) || purchaseDatetime.isEqual(formalizedDatetime.plusDays(7)));
         }
     }
 }
