@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.dbflute.cbean.result.ListResultBean;
+import org.dbflute.exception.NonSpecifiedColumnAccessException;
 import org.dbflute.helper.HandyDate;
 import org.docksidestage.handson.dbflute.exbhv.MemberBhv;
 import org.docksidestage.handson.dbflute.exbhv.MemberSecurityBhv;
@@ -330,16 +331,32 @@ public class HandsOn03Test extends UnitContainerTestCase {
         for (Member member : memberList) {
             String memberName = member.getMemberName();
             LocalDateTime formalizedDatetime = member.getFormalizedDatetime();
-            MemberStatus memberStatusCode = member.getMemberStatus().get();
+            MemberStatus memberStatus = member.getMemberStatus().get();
             //MemberStatusを取得するメソッドはOptionalEntity型を返す。ので、.get()で取り出す
-            String memberStatusName = memberStatusCode.getMemberStatusName();
+            String memberStatusName = memberStatus.getMemberStatusName();
+
+            //会員ステータステーブル(MEBER_STATUS)はcb.specify().specifyMemberStatus().columnMemberStatusName();でMEMBER_STATUS_NAMEカラムのみを取得している
+            //ので、他のカラムを取得した時に落ちるが、テストは通したいのでcatchさせる
+            try {
+                memberStatus.getDescription();
+                fail("specify()で取得していないカラムにアクセスしています");
+            } catch (NonSpecifiedColumnAccessException e) {
+                log("わざと例外を出す: " + e.getClass().getSimpleName());
+            }
+
+            try {
+                memberStatus.getDisplayOrder();
+                fail("specify()で取得していないカラムにアクセスしています");
+            } catch (NonSpecifiedColumnAccessException e) {
+                log("わざと例外を出す: " + e.getClass().getSimpleName());
+            }
 
             log("検索された会員: " + memberName + ", 正式会員日時: " + formalizedDatetime + ", ステータス: " + memberStatusName);
 
             // done ayamin 実行してみて例外が発生するので確認を by jflute (2026/02/27)
             // specify()で取得していないカラムにアクセスしているので例外になる
             //
-            // TODO ayamin DisplayOrder, Description がSpecifyColumnしてないカラムであることをアサートしましょう by jflute (2026/03/13)
+            // TODO done ayamin DisplayOrder, Description がSpecifyColumnしてないカラムであることをアサートしましょう by jflute (2026/03/13)
             // 元々の assertNull() のコードが「捌いた」コミットで消されている。
             //-            assertNull(memberStatusCode.getDescription());
             //-            assertNull(memberStatusCode.getDisplayOrder());
@@ -364,10 +381,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // 例外が発生したらredのイメージだけど...throwした瞬間にredってわけじゃなく...
             // throwされて誰もcatchせず、test_メソッド自体がその例外で中断した場合にred。
 
-            // TODO ayamin 同じ二行が二倍になっている (コード自体は悪くない) by jflute (2026/03/13)
-            assertNotNull(memberStatusCode.getMemberStatusCode());
-            assertNotNull(memberStatusName);
-            assertNotNull(memberStatusCode.getMemberStatusCode()); //assert要件満たしていないかも
+            // TODO done ayamin 同じ二行が二倍になっている (コード自体は悪くない) by jflute (2026/03/13)
+            assertNotNull(memberStatus.getMemberStatusCode()); //assert要件満たしていないかも
             assertNotNull(memberStatusName);
 
             assertTrue(memberName.contains(keyword));
