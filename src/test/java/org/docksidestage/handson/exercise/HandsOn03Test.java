@@ -428,23 +428,22 @@ public class HandsOn03Test extends UnitContainerTestCase {
             cb.setupSelect_Product().withProductStatus();
             cb.setupSelect_Product().withProductCategory().withProductCategorySelf();
 
-            // TODO ayamin "正式会員になってから...の購入" ってことで、恐らくまず存在するものだけに絞るってしたのかな？ by jflute (2026/03/13)
+            // TODO done ayamin "正式会員になってから...の購入" ってことで、恐らくまず存在するものだけに絞るってしたのかな？ by jflute (2026/03/13)
             // どちらかというと、assertするのに存在するものだけにしないといけないと思った by あやみん
             // 結論としては、入ってても結果変わらないし、入れなくても結果変わらない。
             // columnQuery側で「dfloc.PURCHASE_DATETIME >= dfrel_0.FORMALIZED_DATETIME」とかやってるので...
             // FORMALIZED_DATETIME が null のレコードは、この条件でfalseになって結果から除外される。
             // だから、ここでのIsNotNullをわざわざやらなくても結果は変わらない。
             // (他の条件で、自然と「存在すること前提」になってる場合、書かないことが多い)
-            cb.query().queryMember().setFormalizedDatetime_IsNotNull();
 
             // 購入日時が正式会員日時以降かつ正式会員日時の7日後以下の条件を作成
             // convert()メソッドを呼び出し、そのメソッドの引数にaddDayを入れることで、"一週間以内"を表現
-            // TODO ayamin 変数名 purchaseColumnCb を colCB にしちゃってOK by jflute (2026/03/13)
+            // TODO done ayamin 変数名 purchaseColumnCb を colCB にしちゃってOK by jflute (2026/03/13)
             // #1on1: columnQuery自体はレアではあるが、そこに辿り着くための検索ロジカルシンキングの体験が大事 (2026/03/13)
-            cb.columnQuery(purchaseColumnCb -> purchaseColumnCb.specify().columnPurchaseDatetime())
-                    .greaterEqual(purchaseColumnCb -> purchaseColumnCb.specify().specifyMember().columnFormalizedDatetime());
-            cb.columnQuery(purchaseColumnCb -> purchaseColumnCb.specify().columnPurchaseDatetime())
-                    .lessEqual(purchaseColumnCb -> purchaseColumnCb.specify().specifyMember().columnFormalizedDatetime()).convert(op -> op.addDay(7));
+            cb.columnQuery(colCB -> colCB.specify().columnPurchaseDatetime())
+                    .greaterEqual(colCB -> colCB.specify().specifyMember().columnFormalizedDatetime());
+            cb.columnQuery(colCB -> colCB.specify().columnPurchaseDatetime())
+                    .lessEqual(colCB -> colCB.specify().specifyMember().columnFormalizedDatetime()).convert(op -> op.addDay(7));
 
             // #1on1: SQL関数周りのDBMSの方言の話 (2026/03/13)
             // MySQL: date_add(dfrel_0.FORMALIZED_DATETIME, interval 7 day)
