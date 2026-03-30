@@ -484,4 +484,40 @@ public class HandsOn03Test extends UnitContainerTestCase {
             //assertTrue(purchaseDatetime.isBefore(formalizedDatetime.plusDays(7)) || purchaseDatetime.isEqual(formalizedDatetime.plusDays(7)));
         }
     }
+
+    public void test_1974年までに生まれたもしくは不明の会員を検索(){
+        //[8] 1974年までに生まれた、もしくは不明の会員を検索
+        //画面からの検索条件で1974年がリクエストされたと想定
+        //Arrange で String の "1974/01/01" を一度宣言してから日付クラスに変換
+        //その日付クラスの値を、(日付移動などせず)そのまま使って検索条件を実現
+        //会員ステータス名称、リマインダ質問と回答、退会理由入力テキストを取得する(ログ出力) ※1
+        //若い順だが生年月日が null のデータを最初に並べる
+        //生年月日が指定された条件に合致することをアサート (1975年1月1日なら落ちるように)
+        //Arrangeで "きわどいデータ" ※2 を作ってみましょう (Behavior の updateNonstrict() ※3 を使って)
+        //検索で含まれるはずの "きわどいデータ" が検索されてることをアサート (アサート自体の保証のため)
+        //生まれが不明の会員が先頭になっていることをアサート
+
+
+        // ## Act ##
+        String targetDate = "1974/01/01";
+        LocalDate targetLocalDate = new HandyDate(targetDate).getLocalDate();
+
+        //TODO 日付移動しないって、これ↓みたいなminusDaysも禁止？
+        ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            cb.orScopeQuery(orCB -> {
+                orCB.query().setBirthdate_LessEqual(targetLocalDate.minusDays(1));
+                orCB.query().setBirthdate_IsNull();
+            });
+
+            //cb.setupSelect_Member().withMemberStatus();
+        });
+
+
+
+
+
+
+
+
+    }
 }
