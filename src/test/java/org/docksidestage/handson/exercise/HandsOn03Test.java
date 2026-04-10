@@ -486,38 +486,130 @@ public class HandsOn03Test extends UnitContainerTestCase {
     }
 
     public void test_1974年までに生まれたもしくは不明の会員を検索(){
-        //[8] 1974年までに生まれた、もしくは不明の会員を検索
-        //画面からの検索条件で1974年がリクエストされたと想定
-        //Arrange で String の "1974/01/01" を一度宣言してから日付クラスに変換
-        //その日付クラスの値を、(日付移動などせず)そのまま使って検索条件を実現
-        //会員ステータス名称、リマインダ質問と回答、退会理由入力テキストを取得する(ログ出力) ※1
-        //若い順だが生年月日が null のデータを最初に並べる
-        //生年月日が指定された条件に合致することをアサート (1975年1月1日なら落ちるように)
-        //Arrangeで "きわどいデータ" ※2 を作ってみましょう (Behavior の updateNonstrict() ※3 を使って)
-        //検索で含まれるはずの "きわどいデータ" が検索されてることをアサート (アサート自体の保証のため)
-        //生まれが不明の会員が先頭になっていることをアサート
+     // 要件はここで管理 ▶︎ requirements-checklist.md
+
+        String exercise8_targetDate = "1974/01/01";
+        LocalDate targetLocalDate = new HandyDate(exercise8_targetDate).getLocalDate();
+
+        // ## Arrange(際どいデータのassert用) ##
+        LocalDate limitDate = targetLocalDate.plusYears(1).minusDays(1); // 1974-12-31
+        LocalDate overDate = targetLocalDate.plusYears(1); // 1975-01-01
+
+        Integer includedMemberId = 3;
+        Integer excludedMemberId = 4;
+        adjustExercise8_Birthdate(includedMemberId, limitDate);
+        adjustExercise8_Birthdate(excludedMemberId, overDate);
 
 
         // ## Act ##
-        String targetDate = "1974/01/01";
-        LocalDate targetLocalDate = new HandyDate(targetDate).getLocalDate();
-
-        //TODO 日付移動しないって、これ↓みたいなminusDaysも禁止？
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            cb.setupSelect_MemberStatus();
+            cb.setupSelect_MemberSecurityAsOne();
+            cb.setupSelect_MemberWithdrawalAsOne();
+
+            //要件外ではある
+            cb.specify().specifyMemberStatus().columnMemberStatusName();
+            cb.specify().specifyMemberSecurityAsOne().columnReminderQuestion();
+            cb.specify().specifyMemberSecurityAsOne().columnReminderAnswer();
+            cb.specify().specifyMemberWithdrawalAsOne().columnWithdrawalReasonInputText();
+
+            //TODO 日付移動しないって、これ↓みたいなplusYearsも禁止？か久保さんに聞く
             cb.orScopeQuery(orCB -> {
-                orCB.query().setBirthdate_LessEqual(targetLocalDate.minusDays(1));
+                //1974/01/01から1年足した値未満
+                // TODO もっとシンプルにできるかも
+                orCB.query().setBirthdate_LessThan(targetLocalDate.plusYears(1));
                 orCB.query().setBirthdate_IsNull();
             });
 
-            //cb.setupSelect_Member().withMemberStatus();
+            //並び替え要件
+            cb.query().addOrderBy_Birthdate_Asc().withNullsFirst();
+
         });
 
+        //ログ出力要件
+        for (Member member : memberList) {
+            //誕生日の出力は要件外だけど、nullが上に来ているか確かめたい
+            String birthdateText = member.getBirthdate() != null ? member.getBirthdate().toString() : "none";
 
+            String memberStatusName = member.getMemberStatus()
+                    .map(status -> status.getMemberStatusName())
+                    .orElse("none");
 
+            String reminderQuestion = member.getMemberSecurityAsOne()
+                    .map(security -> security.getReminderQuestion())
+                    .orElse("none");
 
+            String reminderAnswer = member.getMemberSecurityAsOne()
+                    .map(security -> security.getReminderAnswer())
+                    .orElse("none");
 
+            String withdrawalReasonInputText = member.getMemberWithdrawalAsOne()
+                    .map(withdrawal -> withdrawal.getWithdrawalReasonInputText())
+                    .orElse("none");
 
+            //左サイドで走りすぎて疲れた
+            log("検索された会員: "
+                    + member.getMemberName()
+                    + ", 生年月日=" + birthdateText
+                    + ", 会員ステータス名称=" + memberStatusName
+                    + ", リマインダ質問=" + reminderQuestion
+                    + ", リマインダ回答=" + reminderAnswer
+                    + ", 退会理由入力テキスト=" + withdrawalReasonInputText);
 
+        }
+
+        // ## Assert ##
+        // 生年月日が指定された条件に合致すること(1975-01-01は落ちること)
+        // 生まれが不明の会員が先頭になっていること
+        assertHasAnyElement(memberList);
+        assertNull(memberList.get(0).getBirthdate());
+
+        LocalDate boundaryDate = targetLocalDate.plusYears(1); // 1975-01-01
+        for (Member member : memberList) {
+            LocalDate birthdate = member.getBirthdate();
+            if (birthdate != null) {
+                assertTrue(member.getMemberName() + " の生年月日が条件外です: " + birthdate,
+                        birthdate.isBefore(boundaryDate));
+            }
+        }
+
+        // ## Assert(際どいデータ用) ##
+        boolean existsIncludedMember = memberList.stream()
+                .anyMatch(member -> member.getMemberId().equals(includedMemberId));
+        assertTrue("1974-12-31 生まれの会員が検索結果に含まれていません", existsIncludedMember);
+        boolean notExistsExcludedMember = memberList.stream()
+                .noneMatch(member -> member.getMemberId().equals(excludedMemberId));
+        assertTrue("1975-01-01 生まれの会員が検索結果に含まれています", notExistsExcludedMember);
+
+    }
+
+    private void adjustExercise8_Birthdate(Integer memberId, LocalDate birthdate) {
+        Member member = new Member();
+        member.setMemberId(memberId);
+        member.setBirthdate(birthdate);
+        memberBhv.updateNonstrict(member);
+    }
+
+    //Junitはprivateにすると落ちるんだ....
+    // TODO 結合テストはJunitで書けないのか？（Unitっていう名前的に）
+    public void test_1975年1月1日生まれはいるのか(){
+        LocalDate targetBirthdate = LocalDate.of(1975, 1, 1);
+
+        boolean exists = memberBhv.selectCount(cb -> {
+            cb.query().setBirthdate_Equal(targetBirthdate);
+        }) > 0;
+
+        log("1975-01-01 生まれの会員がいるか: " + exists);
+
+    }
+    public void test_1974年12月31日生まれはいるのか(){
+        LocalDate targetBirthdate = LocalDate.of(1974, 12, 31);
+
+        boolean exists = memberBhv.selectCount(cb -> {
+            cb.query().setBirthdate_Equal(targetBirthdate);
+        }) > 0;
+
+        log("1974-12-31 生まれの会員がいるか: " + exists);
 
     }
 }
