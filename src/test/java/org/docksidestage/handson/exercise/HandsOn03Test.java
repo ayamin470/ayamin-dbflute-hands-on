@@ -350,13 +350,17 @@ public class HandsOn03Test extends UnitContainerTestCase {
             } catch (NonSpecifiedColumnAccessException e) {
                 log("わざと例外を出す: " + e.getClass().getSimpleName());
             }
+            // #1on1: 例外を期待するお約束のassertも存在する
+            //assertException(NonSpecifiedColumnAccessException.class, () -> {
+            //    memberStatus.getDisplayOrder();
+            //});
 
             log("検索された会員: " + memberName + ", 正式会員日時: " + formalizedDatetime + ", ステータス: " + memberStatusName);
 
             // done ayamin 実行してみて例外が発生するので確認を by jflute (2026/02/27)
             // specify()で取得していないカラムにアクセスしているので例外になる
             //
-            // TODO done ayamin DisplayOrder, Description がSpecifyColumnしてないカラムであることをアサートしましょう by jflute (2026/03/13)
+            // done ayamin DisplayOrder, Description がSpecifyColumnしてないカラムであることをアサートしましょう by jflute (2026/03/13)
             // 元々の assertNull() のコードが「捌いた」コミットで消されている。
             //-            assertNull(memberStatusCode.getDescription());
             //-            assertNull(memberStatusCode.getDisplayOrder());
@@ -381,7 +385,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // 例外が発生したらredのイメージだけど...throwした瞬間にredってわけじゃなく...
             // throwされて誰もcatchせず、test_メソッド自体がその例外で中断した場合にred。
 
-            // TODO done ayamin 同じ二行が二倍になっている (コード自体は悪くない) by jflute (2026/03/13)
+            // done ayamin 同じ二行が二倍になっている (コード自体は悪くない) by jflute (2026/03/13)
             assertNotNull(memberStatus.getMemberStatusCode()); //assert要件満たしていないかも
             assertNotNull(memberStatusName);
 
@@ -428,7 +432,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             cb.setupSelect_Product().withProductStatus();
             cb.setupSelect_Product().withProductCategory().withProductCategorySelf();
 
-            // TODO done ayamin "正式会員になってから...の購入" ってことで、恐らくまず存在するものだけに絞るってしたのかな？ by jflute (2026/03/13)
+            // done ayamin "正式会員になってから...の購入" ってことで、恐らくまず存在するものだけに絞るってしたのかな？ by jflute (2026/03/13)
             // どちらかというと、assertするのに存在するものだけにしないといけないと思った by あやみん
             // 結論としては、入ってても結果変わらないし、入れなくても結果変わらない。
             // columnQuery側で「dfloc.PURCHASE_DATETIME >= dfrel_0.FORMALIZED_DATETIME」とかやってるので...
@@ -438,7 +442,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
             // 購入日時が正式会員日時以降かつ正式会員日時の7日後以下の条件を作成
             // convert()メソッドを呼び出し、そのメソッドの引数にaddDayを入れることで、"一週間以内"を表現
-            // TODO done ayamin 変数名 purchaseColumnCb を colCB にしちゃってOK by jflute (2026/03/13)
+            // done ayamin 変数名 purchaseColumnCb を colCB にしちゃってOK by jflute (2026/03/13)
             // #1on1: columnQuery自体はレアではあるが、そこに辿り着くための検索ロジカルシンキングの体験が大事 (2026/03/13)
             cb.columnQuery(colCB -> colCB.specify().columnPurchaseDatetime())
                     .greaterEqual(colCB -> colCB.specify().specifyMember().columnFormalizedDatetime());
@@ -496,6 +500,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
         LocalDate safeDate = targetLocalDate.plusYears(1).minusDays(1); // 1974-12-31
         LocalDate outDate = targetLocalDate.plusYears(1); // 1975-01-01
 
+        // #1on1: UnitTestの仕組みとして、rollback専用トランザクションが発行されてるので、後で元通り (2026/04/10)
+        // DBFluteハンズオンだと、UTFlute というJUnitのラッパーフレームワークを使っている。
         Integer includedMemberId = 3;
         Integer excludedMemberId = 4;
         adjustExercise8_Birthdate(includedMemberId, safeDate);
@@ -508,6 +514,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
             cb.setupSelect_MemberSecurityAsOne();
             cb.setupSelect_MemberWithdrawalAsOne();
 
+            // TODO ayamin setupSelectと対応するspecify()を近づけて実装してみましょう by jflute (2026/04/10)
+            // #1on1: 質問:処理は軽くなる？ → yes (2026/04/10)
+            // MySQLからJavaに転送するデータ量が少なくなる。
             //要件外ではある
             cb.specify().specifyMemberStatus().columnMemberStatusName();
             cb.specify().specifyMemberSecurityAsOne().columnReminderQuestion();
@@ -515,6 +524,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             cb.specify().specifyMemberWithdrawalAsOne().columnWithdrawalReasonInputText();
 
             //TODO 日付移動しないって、これ↓みたいなplusYearsも禁止？か久保さんに聞く
+            // #1on1: ここでも、同じく "まで検索"。年のまで検索。というヒント (2026/04/10)
             cb.orScopeQuery(orCB -> {
                 //1974/01/01から1年足した値未満
                 // TODO もっとシンプルにできるかも
@@ -573,8 +583,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
         for (Member member : memberList) {
             LocalDate birthdate = member.getBirthdate();
             String birthdateText = birthdate != null ? birthdate.toString() : "none";
+            // TODO ayamin null,nullで続いているレコードをcontinueで弾きたいだけなので、もうちょいifの構成をスッキリ by jflute (2026/04/10)
             if (previousBirthdate == null) {
                 if (birthdate == null) {
+                    // #1on1: このアサート、自分でnoneにしたものをアサートしてるだけなので業務アサートじゃない (2026/04/10)
                     assertEquals("none", birthdateText);
                     continue;
                 }
@@ -582,12 +594,13 @@ public class HandsOn03Test extends UnitContainerTestCase {
                 assertTrue(member.getMemberName() + "生年月日の並び順が古い順になっているか確認してください: previous="
                                 + previousBirthdate + ", current=" + birthdate,
                         birthdate.isAfter(previousBirthdate) || birthdate.isEqual(previousBirthdate));
-
             }
+            
             assertTrue(member.getMemberName() + " 生年月日は1974年12月31日以前になっているか確認してください: " + birthdate,
                     birthdate.isBefore(boundaryDate));
             previousBirthdate = birthdate;
         }
+        // #1on1: スーパークラスのメソッドを探す方法、とりあえずthis.で補完 (2026/04/10)
 
         // ## Assert(際どいデータ用) ##
         boolean existsIncludedMember = memberList.stream()
@@ -596,7 +609,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
         boolean notExistsExcludedMember = memberList.stream()
                 .noneMatch(member -> member.getMemberId().equals(excludedMemberId));
         assertTrue("1975-01-01 生まれの会員が検索結果に含んではいけません", notExistsExcludedMember);
-
     }
 
     private void adjustExercise8_Birthdate(Integer memberId, LocalDate birthdate) {
@@ -607,7 +619,23 @@ public class HandsOn03Test extends UnitContainerTestCase {
     }
 
     //Junitはprivateにすると落ちるんだ....
-    // TODO 結合テストはJunitで書けないのか？（Unitっていう名前的に）
+    // #1on1: その通りです。仕組み的に...privateでも呼べなくないけどやってないだけ (2026/04/10)
+    // Java の public,protected,private は、絶対的なものではない。(editor上でコンパイルエラーにするもの)
+    // Java の内部的に仕組みとして、privateでも呼び出せちゃう方法がある。
+    //
+    // そもそも、テストメソッドって誰が呼んでるんだろう？
+    // JUnitが呼んでいる。抽象的に呼び出している。リフレクションで呼び出している。
+    // イメージ: runMethod.invoke("test_1975年1月1日生まれはいるのか");
+    // このとき、デフォルトではやはりpublicのものじゃないと呼べない。
+    // ただ、ちょっと設定を変えるとなんとprivateでも呼べる。
+
+    // TODO done 結合テストはJunitで書けないのか？（Unitっていう名前的に）
+    // #1on1: Unitって言葉は確かに、小さな部品感があるけど...これはUnitTestの用途から付いた名前なので、
+    // 何か縛りがあるわけじゃない。もっと大きな単位でクラスをテストすれば結合っぽくはなる。
+    // UnitTestという言葉、実質自動テストの意味合いで使われがち。
+    // Unitの単位はいかようにでも解釈できる。
+    // また、結合テストという言葉自体曖昧。何を結合するのか？若干組織によって使われ方が違う。
+    // Junitで書ける結合テストって話で言うと、クラス結合テストくらいまでは書けると言える。
     public void test_1975年1月1日生まれはいるのか(){
         LocalDate targetBirthdate = LocalDate.of(1975, 1, 1);
 
