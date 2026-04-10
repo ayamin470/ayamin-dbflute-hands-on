@@ -488,17 +488,18 @@ public class HandsOn03Test extends UnitContainerTestCase {
     public void test_1974年までに生まれたもしくは不明の会員を検索(){
      // 要件はここで管理 ▶︎ requirements-checklist.md
 
+        // ## Arrange ##
         String exercise8_targetDate = "1974/01/01";
         LocalDate targetLocalDate = new HandyDate(exercise8_targetDate).getLocalDate();
 
         // ## Arrange(際どいデータのassert用) ##
-        LocalDate limitDate = targetLocalDate.plusYears(1).minusDays(1); // 1974-12-31
-        LocalDate overDate = targetLocalDate.plusYears(1); // 1975-01-01
+        LocalDate safeDate = targetLocalDate.plusYears(1).minusDays(1); // 1974-12-31
+        LocalDate outDate = targetLocalDate.plusYears(1); // 1975-01-01
 
         Integer includedMemberId = 3;
         Integer excludedMemberId = 4;
-        adjustExercise8_Birthdate(includedMemberId, limitDate);
-        adjustExercise8_Birthdate(excludedMemberId, overDate);
+        adjustExercise8_Birthdate(includedMemberId, safeDate);
+        adjustExercise8_Birthdate(excludedMemberId, outDate);
 
 
         // ## Act ##
@@ -535,6 +536,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
                     .map(status -> status.getMemberStatusName())
                     .orElse("none");
 
+            String memberName = member.getMemberName();
+
             String reminderQuestion = member.getMemberSecurityAsOne()
                     .map(security -> security.getReminderQuestion())
                     .orElse("none");
@@ -548,8 +551,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
                     .orElse("none");
 
             //左サイドで走りすぎて疲れた
-            log("検索された会員: "
-                    + member.getMemberName()
+            log("検索された会員: " + memberName
                     + ", 生年月日=" + birthdateText
                     + ", 会員ステータス名称=" + memberStatusName
                     + ", リマインダ質問=" + reminderQuestion
@@ -559,27 +561,41 @@ public class HandsOn03Test extends UnitContainerTestCase {
         }
 
         // ## Assert ##
-        // 生年月日が指定された条件に合致すること(1975-01-01は落ちること)
-        // 生まれが不明の会員が先頭になっていること
+        // 1975年1月1日 生まれなら落ちる
+        // 1974年12月31日 生まれは落ちない
         assertHasAnyElement(memberList);
         assertNull(memberList.get(0).getBirthdate());
+        String logFirstBirthdate = memberList.get(0).getBirthdate() != null ? memberList.get(0).getBirthdate().toString() : "none";
+        assertEquals("none", logFirstBirthdate);
 
         LocalDate boundaryDate = targetLocalDate.plusYears(1); // 1975-01-01
+        LocalDate previousBirthdate = null;
         for (Member member : memberList) {
             LocalDate birthdate = member.getBirthdate();
-            if (birthdate != null) {
-                assertTrue(member.getMemberName() + " の生年月日が条件外です: " + birthdate,
-                        birthdate.isBefore(boundaryDate));
+            String birthdateText = birthdate != null ? birthdate.toString() : "none";
+            if (previousBirthdate == null) {
+                if (birthdate == null) {
+                    assertEquals("none", birthdateText);
+                    continue;
+                }
+            } else {
+                assertTrue(member.getMemberName() + "生年月日の並び順が古い順になっているか確認してください: previous="
+                                + previousBirthdate + ", current=" + birthdate,
+                        birthdate.isAfter(previousBirthdate) || birthdate.isEqual(previousBirthdate));
+
             }
+            assertTrue(member.getMemberName() + " 生年月日は1974年12月31日以前になっているか確認してください: " + birthdate,
+                    birthdate.isBefore(boundaryDate));
+            previousBirthdate = birthdate;
         }
 
         // ## Assert(際どいデータ用) ##
         boolean existsIncludedMember = memberList.stream()
                 .anyMatch(member -> member.getMemberId().equals(includedMemberId));
-        assertTrue("1974-12-31 生まれの会員が検索結果に含まれていません", existsIncludedMember);
+        assertTrue("1974-12-31 生まれの会員が検索結果に含みましょう", existsIncludedMember);
         boolean notExistsExcludedMember = memberList.stream()
                 .noneMatch(member -> member.getMemberId().equals(excludedMemberId));
-        assertTrue("1975-01-01 生まれの会員が検索結果に含まれています", notExistsExcludedMember);
+        assertTrue("1975-01-01 生まれの会員が検索結果に含んではいけません", notExistsExcludedMember);
 
     }
 
