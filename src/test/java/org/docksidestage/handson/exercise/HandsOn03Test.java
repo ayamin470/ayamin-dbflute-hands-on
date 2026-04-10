@@ -604,6 +604,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         member.setMemberId(memberId);
         member.setBirthdate(birthdate);
         memberBhv.updateNonstrict(member);
+        //TODO updateしたものって手動で戻さないとDBがそのままになってしまう？
     }
 
     //Junitはprivateにすると落ちるんだ....
