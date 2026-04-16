@@ -511,24 +511,22 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             cb.setupSelect_MemberStatus();
-            cb.setupSelect_MemberSecurityAsOne();
-            cb.setupSelect_MemberWithdrawalAsOne();
-
-            // TODO ayamin setupSelectと対応するspecify()を近づけて実装してみましょう by jflute (2026/04/10)
-            // #1on1: 質問:処理は軽くなる？ → yes (2026/04/10)
-            // MySQLからJavaに転送するデータ量が少なくなる。
-            //要件外ではある
             cb.specify().specifyMemberStatus().columnMemberStatusName();
+            cb.setupSelect_MemberSecurityAsOne();
             cb.specify().specifyMemberSecurityAsOne().columnReminderQuestion();
             cb.specify().specifyMemberSecurityAsOne().columnReminderAnswer();
+            cb.setupSelect_MemberWithdrawalAsOne();
             cb.specify().specifyMemberWithdrawalAsOne().columnWithdrawalReasonInputText();
 
-            //TODO 日付移動しないって、これ↓みたいなplusYearsも禁止？か久保さんに聞く
+            // TODO done ayamin setupSelectと対応するspecify()を近づけて実装してみましょう by jflute (2026/04/10)
+            // #1on1: 質問:処理は軽くなる？ → yes (2026/04/10)
+            // MySQLからJavaに転送するデータ量が少なくなる。
+
+            //TODO done 日付移動しないって、これ↓みたいなplusYearsも禁止？か久保さんに聞く
             // #1on1: ここでも、同じく "まで検索"。年のまで検索。というヒント (2026/04/10)
+            // https://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/datefromto.html
             cb.orScopeQuery(orCB -> {
-                //1974/01/01から1年足した値未満
-                // TODO もっとシンプルにできるかも
-                orCB.query().setBirthdate_LessThan(targetLocalDate.plusYears(1));
+                orCB.query().setBirthdate_FromTo(null, targetLocalDate, op -> op.compareAsYear().allowOneSide());
                 orCB.query().setBirthdate_IsNull();
             });
 
@@ -581,24 +579,24 @@ public class HandsOn03Test extends UnitContainerTestCase {
         LocalDate boundaryDate = targetLocalDate.plusYears(1); // 1975-01-01
         LocalDate previousBirthdate = null;
         for (Member member : memberList) {
-            LocalDate birthdate = member.getBirthdate();
-            String birthdateText = birthdate != null ? birthdate.toString() : "none";
-            // TODO ayamin null,nullで続いているレコードをcontinueで弾きたいだけなので、もうちょいifの構成をスッキリ by jflute (2026/04/10)
-            if (previousBirthdate == null) {
-                if (birthdate == null) {
-                    // #1on1: このアサート、自分でnoneにしたものをアサートしてるだけなので業務アサートじゃない (2026/04/10)
-                    assertEquals("none", birthdateText);
-                    continue;
-                }
-            } else {
+            LocalDate currentBirthdate = member.getBirthdate();
+            String birthdateText = currentBirthdate != null ? currentBirthdate.toString() : "none";
+            // TODO done ayamin null,nullで続いているレコードをcontinueで弾きたいだけなので、もうちょいifの構成をスッキリ by jflute (2026/04/10)
+            //やりたいこと何か？
+            //nullが続く場合もあるから、弾く(何もせず、処理をスキップさせる)
+            //nullが続いているわけではないときは生年月日の並び順が古い順になっているかasertする
+            if (previousBirthdate == null && currentBirthdate == null) {
+                continue;
+            }
+            if (previousBirthdate != null) {
                 assertTrue(member.getMemberName() + "生年月日の並び順が古い順になっているか確認してください: previous="
-                                + previousBirthdate + ", current=" + birthdate,
-                        birthdate.isAfter(previousBirthdate) || birthdate.isEqual(previousBirthdate));
+                                + previousBirthdate + ", current=" + currentBirthdate,
+                        currentBirthdate.isAfter(previousBirthdate) || currentBirthdate.isEqual(previousBirthdate));
             }
             
-            assertTrue(member.getMemberName() + " 生年月日は1974年12月31日以前になっているか確認してください: " + birthdate,
-                    birthdate.isBefore(boundaryDate));
-            previousBirthdate = birthdate;
+            assertTrue(member.getMemberName() + " 生年月日は1974年12月31日以前になっているか確認してください: " + currentBirthdate,
+                    currentBirthdate.isBefore(boundaryDate));
+            previousBirthdate = currentBirthdate;
         }
         // #1on1: スーパークラスのメソッドを探す方法、とりあえずthis.で補完 (2026/04/10)
 
@@ -616,7 +614,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
         member.setMemberId(memberId);
         member.setBirthdate(birthdate);
         memberBhv.updateNonstrict(member);
-        //TODO updateしたものって手動で戻さないとDBがそのままになってしまう？
+        //done updateしたものって手動で戻さないとDBがそのままになってしまう？
+        // ロールバックされてる(ログを見てみよう)
     }
 
     //Junitはprivateにすると落ちるんだ....
@@ -630,7 +629,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     // このとき、デフォルトではやはりpublicのものじゃないと呼べない。
     // ただ、ちょっと設定を変えるとなんとprivateでも呼べる。
 
-    // TODO done 結合テストはJunitで書けないのか？（Unitっていう名前的に）
+    // done 結合テストはJunitで書けないのか？（Unitっていう名前的に）
     // #1on1: Unitって言葉は確かに、小さな部品感があるけど...これはUnitTestの用途から付いた名前なので、
     // 何か縛りがあるわけじゃない。もっと大きな単位でクラスをテストすれば結合っぽくはなる。
     // UnitTestという言葉、実質自動テストの意味合いで使われがち。
@@ -657,4 +656,54 @@ public class HandsOn03Test extends UnitContainerTestCase {
         log("1974-12-31 生まれの会員がいるか: " + exists);
 
     }
+
+    public void  test_2005年6月に正式会員になった会員を先に並べて生年月日のない会員を検索(){
+        // 要件はここで管理 ▶︎ requirements-checklist.md
+
+        // ## Arrange ##
+        String exercise9_targetDate = "2005/06/01";
+        LocalDate targetLocalDate = new HandyDate(exercise9_targetDate).getLocalDate();
+        LocalDateTime targetMonthDateTime = new HandyDate(exercise9_targetDate).getLocalDateTime();
+
+        // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            cb.query().setBirthdate_IsNull();
+            cb.query().addOrderBy_FormalizedDatetime_Asc().withManualOrder(op -> {
+                op.when_FromTo(targetLocalDate, targetLocalDate, fromToOp -> fromToOp.compareAsMonth());
+            });
+            cb.query().addOrderBy_MemberId_Desc();
+        });
+
+        for (Member member : memberList) {
+            LocalDateTime formalizedDatetime = member.getFormalizedDatetime();
+            String formalizedYearMonth = formalizedDatetime != null
+                    ? formalizedDatetime.getYear() + "-" + String.format("%02d", formalizedDatetime.getMonthValue())
+                    : "none";
+            log("検索された会員：会員ID=" + member.getMemberId()
+                    + ", 会員名=" + member.getMemberName()
+                    + ", 正式会員になった年月：" + formalizedYearMonth
+                    + ", 生年月日=：" + member.getBirthdate());
+        }
+
+        // ## Assert ##
+        assertHasAnyElement(memberList);
+
+        //2005年6月に正式会員になった会員が、検索結果の途中に出てきていないかをチェックするフラグ
+        boolean sortOrderCheck = false;
+        for (Member member : memberList) {
+            assertNull(member.getBirthdate());
+
+            LocalDateTime formalizedDatetime = member.getFormalizedDatetime();
+            boolean formalizedIn200506 = formalizedDatetime != null
+                    && formalizedDatetime.getYear() == targetMonthDateTime.getYear()
+                    && formalizedDatetime.getMonthValue() == targetMonthDateTime.getMonthValue();
+            if (!formalizedIn200506) {
+                sortOrderCheck = true;
+            } else if (sortOrderCheck) {
+                fail("並び替え要件を満たしていません: memberId=" + member.getMemberId());
+            }
+        }
+    }
+
+    
 }
