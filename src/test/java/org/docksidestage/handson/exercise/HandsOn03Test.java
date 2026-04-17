@@ -518,21 +518,40 @@ public class HandsOn03Test extends UnitContainerTestCase {
             cb.setupSelect_MemberWithdrawalAsOne();
             cb.specify().specifyMemberWithdrawalAsOne().columnWithdrawalReasonInputText();
 
-            // TODO done ayamin setupSelectと対応するspecify()を近づけて実装してみましょう by jflute (2026/04/10)
+            // done ayamin setupSelectと対応するspecify()を近づけて実装してみましょう by jflute (2026/04/10)
             // #1on1: 質問:処理は軽くなる？ → yes (2026/04/10)
             // MySQLからJavaに転送するデータ量が少なくなる。
 
-            //TODO done 日付移動しないって、これ↓みたいなplusYearsも禁止？か久保さんに聞く
+            // done 日付移動しないって、これ↓みたいなplusYearsも禁止？か久保さんに聞く
             // #1on1: ここでも、同じく "まで検索"。年のまで検索。というヒント (2026/04/10)
             // https://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/datefromto.html
+            // TODO ayamin orScopeQueryで全然いいんだけど... by jflute (2026/04/17)
+            // FromToOptionで、代替できるものがある。orIsNull()。すると、orScopeQueryなくても大丈夫。
+            // ただ、これはたまたまFromToOptionにあって、よくあるパターンだから用意されてる。
+            // そうじゃないものは、orScopeQueryで全然OK。
+            //
+            // orScopeQuery: 汎用的なorを表現するもの
+            // FromToOption@orIsNull(): FromTo限定の局所的なor表現
+            //
+            // #1on1: orScopeQuery()のネストできない話
+            // sea = 'mystic' or (land = 'oneman' and (showbase = 'stage' or showbase is null))
+            // なので、FromToOptionとかの別枠のor表現をちょこちょこ提供している。
             cb.orScopeQuery(orCB -> {
-                orCB.query().setBirthdate_FromTo(null, targetLocalDate, op -> op.compareAsYear().allowOneSide());
+                orCB.query().setBirthdate_FromTo(null, targetLocalDate, op -> op.compareAsYear().allowOneSide().orIsNull());
                 orCB.query().setBirthdate_IsNull();
             });
+            // #1on1: 互換モードのお話
+            // ↓これが、Java8版(2015年)以降のDBFluteは例外になるが...
+            // cb.query().setMemberId_Equal(null);
+            // ↑Java6版だと、例外にならず呼んでないのと同じになる
+            //
+            // ↓これも、Java8版だと空っぽリストだと例外、Java6版だと呼んでないのと同じになる
+            // cb.query().setMemberId_InScope(idList);
+            //
+            // littleAdjustmentMap.dfprop の互換モードを少しずつ移行したい。
 
             //並び替え要件
             cb.query().addOrderBy_Birthdate_Asc().withNullsFirst();
-
         });
 
         //ログ出力要件
@@ -580,11 +599,19 @@ public class HandsOn03Test extends UnitContainerTestCase {
         LocalDate previousBirthdate = null;
         for (Member member : memberList) {
             LocalDate currentBirthdate = member.getBirthdate();
+            // TODO ayamin birthdateText, unusedになってる by jflute (2026/04/17)
             String birthdateText = currentBirthdate != null ? currentBirthdate.toString() : "none";
-            // TODO done ayamin null,nullで続いているレコードをcontinueで弾きたいだけなので、もうちょいifの構成をスッキリ by jflute (2026/04/10)
+            // done ayamin null,nullで続いているレコードをcontinueで弾きたいだけなので、もうちょいifの構成をスッキリ by jflute (2026/04/10)
             //やりたいこと何か？
             //nullが続く場合もあるから、弾く(何もせず、処理をスキップさせる)
             //nullが続いているわけではないときは生年月日の並び順が古い順になっているかasertする
+            // #1on1: early continue悪くない、最初のnull,nullのレコードをスキップしている。 (2026/04/17)
+            // ただ、でもそのわりには、並び順のアサートで結局if文が必要になっている。
+            // 「null,null」の次のレコード「null,あり」のときのために必要なんだけど...
+            // "1974年12月31日以前" のアサートの方で、currentが存在することのifを入れれば、
+            // 逆に early continue なくても良いかも。
+            // (アサートのためのデータが揃っていればアサートするって考え方にシフト)
+            // TODO ayamin ↑の考え方でちょっと変えてみてください by jflute (2026/04/17)
             if (previousBirthdate == null && currentBirthdate == null) {
                 continue;
             }
@@ -593,7 +620,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
                                 + previousBirthdate + ", current=" + currentBirthdate,
                         currentBirthdate.isAfter(previousBirthdate) || currentBirthdate.isEqual(previousBirthdate));
             }
-            
             assertTrue(member.getMemberName() + " 生年月日は1974年12月31日以前になっているか確認してください: " + currentBirthdate,
                     currentBirthdate.isBefore(boundaryDate));
             previousBirthdate = currentBirthdate;
@@ -657,6 +683,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
     }
 
+    // TODO jflute 次回1on1ふぉろーここから (2026/04/17)
     public void  test_2005年6月に正式会員になった会員を先に並べて生年月日のない会員を検索(){
         // 要件はここで管理 ▶︎ requirements-checklist.md
 
@@ -689,6 +716,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertHasAnyElement(memberList);
 
         //2005年6月に正式会員になった会員が、検索結果の途中に出てきていないかをチェックするフラグ
+        // TODO ayamin booleanの変数名、もうちょいわかりやすくできないか？ by jflute (2026/04/17)
+        // [読み物課題] なんとかフラグというboolean変数名
+        // https://jflute.hatenadiary.jp/entry/20181013/flgornuance
         boolean sortOrderCheck = false;
         for (Member member : memberList) {
             assertNull(member.getBirthdate());
