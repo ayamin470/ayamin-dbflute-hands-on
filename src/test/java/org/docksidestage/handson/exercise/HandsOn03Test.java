@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.dbflute.cbean.result.ListResultBean;
+import org.dbflute.cbean.result.PagingResultBean;
 import org.dbflute.exception.NonSpecifiedColumnAccessException;
 import org.dbflute.helper.HandyDate;
 import org.docksidestage.handson.dbflute.exbhv.MemberBhv;
@@ -580,7 +582,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
         LocalDate previousBirthdate = null;
         for (Member member : memberList) {
             LocalDate currentBirthdate = member.getBirthdate();
-            String birthdateText = currentBirthdate != null ? currentBirthdate.toString() : "none";
             // TODO done ayamin null,nullで続いているレコードをcontinueで弾きたいだけなので、もうちょいifの構成をスッキリ by jflute (2026/04/10)
             //やりたいこと何か？
             //nullが続く場合もあるから、弾く(何もせず、処理をスキップさせる)
@@ -705,5 +706,82 @@ public class HandsOn03Test extends UnitContainerTestCase {
         }
     }
 
-    
+    public void test_全ての会員をページング検索() {
+        // 要件はここで管理 ▶︎ requirements-checklist.md
+
+        // ## Arrange ##
+        int pageSize = 3;
+        int pageNumber = 1;
+
+        // ## Act ##
+        PagingResultBean<Member> memberPage = memberBhv.selectPage(cb -> {
+            cb.setupSelect_MemberStatus();
+            cb.specify().specifyMemberStatus().columnMemberStatusName();
+            cb.query().addOrderBy_MemberId_Asc();
+            cb.paging(pageSize, pageNumber);
+        });
+
+        for (Member member : memberPage) {
+            String memberStatusName = member.getMemberStatus()
+                    .map(status -> status.getMemberStatusName())
+                    .orElse("none");
+            log("検索された会員: 会員ID=" + member.getMemberId()
+                    + ", 会員名称=" + member.getMemberName()
+                    + ", 会員ステータス名称=" + memberStatusName);
+        }
+
+        // ## Assert ##
+        // 総ページ数が期待通りのページ数であること
+        // 総レコード件数が会員テーブルの全件であること
+        int allRecordCount = memberBhv.selectCount(cb -> {}); //会員の全件数取得
+        int expectedAllPageCount = (allRecordCount + pageSize - 1) / pageSize; //13件、14件のように割り切れなかった場合、ページを繰り上げたいので先にpageSize - 1しておく
+        assertEquals(allRecordCount, memberPage.getAllRecordCount());
+        assertEquals(expectedAllPageCount, memberPage.getAllPageCount());
+
+        //検索条件として設定されたページサイズが、期待どおり pageSize であること
+        assertEquals(pageSize, memberPage.getPageSize());
+        //今取得したページが、期待どおり pageNumber ページ目であること
+        assertEquals(pageNumber, memberPage.getCurrentPageNumber());
+        //実際に返ってきた検索結果の件数が、ページサイズ分だけあること
+        assertEquals(pageSize, memberPage.size());
+
+        // PageRange を 3 にして PageNumberList を取得していて、 PageNumberList が [1, 2, 3, 4] であることをアサートしている
+        List<Integer> pageNumberList = memberPage.pageRange(op -> op.rangeSize(3)).createPageNumberList();
+        assertEquals(Arrays.asList(1, 2, 3, 4), pageNumberList);
+        //前のページが存在しないことをアサートしている
+        assertFalse(memberPage.existsPreviousPage());
+        //次のページが存在することをアサートしている
+        assertTrue(memberPage.existsNextPage());
+    }
+
+    public void test_会員ステータスの表示順カラムで会員を並べてカーソル検索(){
+        // 要件はここで管理 ▶︎ requirements-checklist.md
+
+        // ## Arrange ##
+        // Listと違い重複を持たないのでHashSetで重複管理
+        Set<String> seenStatusCodeSet = new HashSet<>();
+        boolean[] existsMember = {false};
+        String[] previousStatusCode = {null};
+
+        // ## Act ##
+        memberBhv.selectCursor(cb -> {
+            cb.setupSelect_MemberStatus();
+            cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
+            cb.query().addOrderBy_MemberId_Desc();
+        }, member -> {
+            existsMember[0] = true;
+            // 会員ステータスが取得できていること
+            assertTrue(member.getMemberStatus().isPresent());
+
+            String currentStatusCode = member.getMemberStatus().get().getMemberStatusCode();
+            // 「比較対象となる前の会員」が存在する&&今見ている会員のステータスが、前の会員のステータスと違う場合
+            if (previousStatusCode[0] != null && !currentStatusCode.equals(previousStatusCode[0])) {
+                // 会員ステータスごとに固まって並んでいること
+                assertFalse(seenStatusCodeSet.contains(currentStatusCode));
+                seenStatusCodeSet.add(previousStatusCode[0]);
+            }
+            previousStatusCode[0] = currentStatusCode;
+        });
+    }
+
 }
