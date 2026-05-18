@@ -492,7 +492,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     }
 
     public void test_1974年までに生まれたもしくは不明の会員を検索(){
-     // 要件はここで管理 ▶︎ requirements-checklist.md
+     // 要件はここで管理 ▶︎ ex03-requirements.md
 
         // ## Arrange ##
         String exercise8_targetDate = "1974/01/01";
@@ -659,7 +659,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     }
 
     public void  test_2005年6月に正式会員になった会員を先に並べて生年月日のない会員を検索(){
-        // 要件はここで管理 ▶︎ requirements-checklist.md
+        // 要件はここで管理 ▶︎ rex03-requirements.md
 
         // ## Arrange ##
         String exercise9_targetDate = "2005/06/01";
@@ -707,7 +707,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     }
 
     public void test_全ての会員をページング検索() {
-        // 要件はここで管理 ▶︎ requirements-checklist.md
+        // 要件はここで管理 ▶︎ ex03-requirements.md
 
         // ## Arrange ##
         int pageSize = 3;

@@ -45,11 +45,61 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
      * @param serviceRankCode The value of serviceRankCode as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setServiceRankCode_Equal(String serviceRankCode) {
+    protected void setServiceRankCode_Equal(String serviceRankCode) {
         doSetServiceRankCode_Equal(fRES(serviceRankCode));
+    }
+
+    /**
+     * Equal(=). As ServiceRank. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank} <br>
+     * 会員が受けられるサービスのランクを示す
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
+     */
+    public void setServiceRankCode_Equal_AsServiceRank(CDef.ServiceRank cdef) {
+        doSetServiceRankCode_Equal(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * Equal(=). As Platinum (PLT). And OnlyOnceRegistered. <br>
+     * PLATINUM: platinum rank
+     */
+    public void setServiceRankCode_Equal_Platinum() {
+        setServiceRankCode_Equal_AsServiceRank(CDef.ServiceRank.Platinum);
+    }
+
+    /**
+     * Equal(=). As Gold (GLD). And OnlyOnceRegistered. <br>
+     * GOLD: gold rank
+     */
+    public void setServiceRankCode_Equal_Gold() {
+        setServiceRankCode_Equal_AsServiceRank(CDef.ServiceRank.Gold);
+    }
+
+    /**
+     * Equal(=). As Silver (SIL). And OnlyOnceRegistered. <br>
+     * SILVER: silver rank
+     */
+    public void setServiceRankCode_Equal_Silver() {
+        setServiceRankCode_Equal_AsServiceRank(CDef.ServiceRank.Silver);
+    }
+
+    /**
+     * Equal(=). As Bronze (BRZ). And OnlyOnceRegistered. <br>
+     * BRONZE: bronze rank
+     */
+    public void setServiceRankCode_Equal_Bronze() {
+        setServiceRankCode_Equal_AsServiceRank(CDef.ServiceRank.Bronze);
+    }
+
+    /**
+     * Equal(=). As Plastic (PLS). And OnlyOnceRegistered. <br>
+     * PLASTIC: plastic rank
+     */
+    public void setServiceRankCode_Equal_Plastic() {
+        setServiceRankCode_Equal_AsServiceRank(CDef.ServiceRank.Plastic);
     }
 
     protected void doSetServiceRankCode_Equal(String serviceRankCode) {
@@ -58,11 +108,61 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
      * @param serviceRankCode The value of serviceRankCode as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setServiceRankCode_NotEqual(String serviceRankCode) {
+    protected void setServiceRankCode_NotEqual(String serviceRankCode) {
         doSetServiceRankCode_NotEqual(fRES(serviceRankCode));
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As ServiceRank. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank} <br>
+     * 会員が受けられるサービスのランクを示す
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
+     */
+    public void setServiceRankCode_NotEqual_AsServiceRank(CDef.ServiceRank cdef) {
+        doSetServiceRankCode_NotEqual(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Platinum (PLT). And OnlyOnceRegistered. <br>
+     * PLATINUM: platinum rank
+     */
+    public void setServiceRankCode_NotEqual_Platinum() {
+        setServiceRankCode_NotEqual_AsServiceRank(CDef.ServiceRank.Platinum);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Gold (GLD). And OnlyOnceRegistered. <br>
+     * GOLD: gold rank
+     */
+    public void setServiceRankCode_NotEqual_Gold() {
+        setServiceRankCode_NotEqual_AsServiceRank(CDef.ServiceRank.Gold);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Silver (SIL). And OnlyOnceRegistered. <br>
+     * SILVER: silver rank
+     */
+    public void setServiceRankCode_NotEqual_Silver() {
+        setServiceRankCode_NotEqual_AsServiceRank(CDef.ServiceRank.Silver);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Bronze (BRZ). And OnlyOnceRegistered. <br>
+     * BRONZE: bronze rank
+     */
+    public void setServiceRankCode_NotEqual_Bronze() {
+        setServiceRankCode_NotEqual_AsServiceRank(CDef.ServiceRank.Bronze);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Plastic (PLS). And OnlyOnceRegistered. <br>
+     * PLASTIC: plastic rank
+     */
+    public void setServiceRankCode_NotEqual_Plastic() {
+        setServiceRankCode_NotEqual_AsServiceRank(CDef.ServiceRank.Plastic);
     }
 
     protected void doSetServiceRankCode_NotEqual(String serviceRankCode) {
@@ -70,48 +170,22 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
     }
 
     /**
-     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
-     * @param serviceRankCode The value of serviceRankCode as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     */
-    public void setServiceRankCode_GreaterThan(String serviceRankCode) {
-        regServiceRankCode(CK_GT, fRES(serviceRankCode));
-    }
-
-    /**
-     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
-     * @param serviceRankCode The value of serviceRankCode as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     */
-    public void setServiceRankCode_LessThan(String serviceRankCode) {
-        regServiceRankCode(CK_LT, fRES(serviceRankCode));
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
-     * @param serviceRankCode The value of serviceRankCode as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     */
-    public void setServiceRankCode_GreaterEqual(String serviceRankCode) {
-        regServiceRankCode(CK_GE, fRES(serviceRankCode));
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
-     * @param serviceRankCode The value of serviceRankCode as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     */
-    public void setServiceRankCode_LessEqual(String serviceRankCode) {
-        regServiceRankCode(CK_LE, fRES(serviceRankCode));
-    }
-
-    /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
      * @param serviceRankCodeList The collection of serviceRankCode as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setServiceRankCode_InScope(Collection<String> serviceRankCodeList) {
+    protected void setServiceRankCode_InScope(Collection<String> serviceRankCodeList) {
         doSetServiceRankCode_InScope(serviceRankCodeList);
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. As ServiceRank. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank} <br>
+     * 会員が受けられるサービスのランクを示す
+     * @param cdefList The list of classification definition (as ENUM type). (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setServiceRankCode_InScope_AsServiceRank(Collection<CDef.ServiceRank> cdefList) {
+        doSetServiceRankCode_InScope(cTStrL(cdefList));
     }
 
     protected void doSetServiceRankCode_InScope(Collection<String> serviceRankCodeList) {
@@ -120,59 +194,25 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
      * @param serviceRankCodeList The collection of serviceRankCode as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setServiceRankCode_NotInScope(Collection<String> serviceRankCodeList) {
+    protected void setServiceRankCode_NotInScope(Collection<String> serviceRankCodeList) {
         doSetServiceRankCode_NotInScope(serviceRankCodeList);
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. As ServiceRank. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank} <br>
+     * 会員が受けられるサービスのランクを示す
+     * @param cdefList The list of classification definition (as ENUM type). (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setServiceRankCode_NotInScope_AsServiceRank(Collection<CDef.ServiceRank> cdefList) {
+        doSetServiceRankCode_NotInScope(cTStrL(cdefList));
     }
 
     protected void doSetServiceRankCode_NotInScope(Collection<String> serviceRankCodeList) {
         regINS(CK_NINS, cTL(serviceRankCodeList), xgetCValueServiceRankCode(), "SERVICE_RANK_CODE");
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)} <br>
-     * <pre>e.g. setServiceRankCode_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param serviceRankCode The value of serviceRankCode as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setServiceRankCode_LikeSearch(String serviceRankCode, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setServiceRankCode_LikeSearch(serviceRankCode, xcLSOP(opLambda));
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)} <br>
-     * <pre>e.g. setServiceRankCode_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param serviceRankCode The value of serviceRankCode as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     * @param likeSearchOption The option of like-search. (NotNull)
-     */
-    protected void setServiceRankCode_LikeSearch(String serviceRankCode, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(serviceRankCode), xgetCValueServiceRankCode(), "SERVICE_RANK_CODE", likeSearchOption);
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
-     * @param serviceRankCode The value of serviceRankCode as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setServiceRankCode_NotLikeSearch(String serviceRankCode, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setServiceRankCode_NotLikeSearch(serviceRankCode, xcLSOP(opLambda));
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
-     * @param serviceRankCode The value of serviceRankCode as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     * @param likeSearchOption The option of not-like-search. (NotNull)
-     */
-    protected void setServiceRankCode_NotLikeSearch(String serviceRankCode, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(serviceRankCode), xgetCValueServiceRankCode(), "SERVICE_RANK_CODE", likeSearchOption);
     }
 
     /**
@@ -250,13 +290,13 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
      */
     public void setServiceRankCode_IsNull() { regServiceRankCode(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
      */
     public void setServiceRankCode_IsNotNull() { regServiceRankCode(CK_ISNN, DOBJ); }
 
@@ -517,11 +557,37 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
      * @param newAcceptableFlg The value of newAcceptableFlg as equal. (basically NotNull: error as default, or no condition as option)
      */
-    public void setNewAcceptableFlg_Equal(Integer newAcceptableFlg) {
+    protected void setNewAcceptableFlg_Equal(Integer newAcceptableFlg) {
         doSetNewAcceptableFlg_Equal(newAcceptableFlg);
+    }
+
+    /**
+     * Equal(=). As Flg. And NullIgnored, OnlyOnceRegistered. <br>
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg} <br>
+     * フラグを示す
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
+     */
+    public void setNewAcceptableFlg_Equal_AsFlg(CDef.Flg cdef) {
+        doSetNewAcceptableFlg_Equal(cTNum(cdef != null ? cdef.code() : null, Integer.class));
+    }
+
+    /**
+     * Equal(=). As True (1). And NullIgnored, OnlyOnceRegistered. <br>
+     * はい: 有効を示す
+     */
+    public void setNewAcceptableFlg_Equal_True() {
+        setNewAcceptableFlg_Equal_AsFlg(CDef.Flg.True);
+    }
+
+    /**
+     * Equal(=). As False (0). And NullIgnored, OnlyOnceRegistered. <br>
+     * いいえ: 無効を示す
+     */
+    public void setNewAcceptableFlg_Equal_False() {
+        setNewAcceptableFlg_Equal_AsFlg(CDef.Flg.False);
     }
 
     protected void doSetNewAcceptableFlg_Equal(Integer newAcceptableFlg) {
@@ -530,11 +596,37 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
      * @param newAcceptableFlg The value of newAcceptableFlg as notEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setNewAcceptableFlg_NotEqual(Integer newAcceptableFlg) {
+    protected void setNewAcceptableFlg_NotEqual(Integer newAcceptableFlg) {
         doSetNewAcceptableFlg_NotEqual(newAcceptableFlg);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Flg. And NullIgnored, OnlyOnceRegistered. <br>
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg} <br>
+     * フラグを示す
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
+     */
+    public void setNewAcceptableFlg_NotEqual_AsFlg(CDef.Flg cdef) {
+        doSetNewAcceptableFlg_NotEqual(cTNum(cdef != null ? cdef.code() : null, Integer.class));
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As True (1). And NullIgnored, OnlyOnceRegistered. <br>
+     * はい: 有効を示す
+     */
+    public void setNewAcceptableFlg_NotEqual_True() {
+        setNewAcceptableFlg_NotEqual_AsFlg(CDef.Flg.True);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As False (0). And NullIgnored, OnlyOnceRegistered. <br>
+     * いいえ: 無効を示す
+     */
+    public void setNewAcceptableFlg_NotEqual_False() {
+        setNewAcceptableFlg_NotEqual_AsFlg(CDef.Flg.False);
     }
 
     protected void doSetNewAcceptableFlg_NotEqual(Integer newAcceptableFlg) {
@@ -542,74 +634,22 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
     }
 
     /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
-     * @param newAcceptableFlg The value of newAcceptableFlg as greaterThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setNewAcceptableFlg_GreaterThan(Integer newAcceptableFlg) {
-        regNewAcceptableFlg(CK_GT, newAcceptableFlg);
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
-     * @param newAcceptableFlg The value of newAcceptableFlg as lessThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setNewAcceptableFlg_LessThan(Integer newAcceptableFlg) {
-        regNewAcceptableFlg(CK_LT, newAcceptableFlg);
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
-     * @param newAcceptableFlg The value of newAcceptableFlg as greaterEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setNewAcceptableFlg_GreaterEqual(Integer newAcceptableFlg) {
-        regNewAcceptableFlg(CK_GE, newAcceptableFlg);
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
-     * @param newAcceptableFlg The value of newAcceptableFlg as lessEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setNewAcceptableFlg_LessEqual(Integer newAcceptableFlg) {
-        regNewAcceptableFlg(CK_LE, newAcceptableFlg);
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
-     * @param minNumber The min number of newAcceptableFlg. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of newAcceptableFlg. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param opLambda The callback for option of range-of. (NotNull)
-     */
-    public void setNewAcceptableFlg_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setNewAcceptableFlg_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
-     * @param minNumber The min number of newAcceptableFlg. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of newAcceptableFlg. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param rangeOfOption The option of range-of. (NotNull)
-     */
-    protected void setNewAcceptableFlg_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueNewAcceptableFlg(), "NEW_ACCEPTABLE_FLG", rangeOfOption);
-    }
-
-    /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
      * @param newAcceptableFlgList The collection of newAcceptableFlg as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setNewAcceptableFlg_InScope(Collection<Integer> newAcceptableFlgList) {
+    protected void setNewAcceptableFlg_InScope(Collection<Integer> newAcceptableFlgList) {
         doSetNewAcceptableFlg_InScope(newAcceptableFlgList);
+    }
+
+    /**
+     * InScope {in (1, 2)}. As Flg. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg} <br>
+     * フラグを示す
+     * @param cdefList The list of classification definition (as ENUM type). (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setNewAcceptableFlg_InScope_AsFlg(Collection<CDef.Flg> cdefList) {
+        doSetNewAcceptableFlg_InScope(cTNumL(cdefList, Integer.class));
     }
 
     protected void doSetNewAcceptableFlg_InScope(Collection<Integer> newAcceptableFlgList) {
@@ -618,11 +658,21 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
      * @param newAcceptableFlgList The collection of newAcceptableFlg as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setNewAcceptableFlg_NotInScope(Collection<Integer> newAcceptableFlgList) {
+    protected void setNewAcceptableFlg_NotInScope(Collection<Integer> newAcceptableFlgList) {
         doSetNewAcceptableFlg_NotInScope(newAcceptableFlgList);
+    }
+
+    /**
+     * NotInScope {not in (1, 2)}. As Flg. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg} <br>
+     * フラグを示す
+     * @param cdefList The list of classification definition (as ENUM type). (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setNewAcceptableFlg_NotInScope_AsFlg(Collection<CDef.Flg> cdefList) {
+        doSetNewAcceptableFlg_NotInScope(cTNumL(cdefList, Integer.class));
     }
 
     protected void doSetNewAcceptableFlg_NotInScope(Collection<Integer> newAcceptableFlgList) {

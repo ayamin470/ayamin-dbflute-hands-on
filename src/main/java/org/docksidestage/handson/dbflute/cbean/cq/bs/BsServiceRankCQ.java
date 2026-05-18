@@ -95,14 +95,14 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_ServiceRankCode_Asc() { regOBA("SERVICE_RANK_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_ServiceRankCode_Desc() { regOBD("SERVICE_RANK_CODE"); return this; }
@@ -155,14 +155,14 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_NewAcceptableFlg_Asc() { regOBA("NEW_ACCEPTABLE_FLG"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_NewAcceptableFlg_Desc() { regOBD("NEW_ACCEPTABLE_FLG"); return this; }

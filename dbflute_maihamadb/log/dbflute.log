@@ -5051,3 +5051,739 @@ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
     repsEnvType      = ut
     refreshProject   = $$AutoDetect$$
 _/_/_/_/_/_/_/_/_/_/ {Doc}
+2026-05-18 15:35:54,688 [main] INFO  (TorqueDocumentationTask#begin():193) - +------------------------------------------+
+2026-05-18 15:35:54,689 [main] INFO  (TorqueDocumentationTask#begin():194) - |                                          |
+2026-05-18 15:35:54,689 [main] INFO  (TorqueDocumentationTask#begin():195) - |                   Doc                    |
+2026-05-18 15:35:54,689 [main] INFO  (TorqueDocumentationTask#begin():203) - |                                          |
+2026-05-18 15:35:54,689 [main] INFO  (TorqueDocumentationTask#begin():204) - +------------------------------------------+
+2026-05-18 15:35:54,698 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2026-05-18 15:35:54,698 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2026-05-18 15:35:54,698 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+2026-05-18 15:35:54,698 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = maihamadb
+2026-05-18 15:35:54,699 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():265) - 
+2026-05-18 15:35:54,699 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():266) - * * * * * * * * * * *
+2026-05-18 15:35:54,700 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():267) - *                   *
+2026-05-18 15:35:54,700 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():268) - *    Schema HTML    *
+2026-05-18 15:35:54,700 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():269) - *                   *
+2026-05-18 15:35:54,700 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():270) - * * * * * * * * * * *
+2026-05-18 15:35:54,717 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2026-05-18 15:35:54,748 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2026-05-18 15:35:54,748 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2026-05-18 15:35:54,748 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2026-05-18 15:35:54,748 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2026-05-18 15:35:54,748 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2026-05-18 15:35:54,749 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2026-05-18 15:35:54,749 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2026-05-18 15:35:54,750 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2026-05-18 15:35:54,750 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2026-05-18 15:35:54,756 [main] INFO  (DfDatabaseProperties#createMainSchemaConnection():981) - ...Creating connection to main schema: {maihamadb.$$NoNameSchema$$ as main}
+2026-05-18 15:35:54,836 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'Doc'.
+
+[Advice]
+Check the exception messages and the stack traces.
+* * * * * * * * * */
+java.lang.IllegalStateException: Failed to connect: url=jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED info={password=maihamadb, user=maihamadb}
+	at org.dbflute.properties.DfAbstractDBFluteProperties.createConnection(DfAbstractDBFluteProperties.java:319)
+	at org.dbflute.properties.DfDatabaseProperties.createMainSchemaConnection(DfDatabaseProperties.java:982)
+	at org.dbflute.properties.DfClassificationProperties.createMainSchemaConnection(DfClassificationProperties.java:245)
+	at org.dbflute.properties.DfClassificationProperties.getClassificationDefinitionMap(DfClassificationProperties.java:178)
+	at org.dbflute.properties.DfClassificationProperties.initializeClassificationDefinition(DfClassificationProperties.java:318)
+	at org.apache.torque.engine.database.model.Database.initializeClassificationDeployment(Database.java:1064)
+	at org.apache.torque.engine.database.model.Database.initializeSupplementaryMetaData(Database.java:1023)
+	at org.apache.torque.task.TorqueDocumentationTask.purelyInitializeSchemaHtmlSchemaData(TorqueDocumentationTask.java:442)
+	at org.apache.torque.task.TorqueDocumentationTask.processSchemaHtml(TorqueDocumentationTask.java:277)
+	at org.apache.torque.task.TorqueDocumentationTask.doExecute(TorqueDocumentationTask.java:235)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:129)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:192)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:78)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:151)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at jdk.internal.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:403)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:990)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:335)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2187)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2220)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2015)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:768)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:403)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:385)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:323)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:190)
+	at org.dbflute.properties.DfAbstractDBFluteProperties.createConnection(DfAbstractDBFluteProperties.java:314)
+	... 29 more
+Caused by: java.net.SocketException: Operation not permitted
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:579)
+	at java.base/sun.nio.ch.Net.connect(Net.java:568)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:593)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:633)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:211)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:299)
+	... 45 more
+2026-05-18 15:35:54,842 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s158ms *Abort
+
+  DBFLUTE_CLIENT: {maihamadb}
+    database  = mysql
+    language  = java
+    container = lasta_di
+    package   = org.docksidestage.handson.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    schema = {maihamadb.$$NoNameSchema$$ as main}
+    user   = maihamadb
+    props  = {password=maihamadb, user=maihamadb}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Doc}
+2026-05-18 15:44:36,805 [main] INFO  (TorqueDocumentationTask#begin():193) - +------------------------------------------+
+2026-05-18 15:44:36,806 [main] INFO  (TorqueDocumentationTask#begin():194) - |                                          |
+2026-05-18 15:44:36,806 [main] INFO  (TorqueDocumentationTask#begin():195) - |                   Doc                    |
+2026-05-18 15:44:36,806 [main] INFO  (TorqueDocumentationTask#begin():203) - |                                          |
+2026-05-18 15:44:36,806 [main] INFO  (TorqueDocumentationTask#begin():204) - +------------------------------------------+
+2026-05-18 15:44:36,816 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2026-05-18 15:44:36,816 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2026-05-18 15:44:36,816 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+2026-05-18 15:44:36,816 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = maihamadb
+2026-05-18 15:44:36,817 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():265) - 
+2026-05-18 15:44:36,817 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():266) - * * * * * * * * * * *
+2026-05-18 15:44:36,817 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():267) - *                   *
+2026-05-18 15:44:36,817 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():268) - *    Schema HTML    *
+2026-05-18 15:44:36,817 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():269) - *                   *
+2026-05-18 15:44:36,817 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():270) - * * * * * * * * * * *
+2026-05-18 15:44:36,834 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2026-05-18 15:44:36,868 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2026-05-18 15:44:36,868 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2026-05-18 15:44:36,869 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2026-05-18 15:44:36,869 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2026-05-18 15:44:36,869 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2026-05-18 15:44:36,869 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2026-05-18 15:44:36,870 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2026-05-18 15:44:36,870 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2026-05-18 15:44:36,871 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2026-05-18 15:44:36,877 [main] INFO  (DfDatabaseProperties#createMainSchemaConnection():981) - ...Creating connection to main schema: {maihamadb.$$NoNameSchema$$ as main}
+2026-05-18 15:44:36,959 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'Doc'.
+
+[Advice]
+Check the exception messages and the stack traces.
+* * * * * * * * * */
+java.lang.IllegalStateException: Failed to connect: url=jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED info={password=maihamadb, user=maihamadb}
+	at org.dbflute.properties.DfAbstractDBFluteProperties.createConnection(DfAbstractDBFluteProperties.java:319)
+	at org.dbflute.properties.DfDatabaseProperties.createMainSchemaConnection(DfDatabaseProperties.java:982)
+	at org.dbflute.properties.DfClassificationProperties.createMainSchemaConnection(DfClassificationProperties.java:245)
+	at org.dbflute.properties.DfClassificationProperties.getClassificationDefinitionMap(DfClassificationProperties.java:178)
+	at org.dbflute.properties.DfClassificationProperties.initializeClassificationDefinition(DfClassificationProperties.java:318)
+	at org.apache.torque.engine.database.model.Database.initializeClassificationDeployment(Database.java:1064)
+	at org.apache.torque.engine.database.model.Database.initializeSupplementaryMetaData(Database.java:1023)
+	at org.apache.torque.task.TorqueDocumentationTask.purelyInitializeSchemaHtmlSchemaData(TorqueDocumentationTask.java:442)
+	at org.apache.torque.task.TorqueDocumentationTask.processSchemaHtml(TorqueDocumentationTask.java:277)
+	at org.apache.torque.task.TorqueDocumentationTask.doExecute(TorqueDocumentationTask.java:235)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:129)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:192)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:78)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:151)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at jdk.internal.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:403)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:990)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:335)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2187)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2220)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2015)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:768)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:403)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:385)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:323)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:190)
+	at org.dbflute.properties.DfAbstractDBFluteProperties.createConnection(DfAbstractDBFluteProperties.java:314)
+	... 29 more
+Caused by: java.net.SocketException: Operation not permitted
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:579)
+	at java.base/sun.nio.ch.Net.connect(Net.java:568)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:593)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:633)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:211)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:299)
+	... 45 more
+2026-05-18 15:44:36,965 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s164ms *Abort
+
+  DBFLUTE_CLIENT: {maihamadb}
+    database  = mysql
+    language  = java
+    container = lasta_di
+    package   = org.docksidestage.handson.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    schema = {maihamadb.$$NoNameSchema$$ as main}
+    user   = maihamadb
+    props  = {password=maihamadb, user=maihamadb}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Doc}
+2026-05-18 15:45:10,249 [main] INFO  (TorqueDocumentationTask#begin():193) - +------------------------------------------+
+2026-05-18 15:45:10,250 [main] INFO  (TorqueDocumentationTask#begin():194) - |                                          |
+2026-05-18 15:45:10,250 [main] INFO  (TorqueDocumentationTask#begin():195) - |                   Doc                    |
+2026-05-18 15:45:10,250 [main] INFO  (TorqueDocumentationTask#begin():203) - |                                          |
+2026-05-18 15:45:10,250 [main] INFO  (TorqueDocumentationTask#begin():204) - +------------------------------------------+
+2026-05-18 15:45:10,259 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2026-05-18 15:45:10,259 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2026-05-18 15:45:10,259 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+2026-05-18 15:45:10,259 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = maihamadb
+2026-05-18 15:45:10,260 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():265) - 
+2026-05-18 15:45:10,260 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():266) - * * * * * * * * * * *
+2026-05-18 15:45:10,260 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():267) - *                   *
+2026-05-18 15:45:10,260 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():268) - *    Schema HTML    *
+2026-05-18 15:45:10,261 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():269) - *                   *
+2026-05-18 15:45:10,261 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():270) - * * * * * * * * * * *
+2026-05-18 15:45:10,276 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2026-05-18 15:45:10,309 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2026-05-18 15:45:10,309 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2026-05-18 15:45:10,309 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2026-05-18 15:45:10,310 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2026-05-18 15:45:10,310 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2026-05-18 15:45:10,310 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2026-05-18 15:45:10,311 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2026-05-18 15:45:10,311 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2026-05-18 15:45:10,312 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2026-05-18 15:45:10,319 [main] INFO  (DfDatabaseProperties#createMainSchemaConnection():981) - ...Creating connection to main schema: {maihamadb.$$NoNameSchema$$ as main}
+2026-05-18 15:45:10,399 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'Doc'.
+
+[Advice]
+Check the exception messages and the stack traces.
+* * * * * * * * * */
+java.lang.IllegalStateException: Failed to connect: url=jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED info={password=maihamadb, user=maihamadb}
+	at org.dbflute.properties.DfAbstractDBFluteProperties.createConnection(DfAbstractDBFluteProperties.java:319)
+	at org.dbflute.properties.DfDatabaseProperties.createMainSchemaConnection(DfDatabaseProperties.java:982)
+	at org.dbflute.properties.DfClassificationProperties.createMainSchemaConnection(DfClassificationProperties.java:245)
+	at org.dbflute.properties.DfClassificationProperties.getClassificationDefinitionMap(DfClassificationProperties.java:178)
+	at org.dbflute.properties.DfClassificationProperties.initializeClassificationDefinition(DfClassificationProperties.java:318)
+	at org.apache.torque.engine.database.model.Database.initializeClassificationDeployment(Database.java:1064)
+	at org.apache.torque.engine.database.model.Database.initializeSupplementaryMetaData(Database.java:1023)
+	at org.apache.torque.task.TorqueDocumentationTask.purelyInitializeSchemaHtmlSchemaData(TorqueDocumentationTask.java:442)
+	at org.apache.torque.task.TorqueDocumentationTask.processSchemaHtml(TorqueDocumentationTask.java:277)
+	at org.apache.torque.task.TorqueDocumentationTask.doExecute(TorqueDocumentationTask.java:235)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:129)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:192)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:78)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:151)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at jdk.internal.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:403)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:990)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:335)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2187)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2220)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2015)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:768)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:403)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:385)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:323)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:190)
+	at org.dbflute.properties.DfAbstractDBFluteProperties.createConnection(DfAbstractDBFluteProperties.java:314)
+	... 29 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:579)
+	at java.base/sun.nio.ch.Net.connect(Net.java:568)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:593)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:633)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:211)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:299)
+	... 45 more
+2026-05-18 15:45:10,405 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s160ms *Abort
+
+  DBFLUTE_CLIENT: {maihamadb}
+    database  = mysql
+    language  = java
+    container = lasta_di
+    package   = org.docksidestage.handson.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    schema = {maihamadb.$$NoNameSchema$$ as main}
+    user   = maihamadb
+    props  = {password=maihamadb, user=maihamadb}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Doc}
+2026-05-18 15:46:16,980 [main] INFO  (TorqueDocumentationTask#begin():193) - +------------------------------------------+
+2026-05-18 15:46:16,981 [main] INFO  (TorqueDocumentationTask#begin():194) - |                                          |
+2026-05-18 15:46:16,981 [main] INFO  (TorqueDocumentationTask#begin():195) - |                   Doc                    |
+2026-05-18 15:46:16,981 [main] INFO  (TorqueDocumentationTask#begin():203) - |                                          |
+2026-05-18 15:46:16,981 [main] INFO  (TorqueDocumentationTask#begin():204) - +------------------------------------------+
+2026-05-18 15:46:16,993 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2026-05-18 15:46:16,994 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2026-05-18 15:46:16,994 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+2026-05-18 15:46:16,994 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = maihamadb
+2026-05-18 15:46:16,995 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():265) - 
+2026-05-18 15:46:16,995 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():266) - * * * * * * * * * * *
+2026-05-18 15:46:16,995 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():267) - *                   *
+2026-05-18 15:46:16,995 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():268) - *    Schema HTML    *
+2026-05-18 15:46:16,995 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():269) - *                   *
+2026-05-18 15:46:16,996 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():270) - * * * * * * * * * * *
+2026-05-18 15:46:17,018 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2026-05-18 15:46:17,061 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2026-05-18 15:46:17,061 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2026-05-18 15:46:17,062 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2026-05-18 15:46:17,062 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2026-05-18 15:46:17,062 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2026-05-18 15:46:17,063 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2026-05-18 15:46:17,063 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2026-05-18 15:46:17,064 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2026-05-18 15:46:17,064 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2026-05-18 15:46:17,072 [main] INFO  (DfDatabaseProperties#createMainSchemaConnection():981) - ...Creating connection to main schema: {maihamadb.$$NoNameSchema$$ as main}
+2026-05-18 15:46:17,393 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for MemberStatus classification
+select MEMBER_STATUS_CODE as cls_code, MEMBER_STATUS_NAME as cls_name
+     , MEMBER_STATUS_NAME as cls_alias, DESCRIPTION as cls_comment
+  from MEMBER_STATUS order by DISPLAY_ORDER
+2026-05-18 15:46:17,412 [main] INFO  (DfClsDeploymentInitializer#initializeClassificationDeployment():67) - ...Initializing ClassificationDeployment: project=maihamadb
+2026-05-18 15:46:17,433 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():253) - generator.parse("doc/ControlDocument.vm", ctx);
+2026-05-18 15:46:17,437 [main] INFO  (DfFlutistLog4JLogSystem#init():45) - ...Suppressing velocity.log, which is unneeded for also debug
+2026-05-18 15:46:17,488 [main] INFO  (Database#doEnableDocumentOutputDirectory():1241) - ...Setting up documentOutputDirectory: ./output/doc
+2026-05-18 15:46:17,491 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():242) - ...Loading schema history
+2026-05-18 15:46:17,502 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():246) -  -> found history: count=1
+2026-05-18 15:46:17,522 [main] INFO  (DfSchemaHtmlDataArrangeQuery#getArrangeQueryTableMap():50) -  
+2026-05-18 15:46:17,523 [main] INFO  (DfSchemaHtmlDataArrangeQuery#getArrangeQueryTableMap():51) - ...Setting up arrange queries for documents (ArrangeQueryDoc)
+2026-05-18 15:46:17,538 [main] INFO  (DfArrangeQueryDocSetupper#doExtractArrangeQuery():106) -  -> no arrange query
+2026-05-18 15:46:17,657 [main] INFO  (DfRefreshResourceProcess#show():295) - /===========================================================================
+2026-05-18 15:46:17,657 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Refreshing [dbflute-hands-on] by http://localhost:8386/
+2026-05-18 15:46:17,661 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Retrying refreshing by default secondary URL http://localhost:8387/
+2026-05-18 15:46:17,661 [main] INFO  (DfRefreshResourceProcess#show():295) - Failed to refresh the resources (continued): url=http://localhost:8386/, cause=ConnectException(Connection refused)
+2026-05-18 15:46:17,661 [main] INFO  (DfRefreshResourceProcess#show():295) - ==========/
+2026-05-18 15:46:17,663 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s690ms
+
+  DBFLUTE_CLIENT: {maihamadb}
+    database  = mysql
+    language  = java
+    container = lasta_di
+    package   = org.docksidestage.handson.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    schema = {maihamadb.$$NoNameSchema$$ as main}
+    user   = maihamadb
+    props  = {password=maihamadb, user=maihamadb}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Doc}
+2026-05-18 15:46:26,993 [main] INFO  (TorqueDataModelTask#begin():110) - +------------------------------------------+
+2026-05-18 15:46:26,994 [main] INFO  (TorqueDataModelTask#begin():111) - |                                          |
+2026-05-18 15:46:26,994 [main] INFO  (TorqueDataModelTask#begin():112) - |                 Generate                 |
+2026-05-18 15:46:26,994 [main] INFO  (TorqueDataModelTask#begin():113) - |                                          |
+2026-05-18 15:46:26,994 [main] INFO  (TorqueDataModelTask#begin():114) - +------------------------------------------+
+2026-05-18 15:46:27,003 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2026-05-18 15:46:27,003 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2026-05-18 15:46:27,003 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+2026-05-18 15:46:27,003 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = maihamadb
+2026-05-18 15:46:27,009 [main] INFO  (TorqueDataModelTask#setupControlTemplate():166) - 
+2026-05-18 15:46:27,010 [main] INFO  (TorqueDataModelTask#setupControlTemplate():167) - ...Using Java control: om/ControlGenerateJava.vm
+2026-05-18 15:46:27,021 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2026-05-18 15:46:27,053 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():253) - generator.parse("om/ControlGenerateJava.vm", ctx);
+2026-05-18 15:46:27,058 [main] INFO  (DfFlutistLog4JLogSystem#init():45) - ...Suppressing velocity.log, which is unneeded for also debug
+2026-05-18 15:46:27,115 [main] INFO  (Database#doEnableGenerateOutputDirectory():1209) - ...Setting up generateOutputDirectory: ../src/main/java
+2026-05-18 15:46:27,116 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2026-05-18 15:46:27,117 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2026-05-18 15:46:27,117 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2026-05-18 15:46:27,117 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2026-05-18 15:46:27,117 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2026-05-18 15:46:27,118 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2026-05-18 15:46:27,118 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2026-05-18 15:46:27,118 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2026-05-18 15:46:27,119 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2026-05-18 15:46:27,125 [main] INFO  (DfDatabaseProperties#createMainSchemaConnection():981) - ...Creating connection to main schema: {maihamadb.$$NoNameSchema$$ as main}
+2026-05-18 15:46:27,367 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for MemberStatus classification
+select MEMBER_STATUS_CODE as cls_code, MEMBER_STATUS_NAME as cls_name
+     , MEMBER_STATUS_NAME as cls_alias, DESCRIPTION as cls_comment
+  from MEMBER_STATUS order by DISPLAY_ORDER
+2026-05-18 15:46:27,374 [main] INFO  (DfClsDeploymentInitializer#initializeClassificationDeployment():67) - ...Initializing ClassificationDeployment: project=maihamadb
+2026-05-18 15:46:27,376 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():58) - /=============================
+2026-05-18 15:46:27,376 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():59) - ...Initializing include query.
+2026-05-18 15:46:27,376 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - String
+2026-05-18 15:46:27,376 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - Number
+2026-05-18 15:46:27,376 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - Date
+2026-05-18 15:46:27,376 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   NotEqual -> []
+2026-05-18 15:46:27,376 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   InScope -> []
+2026-05-18 15:46:27,376 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   NotInScope -> []
+2026-05-18 15:46:27,377 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - OrderBy
+2026-05-18 15:46:27,377 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():61) - ========/
+2026-05-18 15:46:27,381 [main] INFO  (Database#info():2872) - public void parseAllCommon() {
+2026-05-18 15:46:27,382 [main] INFO  (Database#info():2872) -     parse('CDef');
+2026-05-18 15:46:27,395 [main] INFO  (Database#info():2872) -     parse('DBCurrent');
+2026-05-18 15:46:27,397 [main] INFO  (Database#info():2872) -     parse('DBFluteConfig');
+2026-05-18 15:46:27,402 [main] INFO  (Database#info():2872) -     parse('DBFluteInitializer');
+2026-05-18 15:46:27,404 [main] INFO  (Database#info():2872) -     parse('DBMetaInstanceHandler');
+2026-05-18 15:46:27,411 [main] INFO  (Database#info():2872) -     parse('EntityDefinedCommonColumn');
+2026-05-18 15:46:27,412 [main] INFO  (Database#info():2872) -     parse('ImplementedBehaviorSelector');
+2026-05-18 15:46:27,415 [main] INFO  (Database#info():2872) -     parse('ImplementedCommonColumnAutoSetupper');
+2026-05-18 15:46:27,417 [main] INFO  (Database#info():2872) -     parse('ImplementedInvokerAssistant');
+2026-05-18 15:46:27,420 [main] INFO  (Database#info():2872) -     parse('ImplementedSqlClauseCreator');
+2026-05-18 15:46:27,421 [main] INFO  (Database#info():2872) - }
+2026-05-18 15:46:27,421 [main] INFO  (Database#info():2872) - public void parseContainerConfig() {
+2026-05-18 15:46:27,421 [main] INFO  (Database#info():2872) -     parse('../resources/dbflute.xml')
+2026-05-18 15:46:27,426 [main] INFO  (Database#info():2872) - }
+2026-05-18 15:46:27,427 [main] INFO  (DfOldClassHandler#info():1045) - public void deleteOldTableClass() {
+2026-05-18 15:46:27,436 [main] INFO  (DfOldClassHandler#info():1045) - }
+2026-05-18 15:46:27,436 [main] INFO  (Database#info():2872) - public void parseTableClass() {
+2026-05-18 15:46:27,436 [main] INFO  (Database#info():2872) -     parse('member');
+2026-05-18 15:46:27,561 [main] INFO  (Database#info():2872) -     parse('member_address');
+2026-05-18 15:46:27,619 [main] INFO  (Database#info():2872) -     parse('member_login');
+2026-05-18 15:46:27,673 [main] INFO  (Database#info():2872) -     parse('member_security');
+2026-05-18 15:46:27,717 [main] INFO  (Database#info():2872) -     parse('member_service');
+2026-05-18 15:46:27,760 [main] INFO  (Database#info():2872) -     parse('member_status');
+2026-05-18 15:46:27,807 [main] INFO  (Database#info():2872) -     parse('member_withdrawal');
+2026-05-18 15:46:27,849 [main] INFO  (Database#info():2872) -     parse('product');
+2026-05-18 15:46:27,899 [main] INFO  (Database#info():2872) -     parse('product_category');
+2026-05-18 15:46:27,938 [main] INFO  (Database#info():2872) -     parse('product_status');
+2026-05-18 15:46:27,969 [main] INFO  (Database#info():2872) -     parse('purchase');
+2026-05-18 15:46:28,018 [main] INFO  (Database#info():2872) -     parse('purchase_payment');
+2026-05-18 15:46:28,055 [main] INFO  (Database#info():2872) -     parse('region');
+2026-05-18 15:46:28,085 [main] INFO  (Database#info():2872) -     parse('service_rank');
+2026-05-18 15:46:28,120 [main] INFO  (Database#info():2872) -     parse('withdrawal_reason');
+2026-05-18 15:46:28,149 [main] INFO  (Database#info():2872) - }
+2026-05-18 15:46:28,149 [main] INFO  (Database#info():2872) -  
+2026-05-18 15:46:28,160 [main] INFO  (DfRefreshResourceProcess#show():295) - /===========================================================================
+2026-05-18 15:46:28,160 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Refreshing [dbflute-hands-on] by http://localhost:8386/
+2026-05-18 15:46:28,163 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Retrying refreshing by default secondary URL http://localhost:8387/
+2026-05-18 15:46:28,163 [main] INFO  (DfRefreshResourceProcess#show():295) - Failed to refresh the resources (continued): url=http://localhost:8386/, cause=ConnectException(Connection refused)
+2026-05-18 15:46:28,163 [main] INFO  (DfRefreshResourceProcess#show():295) - ==========/
+2026-05-18 15:46:28,165 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s176ms
+
+  DBFLUTE_CLIENT: {maihamadb}
+    database  = mysql
+    language  = java
+    container = lasta_di
+    package   = org.docksidestage.handson.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    schema = {maihamadb.$$NoNameSchema$$ as main}
+    user   = maihamadb
+    props  = {password=maihamadb, user=maihamadb}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Generate}
+2026-05-18 15:50:31,356 [main] INFO  (TorqueDocumentationTask#begin():193) - +------------------------------------------+
+2026-05-18 15:50:31,357 [main] INFO  (TorqueDocumentationTask#begin():194) - |                                          |
+2026-05-18 15:50:31,357 [main] INFO  (TorqueDocumentationTask#begin():195) - |                   Doc                    |
+2026-05-18 15:50:31,357 [main] INFO  (TorqueDocumentationTask#begin():203) - |                                          |
+2026-05-18 15:50:31,357 [main] INFO  (TorqueDocumentationTask#begin():204) - +------------------------------------------+
+2026-05-18 15:50:31,367 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2026-05-18 15:50:31,367 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2026-05-18 15:50:31,367 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+2026-05-18 15:50:31,367 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = maihamadb
+2026-05-18 15:50:31,368 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():265) - 
+2026-05-18 15:50:31,368 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():266) - * * * * * * * * * * *
+2026-05-18 15:50:31,368 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():267) - *                   *
+2026-05-18 15:50:31,368 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():268) - *    Schema HTML    *
+2026-05-18 15:50:31,368 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():269) - *                   *
+2026-05-18 15:50:31,368 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():270) - * * * * * * * * * * *
+2026-05-18 15:50:31,385 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2026-05-18 15:50:31,418 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2026-05-18 15:50:31,418 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2026-05-18 15:50:31,418 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2026-05-18 15:50:31,419 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2026-05-18 15:50:31,419 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2026-05-18 15:50:31,419 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2026-05-18 15:50:31,420 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2026-05-18 15:50:31,420 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2026-05-18 15:50:31,420 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2026-05-18 15:50:31,428 [main] INFO  (DfDatabaseProperties#createMainSchemaConnection():981) - ...Creating connection to main schema: {maihamadb.$$NoNameSchema$$ as main}
+2026-05-18 15:50:31,664 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for MemberStatus classification
+select MEMBER_STATUS_CODE as cls_code, MEMBER_STATUS_NAME as cls_name
+     , MEMBER_STATUS_NAME as cls_alias, DESCRIPTION as cls_comment
+  from MEMBER_STATUS order by DISPLAY_ORDER
+2026-05-18 15:50:31,670 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for ServiceRank classification
+select SERVICE_RANK_CODE as cls_code, SERVICE_RANK_NAME as cls_name
+     , SERVICE_RANK_NAME as cls_alias, DESCRIPTION as cls_comment
+  from SERVICE_RANK order by DISPLAY_ORDER
+2026-05-18 15:50:31,679 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for Region classification
+select REGION_ID as cls_code, REGION_NAME as cls_name
+     , REGION_NAME as cls_alias, null as cls_comment
+  from REGION order by REGION_ID
+2026-05-18 15:50:31,682 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for WithdrawalReason classification
+select WITHDRAWAL_REASON_CODE as cls_code, WITHDRAWAL_REASON_CODE as cls_name
+     , WITHDRAWAL_REASON_CODE as cls_alias, WITHDRAWAL_REASON_TEXT as cls_comment
+  from WITHDRAWAL_REASON order by DISPLAY_ORDER
+2026-05-18 15:50:31,686 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for ProductCategory classification
+select loc.PRODUCT_CATEGORY_CODE as cls_code, loc.PRODUCT_CATEGORY_NAME as cls_name
+     , loc.PRODUCT_CATEGORY_NAME as cls_alias, concat('of ', rel.PRODUCT_CATEGORY_NAME) as cls_comment
+  from PRODUCT_CATEGORY loc left outer join PRODUCT_CATEGORY rel on loc.PARENT_CATEGORY_CODE = rel.PRODUCT_CATEGORY_CODE
+ order by loc.PARENT_CATEGORY_CODE is not null, loc.PARENT_CATEGORY_CODE
+2026-05-18 15:50:31,693 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for ProductStatus classification
+select PRODUCT_STATUS_CODE as cls_code, PRODUCT_STATUS_NAME as cls_name
+     , PRODUCT_STATUS_NAME as cls_alias, null as cls_comment
+  from PRODUCT_STATUS
+2026-05-18 15:50:31,701 [main] INFO  (DfClsDeploymentInitializer#initializeClassificationDeployment():67) - ...Initializing ClassificationDeployment: project=maihamadb
+2026-05-18 15:50:31,717 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():253) - generator.parse("doc/ControlDocument.vm", ctx);
+2026-05-18 15:50:31,720 [main] INFO  (DfFlutistLog4JLogSystem#init():45) - ...Suppressing velocity.log, which is unneeded for also debug
+2026-05-18 15:50:31,762 [main] INFO  (Database#doEnableDocumentOutputDirectory():1241) - ...Setting up documentOutputDirectory: ./output/doc
+2026-05-18 15:50:31,765 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():242) - ...Loading schema history
+2026-05-18 15:50:31,774 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():246) -  -> found history: count=1
+2026-05-18 15:50:31,790 [main] INFO  (DfSchemaHtmlDataArrangeQuery#getArrangeQueryTableMap():50) -  
+2026-05-18 15:50:31,790 [main] INFO  (DfSchemaHtmlDataArrangeQuery#getArrangeQueryTableMap():51) - ...Setting up arrange queries for documents (ArrangeQueryDoc)
+2026-05-18 15:50:31,802 [main] INFO  (DfArrangeQueryDocSetupper#doExtractArrangeQuery():106) -  -> no arrange query
+2026-05-18 15:50:31,913 [main] INFO  (DfRefreshResourceProcess#show():295) - /===========================================================================
+2026-05-18 15:50:31,914 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Refreshing [dbflute-hands-on] by http://localhost:8386/
+2026-05-18 15:50:31,916 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Retrying refreshing by default secondary URL http://localhost:8387/
+2026-05-18 15:50:31,917 [main] INFO  (DfRefreshResourceProcess#show():295) - Failed to refresh the resources (continued): url=http://localhost:8386/, cause=ConnectException(Connection refused)
+2026-05-18 15:50:31,917 [main] INFO  (DfRefreshResourceProcess#show():295) - ==========/
+2026-05-18 15:50:31,918 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s568ms
+
+  DBFLUTE_CLIENT: {maihamadb}
+    database  = mysql
+    language  = java
+    container = lasta_di
+    package   = org.docksidestage.handson.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    schema = {maihamadb.$$NoNameSchema$$ as main}
+    user   = maihamadb
+    props  = {password=maihamadb, user=maihamadb}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Doc}
+2026-05-18 15:51:32,090 [main] INFO  (TorqueDataModelTask#begin():110) - +------------------------------------------+
+2026-05-18 15:51:32,091 [main] INFO  (TorqueDataModelTask#begin():111) - |                                          |
+2026-05-18 15:51:32,091 [main] INFO  (TorqueDataModelTask#begin():112) - |                 Generate                 |
+2026-05-18 15:51:32,091 [main] INFO  (TorqueDataModelTask#begin():113) - |                                          |
+2026-05-18 15:51:32,091 [main] INFO  (TorqueDataModelTask#begin():114) - +------------------------------------------+
+2026-05-18 15:51:32,100 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2026-05-18 15:51:32,101 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2026-05-18 15:51:32,101 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+2026-05-18 15:51:32,101 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = maihamadb
+2026-05-18 15:51:32,107 [main] INFO  (TorqueDataModelTask#setupControlTemplate():166) - 
+2026-05-18 15:51:32,107 [main] INFO  (TorqueDataModelTask#setupControlTemplate():167) - ...Using Java control: om/ControlGenerateJava.vm
+2026-05-18 15:51:32,120 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2026-05-18 15:51:32,154 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():253) - generator.parse("om/ControlGenerateJava.vm", ctx);
+2026-05-18 15:51:32,158 [main] INFO  (DfFlutistLog4JLogSystem#init():45) - ...Suppressing velocity.log, which is unneeded for also debug
+2026-05-18 15:51:32,219 [main] INFO  (Database#doEnableGenerateOutputDirectory():1209) - ...Setting up generateOutputDirectory: ../src/main/java
+2026-05-18 15:51:32,221 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2026-05-18 15:51:32,221 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2026-05-18 15:51:32,221 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2026-05-18 15:51:32,222 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2026-05-18 15:51:32,222 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2026-05-18 15:51:32,222 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2026-05-18 15:51:32,223 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2026-05-18 15:51:32,223 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2026-05-18 15:51:32,224 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2026-05-18 15:51:32,231 [main] INFO  (DfDatabaseProperties#createMainSchemaConnection():981) - ...Creating connection to main schema: {maihamadb.$$NoNameSchema$$ as main}
+2026-05-18 15:51:32,485 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for MemberStatus classification
+select MEMBER_STATUS_CODE as cls_code, MEMBER_STATUS_NAME as cls_name
+     , MEMBER_STATUS_NAME as cls_alias, DESCRIPTION as cls_comment
+  from MEMBER_STATUS order by DISPLAY_ORDER
+2026-05-18 15:51:32,489 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for ServiceRank classification
+select SERVICE_RANK_CODE as cls_code, SERVICE_RANK_NAME as cls_name
+     , SERVICE_RANK_NAME as cls_alias, DESCRIPTION as cls_comment
+  from SERVICE_RANK order by DISPLAY_ORDER
+2026-05-18 15:51:32,490 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for Region classification
+select REGION_ID as cls_code, REGION_NAME as cls_name
+     , REGION_NAME as cls_alias, null as cls_comment
+  from REGION order by REGION_ID
+2026-05-18 15:51:32,493 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for WithdrawalReason classification
+select WITHDRAWAL_REASON_CODE as cls_code, WITHDRAWAL_REASON_CODE as cls_name
+     , WITHDRAWAL_REASON_CODE as cls_alias, WITHDRAWAL_REASON_TEXT as cls_comment
+  from WITHDRAWAL_REASON order by DISPLAY_ORDER
+2026-05-18 15:51:32,495 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for ProductCategory classification
+select loc.PRODUCT_CATEGORY_CODE as cls_code, loc.PRODUCT_CATEGORY_NAME as cls_name
+     , loc.PRODUCT_CATEGORY_NAME as cls_alias, concat('of ', rel.PRODUCT_CATEGORY_NAME) as cls_comment
+  from PRODUCT_CATEGORY loc left outer join PRODUCT_CATEGORY rel on loc.PARENT_CATEGORY_CODE = rel.PRODUCT_CATEGORY_CODE
+ order by loc.PARENT_CATEGORY_CODE is not null, loc.PARENT_CATEGORY_CODE
+2026-05-18 15:51:32,498 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for ProductStatus classification
+select PRODUCT_STATUS_CODE as cls_code, PRODUCT_STATUS_NAME as cls_name
+     , PRODUCT_STATUS_NAME as cls_alias, null as cls_comment
+  from PRODUCT_STATUS
+2026-05-18 15:51:32,504 [main] INFO  (DfClsDeploymentInitializer#initializeClassificationDeployment():67) - ...Initializing ClassificationDeployment: project=maihamadb
+2026-05-18 15:51:32,507 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():58) - /=============================
+2026-05-18 15:51:32,507 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():59) - ...Initializing include query.
+2026-05-18 15:51:32,507 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - String
+2026-05-18 15:51:32,507 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - Number
+2026-05-18 15:51:32,507 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - Date
+2026-05-18 15:51:32,507 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   NotEqual -> []
+2026-05-18 15:51:32,507 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   InScope -> []
+2026-05-18 15:51:32,507 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   NotInScope -> []
+2026-05-18 15:51:32,508 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - OrderBy
+2026-05-18 15:51:32,508 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():61) - ========/
+2026-05-18 15:51:32,512 [main] INFO  (Database#info():2872) - public void parseAllCommon() {
+2026-05-18 15:51:32,513 [main] INFO  (Database#info():2872) -     parse('CDef');
+2026-05-18 15:51:32,533 [main] INFO  (Database#info():2872) -     parse('DBCurrent');
+2026-05-18 15:51:32,535 [main] INFO  (Database#info():2872) -     parse('DBFluteConfig');
+2026-05-18 15:51:32,541 [main] INFO  (Database#info():2872) -     parse('DBFluteInitializer');
+2026-05-18 15:51:32,543 [main] INFO  (Database#info():2872) -     parse('DBMetaInstanceHandler');
+2026-05-18 15:51:32,550 [main] INFO  (Database#info():2872) -     parse('EntityDefinedCommonColumn');
+2026-05-18 15:51:32,552 [main] INFO  (Database#info():2872) -     parse('ImplementedBehaviorSelector');
+2026-05-18 15:51:32,554 [main] INFO  (Database#info():2872) -     parse('ImplementedCommonColumnAutoSetupper');
+2026-05-18 15:51:32,557 [main] INFO  (Database#info():2872) -     parse('ImplementedInvokerAssistant');
+2026-05-18 15:51:32,559 [main] INFO  (Database#info():2872) -     parse('ImplementedSqlClauseCreator');
+2026-05-18 15:51:32,561 [main] INFO  (Database#info():2872) - }
+2026-05-18 15:51:32,561 [main] INFO  (Database#info():2872) - public void parseContainerConfig() {
+2026-05-18 15:51:32,561 [main] INFO  (Database#info():2872) -     parse('../resources/dbflute.xml')
+2026-05-18 15:51:32,566 [main] INFO  (Database#info():2872) - }
+2026-05-18 15:51:32,567 [main] INFO  (DfOldClassHandler#info():1045) - public void deleteOldTableClass() {
+2026-05-18 15:51:32,576 [main] INFO  (DfOldClassHandler#info():1045) - }
+2026-05-18 15:51:32,576 [main] INFO  (Database#info():2872) - public void parseTableClass() {
+2026-05-18 15:51:32,576 [main] INFO  (Database#info():2872) -     parse('member');
+2026-05-18 15:51:32,693 [main] INFO  (Database#info():2872) -     parse('member_address');
+2026-05-18 15:51:32,760 [main] INFO  (Database#info():2872) -     parse('member_login');
+2026-05-18 15:51:32,810 [main] INFO  (Database#info():2872) -     parse('member_security');
+2026-05-18 15:51:32,855 [main] INFO  (Database#info():2872) -     parse('member_service');
+2026-05-18 15:51:32,903 [main] INFO  (Database#info():2872) -     parse('member_status');
+2026-05-18 15:51:32,950 [main] INFO  (Database#info():2872) -     parse('member_withdrawal');
+2026-05-18 15:51:32,998 [main] INFO  (Database#info():2872) -     parse('product');
+2026-05-18 15:51:33,050 [main] INFO  (Database#info():2872) -     parse('product_category');
+2026-05-18 15:51:33,091 [main] INFO  (Database#info():2872) -     parse('product_status');
+2026-05-18 15:51:33,129 [main] INFO  (Database#info():2872) -     parse('purchase');
+2026-05-18 15:51:33,177 [main] INFO  (Database#info():2872) -     parse('purchase_payment');
+2026-05-18 15:51:33,217 [main] INFO  (Database#info():2872) -     parse('region');
+2026-05-18 15:51:33,249 [main] INFO  (Database#info():2872) -     parse('service_rank');
+2026-05-18 15:51:33,285 [main] INFO  (Database#info():2872) -     parse('withdrawal_reason');
+2026-05-18 15:51:33,318 [main] INFO  (Database#info():2872) - }
+2026-05-18 15:51:33,318 [main] INFO  (Database#info():2872) -  
+2026-05-18 15:51:33,332 [main] INFO  (DfRefreshResourceProcess#show():295) - /===========================================================================
+2026-05-18 15:51:33,332 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Refreshing [dbflute-hands-on] by http://localhost:8386/
+2026-05-18 15:51:33,334 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Retrying refreshing by default secondary URL http://localhost:8387/
+2026-05-18 15:51:33,335 [main] INFO  (DfRefreshResourceProcess#show():295) - Failed to refresh the resources (continued): url=http://localhost:8386/, cause=ConnectException(Connection refused)
+2026-05-18 15:51:33,335 [main] INFO  (DfRefreshResourceProcess#show():295) - ==========/
+2026-05-18 15:51:33,336 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s252ms
+
+  DBFLUTE_CLIENT: {maihamadb}
+    database  = mysql
+    language  = java
+    container = lasta_di
+    package   = org.docksidestage.handson.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    schema = {maihamadb.$$NoNameSchema$$ as main}
+    user   = maihamadb
+    props  = {password=maihamadb, user=maihamadb}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Generate}

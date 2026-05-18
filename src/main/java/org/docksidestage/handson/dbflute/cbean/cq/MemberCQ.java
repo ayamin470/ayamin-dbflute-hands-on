@@ -32,5 +32,11 @@ public class MemberCQ extends BsMemberCQ {
     // ===================================================================================
     //                                                                       Arrange Query
     //                                                                       =============
-    // You can make your arranged query methods here. e.g. public void arrangeXxx()
+    public void arrangeBankTransferPurchasedMember() {
+        existsPurchase(purchaseCB -> {
+            purchaseCB.query().existsPurchasePayment(paymentCB -> {
+                paymentCB.query().setPaymentMethodCode_Equal_BankTransfer();
+            });
+        });
+    }
 }
