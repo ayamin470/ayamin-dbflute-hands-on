@@ -34,6 +34,8 @@ public class HandsOn04Test extends UnitContainerTestCase {
             cb.setupSelect_Member();
             cb.setupSelect_Product();
             // cb.query().queryMember().setMemberStatusCode_Equal(wdl);
+            // TODO ayamin CDef使わずメソッド指定のものを使ってみましょう by jflute (2026/05/19)
+            //  e.g. cb.query().queryMember().setMemberStatusCode_Equal_退会会員();
             cb.query().queryMember().setMemberStatusCode_Equal_AsMemberStatus(CDef.MemberStatus.退会会員);
             // cb.query().setPaymentCompleteFlg_Equal(unpaidFlg);
             cb.query().setPaymentCompleteFlg_Equal_AsFlg(CDef.Flg.False);
@@ -81,6 +83,8 @@ public class HandsOn04Test extends UnitContainerTestCase {
             }
         }
     }
+    // #1on1: 暗黙の区分値とテーブル区分値 (2026/05/19)
+    // TODO jflute dfpropのmap/listのお話 (2026/05/19)
 
     public void test_一番若い仮会員の会員を検索() {
         // 要件はここで管理 ▶︎ ex04-requirements.md

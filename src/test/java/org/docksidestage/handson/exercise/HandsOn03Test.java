@@ -520,11 +520,11 @@ public class HandsOn03Test extends UnitContainerTestCase {
             cb.setupSelect_MemberWithdrawalAsOne();
             cb.specify().specifyMemberWithdrawalAsOne().columnWithdrawalReasonInputText();
 
-            // TODO done ayamin setupSelectと対応するspecify()を近づけて実装してみましょう by jflute (2026/04/10)
+            // done ayamin setupSelectと対応するspecify()を近づけて実装してみましょう by jflute (2026/04/10)
             // #1on1: 質問:処理は軽くなる？ → yes (2026/04/10)
             // MySQLからJavaに転送するデータ量が少なくなる。
 
-            //TODO done 日付移動しないって、これ↓みたいなplusYearsも禁止？か久保さんに聞く
+            // done 日付移動しないって、これ↓みたいなplusYearsも禁止？か久保さんに聞く
             // #1on1: ここでも、同じく "まで検索"。年のまで検索。というヒント (2026/04/10)
             // https://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/datefromto.html
             cb.orScopeQuery(orCB -> {
@@ -582,7 +582,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         LocalDate previousBirthdate = null;
         for (Member member : memberList) {
             LocalDate currentBirthdate = member.getBirthdate();
-            // TODO done ayamin null,nullで続いているレコードをcontinueで弾きたいだけなので、もうちょいifの構成をスッキリ by jflute (2026/04/10)
+            // done ayamin null,nullで続いているレコードをcontinueで弾きたいだけなので、もうちょいifの構成をスッキリ by jflute (2026/04/10)
             //やりたいこと何か？
             //nullが続く場合もあるから、弾く(何もせず、処理をスキップさせる)
             //nullが続いているわけではないときは生年月日の並び順が古い順になっているかasertする
@@ -669,6 +669,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             cb.query().setBirthdate_IsNull();
+            // #1on1: SQLだと、order by で case when で 0/1 で並べてるだけ (2026/05/19)
+            // 現場でのManualOrderを見てみた。
             cb.query().addOrderBy_FormalizedDatetime_Asc().withManualOrder(op -> {
                 op.when_FromTo(targetLocalDate, targetLocalDate, fromToOp -> fromToOp.compareAsMonth());
             });
@@ -690,6 +692,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertHasAnyElement(memberList);
 
         //2005年6月に正式会員になった会員が、検索結果の途中に出てきていないかをチェックするフラグ
+        // TODO ayamin 目的が変数名になっている。けど、何が起きたらtrueになるのか？がわからない。 by jflute (2026/05/19)
+        // 目的よりも、「何が起きたらtrueになるのか？」をそのまま変数名にした方が良いかなと。
         boolean sortOrderCheck = false;
         for (Member member : memberList) {
             assertNull(member.getBirthdate());
@@ -714,6 +718,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         int pageNumber = 1;
 
         // ## Act ##
+        // #1on1: ページング検索のお話ざっくり (2026/05/19)
         PagingResultBean<Member> memberPage = memberBhv.selectPage(cb -> {
             cb.setupSelect_MemberStatus();
             cb.specify().specifyMemberStatus().columnMemberStatusName();
@@ -764,6 +769,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
         String[] previousStatusCode = {null};
 
         // ## Act ##
+        // #1on1: カーソル検索とは？ (2026/05/19)
+        // 画面検索とバッチ内の検索のシチュエーションの違い。
+        // 内部的なfetch(DBからJavaにデータを持ってくる)のキャッシュの話 (50件ずつくらいで取ってくる)
+        // MySQLのお話。かつ、MySQLはOSSで無料使ってる話。
         memberBhv.selectCursor(cb -> {
             cb.setupSelect_MemberStatus();
             cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
@@ -783,5 +792,4 @@ public class HandsOn03Test extends UnitContainerTestCase {
             previousStatusCode[0] = currentStatusCode;
         });
     }
-
 }

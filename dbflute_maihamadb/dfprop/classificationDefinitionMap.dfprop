@@ -52,11 +52,19 @@ map:{
     #        ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
     #    }
     #}
+
+    #
+    # #1on1: 区分値の種類
+    #
+    
+    # 暗黙の区分値
     ; Flg = list:{
         ; map:{topComment=フラグを示す; codeType=Number}
         ; map:{code=1; name=True ; alias=はい  ; comment=有効を示す}
         ; map:{code=0; name=False; alias=いいえ; comment=無効を示す}
     }
+
+    # テーブル区分値
     ; MemberStatus = list:{
         ; map:{topComment=入会から退会までの会員のステータスを示す; codeType=String}
         ; map:{
@@ -65,6 +73,7 @@ map:{
             ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
         }
     }
+
     ; ServiceRank = list:{
         ; map:{topComment=会員が受けられるサービスのランクを示す; codeType=String}
         ; map:{
