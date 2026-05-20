@@ -692,9 +692,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertHasAnyElement(memberList);
 
         //2005年6月に正式会員になった会員が、検索結果の途中に出てきていないかをチェックするフラグ
-        // TODO ayamin 目的が変数名になっている。けど、何が起きたらtrueになるのか？がわからない。 by jflute (2026/05/19)
+        // TODO done ayamin 目的が変数名になっている。けど、何が起きたらtrueになるのか？がわからない。 by jflute (2026/05/19)
         // 目的よりも、「何が起きたらtrueになるのか？」をそのまま変数名にした方が良いかなと。
-        boolean sortOrderCheck = false;
+        boolean exsistsNotFormalizedIn200506 = false;
         for (Member member : memberList) {
             assertNull(member.getBirthdate());
 
@@ -703,8 +703,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
                     && formalizedDatetime.getYear() == targetMonthDateTime.getYear()
                     && formalizedDatetime.getMonthValue() == targetMonthDateTime.getMonthValue();
             if (!formalizedIn200506) {
-                sortOrderCheck = true;
-            } else if (sortOrderCheck) {
+                exsistsNotFormalizedIn200506 = true;
+            } else if (exsistsNotFormalizedIn200506) {
                 fail("並び替え要件を満たしていません: memberId=" + member.getMemberId());
             }
         }
