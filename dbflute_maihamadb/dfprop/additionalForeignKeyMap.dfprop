@@ -38,5 +38,26 @@ map:{
     #    ; localTableName  = MEMBER             ; foreignTableName  = MEMBER_STATUS
     #    ; localColumnName = MEMBER_STATUS_CODE ; foreignColumnName = MEMBER_STATUS_CODE
     #}
+    ; FK_MEMBER_MEMBER_ADDRESS_VALID = map:{
+        ; localTableName  = MEMBER    ; foreignTableName  = MEMBER_ADDRESS
+        ; localColumnName = MEMBER_ID ; foreignColumnName = MEMBER_ID
+        ; fixedCondition =
+         $$foreignAlias$$.VALID_BEGIN_DATE <= /*targetDate(Date)*/null
+     and $$foreignAlias$$.VALID_END_DATE >= /*targetDate(Date)*/null
+        ; fixedSuffix = AsValid
+        ; comment = 有効な会員住所 (現在日時を入れれば現在住所)
+    }
+    ; FK_MEMBER_MEMBER_LOGIN_LATEST = map:{
+        ; localTableName  = MEMBER    ; foreignTableName = MEMBER_LOGIN
+        ; localColumnName = MEMBER_ID ; foreignColumnName = MEMBER_ID
+        ; fixedCondition =
+$$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$
+select max(login.LOGIN_DATETIME)
+  from MEMBER_LOGIN login
+ where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID
+)$$sqend$$
+        ; fixedSuffix = AsLatest
+        ; comment = 会員の一番新しいログイン履歴レコード
+    }
 }
 # ----------------/
