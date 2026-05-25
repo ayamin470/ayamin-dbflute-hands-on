@@ -38,9 +38,10 @@ public class HandsOn04Test extends UnitContainerTestCase {
             cb.setupSelect_Member();
             cb.setupSelect_Product();
             // cb.query().queryMember().setMemberStatusCode_Equal(wdl);
-            // TODO done ayamin CDef使わずメソッド指定のものを使ってみましょう by jflute (2026/05/19)
+            // done ayamin CDef使わずメソッド指定のものを使ってみましょう by jflute (2026/05/19)
             //  e.g. cb.query().queryMember().setMemberStatusCode_Equal_退会会員();
             cb.query().queryMember().setMemberStatusCode_Equal_退会会員();
+            // TODO ayamin こっちも by jflute (2026/05/22)
             // cb.query().setPaymentCompleteFlg_Equal(unpaidFlg);
             cb.query().setPaymentCompleteFlg_Equal_AsFlg(CDef.Flg.False);
             cb.query().addOrderBy_PurchaseDatetime_Desc();
@@ -98,6 +99,8 @@ public class HandsOn04Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             cb.setupSelect_MemberStatus();
             cb.query().setMemberStatusCode_Equal_仮会員();
+            
+            // TODO ayamin これで、最初の1件は取れるけど、最初の1件が一番若いとは限らない by jflute (2026/05/22)
             cb.fetchFirst(1); //limit1的な意味
         });
 
@@ -120,8 +123,19 @@ public class HandsOn04Test extends UnitContainerTestCase {
             cb.query().setPaymentCompleteFlg_Equal_True();
             cb.query().queryMember().setMemberStatusCode_Equal_正式会員();
             cb.query().addOrderBy_PurchaseDatetime_Desc();
+            // TODO ayamin 一番若いというニュアンスがない by jflute (2026/05/22)
+            // し、一番若い正式会員も、複数の購入をしている可能性はある。
+            // 要件的には、購入は複数取りたいわけだけど、ヒットした購入の最初の1件だけしか取ってない。
+            // せめて、この fetchFirst(1) は、購入に対してやるのであれば、会員に対してやりたい。
             cb.fetchFirst(1);
         });
+        // e.g.
+        // 一番若い正式会員(ayamin)
+        //  |-購入1. ダイヤモンドを買った (支払い済み)
+        //  |-購入2. スーパーカーを買った (支払い済み)
+        //  |-購入3. お豆腐を買った (未払い)
+        //
+        // → 「購入1, 購入2」の一覧を取りたい
 
         // ## Assert ##
         assertHasAnyElement(purchaseList);
@@ -150,7 +164,10 @@ public class HandsOn04Test extends UnitContainerTestCase {
         for (Purchase purchase : purchaseList) {
             Product product = purchase.getProduct().get();
             String productStatusName = product.getProductStatus().get().getProductStatusName();
+            // #1on1: DBFluteのEntity, 関連テーブルはOptionalだけど、カラムのgetはnull戻し (2026/05/22)
+            // というハイブリッド方式。(カラムはOptional向かないのでそのようにしている)
             // どんどん次に渡す！
+            // ↑Goodな表現、「ないかもしれないことを保留してどんどん次に渡す」
             String withdrawalReasonText = purchase.getMember()
                     .flatMap(member -> member.getMemberWithdrawalAsOne())
                     .flatMap(withdrawal -> withdrawal.getWithdrawalReason())
@@ -168,6 +185,21 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
+            // TODO ayamin もう一つのやり方、InScopeを使ってやり方も実装してみましょう by jflute (2026/05/22)
+            // orScopeQuery()でもいいんだけども、orScopeQuery()は汎用的なor機能で、
+            // いまこの場面は実は定型的なorであって「同カラムに対するequal値の列挙」と言える。
+            // それにフィットするSQLの文法があるので、そっちを使いましょう。
+            //  e.g. MEMBER_STATUS_CODE in ('FML', 'WDL')
+            //       MEMBER_STATUS_CODE = 'FML' or MEMBER_STATUS_CODE = 'WDL'
+            // コンピューターから見て、制限されているやり方になっている方が、良いパフォーマンスを選びやすい。
+            // orの方だと汎用的で選択肢がいっぱいあるので判断が遅くなる。
+            // inだったら、ああもうこれは「同カラムに対するequal値の列挙」ってすぐわかるので、
+            // それに適した処理にできる可能性がある。
+            //
+            // まあ実際には、DBMSも頭良くなってるからこのレベルだとほぼ変わらないんだけど、
+            // こういう思想でDBと触れ合って欲しいということ。
+            // scope絞る意識 by ayamin
+            // orScopeQuery()はコメントアウトとかで残して、思い出とか書いておいましょう。
             cb.orScopeQuery(orCB -> {
                 orCB.query().setMemberStatusCode_Equal_正式会員();
                 orCB.query().setMemberStatusCode_Equal_退会会員();
@@ -198,6 +230,15 @@ public class HandsOn04Test extends UnitContainerTestCase {
         }
         assertTrue(existsFormalizedMember);
         assertTrue(existsWithdrawalMember);
+        
+        // #1on1: DBFluteのEntityは、単なるJava上(メモリ上)の入れ物なので... (2026/05/22)
+        // Behaviorで明示的にupdate()とかしない限りは、DBは何も変わらない。
+        //
+        // 他のO/Rマッパーだと、Entityにsetするだけで、DBが変わるものもある。
+        // しかも、メジャーなO/Rマッパーでそういう挙動をする。
+        //
+        // DBFluteは、わりかし明示主義。あくまでbehaviorでDBアクセス。
+        // updateって書いてあったらupdate。書いてないのにupdateしない。
     }
 
     public void test_銀行振込で購入を支払ったことのある会員ステータスごとに一番若い会員を検索() {
@@ -207,8 +248,10 @@ public class HandsOn04Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             cb.setupSelect_MemberStatus();
             // グループごとに先頭を取りたいので、fetchFirst(1)は使えない
-            cb.query().scalar_Equal().max(memberCB -> {
+            cb.query().scalar_Equal().max(memberCB -> { // 2026/05/22
                 memberCB.specify().columnBirthdate();
+                // TODO ayamin setBirthdate_IsNotNull()はなくてもOK by jflute (2026/05/22)
+                // max()関数で、nullのものはmaxじゃないので、ただ除外されるだけ。
                 memberCB.query().setBirthdate_IsNotNull();
                 memberCB.query().existsPurchase(purchaseCB -> {
                     purchaseCB.query().existsPurchasePayment(paymentCB -> {
@@ -219,6 +262,16 @@ public class HandsOn04Test extends UnitContainerTestCase {
                 //何で区切るかの判断のためにspecifyを使っている
                 partitionByCB.specify().columnMemberStatusCode();
             });
+            
+            // TODO ayamin ちょこっと紛れが起きる by jflute (2026/05/22)
+            // そのステータス内で一番若い会員で銀行振込で購入を支払ったことのある人の生年月日(2026/05/22)と、
+            // そのステータス内で一番若い会員で銀行振込で購入を支払ったことのない人の生年月日(2026/05/22)と、
+            // たまたま同じだったら、後者もヒットしちゃう。
+            //
+            // 今だと、max(BIRTHDATE)で導いた 2026/05/22 と同じ生年月日の会員を絞ってるだけ。
+            // max(BIRTHDATE)を導く時に銀行振込の条件は見ているけど、本体の会員一覧を絞る時は見てない。
+            //
+            // ArrangeQueryを使っている方の実装だと、↑の問題は解決している。
         });
 
         // ## Assert ##
@@ -248,6 +301,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             cb.setupSelect_MemberStatus();
+            // #1on1: こっちは、紛れの会員を最後にちゃんと除外している (2026/05/22)
             cb.query().arrangeBankTransferPurchasedMember();
             cb.query().scalar_Equal().max(memberCB -> {
                 memberCB.specify().columnBirthdate();
@@ -257,6 +311,21 @@ public class HandsOn04Test extends UnitContainerTestCase {
                 partitionByCB.specify().columnMemberStatusCode();
             });
         });
+        // #1on1: ArrangeQuery (2026/05/22)
+        // 業務的な複数のまとまり条件を再利用したい。
+        // 検索まるごと再利用はしづらい。関連テーブル、ソート条件が変わりがち。
+        // さあどうする？
+        //  X. コピペしてちょっと変える (優待会員の条件コピーになっちゃう)
+        //  Y. 最小公倍数メソッドする (関連テーブルを追加: A画面で不要なテーブルも追加しちゃう)
+        //  Z. 引数リモコンパターンする
+        // どれもなかなか微妙なので...
+        // なので、再利用したいwhere句のまとまり条件だけでメソッドにして再利用すれば良いのでは？
+        // それがArrangeQuery。
+        // 現場のArrangeQueryを少し読んでみた。
+        //
+        // まとまった条件に業務的な意味付けができるのであれば、その業務名でプログラムを書きたい。
+        // 小さな部品で再利用する方が柔軟性が高い。
+        // (逆にいうと、大きな単位で無理やり再利用しようとすると、さっきのアンチパターン(XYZ)になりやすい)
 
         // ## Assert ##
         assertHasAnyElement(memberList);
@@ -278,6 +347,8 @@ public class HandsOn04Test extends UnitContainerTestCase {
         assertTrue(existsFormalizedMember);
         assertTrue(existsProvisionalMember);
     }
+    // TODO jflute 次回1on1ここから (2026/05/22)
+    
     // 区分値を追加してみた
     // - HAN を TSV に追加
     // - ReplaceSchema -> JDBC -> Doc -> Generateを実行
