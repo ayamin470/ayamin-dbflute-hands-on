@@ -347,7 +347,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         assertTrue(existsFormalizedMember);
         assertTrue(existsProvisionalMember);
     }
-    // TODO jflute 次回1on1ここから (2026/05/22)
+    // done jflute 次回1on1ここから (2026/05/22)
     
     // 区分値を追加してみた
     // - HAN を TSV に追加
@@ -370,7 +370,12 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
     public void test_サービスが利用できる会員を検索() {
         // TODO htmlでグルーピングが確認できなかった
+        // #1on1: ↑MemberStatus区分値の欄にあった (2026/06/05)
         // 要件はここで管理 ▶︎ ex04-requirements.md
+        // #1on1: groupingMap超重要話 (2026/06/05)
+        // if (正式会員 || 仮会員) { をいかにやめられるか？
+        // 自分で自分に質問みてみる。そこで出た答えで実装したい。
+        // (業務概念の抽象化)
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
@@ -390,6 +395,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
     public void test_未払い購入のある会員を検索() {
         // 要件はここで管理 ▶︎ ex04-requirements.md
+        // #1on1: 姉妹コード少しふぉろー (2026/06/05)
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
@@ -429,6 +435,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
     public void test_会員ステータスの表示順カラムで会員を並べて検索() {
         // 要件はここで管理 ▶︎ ex04-requirements.md
+        // #1on1: subItemMap, 現場での独自の属性 (2026/06/05)
 
         // ## Arrange ##
         // 並び替え条件を満たすために、一旦<CDef.MemberStatus>リストに入れておく

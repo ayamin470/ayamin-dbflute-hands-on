@@ -16,11 +16,11 @@ import org.docksidestage.handson.dbflute.exentity.Purchase;
 import org.docksidestage.handson.dbflute.exentity.Region;
 import org.docksidestage.handson.unit.UnitContainerTestCase;
 
+// #1on1: 業務的one-to-oneとは？話 (2026/06/05)
 /**
  * @author ayamin
  * @author jflute
  */
-    
 public class HandsOn05Test extends UnitContainerTestCase {
 
     @Resource
@@ -115,6 +115,7 @@ public class HandsOn05Test extends UnitContainerTestCase {
     public void test_最終ログイン時の会員ステータスを取得して会員を検索() {
         // 要件はここで管理 ▶︎ ex05-requirements.md
         // 最終ログイン日時でなく、「最終ログイン時の会員ステータス」が必要なので、レコード丸ごと必要
+        // #1on1: 導出的one-to-one, けっこう現場で使われている (2026/06/05)
 
         // ## Arrange ##
         // ## Act ##
@@ -138,6 +139,22 @@ public class HandsOn05Test extends UnitContainerTestCase {
                     + ", 最終ログイン時の会員ステータス名称=" + loginMemberStatusName);
         }
     }
+    
+    // TODO jflute 1on1にて、業務的many-to-one話をどこかで (2026/06/05)
+    // TODO jflute 1on1にて、take-finallyのふぉろー (2026/06/05)
 }
 
-// TODO sqlのエイリアス、自分は作りたくない派。エイリアス名つけると逆に混乱する気がしている(慣れていないだけかも)。
+// TODO done sqlのエイリアス、自分は作りたくない派。エイリアス名つけると逆に混乱する気がしている(慣れていないだけかも)。
+// #1on1: テーブル名の長さ次第かも (2026/06/05)
+// 頭文字省略は確かにみづらい。ただ、現場のテーブル名はかなり長いの多いので、素直にやるとSQLが膨れ上がってそれはそれでみづらい。
+// なので、どんなエイリアスをつけるか？次第なのかなと。
+/* 略語を使う必要は別にないのでこうでも良いよ
+select member.MEMBER_ID, member.MEMBER_NAME, member.MEMBER_STATUS_CODE
+  from MEMBER member
+ where member.MEMBER_STATUS_CODE = 'WDL'
+   and not exists (select withdrawal.MEMBER_ID
+                      from MEMBER_WITHDRAWAL withdrawal
+                     where withdrawal.MEMBER_ID = mb.MEMBER_ID
+       )
+;
+*/
