@@ -45,7 +45,7 @@ select mb.MEMBER_ID, mb.MEMBER_NAME, mb.BIRTHDATE
 select mb.MEMBER_ID, mb.MEMBER_NAME, mb.MEMBER_STATUS_CODE
   from MEMBER mb
  where mb.MEMBER_STATUS_CODE = 'WDL'
-   and not exists (select withdrawal.MEMBER_ID
+   and not exists (select wdr.MEMBER_ID
                       from MEMBER_WITHDRAWAL wdr
                      where wdr.MEMBER_ID = mb.MEMBER_ID
        )
