@@ -1,6 +1,7 @@
 package org.docksidestage.handson.exercise;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -41,9 +42,9 @@ public class HandsOn04Test extends UnitContainerTestCase {
             // done ayamin CDef使わずメソッド指定のものを使ってみましょう by jflute (2026/05/19)
             //  e.g. cb.query().queryMember().setMemberStatusCode_Equal_退会会員();
             cb.query().queryMember().setMemberStatusCode_Equal_退会会員();
-            // TODO ayamin こっちも by jflute (2026/05/22)
+            // TODO done ayamin こっちも by jflute (2026/05/22)
             // cb.query().setPaymentCompleteFlg_Equal(unpaidFlg);
-            cb.query().setPaymentCompleteFlg_Equal_AsFlg(CDef.Flg.False);
+            cb.query().setPaymentCompleteFlg_Equal_False();
             cb.query().addOrderBy_PurchaseDatetime_Desc();
         });
 
@@ -99,8 +100,9 @@ public class HandsOn04Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             cb.setupSelect_MemberStatus();
             cb.query().setMemberStatusCode_Equal_仮会員();
-            
-            // TODO ayamin これで、最初の1件は取れるけど、最初の1件が一番若いとは限らない by jflute (2026/05/22)
+            cb.query().setBirthdate_IsNotNull();
+            cb.query().addOrderBy_Birthdate_Desc();
+            // TODO done ayamin これで、最初の1件は取れるけど、最初の1件が一番若いとは限らない by jflute (2026/05/22)
             cb.fetchFirst(1); //limit1的な意味
         });
 
@@ -118,16 +120,27 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // 解釈: 「一番若い会員」その会員の支払済み購入を購入日時の降順で見る
 
         // ## Act ##
+        // ① まず一番若い正式会員を1人だけ特定する
+        // TODO done ayamin 一番若いというニュアンスがない by jflute (2026/05/22)
+        // し、一番若い正式会員も、複数の購入をしている可能性はある。
+        // 要件的には、購入は複数取りたいわけだけど、ヒットした購入の最初の1件だけしか取ってない。
+        // せめて、この fetchFirst(1) は、購入に対してやるのであれば、会員に対してやりたい。
+
+        // → ①いちばん若い会員を1人に確定させる
+        Member youngestMember = memberBhv.selectEntityWithDeletedCheck(cb -> {
+            cb.query().setMemberStatusCode_Equal_正式会員();
+            cb.query().setBirthdate_IsNotNull();
+            cb.query().addOrderBy_Birthdate_Desc();
+            cb.fetchFirst(1);
+        });
+        Integer youngestMemberId = youngestMember.getMemberId();
+
+        // ② その会員の支払済み購入を全部取る
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb -> {
             cb.setupSelect_Member().withMemberStatus();
+            cb.query().setMemberId_Equal(youngestMemberId);
             cb.query().setPaymentCompleteFlg_Equal_True();
-            cb.query().queryMember().setMemberStatusCode_Equal_正式会員();
             cb.query().addOrderBy_PurchaseDatetime_Desc();
-            // TODO ayamin 一番若いというニュアンスがない by jflute (2026/05/22)
-            // し、一番若い正式会員も、複数の購入をしている可能性はある。
-            // 要件的には、購入は複数取りたいわけだけど、ヒットした購入の最初の1件だけしか取ってない。
-            // せめて、この fetchFirst(1) は、購入に対してやるのであれば、会員に対してやりたい。
-            cb.fetchFirst(1);
         });
         // e.g.
         // 一番若い正式会員(ayamin)
@@ -185,7 +198,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
-            // TODO ayamin もう一つのやり方、InScopeを使ってやり方も実装してみましょう by jflute (2026/05/22)
+            // TODO done ayamin もう一つのやり方、InScopeを使ってやり方も実装してみましょう by jflute (2026/05/22)
             // orScopeQuery()でもいいんだけども、orScopeQuery()は汎用的なor機能で、
             // いまこの場面は実は定型的なorであって「同カラムに対するequal値の列挙」と言える。
             // それにフィットするSQLの文法があるので、そっちを使いましょう。
@@ -200,10 +213,18 @@ public class HandsOn04Test extends UnitContainerTestCase {
             // こういう思想でDBと触れ合って欲しいということ。
             // scope絞る意識 by ayamin
             // orScopeQuery()はコメントアウトとかで残して、思い出とか書いておいましょう。
-            cb.orScopeQuery(orCB -> {
-                orCB.query().setMemberStatusCode_Equal_正式会員();
-                orCB.query().setMemberStatusCode_Equal_退会会員();
-            });
+
+            // InScope版に置き換え by ayamin (2026/06/07)
+            // 思い出:
+            // cb.orScopeQuery(orCB -> {
+            //     orCB.query().setMemberStatusCode_Equal_正式会員();
+            //     orCB.query().setMemberStatusCode_Equal_退会会員();
+            // });
+
+            // せっかくなので正式会員と退会会員をまとめて区分値グループを作ってみようかと思ったけど
+            // 特に業務的にこれをまとめたい理由思いつかなかったのでそのままGO
+            cb.query().setMemberStatusCode_InScope_AsMemberStatus(
+                    Arrays.asList(CDef.MemberStatus.正式会員, CDef.MemberStatus.退会会員));
             cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         });
 
@@ -247,12 +268,20 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
             cb.setupSelect_MemberStatus();
+
+            // メインクエリで井銀行振込を絞り込む
+            // サブクエリでは、実は絞り込みをしていなくて、maxの計算をしているだけ
+            cb.query().existsPurchase(purchaseCB -> {
+                purchaseCB.query().existsPurchasePayment(paymentCB -> {
+                    paymentCB.query().setPaymentMethodCode_Equal_BankTransfer();
+                });
+            });
+
             // グループごとに先頭を取りたいので、fetchFirst(1)は使えない
             cb.query().scalar_Equal().max(memberCB -> { // 2026/05/22
                 memberCB.specify().columnBirthdate();
-                // TODO ayamin setBirthdate_IsNotNull()はなくてもOK by jflute (2026/05/22)
+                // TODO done ayamin setBirthdate_IsNotNull()はなくてもOK by jflute (2026/05/22)
                 // max()関数で、nullのものはmaxじゃないので、ただ除外されるだけ。
-                memberCB.query().setBirthdate_IsNotNull();
                 memberCB.query().existsPurchase(purchaseCB -> {
                     purchaseCB.query().existsPurchasePayment(paymentCB -> {
                         paymentCB.query().setPaymentMethodCode_Equal_BankTransfer();
@@ -263,15 +292,14 @@ public class HandsOn04Test extends UnitContainerTestCase {
                 partitionByCB.specify().columnMemberStatusCode();
             });
             
-            // TODO ayamin ちょこっと紛れが起きる by jflute (2026/05/22)
+            // TODO done ayamin ちょこっと紛れが起きる by jflute (2026/05/22)
             // そのステータス内で一番若い会員で銀行振込で購入を支払ったことのある人の生年月日(2026/05/22)と、
             // そのステータス内で一番若い会員で銀行振込で購入を支払ったことのない人の生年月日(2026/05/22)と、
             // たまたま同じだったら、後者もヒットしちゃう。
             //
             // 今だと、max(BIRTHDATE)で導いた 2026/05/22 と同じ生年月日の会員を絞ってるだけ。
             // max(BIRTHDATE)を導く時に銀行振込の条件は見ているけど、本体の会員一覧を絞る時は見てない。
-            //
-            // ArrangeQueryを使っている方の実装だと、↑の問題は解決している。
+
         });
 
         // ## Assert ##
@@ -369,7 +397,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
     //    }
 
     public void test_サービスが利用できる会員を検索() {
-        // TODO htmlでグルーピングが確認できなかった
+        // TODO done htmlでグルーピングが確認できなかった
         // #1on1: ↑MemberStatus区分値の欄にあった (2026/06/05)
         // 要件はここで管理 ▶︎ ex04-requirements.md
         // #1on1: groupingMap超重要話 (2026/06/05)
