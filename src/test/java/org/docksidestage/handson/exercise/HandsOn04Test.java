@@ -42,7 +42,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
             // done ayamin CDef使わずメソッド指定のものを使ってみましょう by jflute (2026/05/19)
             //  e.g. cb.query().queryMember().setMemberStatusCode_Equal_退会会員();
             cb.query().queryMember().setMemberStatusCode_Equal_退会会員();
-            // TODO done ayamin こっちも by jflute (2026/05/22)
+            // done ayamin こっちも by jflute (2026/05/22)
             // cb.query().setPaymentCompleteFlg_Equal(unpaidFlg);
             cb.query().setPaymentCompleteFlg_Equal_False();
             cb.query().addOrderBy_PurchaseDatetime_Desc();
@@ -102,7 +102,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
             cb.query().setMemberStatusCode_Equal_仮会員();
             cb.query().setBirthdate_IsNotNull();
             cb.query().addOrderBy_Birthdate_Desc();
-            // TODO done ayamin これで、最初の1件は取れるけど、最初の1件が一番若いとは限らない by jflute (2026/05/22)
+            // done ayamin これで、最初の1件は取れるけど、最初の1件が一番若いとは限らない by jflute (2026/05/22)
             cb.fetchFirst(1); //limit1的な意味
         });
 
@@ -121,7 +121,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Act ##
         // ① まず一番若い正式会員を1人だけ特定する
-        // TODO done ayamin 一番若いというニュアンスがない by jflute (2026/05/22)
+        // done ayamin 一番若いというニュアンスがない by jflute (2026/05/22)
         // し、一番若い正式会員も、複数の購入をしている可能性はある。
         // 要件的には、購入は複数取りたいわけだけど、ヒットした購入の最初の1件だけしか取ってない。
         // せめて、この fetchFirst(1) は、購入に対してやるのであれば、会員に対してやりたい。
@@ -198,7 +198,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb -> {
-            // TODO done ayamin もう一つのやり方、InScopeを使ってやり方も実装してみましょう by jflute (2026/05/22)
+            // done ayamin もう一つのやり方、InScopeを使ってやり方も実装してみましょう by jflute (2026/05/22)
             // orScopeQuery()でもいいんだけども、orScopeQuery()は汎用的なor機能で、
             // いまこの場面は実は定型的なorであって「同カラムに対するequal値の列挙」と言える。
             // それにフィットするSQLの文法があるので、そっちを使いましょう。
@@ -280,7 +280,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
             // グループごとに先頭を取りたいので、fetchFirst(1)は使えない
             cb.query().scalar_Equal().max(memberCB -> { // 2026/05/22
                 memberCB.specify().columnBirthdate();
-                // TODO done ayamin setBirthdate_IsNotNull()はなくてもOK by jflute (2026/05/22)
+                // done ayamin setBirthdate_IsNotNull()はなくてもOK by jflute (2026/05/22)
                 // max()関数で、nullのものはmaxじゃないので、ただ除外されるだけ。
                 memberCB.query().existsPurchase(purchaseCB -> {
                     purchaseCB.query().existsPurchasePayment(paymentCB -> {
@@ -292,7 +292,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
                 partitionByCB.specify().columnMemberStatusCode();
             });
             
-            // TODO done ayamin ちょこっと紛れが起きる by jflute (2026/05/22)
+            // done ayamin ちょこっと紛れが起きる by jflute (2026/05/22)
             // そのステータス内で一番若い会員で銀行振込で購入を支払ったことのある人の生年月日(2026/05/22)と、
             // そのステータス内で一番若い会員で銀行振込で購入を支払ったことのない人の生年月日(2026/05/22)と、
             // たまたま同じだったら、後者もヒットしちゃう。
@@ -397,7 +397,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
     //    }
 
     public void test_サービスが利用できる会員を検索() {
-        // TODO done htmlでグルーピングが確認できなかった
+        // done htmlでグルーピングが確認できなかった
         // #1on1: ↑MemberStatus区分値の欄にあった (2026/06/05)
         // 要件はここで管理 ▶︎ ex04-requirements.md
         // #1on1: groupingMap超重要話 (2026/06/05)

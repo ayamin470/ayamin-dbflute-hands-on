@@ -692,7 +692,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertHasAnyElement(memberList);
 
         //2005年6月に正式会員になった会員が、検索結果の途中に出てきていないかをチェックするフラグ
-        // TODO done ayamin 目的が変数名になっている。けど、何が起きたらtrueになるのか？がわからない。 by jflute (2026/05/19)
+        // done ayamin 目的が変数名になっている。けど、何が起きたらtrueになるのか？がわからない。 by jflute (2026/05/19)
         // 目的よりも、「何が起きたらtrueになるのか？」をそのまま変数名にした方が良いかなと。
         boolean exsistsNotFormalizedIn200506 = false;
         for (Member member : memberList) {

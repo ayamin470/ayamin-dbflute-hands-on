@@ -35,7 +35,7 @@ public class Memory_HandsOn02Test extends UnitContainerTestCase {
 
         //アサート、リストが空でないか、会員名がSから始まっているか、昇順であるか
         //リストに入っている名前を比較する
-        // TODO ayamin [いいね] 素通り防止Good, UnitTestのお約束となります by jflute (2025/12/26)
+        // done ayamin [いいね] 素通り防止Good, UnitTestのお約束となります by jflute (2025/12/26)
         // assertHasAnyElement(memberList) という専用のメソッド用意してるので使ってみてください。
         assertFalse("検索結果が空ではない", memberList.isEmpty());
         String previousName = "";
@@ -49,7 +49,7 @@ public class Memory_HandsOn02Test extends UnitContainerTestCase {
             previousName = currentName;
         }
 
-        // TODO ayamin [いいね] orderByのアサートまでやってくださりありがとうございます。 by jflute (2025/12/26)
+        // done ayamin [いいね] orderByのアサートまでやってくださりありがとうございます。 by jflute (2025/12/26)
         // 一方で、要件的には特にorderByのアサートをせよとは書いてないので、次回以降はなくても大丈夫です。
     }
 }

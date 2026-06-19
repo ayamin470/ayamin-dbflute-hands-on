@@ -29,8 +29,8 @@ package org.docksidestage.handson.exercise.memory;
 //    private MemberBhv memberBhv;
 //
 //    public void test会員名がSで始まりかつ1968年以前生まれの人を探す() {
-// TODO ayamin 要件漏れがあるので、実装を追加しましょう by jflute (2025/12/17)
-// TODO ayamin javadocお願いします by jflute (2025/12/17)
+// done ayamin 要件漏れがあるので、実装を追加しましょう by jflute (2025/12/17)
+// done ayamin javadocお願いします by jflute (2025/12/17)
 
 //        検索条件の日付を用意
 //        LocalDate targetDate = LocalDate.of(1968, 1, 1);

@@ -50,4 +50,4 @@ public class HandsOn06LogicTest extends UnitContainerTestCase {
     }
 }
 
-//TODO DBFluteプロパティの設定 から
+// TODO ayamin DBFluteプロパティの設定 から (2026/06/19)

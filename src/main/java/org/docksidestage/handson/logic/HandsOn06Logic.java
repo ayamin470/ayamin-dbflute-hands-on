@@ -10,6 +10,7 @@ import org.docksidestage.handson.dbflute.exentity.Member;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+// #1on1: logback.xmlの説明。現場でのログ設定。 (2026/06/19)
 /**
  * @author ayamin
  */
