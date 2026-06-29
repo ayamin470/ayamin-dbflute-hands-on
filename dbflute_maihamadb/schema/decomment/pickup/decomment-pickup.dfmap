@@ -1,0 +1,155 @@
+map:{
+    ; formatVersion = 1.1
+    ; pickupDatetime = 2026-06-29T23:00:24.684
+    ; decoMap = map:{
+        ; tableList = list:{
+            ; map:{
+                ; tableName = member_address
+                ; mappingList = list:{}
+                ; propertyList = list:{
+                    ; map:{
+                        ; decomment = shalias:\{会員住所情報\}
+会員の住所に関する情報。
+同時に有効期間ごとに履歴管理されている。
+                        ; databaseComment = 会員の住所に関する情報。
+同時に有効期間ごとに履歴管理されている。
+                        ; commentVersion = 0
+                        ; authorList = list:{
+                            ; ayami.hatano
+                        }
+                        ; pieceCode = b9df8f0c
+                        ; pieceOwner = ayami.hatano
+                        ; pieceGitBranch = master
+                        ; pieceDatetime = 2026-06-29T22:43:27.495
+                        ; previousPieceList = list:{
+                            ; 93d72b46
+                            ; ef1271c8
+                        }
+                    }
+                }
+                ; columnList = list:{
+                    ; map:{
+                        ; columnName = ADDRESS
+                        ; mappingList = list:{}
+                        ; propertyList = list:{
+                            ; map:{
+                                ; decomment = shalias:\{住所\}
+会員の最新の住所。
+住所が変更されると、最新の住所が新しいレコードとして登録される。
+                                ; databaseComment = まるごと住所
+                                ; commentVersion = 0
+                                ; authorList = list:{
+                                    ; ayami.hatano
+                                }
+                                ; pieceCode = ee1e07c1
+                                ; pieceOwner = ayami.hatano
+                                ; pieceGitBranch = master
+                                ; pieceDatetime = 2026-06-29T22:45:56.812
+                                ; previousPieceList = list:{
+                                    ; 6e3d0489
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            ; map:{
+                ; tableName = member
+                ; mappingList = list:{}
+                ; propertyList = list:{
+                    ; map:{
+                        ; decomment = shalias:\{会員\}
+会員登録時にデータが登録される。
+基本的に物理削除はなく、退会したらステータスが退会会員になる。
+                        ; databaseComment = 会員登録時にデータが登録される。
+基本的に物理削除はなく、退会したらステータスが退会会員になる。
+                        ; commentVersion = 0
+                        ; authorList = list:{
+                            ; ayami.hatano
+                        }
+                        ; pieceCode = 43000139
+                        ; pieceOwner = ayami.hatano
+                        ; pieceGitBranch = master
+                        ; pieceDatetime = 2026-06-29T22:43:12.211
+                        ; previousPieceList = list:{
+                            ; fd29cb9c
+                        }
+                    }
+                }
+                ; columnList = list:{}
+            }
+            ; map:{
+                ; tableName = region
+                ; mappingList = list:{}
+                ; propertyList = list:{
+                    ; map:{
+                        ; decomment = shalias:\{地域\}
+主に会員の住所に対応する地域。
+                        ; databaseComment = 主に会員の住所に対応する地域。
+かなりざっくりした感じではある。
+                        ; commentVersion = 0
+                        ; authorList = list:{
+                            ; ayami.hatano
+                        }
+                        ; pieceCode = d55e414e
+                        ; pieceOwner = ayami.hatano
+                        ; pieceGitBranch = master
+                        ; pieceDatetime = 2026-06-29T22:47:37.624
+                        ; previousPieceList = list:{}
+                    }
+                }
+                ; columnList = list:{
+                    ; map:{
+                        ; columnName = REGION_NAME
+                        ; mappingList = list:{}
+                        ; propertyList = list:{
+                            ; map:{
+                                ; decomment = shalias:\{地域名称\}
+例：アメリカ、千葉。千葉は国として扱うドメインルールに基づいている。
+                                ; databaseComment = null
+                                ; commentVersion = 0
+                                ; authorList = list:{
+                                    ; ayami.hatano
+                                }
+                                ; pieceCode = b71214ec
+                                ; pieceOwner = ayami.hatano
+                                ; pieceGitBranch = master
+                                ; pieceDatetime = 2026-06-29T22:47:52.649
+                                ; previousPieceList = list:{}
+                            }
+                        }
+                    }
+                }
+            }
+            ; map:{
+                ; tableName = purchase_payment
+                ; mappingList = list:{}
+                ; propertyList = list:{}
+                ; columnList = list:{
+                    ; map:{
+                        ; columnName = PAYMENT_AMOUNT
+                        ; mappingList = list:{}
+                        ; propertyList = list:{
+                            ; map:{
+                                ; decomment = shalias:\{支払金額\}
+支払った金額。外貨での支払いに対応できるよう、小数点第二位まで許容。
+                                ; databaseComment = 支払った金額。さて、小数点なのはなぜでしょう？
+                                ; commentVersion = 0
+                                ; authorList = list:{
+                                    ; ayami.hatano
+                                }
+                                ; pieceCode = 25486c4
+                                ; pieceOwner = ayami.hatano
+                                ; pieceGitBranch = master
+                                ; pieceDatetime = 2026-06-29T22:48:26.231
+                                ; previousPieceList = list:{
+                                    ; 35f8bed9
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
