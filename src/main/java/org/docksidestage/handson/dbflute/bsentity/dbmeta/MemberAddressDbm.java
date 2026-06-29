@@ -82,24 +82,26 @@ public class MemberAddressDbm extends AbstractDBMeta {
     //                                                                          Table Info
     //                                                                          ==========
     protected final String _tableDbName = "member_address";
-    protected final String _tableDispName = "member_address";
+    protected final String _tableDispName = "MEMBER_ADDRESS";
     protected final String _tablePropertyName = "memberAddress";
-    protected final TableSqlName _tableSqlName = new TableSqlName("member_address", _tableDbName);
+    protected final TableSqlName _tableSqlName = new TableSqlName("MEMBER_ADDRESS", _tableDbName);
     { _tableSqlName.xacceptFilter(DBFluteConfig.getInstance().getTableSqlNameFilter()); }
     public String getTableDbName() { return _tableDbName; }
     public String getTableDispName() { return _tableDispName; }
     public String getTablePropertyName() { return _tablePropertyName; }
     public TableSqlName getTableSqlName() { return _tableSqlName; }
+    protected final String _tableAlias = "会員住所情報";
+    public String getTableAlias() { return _tableAlias; }
 
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberAddressId = cci("MEMBER_ADDRESS_ID", "MEMBER_ADDRESS_ID", null, null, Integer.class, "memberAddressId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "member", null, null, false);
-    protected final ColumnInfo _columnValidBeginDate = cci("VALID_BEGIN_DATE", "VALID_BEGIN_DATE", null, null, java.time.LocalDate.class, "validBeginDate", null, false, false, true, "DATE", 10, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnValidEndDate = cci("VALID_END_DATE", "VALID_END_DATE", null, null, java.time.LocalDate.class, "validEndDate", null, false, false, true, "DATE", 10, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnAddress = cci("ADDRESS", "ADDRESS", null, null, String.class, "address", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, null, Integer.class, "regionId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "region", null, CDef.DefMeta.Region, false);
+    protected final ColumnInfo _columnMemberAddressId = cci("MEMBER_ADDRESS_ID", "MEMBER_ADDRESS_ID", null, "会員住所ID", Integer.class, "memberAddressId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Integer.class, "memberId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "member", null, null, false);
+    protected final ColumnInfo _columnValidBeginDate = cci("VALID_BEGIN_DATE", "VALID_BEGIN_DATE", null, "有効開始日", java.time.LocalDate.class, "validBeginDate", null, false, false, true, "DATE", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnValidEndDate = cci("VALID_END_DATE", "VALID_END_DATE", null, "有効終了日", java.time.LocalDate.class, "validEndDate", null, false, false, true, "DATE", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnAddress = cci("ADDRESS", "ADDRESS", null, "住所", String.class, "address", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, "地域ID", Integer.class, "regionId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "region", null, CDef.DefMeta.Region, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, null, java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, null, String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, null, java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, false, null, null, null, null, null, false);
@@ -107,32 +109,32 @@ public class MemberAddressDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, null, Long.class, "versionNo", null, false, false, true, "BIGINT", 19, 0, null, null, false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
     /**
-     * MEMBER_ADDRESS_ID: {PK, ID, NotNull, INT(10)}
+     * (会員住所ID)MEMBER_ADDRESS_ID: {PK, ID, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberAddressId() { return _columnMemberAddressId; }
     /**
-     * MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
     /**
-     * VALID_BEGIN_DATE: {+UQ, NotNull, DATE(10)}
+     * (有効開始日)VALID_BEGIN_DATE: {+UQ, NotNull, DATE(10)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnValidBeginDate() { return _columnValidBeginDate; }
     /**
-     * VALID_END_DATE: {NotNull, DATE(10)}
+     * (有効終了日)VALID_END_DATE: {NotNull, DATE(10)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnValidEndDate() { return _columnValidEndDate; }
     /**
-     * ADDRESS: {NotNull, VARCHAR(200)}
+     * (住所)ADDRESS: {NotNull, VARCHAR(200)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnAddress() { return _columnAddress; }
     /**
-     * REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region}
+     * (地域ID)REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnRegionId() { return _columnRegionId; }
@@ -209,7 +211,7 @@ public class MemberAddressDbm extends AbstractDBMeta {
     //                                      Foreign Property
     //                                      ----------------
     /**
-     * member by my MEMBER_ID, named 'member'.
+     * (会員)MEMBER by my MEMBER_ID, named 'member'.
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignMember() {
@@ -217,7 +219,7 @@ public class MemberAddressDbm extends AbstractDBMeta {
         return cfi("FK_MEMBER_ADDRESS_MEMBER", "member", this, MemberDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "memberAddressList", false);
     }
     /**
-     * region by my REGION_ID, named 'region'.
+     * (地域)REGION by my REGION_ID, named 'region'.
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignRegion() {

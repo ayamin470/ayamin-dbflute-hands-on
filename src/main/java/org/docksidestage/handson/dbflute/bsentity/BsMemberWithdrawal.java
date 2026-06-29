@@ -13,8 +13,8 @@ import org.docksidestage.handson.dbflute.allcommon.CDef;
 import org.docksidestage.handson.dbflute.exentity.*;
 
 /**
- * The entity of member_withdrawal as TABLE. <br>
- * 会員退会情報: 退会会員の退会に関する詳細な情報。<br>
+ * The entity of (会員退会情報)MEMBER_WITHDRAWAL as TABLE. <br>
+ * 退会会員の退会に関する詳細な情報。<br>
  * 退会会員のみデータが存在する。
  * @author DBFlute(AutoGenerator)
  */
@@ -32,13 +32,13 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
     /** MEMBER_ID: {PK, NotNull, INT(10), FK to member} */
     protected Integer _memberId;
 
-    /** WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} */
+    /** (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} */
     protected String _withdrawalReasonCode;
 
-    /** WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} */
+    /** (退会理由入力テキスト)WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} */
     protected String _withdrawalReasonInputText;
 
-    /** WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} */
+    /** (退会日時)WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} */
     protected java.time.LocalDateTime _withdrawalDatetime;
 
     /** REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -80,7 +80,7 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
     //                                                             =======================
     /**
      * Get the value of withdrawalReasonCode as the classification of WithdrawalReason. <br>
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
      * 会員の退会理由。なのでちょっとねがてぃぶ
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
@@ -91,7 +91,7 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
 
     /**
      * Set the value of withdrawalReasonCode as the classification of WithdrawalReason. <br>
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
      * 会員の退会理由。なのでちょっとねがてぃぶ
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
@@ -184,11 +184,11 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** member by my MEMBER_ID, named 'member'. */
+    /** (会員)MEMBER by my MEMBER_ID, named 'member'. */
     protected OptionalEntity<Member> _member;
 
     /**
-     * [get] member by my MEMBER_ID, named 'member'. <br>
+     * [get] (会員)MEMBER by my MEMBER_ID, named 'member'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
      * @return The entity of foreign property 'member'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -198,18 +198,18 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
     }
 
     /**
-     * [set] member by my MEMBER_ID, named 'member'.
+     * [set] (会員)MEMBER by my MEMBER_ID, named 'member'.
      * @param member The entity of foreign property 'member'. (NullAllowed)
      */
     public void setMember(OptionalEntity<Member> member) {
         _member = member;
     }
 
-    /** withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'. */
+    /** (退会理由)WITHDRAWAL_REASON by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'. */
     protected OptionalEntity<WithdrawalReason> _withdrawalReason;
 
     /**
-     * [get] withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'. <br>
+     * [get] (退会理由)WITHDRAWAL_REASON by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
      * @return The entity of foreign property 'withdrawalReason'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -219,7 +219,7 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
     }
 
     /**
-     * [set] withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
+     * [set] (退会理由)WITHDRAWAL_REASON by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
      * @param withdrawalReason The entity of foreign property 'withdrawalReason'. (NullAllowed)
      */
     public void setWithdrawalReason(OptionalEntity<WithdrawalReason> withdrawalReason) {
@@ -326,19 +326,19 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
     }
 
     /**
-     * [get] WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
-     * 退会理由コード: 退会した定型理由を参照するコード。<br>
+     * [get] (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
+     * 退会した定型理由を参照するコード。<br>
      * 何も言わずに退会する会員もいるので必須項目ではない。
      * @return The value of the column 'WITHDRAWAL_REASON_CODE'. (NullAllowed even if selected: for no constraint)
      */
     public String getWithdrawalReasonCode() {
         checkSpecifiedProperty("withdrawalReasonCode");
-        return _withdrawalReasonCode;
+        return convertEmptyToNull(_withdrawalReasonCode);
     }
 
     /**
-     * [set] WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
-     * 退会理由コード: 退会した定型理由を参照するコード。<br>
+     * [set] (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
+     * 退会した定型理由を参照するコード。<br>
      * 何も言わずに退会する会員もいるので必須項目ではない。
      * @param withdrawalReasonCode The value of the column 'WITHDRAWAL_REASON_CODE'. (NullAllowed: null update allowed for no constraint)
      */
@@ -349,19 +349,19 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
     }
 
     /**
-     * [get] WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} <br>
-     * 退会理由入力テキスト: 会員がフリーテキストで入力できる退会理由。<br>
+     * [get] (退会理由入力テキスト)WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} <br>
+     * 会員がフリーテキストで入力できる退会理由。<br>
      * もう言いたいこと言ってもらう感じ。
      * @return The value of the column 'WITHDRAWAL_REASON_INPUT_TEXT'. (NullAllowed even if selected: for no constraint)
      */
     public String getWithdrawalReasonInputText() {
         checkSpecifiedProperty("withdrawalReasonInputText");
-        return _withdrawalReasonInputText;
+        return convertEmptyToNull(_withdrawalReasonInputText);
     }
 
     /**
-     * [set] WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} <br>
-     * 退会理由入力テキスト: 会員がフリーテキストで入力できる退会理由。<br>
+     * [set] (退会理由入力テキスト)WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} <br>
+     * 会員がフリーテキストで入力できる退会理由。<br>
      * もう言いたいこと言ってもらう感じ。
      * @param withdrawalReasonInputText The value of the column 'WITHDRAWAL_REASON_INPUT_TEXT'. (NullAllowed: null update allowed for no constraint)
      */
@@ -371,8 +371,8 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
     }
 
     /**
-     * [get] WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} <br>
-     * 退会日時: 退会した瞬間の日時。<br>
+     * [get] (退会日時)WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} <br>
+     * 退会した瞬間の日時。<br>
      * 正式会員日時と違い、こっちはone-to-oneの別テーブルで。
      * @return The value of the column 'WITHDRAWAL_DATETIME'. (basically NotNull if selected: for the constraint)
      */
@@ -382,8 +382,8 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
     }
 
     /**
-     * [set] WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} <br>
-     * 退会日時: 退会した瞬間の日時。<br>
+     * [set] (退会日時)WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} <br>
+     * 退会した瞬間の日時。<br>
      * 正式会員日時と違い、こっちはone-to-oneの別テーブルで。
      * @param withdrawalDatetime The value of the column 'WITHDRAWAL_DATETIME'. (basically NotNull if update: for the constraint)
      */
@@ -416,7 +416,7 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
      */
     public String getRegisterUser() {
         checkSpecifiedProperty("registerUser");
-        return _registerUser;
+        return convertEmptyToNull(_registerUser);
     }
 
     /**
@@ -452,7 +452,7 @@ public abstract class BsMemberWithdrawal extends AbstractEntity implements Domai
      */
     public String getUpdateUser() {
         checkSpecifiedProperty("updateUser");
-        return _updateUser;
+        return convertEmptyToNull(_updateUser);
     }
 
     /**

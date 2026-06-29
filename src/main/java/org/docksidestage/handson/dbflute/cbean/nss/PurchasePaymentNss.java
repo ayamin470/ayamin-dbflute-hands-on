@@ -20,7 +20,7 @@ public class PurchasePaymentNss {
     //                                                                     ===============
     /**
      * With nested relation columns to select clause. <br>
-     * purchase by my PURCHASE_ID, named 'purchase'.
+     * (購入)PURCHASE by my PURCHASE_ID, named 'purchase'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public PurchaseNss withPurchase() {

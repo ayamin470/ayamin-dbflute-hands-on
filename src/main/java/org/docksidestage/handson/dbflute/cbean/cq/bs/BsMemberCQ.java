@@ -123,14 +123,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
+     * (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_MemberId_Asc() { regOBA("MEMBER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
+     * (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_MemberId_Desc() { regOBD("MEMBER_ID"); return this; }
@@ -143,14 +143,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * MEMBER_NAME: {IX, NotNull, VARCHAR(160)}
+     * (会員名称)MEMBER_NAME: {IX, NotNull, VARCHAR(160)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_MemberName_Asc() { regOBA("MEMBER_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MEMBER_NAME: {IX, NotNull, VARCHAR(160)}
+     * (会員名称)MEMBER_NAME: {IX, NotNull, VARCHAR(160)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_MemberName_Desc() { regOBD("MEMBER_NAME"); return this; }
@@ -163,14 +163,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)}
+     * (会員アカウント)MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_MemberAccount_Asc() { regOBA("MEMBER_ACCOUNT"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)}
+     * (会員アカウント)MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_MemberAccount_Desc() { regOBD("MEMBER_ACCOUNT"); return this; }
@@ -183,14 +183,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_MemberStatusCode_Asc() { regOBA("MEMBER_STATUS_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_MemberStatusCode_Desc() { regOBD("MEMBER_STATUS_CODE"); return this; }
@@ -203,14 +203,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * FORMALIZED_DATETIME: {IX, DATETIME(19)}
+     * (正式会員日時)FORMALIZED_DATETIME: {IX, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_FormalizedDatetime_Asc() { regOBA("FORMALIZED_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * FORMALIZED_DATETIME: {IX, DATETIME(19)}
+     * (正式会員日時)FORMALIZED_DATETIME: {IX, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_FormalizedDatetime_Desc() { regOBD("FORMALIZED_DATETIME"); return this; }
@@ -223,14 +223,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * BIRTHDATE: {DATE(10)}
+     * (生年月日)BIRTHDATE: {DATE(10)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_Birthdate_Asc() { regOBA("BIRTHDATE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * BIRTHDATE: {DATE(10)}
+     * (生年月日)BIRTHDATE: {DATE(10)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_Birthdate_Desc() { regOBD("BIRTHDATE"); return this; }
@@ -243,14 +243,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_RegisterDatetime_Asc() { regOBA("REGISTER_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_RegisterDatetime_Desc() { regOBD("REGISTER_DATETIME"); return this; }
@@ -263,14 +263,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * REGISTER_USER: {NotNull, VARCHAR(200)}
+     * (登録ユーザ)REGISTER_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_RegisterUser_Asc() { regOBA("REGISTER_USER"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * REGISTER_USER: {NotNull, VARCHAR(200)}
+     * (登録ユーザ)REGISTER_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_RegisterUser_Desc() { regOBD("REGISTER_USER"); return this; }
@@ -283,14 +283,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_UpdateDatetime_Asc() { regOBA("UPDATE_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_UpdateDatetime_Desc() { regOBD("UPDATE_DATETIME"); return this; }
@@ -303,14 +303,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * UPDATE_USER: {NotNull, VARCHAR(200)}
+     * (更新ユーザ)UPDATE_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_UpdateUser_Asc() { regOBA("UPDATE_USER"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * UPDATE_USER: {NotNull, VARCHAR(200)}
+     * (更新ユーザ)UPDATE_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_UpdateUser_Desc() { regOBD("UPDATE_USER"); return this; }
@@ -323,14 +323,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * VERSION_NO: {NotNull, BIGINT(19)}
+     * (バージョンNO)VERSION_NO: {NotNull, BIGINT(19)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_VersionNo_Asc() { regOBA("VERSION_NO"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * VERSION_NO: {NotNull, BIGINT(19)}
+     * (バージョンNO)VERSION_NO: {NotNull, BIGINT(19)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_VersionNo_Desc() { regOBD("VERSION_NO"); return this; }
@@ -402,7 +402,7 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
+     * (会員ステータス)MEMBER_STATUS by my MEMBER_STATUS_CODE, named 'memberStatus'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberStatusCQ queryMemberStatus() {
@@ -422,7 +422,7 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br>
+     * (会員住所情報)MEMBER_ADDRESS by my MEMBER_ID, named 'memberAddressAsValid'. <br>
      * 有効な会員住所 (現在日時を入れれば現在住所)
      * @param targetDate The bind parameter of fixed condition for targetDate. (NotNull)
      * @return The instance of condition-query. (NotNull)
@@ -453,7 +453,7 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br>
+     * (会員ログイン情報)MEMBER_LOGIN by my MEMBER_ID, named 'memberLoginAsLatest'. <br>
      * 会員の一番新しいログイン履歴レコード
      * @return The instance of condition-query. (NotNull)
      */
@@ -474,7 +474,7 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
+     * (会員セキュリティ情報)member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberSecurityCQ queryMemberSecurityAsOne() { return xdfgetConditionQueryMemberSecurityAsOne(); }
@@ -492,7 +492,7 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * member_service by MEMBER_ID, named 'memberServiceAsOne'.
+     * (会員サービス)member_service by MEMBER_ID, named 'memberServiceAsOne'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberServiceCQ queryMemberServiceAsOne() { return xdfgetConditionQueryMemberServiceAsOne(); }
@@ -510,7 +510,7 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
+     * (会員退会情報)member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberWithdrawalCQ queryMemberWithdrawalAsOne() { return xdfgetConditionQueryMemberWithdrawalAsOne(); }

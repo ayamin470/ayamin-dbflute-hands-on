@@ -20,7 +20,7 @@ import org.docksidestage.handson.dbflute.bsentity.dbmeta.*;
 import org.docksidestage.handson.dbflute.cbean.*;
 
 /**
- * The behavior of member as TABLE.
+ * The behavior of (会員)MEMBER as TABLE.
  * @author DBFlute(AutoGenerator)
  */
 public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, MemberCB> {
@@ -92,7 +92,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
      * </pre>
      * @param cbLambda The callback for condition-bean of Member. (NotNull)
      * @return The optional entity selected by the condition. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityAlreadyDeletedException When get(), alwaysPresent() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
@@ -129,9 +129,9 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberId : PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS. (NotNull)
+     * @param memberId (会員ID): PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS. (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityAlreadyDeletedException When get(), alwaysPresent() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
@@ -158,9 +158,9 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Select the entity by the unique-key value.
-     * @param memberAccount : UQ, NotNull, VARCHAR(50). (NotNull)
+     * @param memberAccount (会員アカウント): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityAlreadyDeletedException When get(), alwaysPresent() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
@@ -358,7 +358,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberAddressList by the set-upper of referrer. <br>
-     * member_address by MEMBER_ID, named 'memberAddressList'.
+     * (会員住所情報)MEMBER_ADDRESS by MEMBER_ID, named 'memberAddressList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberAddress</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">addressCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">addressCB</span>.setupSelect...
@@ -389,7 +389,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberAddressList by the set-upper of referrer. <br>
-     * member_address by MEMBER_ID, named 'memberAddressList'.
+     * (会員住所情報)MEMBER_ADDRESS by MEMBER_ID, named 'memberAddressList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberAddress</span>(<span style="color: #553000">member</span>, <span style="color: #553000">addressCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">addressCB</span>.setupSelect...
@@ -422,7 +422,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberLoginList by the set-upper of referrer. <br>
-     * member_login by MEMBER_ID, named 'memberLoginList'.
+     * (会員ログイン情報)MEMBER_LOGIN by MEMBER_ID, named 'memberLoginList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberLogin</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">loginCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">loginCB</span>.setupSelect...
@@ -453,7 +453,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of memberLoginList by the set-upper of referrer. <br>
-     * member_login by MEMBER_ID, named 'memberLoginList'.
+     * (会員ログイン情報)MEMBER_LOGIN by MEMBER_ID, named 'memberLoginList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberLogin</span>(<span style="color: #553000">member</span>, <span style="color: #553000">loginCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">loginCB</span>.setupSelect...
@@ -486,7 +486,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of purchaseList by the set-upper of referrer. <br>
-     * purchase by MEMBER_ID, named 'purchaseList'.
+     * (購入)PURCHASE by MEMBER_ID, named 'purchaseList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadPurchase</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">purchaseCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">purchaseCB</span>.setupSelect...
@@ -517,7 +517,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Load referrer of purchaseList by the set-upper of referrer. <br>
-     * purchase by MEMBER_ID, named 'purchaseList'.
+     * (購入)PURCHASE by MEMBER_ID, named 'purchaseList'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadPurchase</span>(<span style="color: #553000">member</span>, <span style="color: #553000">purchaseCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">purchaseCB</span>.setupSelect...

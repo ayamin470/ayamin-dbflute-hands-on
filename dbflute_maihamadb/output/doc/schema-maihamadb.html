@@ -101,6 +101,23 @@ h4 {
 }
 
 /* -------------------------------------------------
+                                    Schema Comment
+------------------------------------------------- */
+pre.schemaalias {
+	padding-top: 0.5em;
+	padding-left: 0.5em;
+	color: #3F7E5E;
+	font-size: 2.0em;
+}
+
+pre.schemadescription {
+	padding-top: 0.5em;
+	padding-left: 0.5em;
+	color: #3F7E5E;
+	font-size: 1.2em;
+}
+
+/* -------------------------------------------------
                                    Database Table
 ------------------------------------------------- */
 table {
@@ -119,7 +136,7 @@ td {
 	padding:2px;
 }
 .tablecomment {
-	font-size: 0.8em;
+	font-size: 1.0em;
 	color: #3F7E5E;
 	padding:0 0 0.2em 1em;
 }
@@ -142,6 +159,14 @@ td {
 .flgcell {
 	text-align: center;
 }
+.notnullbusiness {
+	font-style: italic;
+	font-size: 0.7em;
+}
+.notnullmaybe {
+	font-style: italic;
+	font-size: 0.7em;
+}
 .flgplus {
 	font-size: 0.7em;
 }
@@ -157,10 +182,10 @@ td {
 	font-size: 0.6em;
 }
 .relcell {
-	font-size: 0.7em;
+	font-size: 0.8em;
 }
 .commentcell {
-	font-size: 0.7em;
+	font-size: 0.9em;
 	color: #3F7E5E;
 }
 .commentcellerror {
@@ -187,6 +212,13 @@ td {
 }
 .commentdesc {
 	color: #3F7E5E;
+}
+.deprecatedtable {
+	color: #3F7E5E; /* comment-out color */
+	font-size: 0.8em;
+}
+.deprecatedtablerelation {
+	color: #3F7E5E; /* comment-out color */
 }
 
 /* inner table */
@@ -357,69 +389,152 @@ pre.spolicyviodisp {
 	width: 100%;
 	top: 0;
 	left: 0;
-	padding-top: 50px;
-	background-color: rgba(0, 0, 0, 0.5);
+	padding-top: 40px;
+	background-color: rgba(0, 0, 0, 0.4);
 }
 .decommentmodalcontent {
 	position: relative;
 	z-index: 10;
-	width: 50%;
+	width: 70%;
+	max-width: 650px;
 	margin: 0 auto;
-	border: 1px solid #999999;
-	padding: 15px;
+	padding: 28px 32px;
 	background-color: #fff8f8;
-	border-radius: 4px;
+	border-radius: 16px;
+	border: none;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 .decommentmodalcontent p {
 	font-size: 14px;
-	color: #222277;
+	color: #333;
+	margin-bottom: 6px;
+}
+.decomment-target-name {
+	display: inline-block;
+	background-color: #e8f0fe;
+	padding: 2px 8px;
+	border-radius: 4px;
+	font-weight: bold;
+	color: #1a73e8;
+}
+.decomment-editor {
+	margin-top: 10px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	overflow: hidden;
+	transition: border-color 0.2s;
+}
+.decomment-editor:focus-within {
+	border-color: #709dff;
 }
 .decommentinput {
 	display: block;
 	width: 100%;
-	margin-top: 10px;
+	padding: 8px;
 	font-size: 12px;
+	border: none;
+	border-radius: 0;
+	box-sizing: border-box;
+	resize: vertical;
 }
-.decommentmodal-ok-area {
-	text-align: right;
-	margin: 0em 1em 0em 0em
+.decommentinput:focus {
+	outline: none;
+}
+.decomment-alias-input-area {
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+.decomment-alias-label {
+	font-size: 12px;
+	color: #555;
+	white-space: nowrap;
+}
+.decomment-alias-input {
+	flex: 1;
+	max-width: 350px;
+	padding: 5px;
+	font-size: 12px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	transition: border-color 0.2s;
+}
+.decomment-alias-input:focus {
+	outline: none;
+	border-color: #709dff;
+}
+.decommentmodal-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 24px;
+}
+.decommentmodal-guide-link {
+	font-size: 12px;
+	color: #5a8eff;
+	text-decoration: none;
+}
+.decommentmodal-guide-link:hover {
+	text-decoration: underline;
 }
 .decommentmodal-ok-btn {
 	display: inline-block;
-	margin: 0.5em 0em;
-	padding: 0.5em 1.5em 0.5em 1.5em;
+	padding: 0.6em 2.5em;
 	text-decoration: none;
-	border-radius: 3px;
+	border-radius: 10px;
 	font-weight: bold;
 	color: #FFF;
-	text-align: right;
-	background-image: -webkit-linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
-	background-image: linear-gradient(45deg, #709dff 0%, #b0c9ff 100%);
-	transition: .4s;
+	background-color: #5a8eff;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.2s;
 }
-.decommentmodal-ok-btn:hover{
-	background-image: -webkit-linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
-	background-image: linear-gradient(45deg, #709dff 50%, #b0c9ff 100%);
+.decommentmodal-ok-btn:hover {
+	background-color: #4a7eef;
 }
 .decommentmodal-close-btn {
 	position: absolute;
-	margin-left: 10px;
-	padding: 0;
-	right: 10px;
-	top: 5px;
+	right: 12px;
+	top: 12px;
 	cursor: pointer;
-	width: 28px;
-	height: 28px;
+	width: 32px;
+	height: 32px;
 	border: 0;
 	border-radius: 50%;
-	color: #657786;
-	font-size: 14px;
-	line-height: 24px;
+	color: #666;
+	font-size: 18px;
+	line-height: 32px;
 	text-align: center;
-	transition: box-shadow .15s ease-in-out;
+	transition: background-color 0.15s;
 }
 .decommentmodal-close-btn:hover {
-	background-color: #eed;
+	background-color: #f0f0f0;
+}
+.decomment-toolbar {
+	display: flex;
+	gap: 4px;
+	padding: 2px 6px;
+	background-color: #f6f8fa;
+	border-bottom: 1px solid #ddd;
+}
+.decomment-toolbar-btn {
+	width: 22px;
+	height: 22px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background: transparent;
+	cursor: pointer;
+	font-size: 11px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.15s, border-color 0.15s;
+	padding: 0;
+}
+.decomment-toolbar-btn:hover {
+	background-color: #eaeef2;
+	border-color: #ddd;
 }
 .decomment-user-input {
 	display: none;
@@ -432,6 +547,52 @@ pre.spolicyviodisp {
 .decomment-user-name-desc {
 	margin-left: 0.5em;
 	color: #222277;
+}
+
+/* -------------------------------------------------
+                            Notification Banner
+------------------------------------------------- */
+.notificationbanner {
+	display: none;
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1000;
+	max-width: 400px;
+}
+.notificationbannercontent {
+	position: relative;
+	padding: 15px;
+	background-color: #709dff;
+	border: 1px solid #5a7fcf;
+	border-radius: 4px;
+	color: #ffffff;
+}
+.notificationbannercontent p {
+	margin: 0;
+	padding-right: 20px;
+	font-size: 14px;
+	color: #ffffff;
+}
+.notificationbanner-close-btn {
+	position: absolute;
+	padding: 0;
+	right: 10px;
+	top: 5px;
+	cursor: pointer;
+	width: 28px;
+	height: 28px;
+	border: 0;
+	border-radius: 50%;
+	background-color: transparent;
+	color: #ffffff;
+	font-size: 14px;
+	line-height: 24px;
+	text-align: center;
+	transition: box-shadow .15s ease-in-out;
+}
+.notificationbanner-close-btn:hover {
+	background-color: rgba(255, 255, 255, 0.2);
 }
 	</style>
 </head>
@@ -497,16 +658,19 @@ pre.spolicyviodisp {
 	<button id="column-mapping-submit-button">Mapping</button>
 </div>
 
-<h2>Table List</h2>
+
+
+<h2 title="mainSchema=maihamadb, tableCount=15, columnCountAll=104">Table List</h2>
 <div class="keywordsearch">
 	<input type="text" id="incremental-search-field" tabindex=1 value="" placeholder="Table Search" />
 	<ul id="suggestion-list" class="suggestionarea"></ul>
-	<span class="searchmemo">*Push 'tab' (primary tab order)</span>
+	<span class="searchmemo">*Push 'shift + command (ctrl) + , (comma)'</span>
 </div>
 <table>
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>ForeignTable</th>
@@ -519,159 +683,174 @@ pre.spolicyviodisp {
 	<tbody id="table-list-body">
 	<tr>
 		<td class="rownumcell">1</td>
-		<td class="namecell" data-name="member"><a href="#member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=11">member</a></td>
+		<td class="aliascell">会員</td>
+		<td class="namecell" data-name="member"><a href="#member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=11">MEMBER</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member_status" title="FK_MEMBER_MEMBER_STATUS">member_status</a>, <a href="#member_address" class="additionalfk" title="FK_MEMBER_MEMBER_ADDRESS_VALID: fixedCondition=&quot;$$foreignAlias$$.VALID_BEGIN_DATE &lt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null\n     and $$foreignAlias$$.VALID_END_DATE &gt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null&quot;, comment=有効な会員住所 (現在日時を入れれば現在住所)">member_address(AsValid)</a>, <a href="#member_login" class="additionalfk" title="FK_MEMBER_MEMBER_LOGIN_LATEST: fixedCondition=&quot;$$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$\nselect max(login.LOGIN_DATETIME)\n  from MEMBER_LOGIN login\n where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID\n)$$sqend$$&quot;, comment=会員の一番新しいログイン履歴レコード">member_login(AsLatest)</a></td>
-		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_MEMBER">member_address</a>, <a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER">member_login</a>, <a href="#member_security" title="FK_MEMBER_SECURITY_MEMBER">member_security</a>, <a href="#member_service" title="FK_MEMBER_SERVICE_MEMBER">member_service</a>, <a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_MEMBER">member_withdrawal</a>, <a href="#purchase" title="FK_PURCHASE_MEMBER">purchase</a></td>
-		<td class="commentcell member_comment"><pre>会員: 会員登録時にデータが登録される。
+		<td class="relcell"><a href="#member_status" title="FK_MEMBER_MEMBER_STATUS">MEMBER_STATUS</a>, <a href="#member_address" class="additionalfk" title="FK_MEMBER_MEMBER_ADDRESS_VALID: fixedCondition=&quot;$$foreignAlias$$.VALID_BEGIN_DATE &lt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null\n     and $$foreignAlias$$.VALID_END_DATE &gt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null&quot;, comment=有効な会員住所 (現在日時を入れれば現在住所)">MEMBER_ADDRESS(AsValid)</a>, <a href="#member_login" class="additionalfk" title="FK_MEMBER_MEMBER_LOGIN_LATEST: fixedCondition=&quot;$$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$\nselect max(login.LOGIN_DATETIME)\n  from MEMBER_LOGIN login\n where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID\n)$$sqend$$&quot;, comment=会員の一番新しいログイン履歴レコード">MEMBER_LOGIN(AsLatest)</a></td>
+		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_MEMBER">MEMBER_ADDRESS</a>, <a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER">MEMBER_LOGIN</a>, <a href="#member_security" title="FK_MEMBER_SECURITY_MEMBER">MEMBER_SECURITY</a>, <a href="#member_service" title="FK_MEMBER_SERVICE_MEMBER">MEMBER_SERVICE</a>, <a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_MEMBER">MEMBER_WITHDRAWAL</a>, <a href="#purchase" title="FK_PURCHASE_MEMBER">PURCHASE</a></td>
+		<td class="commentcell member_comment"><pre>会員登録時にデータが登録される。
 基本的に物理削除はなく、退会したらステータスが退会会員になる。</pre></td>
 		<td class="subcell">Member</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">2</td>
-		<td class="namecell" data-name="member_address"><a href="#member_address" title="type=TABLE, primaryKey={MEMBER_ADDRESS_ID}, nameLength=14, columnCount=11">member_address</a></td>
+		<td class="aliascell">会員住所情報</td>
+		<td class="namecell" data-name="member_address"><a href="#member_address" title="type=TABLE, primaryKey={MEMBER_ADDRESS_ID}, nameLength=14, columnCount=11">MEMBER_ADDRESS</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_ADDRESS_MEMBER">member</a>, <a href="#region" title="FK_MEMBER_ADDRESS_REGION">region</a></td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_ADDRESS_MEMBER">MEMBER</a>, <a href="#region" title="FK_MEMBER_ADDRESS_REGION">REGION</a></td>
 		<td class="relcell">&nbsp;</td>
-		<td class="commentcell member_address_comment"><pre>会員住所情報: 会員の住所に関する情報。
+		<td class="commentcell member_address_comment"><pre>会員の住所に関する情報。
 同時に有効期間ごとに履歴管理されている。</pre></td>
 		<td class="subcell">MemberAddress</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">3</td>
-		<td class="namecell" data-name="member_login"><a href="#member_login" title="type=TABLE, primaryKey={MEMBER_LOGIN_ID}, nameLength=12, columnCount=5">member_login</a></td>
+		<td class="aliascell">会員ログイン情報</td>
+		<td class="namecell" data-name="member_login"><a href="#member_login" title="type=TABLE, primaryKey={MEMBER_LOGIN_ID}, nameLength=12, columnCount=5">MEMBER_LOGIN</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member_status" title="FK_MEMBER_LOGIN_MEMBER_STATUS">member_status</a>, <a href="#member" title="FK_MEMBER_LOGIN_MEMBER">member</a></td>
+		<td class="relcell"><a href="#member_status" title="FK_MEMBER_LOGIN_MEMBER_STATUS">MEMBER_STATUS</a>, <a href="#member" title="FK_MEMBER_LOGIN_MEMBER">MEMBER</a></td>
 		<td class="relcell">&nbsp;</td>
-		<td class="commentcell member_login_comment"><pre>会員ログイン情報: ログインするたびに登録されるログイン履歴。</pre></td>
+		<td class="commentcell member_login_comment"><pre>ログインするたびに登録されるログイン履歴。</pre></td>
 		<td class="subcell">MemberLogin</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">4</td>
-		<td class="namecell" data-name="member_security"><a href="#member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=9">member_security</a></td>
+		<td class="aliascell">会員セキュリティ情報</td>
+		<td class="namecell" data-name="member_security"><a href="#member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=9">MEMBER_SECURITY</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_SECURITY_MEMBER">member</a></td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_SECURITY_MEMBER">MEMBER</a></td>
 		<td class="relcell">&nbsp;</td>
-		<td class="commentcell member_security_comment"><pre>会員セキュリティ情報: 会員とは one-to-one で、会員一人につき必ず一つのセキュリティ情報がある</pre></td>
+		<td class="commentcell member_security_comment"><pre>会員とは one-to-one で、会員一人につき必ず一つのセキュリティ情報がある</pre></td>
 		<td class="subcell">MemberSecurity</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">5</td>
-		<td class="namecell" data-name="member_service"><a href="#member_service" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=14, columnCount=8">member_service</a></td>
+		<td class="aliascell">会員サービス</td>
+		<td class="namecell" data-name="member_service"><a href="#member_service" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=14, columnCount=8">MEMBER_SERVICE</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_SERVICE_MEMBER">member</a>, <a href="#service_rank" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">service_rank</a></td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_SERVICE_MEMBER">MEMBER</a>, <a href="#service_rank" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">SERVICE_RANK</a></td>
 		<td class="relcell">&nbsp;</td>
-		<td class="commentcell member_service_comment"><pre>会員サービス: 会員のサービス情報（ポイントサービスなど）。</pre></td>
+		<td class="commentcell member_service_comment"><pre>会員のサービス情報（ポイントサービスなど）。</pre></td>
 		<td class="subcell">MemberService</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">6</td>
-		<td class="namecell" data-name="member_status"><a href="#member_status" title="type=TABLE, primaryKey={MEMBER_STATUS_CODE}, nameLength=13, columnCount=4">member_status</a></td>
+		<td class="aliascell">会員ステータス</td>
+		<td class="namecell" data-name="member_status"><a href="#member_status" title="type=TABLE, primaryKey={MEMBER_STATUS_CODE}, nameLength=13, columnCount=4">MEMBER_STATUS</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_MEMBER_STATUS">member</a>, <a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER_STATUS">member_login</a></td>
-		<td class="commentcell member_status_comment"><pre>会員ステータス</pre></td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_MEMBER_STATUS">MEMBER</a>, <a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER_STATUS">MEMBER_LOGIN</a></td>
+		<td class="commentcell member_status_comment"><pre>&nbsp;</pre></td>
 		<td class="subcell">MemberStatus</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">7</td>
-		<td class="namecell" data-name="member_withdrawal"><a href="#member_withdrawal" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=17, columnCount=8">member_withdrawal</a></td>
+		<td class="aliascell">会員退会情報</td>
+		<td class="namecell" data-name="member_withdrawal"><a href="#member_withdrawal" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=17, columnCount=8">MEMBER_WITHDRAWAL</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_WITHDRAWAL_MEMBER">member</a>, <a href="#withdrawal_reason" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">withdrawal_reason</a></td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_WITHDRAWAL_MEMBER">MEMBER</a>, <a href="#withdrawal_reason" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">WITHDRAWAL_REASON</a></td>
 		<td class="relcell">&nbsp;</td>
-		<td class="commentcell member_withdrawal_comment"><pre>会員退会情報: 退会会員の退会に関する詳細な情報。
+		<td class="commentcell member_withdrawal_comment"><pre>退会会員の退会に関する詳細な情報。
 退会会員のみデータが存在する。</pre></td>
 		<td class="subcell">MemberWithdrawal</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">8</td>
-		<td class="namecell" data-name="product"><a href="#product" title="type=TABLE, primaryKey={PRODUCT_ID}, nameLength=7, columnCount=11">product</a></td>
+		<td class="aliascell">商品</td>
+		<td class="namecell" data-name="product"><a href="#product" title="type=TABLE, primaryKey={PRODUCT_ID}, nameLength=7, columnCount=11">PRODUCT</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_PRODUCT_CATEGORY">product_category</a>, <a href="#product_status" title="FK_PRODUCT_PRODUCT_STATUS">product_status</a></td>
-		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PRODUCT">purchase</a></td>
-		<td class="commentcell product_comment"><pre>商品</pre></td>
+		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_PRODUCT_CATEGORY">PRODUCT_CATEGORY</a>, <a href="#product_status" title="FK_PRODUCT_PRODUCT_STATUS">PRODUCT_STATUS</a></td>
+		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PRODUCT">PURCHASE</a></td>
+		<td class="commentcell product_comment"><pre>&nbsp;</pre></td>
 		<td class="subcell">Product</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">9</td>
-		<td class="namecell" data-name="product_category"><a href="#product_category" title="type=TABLE, primaryKey={PRODUCT_CATEGORY_CODE}, nameLength=16, columnCount=3">product_category</a></td>
+		<td class="aliascell">商品カテゴリ</td>
+		<td class="namecell" data-name="product_category"><a href="#product_category" title="type=TABLE, primaryKey={PRODUCT_CATEGORY_CODE}, nameLength=16, columnCount=3">PRODUCT_CATEGORY</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">product_category</a></td>
-		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_CATEGORY">product</a>, <a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">product_category</a></td>
-		<td class="commentcell product_category_comment"><pre>商品カテゴリ: 商品のカテゴリを表現するマスタ。
+		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">PRODUCT_CATEGORY</a></td>
+		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_CATEGORY">PRODUCT</a>, <a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">PRODUCT_CATEGORY</a></td>
+		<td class="commentcell product_category_comment"><pre>商品のカテゴリを表現するマスタ。
 自己参照の階層になっている。</pre></td>
 		<td class="subcell">ProductCategory</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">10</td>
-		<td class="namecell" data-name="product_status"><a href="#product_status" title="type=TABLE, primaryKey={PRODUCT_STATUS_CODE}, nameLength=14, columnCount=2">product_status</a></td>
+		<td class="aliascell">商品ステータス</td>
+		<td class="namecell" data-name="product_status"><a href="#product_status" title="type=TABLE, primaryKey={PRODUCT_STATUS_CODE}, nameLength=14, columnCount=2">PRODUCT_STATUS</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_STATUS">product</a></td>
-		<td class="commentcell product_status_comment"><pre>商品ステータス</pre></td>
+		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_STATUS">PRODUCT</a></td>
+		<td class="commentcell product_status_comment"><pre>&nbsp;</pre></td>
 		<td class="subcell">ProductStatus</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">11</td>
-		<td class="namecell" data-name="purchase"><a href="#purchase" title="type=TABLE, primaryKey={PURCHASE_ID}, nameLength=8, columnCount=12">purchase</a></td>
+		<td class="aliascell">購入</td>
+		<td class="namecell" data-name="purchase"><a href="#purchase" title="type=TABLE, primaryKey={PURCHASE_ID}, nameLength=8, columnCount=12">PURCHASE</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="FK_PURCHASE_MEMBER">member</a>, <a href="#product" title="FK_PURCHASE_PRODUCT">product</a></td>
-		<td class="relcell"><a href="#purchase_payment" title="FK_PURCHASE_PAYMENT_PURCHASE">purchase_payment</a></td>
-		<td class="commentcell purchase_comment"><pre>購入: 一つの商品に対する一回の購入を表現する。
+		<td class="relcell"><a href="#member" title="FK_PURCHASE_MEMBER">MEMBER</a>, <a href="#product" title="FK_PURCHASE_PRODUCT">PRODUCT</a></td>
+		<td class="relcell"><a href="#purchase_payment" title="FK_PURCHASE_PAYMENT_PURCHASE">PURCHASE_PAYMENT</a></td>
+		<td class="commentcell purchase_comment"><pre>一つの商品に対する一回の購入を表現する。
 一回の購入で一つの商品を複数個買うこともある。</pre></td>
 		<td class="subcell">Purchase</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">12</td>
-		<td class="namecell" data-name="purchase_payment"><a href="#purchase_payment" title="type=TABLE, primaryKey={PURCHASE_PAYMENT_ID}, nameLength=16, columnCount=9">purchase_payment</a></td>
+		<td class="aliascell">購入支払</td>
+		<td class="namecell" data-name="purchase_payment"><a href="#purchase_payment" title="type=TABLE, primaryKey={PURCHASE_PAYMENT_ID}, nameLength=16, columnCount=9">PURCHASE_PAYMENT</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PAYMENT_PURCHASE">purchase</a></td>
+		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PAYMENT_PURCHASE">PURCHASE</a></td>
 		<td class="relcell">&nbsp;</td>
-		<td class="commentcell purchase_payment_comment"><pre>購入支払: 購入に対する支払。
+		<td class="commentcell purchase_payment_comment"><pre>購入に対する支払。
 分割払いもできるのでmanyとなり、会員からの孫テーブルのテストができてうれしい。</pre></td>
 		<td class="subcell">PurchasePayment</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">13</td>
-		<td class="namecell" data-name="region"><a href="#region" title="type=TABLE, primaryKey={REGION_ID}, nameLength=6, columnCount=2">region</a></td>
+		<td class="aliascell">地域</td>
+		<td class="namecell" data-name="region"><a href="#region" title="type=TABLE, primaryKey={REGION_ID}, nameLength=6, columnCount=2">REGION</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_REGION">member_address</a></td>
-		<td class="commentcell region_comment"><pre>地域: 主に会員の住所に対応する地域。
+		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_REGION">MEMBER_ADDRESS</a></td>
+		<td class="commentcell region_comment"><pre>主に会員の住所に対応する地域。
 かなりざっくりした感じではある。</pre></td>
 		<td class="subcell">Region</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">14</td>
-		<td class="namecell" data-name="service_rank"><a href="#service_rank" title="type=TABLE, primaryKey={SERVICE_RANK_CODE}, nameLength=12, columnCount=6">service_rank</a></td>
+		<td class="aliascell">サービスランク</td>
+		<td class="namecell" data-name="service_rank"><a href="#service_rank" title="type=TABLE, primaryKey={SERVICE_RANK_CODE}, nameLength=12, columnCount=6">SERVICE_RANK</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#member_service" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">member_service</a></td>
-		<td class="commentcell service_rank_comment"><pre>サービスランク: 会員のサービスレベルを表現するランク。
+		<td class="relcell"><a href="#member_service" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">MEMBER_SERVICE</a></td>
+		<td class="commentcell service_rank_comment"><pre>会員のサービスレベルを表現するランク。
 （ゴールドとかプラチナとか）</pre></td>
 		<td class="subcell">ServiceRank</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">15</td>
-		<td class="namecell" data-name="withdrawal_reason"><a href="#withdrawal_reason" title="type=TABLE, primaryKey={WITHDRAWAL_REASON_CODE}, nameLength=17, columnCount=3">withdrawal_reason</a></td>
+		<td class="aliascell">退会理由</td>
+		<td class="namecell" data-name="withdrawal_reason"><a href="#withdrawal_reason" title="type=TABLE, primaryKey={WITHDRAWAL_REASON_CODE}, nameLength=17, columnCount=3">WITHDRAWAL_REASON</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">member_withdrawal</a></td>
-		<td class="commentcell withdrawal_reason_comment"><pre>退会理由: 会員に選ばせる定型的な退会理由のマスタ。</pre></td>
+		<td class="relcell"><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">MEMBER_WITHDRAWAL</a></td>
+		<td class="commentcell withdrawal_reason_comment"><pre>会員に選ばせる定型的な退会理由のマスタ。</pre></td>
 		<td class="subcell">WithdrawalReason</td>
 		<td class="subcell">2025/10/08</td>
 	</tr>
@@ -679,11 +858,11 @@ pre.spolicyviodisp {
 </table>
 
 <h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=11">
-member
+(会員)MEMBER
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 &nbsp;<span class="arrqycount"><a href="#member_arrqy">(arrangeQuery=1)</a></span>
 </h2>
-<div class="tablecomment member_comment" data-name="member"><pre>会員: 会員登録時にデータが登録される。
+<div class="tablecomment member_comment" data-name="member"><pre>会員登録時にデータが登録される。
 基本的に物理削除はなく、退会したらステータスが退会会員になる。</pre></div>
 <input type="hidden" value="member">
 <table class="tablecontent">
@@ -695,6 +874,7 @@ member
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -715,13 +895,14 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員ID</td>
 		<td class=" columnnamecell" id="member_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member_address" class="additionalfk" title="FK_MEMBER_MEMBER_ADDRESS_VALID: fixedCondition=&quot;$$foreignAlias$$.VALID_BEGIN_DATE &lt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null\n     and $$foreignAlias$$.VALID_END_DATE &gt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null&quot;, comment=有効な会員住所 (現在日時を入れれば現在住所)">member_address(AsValid)</a>,<br><a href="#member_login" class="additionalfk" title="FK_MEMBER_MEMBER_LOGIN_LATEST: fixedCondition=&quot;$$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$\nselect max(login.LOGIN_DATETIME)\n  from MEMBER_LOGIN login\n where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID\n)$$sqend$$&quot;, comment=会員の一番新しいログイン履歴レコード">member_login(AsLatest)</a>&nbsp;</td>
-		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_MEMBER">member_address</a>,<br><a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER">member_login</a>,<br><a href="#member_security" title="FK_MEMBER_SECURITY_MEMBER">member_security</a>,<br><a href="#member_service" title="FK_MEMBER_SERVICE_MEMBER">member_service</a>,<br><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_MEMBER">member_withdrawal</a>,<br><a href="#purchase" title="FK_PURCHASE_MEMBER">purchase</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_address" class="additionalfk" title="FK_MEMBER_MEMBER_ADDRESS_VALID: fixedCondition=&quot;$$foreignAlias$$.VALID_BEGIN_DATE &lt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null\n     and $$foreignAlias$$.VALID_END_DATE &gt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null&quot;, comment=有効な会員住所 (現在日時を入れれば現在住所)">MEMBER_ADDRESS(AsValid)</a>,<br><a href="#member_login" class="additionalfk" title="FK_MEMBER_MEMBER_LOGIN_LATEST: fixedCondition=&quot;$$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$\nselect max(login.LOGIN_DATETIME)\n  from MEMBER_LOGIN login\n where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID\n)$$sqend$$&quot;, comment=会員の一番新しいログイン履歴レコード">MEMBER_LOGIN(AsLatest)</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_MEMBER">MEMBER_ADDRESS</a>,<br><a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER">MEMBER_LOGIN</a>,<br><a href="#member_security" title="FK_MEMBER_SECURITY_MEMBER">MEMBER_SECURITY</a>,<br><a href="#member_service" title="FK_MEMBER_SERVICE_MEMBER">MEMBER_SERVICE</a>,<br><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_MEMBER">MEMBER_WITHDRAWAL</a>,<br><a href="#purchase" title="FK_PURCHASE_MEMBER">PURCHASE</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>会員ID: 会員を識別するID。連番として基本的に自動採番される。
+		<td class="commentcell"><pre>会員を識別するID。連番として基本的に自動採番される。
 （会員IDだけに限らず）採番方法はDBMSによって変わる。</pre></td>
 		<td class="subcell">memberId</td>
 		<td class="subcell">Integer</td>
@@ -734,13 +915,14 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="IX_MEMBER_MEMBER_NAME(MEMBER_NAME)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員名称</td>
 		<td class=" columnnamecell" id="member_member_name">MEMBER_NAME</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 160 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>会員名称: 会員のフルネームの名称。</pre></td>
+		<td class="commentcell"><pre>会員のフルネームの名称。</pre></td>
 		<td class="subcell">memberName</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -752,13 +934,14 @@ member
 		<td class="flgcell" title="MEMBER_ACCOUNT(MEMBER_ACCOUNT)">o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員アカウント</td>
 		<td class=" columnnamecell" id="member_member_account">MEMBER_ACCOUNT</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 50 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>会員アカウント: 会員がログイン時に利用するアカウントNO。</pre></td>
+		<td class="commentcell"><pre>会員がログイン時に利用するアカウントNO。</pre></td>
 		<td class="subcell">memberAccount</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -770,13 +953,14 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="FK_MEMBER_MEMBER_STATUS(MEMBER_STATUS_CODE)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員ステータスコード</td>
 		<td class=" columnnamecell" id="member_member_status_code">MEMBER_STATUS_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#member_status" title="FK_MEMBER_MEMBER_STATUS">member_status</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_status" title="FK_MEMBER_MEMBER_STATUS">MEMBER_STATUS</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#MemberStatusCls">MemberStatus</a></td>
-		<td class="commentcell"><pre>会員ステータスコード</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">memberStatusCode</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -788,13 +972,14 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="IX_MEMBER_FORMALIZED_DATETIME(FORMALIZED_DATETIME)">o</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="aliascell">正式会員日時</td>
 		<td class=" columnnamecell" id="member_formalized_datetime">FORMALIZED_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>正式会員日時: 会員が正式に確定した日時。一度確定したら更新されない。
+		<td class="commentcell"><pre>会員が正式に確定した日時。一度確定したら更新されない。
 仮会員のときはnull。</pre></td>
 		<td class="subcell">formalizedDatetime</td>
 		<td class="subcell">LocalDateTime</td>
@@ -807,13 +992,14 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="aliascell">生年月日</td>
 		<td class=" columnnamecell" id="member_birthdate">BIRTHDATE</td>
 		<td class="typecell">DATE</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>生年月日: 必須項目ではないので、このデータがない会員もいる。</pre></td>
+		<td class="commentcell"><pre>必須項目ではないので、このデータがない会員もいる。</pre></td>
 		<td class="subcell">birthdate</td>
 		<td class="subcell">LocalDate</td>
 		<td class="subcell">first</td>
@@ -825,13 +1011,14 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">登録日時</td>
 		<td class=" columnnamecell" id="member_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>登録日時: レコードが登録された日時。共通カラムの一つ。</pre></td>
+		<td class="commentcell"><pre>レコードが登録された日時。共通カラムの一つ。</pre></td>
 		<td class="subcell">registerDatetime</td>
 		<td class="subcell">LocalDateTime</td>
 		<td class="subcell">first</td>
@@ -843,13 +1030,14 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">登録ユーザ</td>
 		<td class=" columnnamecell" id="member_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>登録ユーザ: レコードを登録したユーザ。共通カラムの一つ。</pre></td>
+		<td class="commentcell"><pre>レコードを登録したユーザ。共通カラムの一つ。</pre></td>
 		<td class="subcell">registerUser</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -861,13 +1049,14 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">更新日時</td>
 		<td class=" columnnamecell" id="member_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>更新日時: レコードが（最後に）更新された日時。共通カラムの一つ。</pre></td>
+		<td class="commentcell"><pre>レコードが（最後に）更新された日時。共通カラムの一つ。</pre></td>
 		<td class="subcell">updateDatetime</td>
 		<td class="subcell">LocalDateTime</td>
 		<td class="subcell">first</td>
@@ -879,13 +1068,14 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">更新ユーザ</td>
 		<td class=" columnnamecell" id="member_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>更新ユーザ: レコードを更新したユーザ。</pre></td>
+		<td class="commentcell"><pre>レコードを更新したユーザ。</pre></td>
 		<td class="subcell">updateUser</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -897,13 +1087,14 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell optcell">バージョンNO</td>
 		<td class="optcell columnnamecell" id="member_version_no">VERSION_NO</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>バージョンNO: レコードのバージョンを示すNO。
+		<td class="commentcell"><pre>レコードのバージョンを示すNO。
 更新回数と等しく、主に排他制御のために利用される。</pre></td>
 		<td class="subcell">versionNo</td>
 		<td class="subcell">Long</td>
@@ -913,10 +1104,10 @@ member
 </table>
 
 <h2 id="member_address" title="type=TABLE, primaryKey={MEMBER_ADDRESS_ID}, nameLength=14, columnCount=11">
-member_address
+(会員住所情報)MEMBER_ADDRESS
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment member_address_comment" data-name="member_address"><pre>会員住所情報: 会員の住所に関する情報。
+<div class="tablecomment member_address_comment" data-name="member_address"><pre>会員の住所に関する情報。
 同時に有効期間ごとに履歴管理されている。</pre></div>
 <input type="hidden" value="member_address">
 <table class="tablecontent">
@@ -928,6 +1119,7 @@ member_address
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -948,13 +1140,14 @@ member_address
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員住所ID</td>
 		<td class=" columnnamecell" id="member_address_member_address_id">MEMBER_ADDRESS_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>会員住所ID: 会員住所を識別するID。
+		<td class="commentcell"><pre>会員住所を識別するID。
 履歴分も含むテーブルなので、これ自体はFKではない。</pre></td>
 		<td class="subcell">memberAddressId</td>
 		<td class="subcell">Integer</td>
@@ -967,13 +1160,14 @@ member_address
 		<td class="flgcell" title="MEMBER_ID(MEMBER_ID, VALID_BEGIN_DATE)">o<span class="flgplus">+</span></td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員ID</td>
 		<td class=" columnnamecell" id="member_address_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_ADDRESS_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_ADDRESS_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>会員ID: 会員を参照するID。
+		<td class="commentcell"><pre>会員を参照するID。
 履歴分を含むため、これだけではユニークにはならない。</pre></td>
 		<td class="subcell">memberId</td>
 		<td class="subcell">Integer</td>
@@ -986,13 +1180,14 @@ member_address
 		<td class="flgcell" title="MEMBER_ID(MEMBER_ID, VALID_BEGIN_DATE)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">有効開始日</td>
 		<td class=" columnnamecell" id="member_address_valid_begin_date">VALID_BEGIN_DATE</td>
 		<td class="typecell">DATE</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>有効開始日: 一つの有効期間の開始を示す日付。
+		<td class="commentcell"><pre>一つの有効期間の開始を示す日付。
 前の有効終了日の次の日の値が格納される。</pre></td>
 		<td class="subcell">validBeginDate</td>
 		<td class="subcell">LocalDate</td>
@@ -1005,13 +1200,14 @@ member_address
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">有効終了日</td>
 		<td class=" columnnamecell" id="member_address_valid_end_date">VALID_END_DATE</td>
 		<td class="typecell">DATE</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>有効終了日: 有効期間の終了日。
+		<td class="commentcell"><pre>有効期間の終了日。
 次の有効開始日の一日前の値が格納される。
 ただし、次の有効期間がない場合は 9999/12/31 となる。</pre></td>
 		<td class="subcell">validEndDate</td>
@@ -1025,13 +1221,14 @@ member_address
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">住所</td>
 		<td class=" columnnamecell" id="member_address_address">ADDRESS</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>住所: まるごと住所</pre></td>
+		<td class="commentcell"><pre>まるごと住所</pre></td>
 		<td class="subcell">address</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -1043,13 +1240,14 @@ member_address
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="FK_MEMBER_ADDRESS_REGION(REGION_ID)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">地域ID</td>
 		<td class=" columnnamecell" id="member_address_region_id">REGION_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#region" title="FK_MEMBER_ADDRESS_REGION">region</a>&nbsp;</td>
+		<td class="relcell"><a href="#region" title="FK_MEMBER_ADDRESS_REGION">REGION</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#RegionCls">Region</a></td>
-		<td class="commentcell"><pre>地域ID: 地域を参照するID。
+		<td class="commentcell"><pre>地域を参照するID。
 ここでは特に住所の内容と連動しているわけではない。</pre></td>
 		<td class="subcell">regionId</td>
 		<td class="subcell">Integer</td>
@@ -1062,6 +1260,7 @@ member_address
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_address_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -1080,6 +1279,7 @@ member_address
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_address_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -1098,6 +1298,7 @@ member_address
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_address_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -1116,6 +1317,7 @@ member_address
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_address_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -1134,6 +1336,7 @@ member_address
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell optcell"></td>
 		<td class="optcell columnnamecell" id="member_address_version_no">VERSION_NO</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
@@ -1149,10 +1352,10 @@ member_address
 </table>
 
 <h2 id="member_login" title="type=TABLE, primaryKey={MEMBER_LOGIN_ID}, nameLength=12, columnCount=5">
-member_login
+(会員ログイン情報)MEMBER_LOGIN
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment member_login_comment" data-name="member_login"><pre>会員ログイン情報: ログインするたびに登録されるログイン履歴。</pre></div>
+<div class="tablecomment member_login_comment" data-name="member_login"><pre>ログインするたびに登録されるログイン履歴。</pre></div>
 <input type="hidden" value="member_login">
 <table class="tablecontent">
 	<thead>
@@ -1163,6 +1366,7 @@ member_login
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -1183,13 +1387,14 @@ member_login
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員ログインID</td>
 		<td class=" columnnamecell" id="member_login_member_login_id">MEMBER_LOGIN_ID</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>会員ログインID</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">memberLoginId</td>
 		<td class="subcell">Long</td>
 		<td class="subcell">first</td>
@@ -1201,13 +1406,14 @@ member_login
 		<td class="flgcell" title="MEMBER_ID(MEMBER_ID, LOGIN_DATETIME)">o<span class="flgplus">+</span></td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員ID</td>
 		<td class=" columnnamecell" id="member_login_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_LOGIN_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_LOGIN_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>会員ID</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">memberId</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
@@ -1219,13 +1425,14 @@ member_login
 		<td class="flgcell" title="MEMBER_ID(MEMBER_ID, LOGIN_DATETIME)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell" title="IX_MEMBER_LOGIN_DATETIME(LOGIN_DATETIME)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">ログイン日時</td>
 		<td class=" columnnamecell" id="member_login_login_datetime">LOGIN_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>ログイン日時: ログインした瞬間の日時。</pre></td>
+		<td class="commentcell"><pre>ログインした瞬間の日時。</pre></td>
 		<td class="subcell">loginDatetime</td>
 		<td class="subcell">LocalDateTime</td>
 		<td class="subcell">first</td>
@@ -1237,13 +1444,14 @@ member_login
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">モバイルログインフラグ</td>
 		<td class=" columnnamecell" id="member_login_mobile_login_flg">MOBILE_LOGIN_FLG</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#FlgCls">Flg</a></td>
-		<td class="commentcell"><pre>モバイルログインフラグ: モバイル機器からのログインか否か。</pre></td>
+		<td class="commentcell"><pre>モバイル機器からのログインか否か。</pre></td>
 		<td class="subcell">mobileLoginFlg</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
@@ -1255,13 +1463,14 @@ member_login
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="FK_MEMBER_LOGIN_MEMBER_STATUS(LOGIN_MEMBER_STATUS_CODE)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">ログイン会員ステータスコード</td>
 		<td class=" columnnamecell" id="member_login_login_member_status_code">LOGIN_MEMBER_STATUS_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#member_status" title="FK_MEMBER_LOGIN_MEMBER_STATUS">member_status</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_status" title="FK_MEMBER_LOGIN_MEMBER_STATUS">MEMBER_STATUS</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#MemberStatusCls">MemberStatus</a></td>
-		<td class="commentcell"><pre>ログイン会員ステータスコード: ログイン時の会員ステータス</pre></td>
+		<td class="commentcell"><pre>ログイン時の会員ステータス</pre></td>
 		<td class="subcell">loginMemberStatusCode</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -1270,10 +1479,10 @@ member_login
 </table>
 
 <h2 id="member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=9">
-member_security
+(会員セキュリティ情報)MEMBER_SECURITY
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment member_security_comment" data-name="member_security"><pre>会員セキュリティ情報: 会員とは one-to-one で、会員一人につき必ず一つのセキュリティ情報がある</pre></div>
+<div class="tablecomment member_security_comment" data-name="member_security"><pre>会員とは one-to-one で、会員一人につき必ず一つのセキュリティ情報がある</pre></div>
 <input type="hidden" value="member_security">
 <table class="tablecontent">
 	<thead>
@@ -1284,6 +1493,7 @@ member_security
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -1304,13 +1514,14 @@ member_security
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員ID</td>
 		<td class=" columnnamecell" id="member_security_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_SECURITY_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_SECURITY_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>会員ID: そのまま one-to-one を構成するためのFKとなる。</pre></td>
+		<td class="commentcell"><pre>そのまま one-to-one を構成するためのFKとなる。</pre></td>
 		<td class="subcell">memberId</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
@@ -1322,13 +1533,14 @@ member_security
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">ログインパスワード</td>
 		<td class=" columnnamecell" id="member_security_login_password">LOGIN_PASSWORD</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 50 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>ログインパスワード: ログイン時に利用するパスワード。
+		<td class="commentcell"><pre>ログイン時に利用するパスワード。
 本当は良くないが、Exampleなのでひとまず暗号化していない。</pre></td>
 		<td class="subcell">loginPassword</td>
 		<td class="subcell">String</td>
@@ -1341,13 +1553,14 @@ member_security
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">リマインダ質問</td>
 		<td class=" columnnamecell" id="member_security_reminder_question">REMINDER_QUESTION</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 50 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>リマインダ質問: パスワードを忘れた際のリマインダ機能における質問の内容。</pre></td>
+		<td class="commentcell"><pre>パスワードを忘れた際のリマインダ機能における質問の内容。</pre></td>
 		<td class="subcell">reminderQuestion</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -1359,13 +1572,14 @@ member_security
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">リマインダ回答</td>
 		<td class=" columnnamecell" id="member_security_reminder_answer">REMINDER_ANSWER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 50 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>リマインダ回答: パスワードを忘れた際のリマインダ機能における質問の答え。</pre></td>
+		<td class="commentcell"><pre>パスワードを忘れた際のリマインダ機能における質問の答え。</pre></td>
 		<td class="subcell">reminderAnswer</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -1377,6 +1591,7 @@ member_security
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_security_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -1395,6 +1610,7 @@ member_security
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_security_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -1413,6 +1629,7 @@ member_security
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_security_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -1431,6 +1648,7 @@ member_security
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_security_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -1449,6 +1667,7 @@ member_security
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell optcell"></td>
 		<td class="optcell columnnamecell" id="member_security_version_no">VERSION_NO</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
@@ -1464,10 +1683,10 @@ member_security
 </table>
 
 <h2 id="member_service" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=14, columnCount=8">
-member_service
+(会員サービス)MEMBER_SERVICE
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment member_service_comment" data-name="member_service"><pre>会員サービス: 会員のサービス情報（ポイントサービスなど）。</pre></div>
+<div class="tablecomment member_service_comment" data-name="member_service"><pre>会員のサービス情報（ポイントサービスなど）。</pre></div>
 <input type="hidden" value="member_service">
 <table class="tablecontent">
 	<thead>
@@ -1478,6 +1697,7 @@ member_service
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -1498,13 +1718,14 @@ member_service
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員ID</td>
 		<td class=" columnnamecell" id="member_service_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_SERVICE_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_SERVICE_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>会員ID: 会員を参照するID。ユニークなので、会員とは one-to-one の関係に。</pre></td>
+		<td class="commentcell"><pre>会員を参照するID。ユニークなので、会員とは one-to-one の関係に。</pre></td>
 		<td class="subcell">memberId</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
@@ -1516,13 +1737,14 @@ member_service
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="IX_MEMBER_SERVICE_POINT_COUNT(AKIRAKANI_OKASHII_KARAMU_MEI)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">サービスポイント数</td>
 		<td class=" columnnamecell" id="member_service_akirakani_okashii_karamu_mei">AKIRAKANI_OKASHII_KARAMU_MEI</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>サービスポイント数: 会員が現在利用できるサービスポイントの数。
+		<td class="commentcell"><pre>会員が現在利用できるサービスポイントの数。
 基本的に、購入時には増えてポイントを使ったら減る。</pre></td>
 		<td class="subcell">akirakaniOkashiiKaramuMei</td>
 		<td class="subcell">Integer</td>
@@ -1535,13 +1757,14 @@ member_service
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE(SERVICE_RANK_CODE)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">サービスランクコード</td>
 		<td class=" columnnamecell" id="member_service_service_rank_code">SERVICE_RANK_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#service_rank" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">service_rank</a>&nbsp;</td>
+		<td class="relcell"><a href="#service_rank" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">SERVICE_RANK</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#ServiceRankCls">ServiceRank</a></td>
-		<td class="commentcell"><pre>サービスランクコード: サービスランクを参照するコード。
+		<td class="commentcell"><pre>サービスランクを参照するコード。
 どんなランクがあるのかドキドキですね。</pre></td>
 		<td class="subcell">serviceRankCode</td>
 		<td class="subcell">String</td>
@@ -1554,6 +1777,7 @@ member_service
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_service_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -1572,6 +1796,7 @@ member_service
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_service_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -1590,6 +1815,7 @@ member_service
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_service_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -1608,6 +1834,7 @@ member_service
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_service_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -1626,6 +1853,7 @@ member_service
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell optcell"></td>
 		<td class="optcell columnnamecell" id="member_service_version_no">VERSION_NO</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
@@ -1641,10 +1869,10 @@ member_service
 </table>
 
 <h2 id="member_status" title="type=TABLE, primaryKey={MEMBER_STATUS_CODE}, nameLength=13, columnCount=4">
-member_status
+(会員ステータス)MEMBER_STATUS
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment member_status_comment" data-name="member_status"><pre>会員ステータス</pre></div>
+<div class="tablecomment member_status_comment" data-name="member_status"><pre></pre></div>
 <input type="hidden" value="member_status">
 <table class="tablecontent">
 	<thead>
@@ -1655,6 +1883,7 @@ member_status
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -1675,13 +1904,14 @@ member_status
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員ステータスコード</td>
 		<td class=" columnnamecell" id="member_status_member_status_code">MEMBER_STATUS_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_MEMBER_STATUS">member</a>,<br><a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER_STATUS">member_login</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_MEMBER_STATUS">MEMBER</a>,<br><a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER_STATUS">MEMBER_LOGIN</a>&nbsp;</td>
 		<td class="relcell"><a href="#MemberStatusCls">MemberStatus</a></td>
-		<td class="commentcell"><pre>会員ステータスコード: 会員ステータスを識別するコード。</pre></td>
+		<td class="commentcell"><pre>会員ステータスを識別するコード。</pre></td>
 		<td class="subcell">memberStatusCode</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -1693,13 +1923,14 @@ member_status
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員ステータス名称</td>
 		<td class=" columnnamecell" id="member_status_member_status_name">MEMBER_STATUS_NAME</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 50 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>会員ステータス名称</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">memberStatusName</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -1711,13 +1942,14 @@ member_status
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">説明</td>
 		<td class=" columnnamecell" id="member_status_description">DESCRIPTION</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>説明: 会員ステータスそれぞれの説明。
+		<td class="commentcell"><pre>会員ステータスそれぞれの説明。
 気の利いた説明があるとディベロッパーがとても助かる。</pre></td>
 		<td class="subcell">description</td>
 		<td class="subcell">String</td>
@@ -1730,13 +1962,14 @@ member_status
 		<td class="flgcell" title="DISPLAY_ORDER(DISPLAY_ORDER)">o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">表示順</td>
 		<td class=" columnnamecell" id="member_status_display_order">DISPLAY_ORDER</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>表示順: UI上のステータスの表示順を示すNO。
+		<td class="commentcell"><pre>UI上のステータスの表示順を示すNO。
 並べるときは、このカラムに対して昇順のソート条件にする。</pre></td>
 		<td class="subcell">displayOrder</td>
 		<td class="subcell">Integer</td>
@@ -1746,10 +1979,10 @@ member_status
 </table>
 
 <h2 id="member_withdrawal" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=17, columnCount=8">
-member_withdrawal
+(会員退会情報)MEMBER_WITHDRAWAL
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment member_withdrawal_comment" data-name="member_withdrawal"><pre>会員退会情報: 退会会員の退会に関する詳細な情報。
+<div class="tablecomment member_withdrawal_comment" data-name="member_withdrawal"><pre>退会会員の退会に関する詳細な情報。
 退会会員のみデータが存在する。</pre></div>
 <input type="hidden" value="member_withdrawal">
 <table class="tablecontent">
@@ -1761,6 +1994,7 @@ member_withdrawal
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -1781,10 +2015,11 @@ member_withdrawal
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_withdrawal_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_WITHDRAWAL_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_WITHDRAWAL_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>&nbsp;</pre></td>
@@ -1799,13 +2034,14 @@ member_withdrawal
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON(WITHDRAWAL_REASON_CODE)">o</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="aliascell">退会理由コード</td>
 		<td class=" columnnamecell" id="member_withdrawal_withdrawal_reason_code">WITHDRAWAL_REASON_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#withdrawal_reason" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">withdrawal_reason</a>&nbsp;</td>
+		<td class="relcell"><a href="#withdrawal_reason" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">WITHDRAWAL_REASON</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#WithdrawalReasonCls">WithdrawalReason</a></td>
-		<td class="commentcell"><pre>退会理由コード: 退会した定型理由を参照するコード。
+		<td class="commentcell"><pre>退会した定型理由を参照するコード。
 何も言わずに退会する会員もいるので必須項目ではない。</pre></td>
 		<td class="subcell">withdrawalReasonCode</td>
 		<td class="subcell">String</td>
@@ -1818,13 +2054,14 @@ member_withdrawal
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="aliascell">退会理由入力テキスト</td>
 		<td class=" columnnamecell" id="member_withdrawal_withdrawal_reason_input_text">WITHDRAWAL_REASON_INPUT_TEXT</td>
 		<td class="typecell">TEXT</td>
 		<td class="sizecell"> 65535 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>退会理由入力テキスト: 会員がフリーテキストで入力できる退会理由。
+		<td class="commentcell"><pre>会員がフリーテキストで入力できる退会理由。
 もう言いたいこと言ってもらう感じ。</pre></td>
 		<td class="subcell">withdrawalReasonInputText</td>
 		<td class="subcell">String</td>
@@ -1837,13 +2074,14 @@ member_withdrawal
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">退会日時</td>
 		<td class=" columnnamecell" id="member_withdrawal_withdrawal_datetime">WITHDRAWAL_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>退会日時: 退会した瞬間の日時。
+		<td class="commentcell"><pre>退会した瞬間の日時。
 正式会員日時と違い、こっちはone-to-oneの別テーブルで。</pre></td>
 		<td class="subcell">withdrawalDatetime</td>
 		<td class="subcell">LocalDateTime</td>
@@ -1856,6 +2094,7 @@ member_withdrawal
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_withdrawal_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -1874,6 +2113,7 @@ member_withdrawal
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_withdrawal_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -1892,6 +2132,7 @@ member_withdrawal
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_withdrawal_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -1910,6 +2151,7 @@ member_withdrawal
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="member_withdrawal_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -1925,10 +2167,10 @@ member_withdrawal
 </table>
 
 <h2 id="product" title="type=TABLE, primaryKey={PRODUCT_ID}, nameLength=7, columnCount=11">
-product
+(商品)PRODUCT
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment product_comment" data-name="product"><pre>商品</pre></div>
+<div class="tablecomment product_comment" data-name="product"><pre></pre></div>
 <input type="hidden" value="product">
 <table class="tablecontent">
 	<thead>
@@ -1939,6 +2181,7 @@ product
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -1959,11 +2202,12 @@ product
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="product_product_id">PRODUCT_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PRODUCT">purchase</a>&nbsp;</td>
+		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PRODUCT">PURCHASE</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">productId</td>
@@ -1977,13 +2221,14 @@ product
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="IX_PRODUCT_PRODUCT_NAME(PRODUCT_NAME)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">商品名称</td>
 		<td class=" columnnamecell" id="product_product_name">PRODUCT_NAME</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 50 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>商品名称</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">productName</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -1995,13 +2240,14 @@ product
 		<td class="flgcell" title="PRODUCT_HANDLE_CODE(PRODUCT_HANDLE_CODE)">o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">商品ハンドルコード</td>
 		<td class=" columnnamecell" id="product_product_handle_code">PRODUCT_HANDLE_CODE</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 100 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>商品ハンドルコード: 商品を識別する業務上のコード。</pre></td>
+		<td class="commentcell"><pre>商品を識別する業務上のコード。</pre></td>
 		<td class="subcell">productHandleCode</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -2013,10 +2259,11 @@ product
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="FK_PRODUCT_PRODUCT_CATEGORY(PRODUCT_CATEGORY_CODE)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="product_product_category_code">PRODUCT_CATEGORY_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_PRODUCT_CATEGORY">product_category</a>&nbsp;</td>
+		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_PRODUCT_CATEGORY">PRODUCT_CATEGORY</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>&nbsp;</pre></td>
@@ -2031,10 +2278,11 @@ product
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="FK_PRODUCT_PRODUCT_STATUS(PRODUCT_STATUS_CODE)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="product_product_status_code">PRODUCT_STATUS_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#product_status" title="FK_PRODUCT_PRODUCT_STATUS">product_status</a>&nbsp;</td>
+		<td class="relcell"><a href="#product_status" title="FK_PRODUCT_PRODUCT_STATUS">PRODUCT_STATUS</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#ProductStatusCls">ProductStatus</a></td>
 		<td class="commentcell"><pre>&nbsp;</pre></td>
@@ -2049,13 +2297,14 @@ product
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="aliascell">定価</td>
 		<td class=" columnnamecell" id="product_regular_price">REGULAR_PRICE</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>定価</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">regularPrice</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
@@ -2067,6 +2316,7 @@ product
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="product_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -2085,6 +2335,7 @@ product
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="product_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -2103,6 +2354,7 @@ product
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="product_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -2121,6 +2373,7 @@ product
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="product_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -2139,6 +2392,7 @@ product
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell optcell"></td>
 		<td class="optcell columnnamecell" id="product_version_no">VERSION_NO</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
@@ -2154,10 +2408,10 @@ product
 </table>
 
 <h2 id="product_category" title="type=TABLE, primaryKey={PRODUCT_CATEGORY_CODE}, nameLength=16, columnCount=3">
-product_category
+(商品カテゴリ)PRODUCT_CATEGORY
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment product_category_comment" data-name="product_category"><pre>商品カテゴリ: 商品のカテゴリを表現するマスタ。
+<div class="tablecomment product_category_comment" data-name="product_category"><pre>商品のカテゴリを表現するマスタ。
 自己参照の階層になっている。</pre></div>
 <input type="hidden" value="product_category">
 <table class="tablecontent">
@@ -2169,6 +2423,7 @@ product_category
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -2189,13 +2444,14 @@ product_category
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">商品カテゴリコード</td>
 		<td class=" columnnamecell" id="product_category_product_category_code">PRODUCT_CATEGORY_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_CATEGORY">product</a>,<br><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">product_category</a>&nbsp;</td>
+		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_CATEGORY">PRODUCT</a>,<br><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">PRODUCT_CATEGORY</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>商品カテゴリコード</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">productCategoryCode</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -2207,13 +2463,14 @@ product_category
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">商品カテゴリ名称</td>
 		<td class=" columnnamecell" id="product_category_product_category_name">PRODUCT_CATEGORY_NAME</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 50 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>商品カテゴリ名称</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">productCategoryName</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -2225,13 +2482,14 @@ product_category
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="FK_PRODUCT_CATEGORY_PARENT(PARENT_CATEGORY_CODE)">o</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="aliascell">親カテゴリコード</td>
 		<td class=" columnnamecell" id="product_category_parent_category_code">PARENT_CATEGORY_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">product_category</a>&nbsp;</td>
+		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">PRODUCT_CATEGORY</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>親カテゴリコード: 最上位の場合はデータなし。</pre></td>
+		<td class="commentcell"><pre>最上位の場合はデータなし。</pre></td>
 		<td class="subcell">parentCategoryCode</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -2240,10 +2498,10 @@ product_category
 </table>
 
 <h2 id="product_status" title="type=TABLE, primaryKey={PRODUCT_STATUS_CODE}, nameLength=14, columnCount=2">
-product_status
+(商品ステータス)PRODUCT_STATUS
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment product_status_comment" data-name="product_status"><pre>商品ステータス</pre></div>
+<div class="tablecomment product_status_comment" data-name="product_status"><pre></pre></div>
 <input type="hidden" value="product_status">
 <table class="tablecontent">
 	<thead>
@@ -2254,6 +2512,7 @@ product_status
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -2274,13 +2533,14 @@ product_status
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">商品ステータスコード</td>
 		<td class=" columnnamecell" id="product_status_product_status_code">PRODUCT_STATUS_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_STATUS">product</a>&nbsp;</td>
+		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_STATUS">PRODUCT</a>&nbsp;</td>
 		<td class="relcell"><a href="#ProductStatusCls">ProductStatus</a></td>
-		<td class="commentcell"><pre>商品ステータスコード</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">productStatusCode</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -2292,13 +2552,14 @@ product_status
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">商品ステータス名称</td>
 		<td class=" columnnamecell" id="product_status_product_status_name">PRODUCT_STATUS_NAME</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 50 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>商品ステータス名称</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">productStatusName</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -2307,10 +2568,10 @@ product_status
 </table>
 
 <h2 id="purchase" title="type=TABLE, primaryKey={PURCHASE_ID}, nameLength=8, columnCount=12">
-purchase
+(購入)PURCHASE
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment purchase_comment" data-name="purchase"><pre>購入: 一つの商品に対する一回の購入を表現する。
+<div class="tablecomment purchase_comment" data-name="purchase"><pre>一つの商品に対する一回の購入を表現する。
 一回の購入で一つの商品を複数個買うこともある。</pre></div>
 <input type="hidden" value="purchase">
 <table class="tablecontent">
@@ -2322,6 +2583,7 @@ purchase
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -2342,13 +2604,14 @@ purchase
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">購入ID</td>
 		<td class=" columnnamecell" id="purchase_purchase_id">PURCHASE_ID</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#purchase_payment" title="FK_PURCHASE_PAYMENT_PURCHASE">purchase_payment</a>&nbsp;</td>
+		<td class="relcell"><a href="#purchase_payment" title="FK_PURCHASE_PAYMENT_PURCHASE">PURCHASE_PAYMENT</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>購入ID: 連番</pre></td>
+		<td class="commentcell"><pre>連番</pre></td>
 		<td class="subcell">purchaseId</td>
 		<td class="subcell">Long</td>
 		<td class="subcell">first</td>
@@ -2360,13 +2623,14 @@ purchase
 		<td class="flgcell" title="MEMBER_ID(MEMBER_ID, PRODUCT_ID, PURCHASE_DATETIME)">o<span class="flgplus">+</span></td>
 		<td class="flgcell" title="IX_PURCHASE_DATETIME_MEMBER(PURCHASE_DATETIME, MEMBER_ID), MEMBER_ID_2(MEMBER_ID)">o<span class="flgplus">+</span></td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">会員ID</td>
 		<td class=" columnnamecell" id="purchase_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_PURCHASE_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_PURCHASE_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>会員ID: 会員を参照するID。
+		<td class="commentcell"><pre>会員を参照するID。
 購入を識別する自然キー（複合ユニーク制約）の筆頭要素。</pre></td>
 		<td class="subcell">memberId</td>
 		<td class="subcell">Integer</td>
@@ -2379,13 +2643,14 @@ purchase
 		<td class="flgcell" title="MEMBER_ID(MEMBER_ID, PRODUCT_ID, PURCHASE_DATETIME)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell" title="IX_PURCHASE_PRODUCT_DATETIME(PRODUCT_ID, PURCHASE_DATETIME), PRODUCT_ID(PRODUCT_ID)">o<span class="flgplus">+</span></td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">商品ID</td>
 		<td class=" columnnamecell" id="purchase_product_id">PRODUCT_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#product" title="FK_PURCHASE_PRODUCT">product</a>&nbsp;</td>
+		<td class="relcell"><a href="#product" title="FK_PURCHASE_PRODUCT">PRODUCT</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>商品ID: 商品を参照するID。</pre></td>
+		<td class="commentcell"><pre>商品を参照するID。</pre></td>
 		<td class="subcell">productId</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
@@ -2397,13 +2662,14 @@ purchase
 		<td class="flgcell" title="MEMBER_ID(MEMBER_ID, PRODUCT_ID, PURCHASE_DATETIME)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell" title="IX_PURCHASE_DATETIME_MEMBER(PURCHASE_DATETIME, MEMBER_ID), IX_PURCHASE_PRODUCT_DATETIME(PRODUCT_ID, PURCHASE_DATETIME)">o<span class="flgplus">+</span></td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">購入日時</td>
 		<td class=" columnnamecell" id="purchase_purchase_datetime">PURCHASE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>購入日時: 購入した瞬間の日時。</pre></td>
+		<td class="commentcell"><pre>購入した瞬間の日時。</pre></td>
 		<td class="subcell">purchaseDatetime</td>
 		<td class="subcell">LocalDateTime</td>
 		<td class="subcell">first</td>
@@ -2415,13 +2681,14 @@ purchase
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">購入数量</td>
 		<td class=" columnnamecell" id="purchase_purchase_count">PURCHASE_COUNT</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>購入数量: 購入した商品の（一回の購入における）数量。</pre></td>
+		<td class="commentcell"><pre>購入した商品の（一回の購入における）数量。</pre></td>
 		<td class="subcell">purchaseCount</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
@@ -2433,13 +2700,14 @@ purchase
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="IX_PURCHASE_PRICE(PURCHASE_PRICE)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">購入価格</td>
 		<td class=" columnnamecell" id="purchase_purchase_price">PURCHASE_PRICE</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>購入価格: 購入によって実際に会員が支払った（支払う予定の）価格。
+		<td class="commentcell"><pre>購入によって実際に会員が支払った（支払う予定の）価格。
 基本は商品の定価に購入数量を掛けたものになるが、
 ポイント利用や割引があったりと必ずしもそうはならない。</pre></td>
 		<td class="subcell">purchasePrice</td>
@@ -2453,13 +2721,14 @@ purchase
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">支払完了フラグ</td>
 		<td class=" columnnamecell" id="purchase_payment_complete_flg">PAYMENT_COMPLETE_FLG</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#FlgCls">Flg</a></td>
-		<td class="commentcell"><pre>支払完了フラグ: この購入に関しての支払いが完了しているか否か。</pre></td>
+		<td class="commentcell"><pre>この購入に関しての支払いが完了しているか否か。</pre></td>
 		<td class="subcell">paymentCompleteFlg</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
@@ -2471,6 +2740,7 @@ purchase
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="purchase_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -2489,6 +2759,7 @@ purchase
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="purchase_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -2507,6 +2778,7 @@ purchase
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="purchase_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -2525,6 +2797,7 @@ purchase
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="purchase_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -2543,6 +2816,7 @@ purchase
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell optcell"></td>
 		<td class="optcell columnnamecell" id="purchase_version_no">VERSION_NO</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
@@ -2558,10 +2832,10 @@ purchase
 </table>
 
 <h2 id="purchase_payment" title="type=TABLE, primaryKey={PURCHASE_PAYMENT_ID}, nameLength=16, columnCount=9">
-purchase_payment
+(購入支払)PURCHASE_PAYMENT
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment purchase_payment_comment" data-name="purchase_payment"><pre>購入支払: 購入に対する支払。
+<div class="tablecomment purchase_payment_comment" data-name="purchase_payment"><pre>購入に対する支払。
 分割払いもできるのでmanyとなり、会員からの孫テーブルのテストができてうれしい。</pre></div>
 <input type="hidden" value="purchase_payment">
 <table class="tablecontent">
@@ -2573,6 +2847,7 @@ purchase_payment
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -2593,13 +2868,14 @@ purchase_payment
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">購入支払ID</td>
 		<td class=" columnnamecell" id="purchase_payment_purchase_payment_id">PURCHASE_PAYMENT_ID</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>購入支払ID: 連番</pre></td>
+		<td class="commentcell"><pre>連番</pre></td>
 		<td class="subcell">purchasePaymentId</td>
 		<td class="subcell">Long</td>
 		<td class="subcell">first</td>
@@ -2611,13 +2887,14 @@ purchase_payment
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="FK_PURCHASE_PAYMENT_PURCHASE(PURCHASE_ID)">o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">購入ID</td>
 		<td class=" columnnamecell" id="purchase_payment_purchase_id">PURCHASE_ID</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
-		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PAYMENT_PURCHASE">purchase</a>&nbsp;</td>
+		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PAYMENT_PURCHASE">PURCHASE</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>購入ID: 支払い対象の購入へのID</pre></td>
+		<td class="commentcell"><pre>支払い対象の購入へのID</pre></td>
 		<td class="subcell">purchaseId</td>
 		<td class="subcell">Long</td>
 		<td class="subcell">first</td>
@@ -2629,13 +2906,14 @@ purchase_payment
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="IX_PURCHASE_PAYMENT_DATETIME(PAYMENT_DATETIME, PAYMENT_AMOUNT)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">支払金額</td>
 		<td class=" columnnamecell" id="purchase_payment_payment_amount">PAYMENT_AMOUNT</td>
 		<td class="typecell">DECIMAL</td>
 		<td class="sizecell"> 10, 2 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>支払金額: 支払った金額。さて、小数点なのはなぜでしょう？</pre></td>
+		<td class="commentcell"><pre>支払った金額。さて、小数点なのはなぜでしょう？</pre></td>
 		<td class="subcell">paymentAmount</td>
 		<td class="subcell">BigDecimal</td>
 		<td class="subcell">first</td>
@@ -2647,13 +2925,14 @@ purchase_payment
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="IX_PURCHASE_PAYMENT_DATETIME(PAYMENT_DATETIME, PAYMENT_AMOUNT)">o<span class="flgplus">+</span></td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">支払日時</td>
 		<td class=" columnnamecell" id="purchase_payment_payment_datetime">PAYMENT_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>支払日時: 支払ったときの日時</pre></td>
+		<td class="commentcell"><pre>支払ったときの日時</pre></td>
 		<td class="subcell">paymentDatetime</td>
 		<td class="subcell">LocalDateTime</td>
 		<td class="subcell">first</td>
@@ -2665,13 +2944,14 @@ purchase_payment
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">支払方法コード</td>
 		<td class=" columnnamecell" id="purchase_payment_payment_method_code">PAYMENT_METHOD_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#PaymentMethodCls">PaymentMethod</a></td>
-		<td class="commentcell"><pre>支払方法コード: 手渡しや銀行振込など</pre></td>
+		<td class="commentcell"><pre>手渡しや銀行振込など</pre></td>
 		<td class="subcell">paymentMethodCode</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -2683,6 +2963,7 @@ purchase_payment
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="purchase_payment_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -2701,6 +2982,7 @@ purchase_payment
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="purchase_payment_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -2719,6 +3001,7 @@ purchase_payment
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="purchase_payment_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
@@ -2737,6 +3020,7 @@ purchase_payment
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="purchase_payment_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -2752,10 +3036,10 @@ purchase_payment
 </table>
 
 <h2 id="region" title="type=TABLE, primaryKey={REGION_ID}, nameLength=6, columnCount=2">
-region
+(地域)REGION
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment region_comment" data-name="region"><pre>地域: 主に会員の住所に対応する地域。
+<div class="tablecomment region_comment" data-name="region"><pre>主に会員の住所に対応する地域。
 かなりざっくりした感じではある。</pre></div>
 <input type="hidden" value="region">
 <table class="tablecontent">
@@ -2767,6 +3051,7 @@ region
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -2787,13 +3072,14 @@ region
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">地域ID</td>
 		<td class=" columnnamecell" id="region_region_id">REGION_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_REGION">member_address</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_REGION">MEMBER_ADDRESS</a>&nbsp;</td>
 		<td class="relcell"><a href="#RegionCls">Region</a></td>
-		<td class="commentcell"><pre>地域ID</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">regionId</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
@@ -2805,13 +3091,14 @@ region
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">地域名称</td>
 		<td class=" columnnamecell" id="region_region_name">REGION_NAME</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 50 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>地域名称</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">regionName</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -2820,10 +3107,10 @@ region
 </table>
 
 <h2 id="service_rank" title="type=TABLE, primaryKey={SERVICE_RANK_CODE}, nameLength=12, columnCount=6">
-service_rank
+(サービスランク)SERVICE_RANK
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment service_rank_comment" data-name="service_rank"><pre>サービスランク: 会員のサービスレベルを表現するランク。
+<div class="tablecomment service_rank_comment" data-name="service_rank"><pre>会員のサービスレベルを表現するランク。
 （ゴールドとかプラチナとか）</pre></div>
 <input type="hidden" value="service_rank">
 <table class="tablecontent">
@@ -2835,6 +3122,7 @@ service_rank
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -2855,13 +3143,14 @@ service_rank
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">サービスランクコード</td>
 		<td class=" columnnamecell" id="service_rank_service_rank_code">SERVICE_RANK_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#member_service" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">member_service</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_service" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">MEMBER_SERVICE</a>&nbsp;</td>
 		<td class="relcell"><a href="#ServiceRankCls">ServiceRank</a></td>
-		<td class="commentcell"><pre>サービスランクコード: サービスランクを識別するコード。</pre></td>
+		<td class="commentcell"><pre>サービスランクを識別するコード。</pre></td>
 		<td class="subcell">serviceRankCode</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -2873,13 +3162,14 @@ service_rank
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">サービスランク名称</td>
 		<td class=" columnnamecell" id="service_rank_service_rank_name">SERVICE_RANK_NAME</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 50 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>サービスランク名称: サービスランクの名称。
+		<td class="commentcell"><pre>サービスランクの名称。
 （ゴールドとかプラチナとか基本的には威厳のある名前）</pre></td>
 		<td class="subcell">serviceRankName</td>
 		<td class="subcell">String</td>
@@ -2892,13 +3182,14 @@ service_rank
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">サービスポイント発生率</td>
 		<td class=" columnnamecell" id="service_rank_service_point_incidence">SERVICE_POINT_INCIDENCE</td>
 		<td class="typecell">DECIMAL</td>
 		<td class="sizecell"> 5, 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>サービスポイント発生率: 購入ごとのサービスポイントの発生率。
+		<td class="commentcell"><pre>購入ごとのサービスポイントの発生率。
 購入価格にこの値をかけた数が発生ポイント。</pre></td>
 		<td class="subcell">servicePointIncidence</td>
 		<td class="subcell">BigDecimal</td>
@@ -2911,13 +3202,14 @@ service_rank
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">新規受け入れ可能フラグ</td>
 		<td class=" columnnamecell" id="service_rank_new_acceptable_flg">NEW_ACCEPTABLE_FLG</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#FlgCls">Flg</a></td>
-		<td class="commentcell"><pre>新規受け入れ可能フラグ: このランクへの新規受け入れができるかどうか。</pre></td>
+		<td class="commentcell"><pre>このランクへの新規受け入れができるかどうか。</pre></td>
 		<td class="subcell">newAcceptableFlg</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
@@ -2929,6 +3221,7 @@ service_rank
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="service_rank_description">DESCRIPTION</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
@@ -2947,6 +3240,7 @@ service_rank
 		<td class="flgcell" title="DISPLAY_ORDER(DISPLAY_ORDER)">o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell"></td>
 		<td class=" columnnamecell" id="service_rank_display_order">DISPLAY_ORDER</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
@@ -2962,10 +3256,10 @@ service_rank
 </table>
 
 <h2 id="withdrawal_reason" title="type=TABLE, primaryKey={WITHDRAWAL_REASON_CODE}, nameLength=17, columnCount=3">
-withdrawal_reason
+(退会理由)WITHDRAWAL_REASON
 &nbsp;<span class="tablefirstdatetitle">since 2025/10/08</span>
 </h2>
-<div class="tablecomment withdrawal_reason_comment" data-name="withdrawal_reason"><pre>退会理由: 会員に選ばせる定型的な退会理由のマスタ。</pre></div>
+<div class="tablecomment withdrawal_reason_comment" data-name="withdrawal_reason"><pre>会員に選ばせる定型的な退会理由のマスタ。</pre></div>
 <input type="hidden" value="withdrawal_reason">
 <table class="tablecontent">
 	<thead>
@@ -2976,6 +3270,7 @@ withdrawal_reason
 		<th>UQ</th>
 		<th>IX</th>
 		<th>Not<br />Null</th>
+		<th>Alias</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
@@ -2996,13 +3291,14 @@ withdrawal_reason
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">退会理由コード</td>
 		<td class=" columnnamecell" id="withdrawal_reason_withdrawal_reason_code">WITHDRAWAL_REASON_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">member_withdrawal</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">MEMBER_WITHDRAWAL</a>&nbsp;</td>
 		<td class="relcell"><a href="#WithdrawalReasonCls">WithdrawalReason</a></td>
-		<td class="commentcell"><pre>退会理由コード</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">withdrawalReasonCode</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
@@ -3014,13 +3310,14 @@ withdrawal_reason
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">退会理由テキスト</td>
 		<td class=" columnnamecell" id="withdrawal_reason_withdrawal_reason_text">WITHDRAWAL_REASON_TEXT</td>
 		<td class="typecell">TEXT</td>
 		<td class="sizecell"> 65535 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>退会理由テキスト: 退会理由の内容。テキスト形式なので目いっぱい書けるが、
+		<td class="commentcell"><pre>退会理由の内容。テキスト形式なので目いっぱい書けるが、
 そうするとUI側できれいに見せるのが大変でしょうね。</pre></td>
 		<td class="subcell">withdrawalReasonText</td>
 		<td class="subcell">String</td>
@@ -3033,13 +3330,14 @@ withdrawal_reason
 		<td class="flgcell" title="DISPLAY_ORDER(DISPLAY_ORDER)">o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">表示順</td>
 		<td class=" columnnamecell" id="withdrawal_reason_display_order">DISPLAY_ORDER</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>表示順</pre></td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
 		<td class="subcell">displayOrder</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
@@ -3303,7 +3601,7 @@ withdrawal_reason
 	</tr>
 	<tr>
 		<td>PaymentMethod</td>
-		<td class="clstypecell"> implicit<br />(check)</td>
+		<td class="clstypecell"> implicit</td>
 		<td>支払方法</td>
 		<td>
 			<table class="child">
@@ -3342,7 +3640,7 @@ withdrawal_reason
 </table>
 
 <h2 id="arrangequery">ArrangeQuery List</h2>
-<h3 id="member_arrqy"><a href="#member">member</a></h3>
+<h3 id="member_arrqy"><a href="#member">MEMBER</a></h3>
 <h4 id="member_arrqy_query">MemberCQ</h4>
 <dl class="arrqylist">
 	<dt>arrangeBankTransferPurchasedMember()</dt>
@@ -3354,14 +3652,33 @@ withdrawal_reason
 	Created by <a href="http://dbflute.org/">DBFlute(AutoGenerator)</a>
 </p>
 
-<!-- Only used by dbflute intro http://dbflute.seasar.org/ja/manual/function/helper/intro/index.html -->
+<!-- Only used by dbflute intro http://dbflute.seasar.org/ja/manual/function/generator/intro/index.html -->
 <div id="decomment-modal" class="decommentmodal">
 	<div class="decommentmodalcontent">
 		<div id="decomment-close" class="decommentmodal-close-btn"><span>x</span></div>
-		<p>Input the new column comment of <span id="decomment-modal-column-info"></span></p>
-		<textarea id="decomment-input" class="decommentinput" rows="5"></textarea>
+		<p>Input the new comment of <span id="decomment-modal-column-info" class="decomment-target-name"></span></p>
+		<div class="decomment-editor">
+			<div class="decomment-toolbar">
+				<button type="button" class="decomment-toolbar-btn" id="decomment-toolbar-strikethrough" title="Strikethrough (~~text~~)"><s>S</s></button>
+			</div>
+			<textarea id="decomment-input" class="decommentinput" rows="11"></textarea>
+		</div>
+		<div class="decomment-alias-input-area">
+			<label for="decomment-alias-input" class="decomment-alias-label">Alias:</label>
+			<input type="text" id="decomment-alias-input" class="decomment-alias-input"/>
+		</div>
 		<div id="decomment-user-input" class="decomment-user-input"><input type="text" id="decomment-user-name" class="decomment-user-name" placeholder="User name"/><span class="decomment-user-name-desc">*required (saved in cookie)</span></div>
-		<div class="decommentmodal-ok-area"><button id="decomment-ok" class="decommentmodal-ok-btn">OK</button></div>
+		<div class="decommentmodal-footer">
+			<a href="https://jflute.hatenadiary.jp/entry/20170628/letsdbcomment" target="_blank" class="decommentmodal-guide-link">Learn more</a>
+			<button id="decomment-ok" class="decommentmodal-ok-btn">OK</button>
+		</div>
+	</div>
+</div>
+<!-- Notification Banner for informational messages -->
+<div id="notification-banner" class="notificationbanner">
+	<div class="notificationbannercontent">
+		<div id="notification-close" class="notificationbanner-close-btn"><span>×</span></div>
+		<p id="notification-message"></p>
 	</div>
 </div>
 <script>
@@ -3376,7 +3693,7 @@ withdrawal_reason
 
 // this index value depends on DBFlute settings
 // so defines it here as global for easy-to-understand
-var NAME_INDEX = 1; // number, name
+var NAME_INDEX = 2; // number, alias, name
 
 function Incremental (targetInput, dist) {
 	this.targetInput = targetInput;
@@ -3543,20 +3860,20 @@ Incremental.prototype = {
 	 * Select suggestion
 	 */
 	selectSuggestion: function (ev) {
-		var keyCode = ev.keyCode,
+		var key = ev.key,
 			visibleChildNodes = this.filterVisibleChild(),
 			prevIdx;
 
-		if (keyCode === 38 || keyCode === 40) {
+		if (key === 'ArrowUp' || key === 'ArrowDown') {
 
 			if (visibleChildNodes.length) {
 				prevIdx = this.suggestionIdx;
 
-				if (keyCode === 40 && this.suggestionIdx < visibleChildNodes.length - 1) {
+				if (key === 'ArrowDown' && this.suggestionIdx < visibleChildNodes.length - 1) {
 					this.suggestionIdx++;
 				}
 
-				if (keyCode === 38 && this.suggestionIdx > 0) {
+				if (key === 'ArrowUp' && this.suggestionIdx > 0) {
 					this.suggestionIdx--;
 				}
 
@@ -3583,7 +3900,7 @@ Incremental.prototype = {
 	 * @param {Object} ev
 	 */
 	setInputValue: function (ev) {
-		var keyCode = ev.keyCode,
+		var key = ev.key,
 			visibleChildNodes = this.filterVisibleChild(),
 			currentSuggestionTxt,
 			selectedSection;
@@ -3591,7 +3908,7 @@ Incremental.prototype = {
 		if (visibleChildNodes.length) {
 			currentSuggestionTxt = this.util.getElemTxt(visibleChildNodes[this.suggestionIdx]);
 
-			if (keyCode === 13) {
+			if (key === 'Enter') {
 				this.targetInput.value = currentSuggestionTxt;
 				selectedSection = this.getSelectedSection(visibleChildNodes[this.suggestionIdx]);
 				this.clearSuggestion();
@@ -3713,9 +4030,33 @@ Incremental.prototype.util = {
 
 var searcher = new Incremental(document.getElementById('incremental-search-field'), document.getElementById('table-list-body'));
 searcher.init();
+
+// ===================================================================================
+//                                                              Search Keyboard Shortcut
+//                                                              ========================
+// Keyboard shortcut to focus search: Shift+Cmd+,
+document.addEventListener('keydown', function(e) {
+	// Skip if user is already typing in an input/textarea
+	if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+		return;
+	}
+
+	if (e.shiftKey && (e.ctrlKey || e.metaKey) && e.key === ',') {
+		e.preventDefault();
+		var searchField = document.getElementById('incremental-search-field');
+		if (searchField) {
+			searchField.focus();
+			searchField.select();
+			searchField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		}
+	}
+});
 </script>
 <script>
 
+// ===================================================================================
+//                                                                          Api Client
+//                                                                          ==========
 /**
  * @author deco
  */
@@ -3792,6 +4133,9 @@ ApiClient.prototype = {
 	}
 }
 
+// ===================================================================================
+//                                                                      Decomment Util
+//                                                                      ==============
 /**
  * @author deco
  */
@@ -3830,8 +4174,8 @@ var DecommentUtil = new function(){
 		});
 	},
 	/**
-	 * Escape newline character of text
-	 * @param {String} string - text
+	 * Escape newline character of text. (changing to real line separator)
+	 * @param {String} string - text (NotNull, EmpytAllowed)
 	 */
 	this.escapeNewlineCharacter = function (string) {
 		return string.split('<br>').join('\n');
@@ -3864,77 +4208,184 @@ var DecommentUtil = new function(){
 	 */
 	this.isDecommentServer = function() {
 		return document.getElementById("decomment_server") != null;
+	},
+	/**
+	 * Extract alias from dfalias:{} or shalias:{} marker in decomment
+	 * @param {string} decomment - decomment text
+	 * @returns {string} extracted alias (empty if not found)
+	 */
+	this.extractAlias = function(decomment) {
+		if (!decomment) {
+			return '';
+		}
+		var match = decomment.match(/(?:dfalias|shalias):\s*\{\s*([^}]*)\s*\}/);
+		return match ? match[1].trim() : '';
+	},
+	/**
+	 * Remove dfalias:{} or shalias:{} marker from decomment
+	 * @param {string} decomment - decomment text
+	 * @returns {string} decomment without alias marker
+	 */
+	this.removeAliasFromDecomment = function(decomment) {
+		if (!decomment) {
+			return '';
+		}
+		var result = decomment.replace(/(?:dfalias|shalias):\s*\{[^}]*\}\s*\n?/g, '');
+		// remove leading <br> to prevent empty line when opening in plain schema html
+		return result.replace(/^<br\s*\/?>/i, '').trim();
+	},
+	/**
+	 * Render strikethrough markdown syntax (~~text~~) as HTML del tags for display.
+	 * @param {string} string - decomment text where text wrapped in ~~ is the strikethrough target (e.g. ~~foo~~ renders foo as strikethrough)
+	 * @returns {string} text with ~~text~~ converted to <del>text</del>
+	 */
+	this.renderStrikethrough = function(string) {
+		if (!string) {
+			return string;
+		}
+		return string.replace(/~~(.+?)~~/g, '<del>$1</del>');
 	}
 }
 
+// ===================================================================================
+//                                                              Notification Handler
+//                                                              ====================
+/**
+ * @author shiny
+ */
+var NotificationHandler = new function() {
+	var AUTO_HIDE_DELAY = 10000; // 10 seconds
+	var hideTimeout = null;
+
+	/**
+	 * Show notification banner with message
+	 * @param {string} message - The message to display (NotNull)
+	 */
+	this.show = function(message) {
+		var bannerElement = document.getElementById('notification-banner');
+		var messageElement = document.getElementById('notification-message');
+
+		if (!bannerElement || !messageElement) {
+			return;
+		}
+
+		if (hideTimeout) {
+			clearTimeout(hideTimeout);
+		}
+
+		messageElement.innerText = message;
+		bannerElement.style.display = 'block';
+
+		var closeBtn = document.getElementById('notification-close');
+		if (closeBtn) {
+			closeBtn.onclick = function() {
+				NotificationHandler.hide();
+			};
+		}
+
+		hideTimeout = setTimeout(function() {
+			NotificationHandler.hide();
+		}, AUTO_HIDE_DELAY);
+	};
+
+	/**
+	 * Hide notification banner
+	 */
+	this.hide = function() {
+		var bannerElement = document.getElementById('notification-banner');
+		if (bannerElement) {
+			bannerElement.style.display = 'none';
+		}
+		if (hideTimeout) {
+			clearTimeout(hideTimeout);
+			hideTimeout = null;
+		}
+	};
+}
+
+// ===================================================================================
+//                                                                     Decomment Store
+//                                                                     ===============
 /**
  * @author deco
  */
 function StoreClient() {
+
+    // _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+	// the pickup object as embedded in this SchemaHTML by DBFlute Engine.
+	// initialized from saved pickup file by Doc task.
+	// _/_/_/_/_/_/_/_/
 	// setup from dbflute if decomment pickup exists
 	this.embeddedPickup = {
 		'tables': [
 		]
 	}
+
+    // _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+	// the stored object of pickup to display.
+	// this pickup store stores virtual pickup or embedded pickup to reflect it to HTML display.
+	// while, pickup store has current database comment as initialized values
+	// to determine database comment conflict.
+	// _/_/_/_/_/_/_/_/
 	this.pickupStore = {
 		'member': {
-			'databaseComment': '会員:&nbsp;会員登録時にデータが登録される。<br>基本的に物理削除はなく、退会したらステータスが退会会員になる。'
+			'databaseComment': '会員登録時にデータが登録される。<br>基本的に物理削除はなく、退会したらステータスが退会会員になる。'
 			, 'columns': {
 				'MEMBER_ID': {
-					'databaseComment': '会員ID:&nbsp;会員を識別するID。連番として基本的に自動採番される。<br>（会員IDだけに限らず）採番方法はDBMSによって変わる。'
+					'databaseComment': '会員を識別するID。連番として基本的に自動採番される。<br>（会員IDだけに限らず）採番方法はDBMSによって変わる。'
 				}
 				, 'MEMBER_NAME': {
-					'databaseComment': '会員名称:&nbsp;会員のフルネームの名称。'
+					'databaseComment': '会員のフルネームの名称。'
 				}
 				, 'MEMBER_ACCOUNT': {
-					'databaseComment': '会員アカウント:&nbsp;会員がログイン時に利用するアカウントNO。'
+					'databaseComment': '会員がログイン時に利用するアカウントNO。'
 				}
 				, 'MEMBER_STATUS_CODE': {
-					'databaseComment': '会員ステータスコード'
+					'databaseComment': ''
 				}
 				, 'FORMALIZED_DATETIME': {
-					'databaseComment': '正式会員日時:&nbsp;会員が正式に確定した日時。一度確定したら更新されない。<br>仮会員のときはnull。'
+					'databaseComment': '会員が正式に確定した日時。一度確定したら更新されない。<br>仮会員のときはnull。'
 				}
 				, 'BIRTHDATE': {
-					'databaseComment': '生年月日:&nbsp;必須項目ではないので、このデータがない会員もいる。'
+					'databaseComment': '必須項目ではないので、このデータがない会員もいる。'
 				}
 				, 'REGISTER_DATETIME': {
-					'databaseComment': '登録日時:&nbsp;レコードが登録された日時。共通カラムの一つ。'
+					'databaseComment': 'レコードが登録された日時。共通カラムの一つ。'
 				}
 				, 'REGISTER_USER': {
-					'databaseComment': '登録ユーザ:&nbsp;レコードを登録したユーザ。共通カラムの一つ。'
+					'databaseComment': 'レコードを登録したユーザ。共通カラムの一つ。'
 				}
 				, 'UPDATE_DATETIME': {
-					'databaseComment': '更新日時:&nbsp;レコードが（最後に）更新された日時。共通カラムの一つ。'
+					'databaseComment': 'レコードが（最後に）更新された日時。共通カラムの一つ。'
 				}
 				, 'UPDATE_USER': {
-					'databaseComment': '更新ユーザ:&nbsp;レコードを更新したユーザ。'
+					'databaseComment': 'レコードを更新したユーザ。'
 				}
 				, 'VERSION_NO': {
-					'databaseComment': 'バージョンNO:&nbsp;レコードのバージョンを示すNO。<br>更新回数と等しく、主に排他制御のために利用される。'
+					'databaseComment': 'レコードのバージョンを示すNO。<br>更新回数と等しく、主に排他制御のために利用される。'
 				}
 			}
 		}
 		, 'member_address': {
-			'databaseComment': '会員住所情報:&nbsp;会員の住所に関する情報。<br>同時に有効期間ごとに履歴管理されている。'
+			'databaseComment': '会員の住所に関する情報。<br>同時に有効期間ごとに履歴管理されている。'
 			, 'columns': {
 				'MEMBER_ADDRESS_ID': {
-					'databaseComment': '会員住所ID:&nbsp;会員住所を識別するID。<br>履歴分も含むテーブルなので、これ自体はFKではない。'
+					'databaseComment': '会員住所を識別するID。<br>履歴分も含むテーブルなので、これ自体はFKではない。'
 				}
 				, 'MEMBER_ID': {
-					'databaseComment': '会員ID:&nbsp;会員を参照するID。<br>履歴分を含むため、これだけではユニークにはならない。'
+					'databaseComment': '会員を参照するID。<br>履歴分を含むため、これだけではユニークにはならない。'
 				}
 				, 'VALID_BEGIN_DATE': {
-					'databaseComment': '有効開始日:&nbsp;一つの有効期間の開始を示す日付。<br>前の有効終了日の次の日の値が格納される。'
+					'databaseComment': '一つの有効期間の開始を示す日付。<br>前の有効終了日の次の日の値が格納される。'
 				}
 				, 'VALID_END_DATE': {
-					'databaseComment': '有効終了日:&nbsp;有効期間の終了日。<br>次の有効開始日の一日前の値が格納される。<br>ただし、次の有効期間がない場合は&nbsp;9999/12/31&nbsp;となる。'
+					'databaseComment': '有効期間の終了日。<br>次の有効開始日の一日前の値が格納される。<br>ただし、次の有効期間がない場合は&nbsp;9999/12/31&nbsp;となる。'
 				}
 				, 'ADDRESS': {
-					'databaseComment': '住所:&nbsp;まるごと住所'
+					'databaseComment': 'まるごと住所'
 				}
 				, 'REGION_ID': {
-					'databaseComment': '地域ID:&nbsp;地域を参照するID。<br>ここでは特に住所の内容と連動しているわけではない。'
+					'databaseComment': '地域を参照するID。<br>ここでは特に住所の内容と連動しているわけではない。'
 				}
 				, 'REGISTER_DATETIME': {
 					'databaseComment': ''
@@ -3954,39 +4405,39 @@ function StoreClient() {
 			}
 		}
 		, 'member_login': {
-			'databaseComment': '会員ログイン情報:&nbsp;ログインするたびに登録されるログイン履歴。'
+			'databaseComment': 'ログインするたびに登録されるログイン履歴。'
 			, 'columns': {
 				'MEMBER_LOGIN_ID': {
-					'databaseComment': '会員ログインID'
+					'databaseComment': ''
 				}
 				, 'MEMBER_ID': {
-					'databaseComment': '会員ID'
+					'databaseComment': ''
 				}
 				, 'LOGIN_DATETIME': {
-					'databaseComment': 'ログイン日時:&nbsp;ログインした瞬間の日時。'
+					'databaseComment': 'ログインした瞬間の日時。'
 				}
 				, 'MOBILE_LOGIN_FLG': {
-					'databaseComment': 'モバイルログインフラグ:&nbsp;モバイル機器からのログインか否か。'
+					'databaseComment': 'モバイル機器からのログインか否か。'
 				}
 				, 'LOGIN_MEMBER_STATUS_CODE': {
-					'databaseComment': 'ログイン会員ステータスコード:&nbsp;ログイン時の会員ステータス'
+					'databaseComment': 'ログイン時の会員ステータス'
 				}
 			}
 		}
 		, 'member_security': {
-			'databaseComment': '会員セキュリティ情報:&nbsp;会員とは&nbsp;one-to-one&nbsp;で、会員一人につき必ず一つのセキュリティ情報がある'
+			'databaseComment': '会員とは&nbsp;one-to-one&nbsp;で、会員一人につき必ず一つのセキュリティ情報がある'
 			, 'columns': {
 				'MEMBER_ID': {
-					'databaseComment': '会員ID:&nbsp;そのまま&nbsp;one-to-one&nbsp;を構成するためのFKとなる。'
+					'databaseComment': 'そのまま&nbsp;one-to-one&nbsp;を構成するためのFKとなる。'
 				}
 				, 'LOGIN_PASSWORD': {
-					'databaseComment': 'ログインパスワード:&nbsp;ログイン時に利用するパスワード。<br>本当は良くないが、Exampleなのでひとまず暗号化していない。'
+					'databaseComment': 'ログイン時に利用するパスワード。<br>本当は良くないが、Exampleなのでひとまず暗号化していない。'
 				}
 				, 'REMINDER_QUESTION': {
-					'databaseComment': 'リマインダ質問:&nbsp;パスワードを忘れた際のリマインダ機能における質問の内容。'
+					'databaseComment': 'パスワードを忘れた際のリマインダ機能における質問の内容。'
 				}
 				, 'REMINDER_ANSWER': {
-					'databaseComment': 'リマインダ回答:&nbsp;パスワードを忘れた際のリマインダ機能における質問の答え。'
+					'databaseComment': 'パスワードを忘れた際のリマインダ機能における質問の答え。'
 				}
 				, 'REGISTER_DATETIME': {
 					'databaseComment': ''
@@ -4006,16 +4457,16 @@ function StoreClient() {
 			}
 		}
 		, 'member_service': {
-			'databaseComment': '会員サービス:&nbsp;会員のサービス情報（ポイントサービスなど）。'
+			'databaseComment': '会員のサービス情報（ポイントサービスなど）。'
 			, 'columns': {
 				'MEMBER_ID': {
-					'databaseComment': '会員ID:&nbsp;会員を参照するID。ユニークなので、会員とは&nbsp;one-to-one&nbsp;の関係に。'
+					'databaseComment': '会員を参照するID。ユニークなので、会員とは&nbsp;one-to-one&nbsp;の関係に。'
 				}
 				, 'AKIRAKANI_OKASHII_KARAMU_MEI': {
-					'databaseComment': 'サービスポイント数:&nbsp;会員が現在利用できるサービスポイントの数。<br>基本的に、購入時には増えてポイントを使ったら減る。'
+					'databaseComment': '会員が現在利用できるサービスポイントの数。<br>基本的に、購入時には増えてポイントを使ったら減る。'
 				}
 				, 'SERVICE_RANK_CODE': {
-					'databaseComment': 'サービスランクコード:&nbsp;サービスランクを参照するコード。<br>どんなランクがあるのかドキドキですね。'
+					'databaseComment': 'サービスランクを参照するコード。<br>どんなランクがあるのかドキドキですね。'
 				}
 				, 'REGISTER_DATETIME': {
 					'databaseComment': ''
@@ -4035,36 +4486,36 @@ function StoreClient() {
 			}
 		}
 		, 'member_status': {
-			'databaseComment': '会員ステータス'
+			'databaseComment': ''
 			, 'columns': {
 				'MEMBER_STATUS_CODE': {
-					'databaseComment': '会員ステータスコード:&nbsp;会員ステータスを識別するコード。'
+					'databaseComment': '会員ステータスを識別するコード。'
 				}
 				, 'MEMBER_STATUS_NAME': {
-					'databaseComment': '会員ステータス名称'
+					'databaseComment': ''
 				}
 				, 'DESCRIPTION': {
-					'databaseComment': '説明:&nbsp;会員ステータスそれぞれの説明。<br>気の利いた説明があるとディベロッパーがとても助かる。'
+					'databaseComment': '会員ステータスそれぞれの説明。<br>気の利いた説明があるとディベロッパーがとても助かる。'
 				}
 				, 'DISPLAY_ORDER': {
-					'databaseComment': '表示順:&nbsp;UI上のステータスの表示順を示すNO。<br>並べるときは、このカラムに対して昇順のソート条件にする。'
+					'databaseComment': 'UI上のステータスの表示順を示すNO。<br>並べるときは、このカラムに対して昇順のソート条件にする。'
 				}
 			}
 		}
 		, 'member_withdrawal': {
-			'databaseComment': '会員退会情報:&nbsp;退会会員の退会に関する詳細な情報。<br>退会会員のみデータが存在する。'
+			'databaseComment': '退会会員の退会に関する詳細な情報。<br>退会会員のみデータが存在する。'
 			, 'columns': {
 				'MEMBER_ID': {
 					'databaseComment': ''
 				}
 				, 'WITHDRAWAL_REASON_CODE': {
-					'databaseComment': '退会理由コード:&nbsp;退会した定型理由を参照するコード。<br>何も言わずに退会する会員もいるので必須項目ではない。'
+					'databaseComment': '退会した定型理由を参照するコード。<br>何も言わずに退会する会員もいるので必須項目ではない。'
 				}
 				, 'WITHDRAWAL_REASON_INPUT_TEXT': {
-					'databaseComment': '退会理由入力テキスト:&nbsp;会員がフリーテキストで入力できる退会理由。<br>もう言いたいこと言ってもらう感じ。'
+					'databaseComment': '会員がフリーテキストで入力できる退会理由。<br>もう言いたいこと言ってもらう感じ。'
 				}
 				, 'WITHDRAWAL_DATETIME': {
-					'databaseComment': '退会日時:&nbsp;退会した瞬間の日時。<br>正式会員日時と違い、こっちはone-to-oneの別テーブルで。'
+					'databaseComment': '退会した瞬間の日時。<br>正式会員日時と違い、こっちはone-to-oneの別テーブルで。'
 				}
 				, 'REGISTER_DATETIME': {
 					'databaseComment': ''
@@ -4081,16 +4532,16 @@ function StoreClient() {
 			}
 		}
 		, 'product': {
-			'databaseComment': '商品'
+			'databaseComment': ''
 			, 'columns': {
 				'PRODUCT_ID': {
 					'databaseComment': ''
 				}
 				, 'PRODUCT_NAME': {
-					'databaseComment': '商品名称'
+					'databaseComment': ''
 				}
 				, 'PRODUCT_HANDLE_CODE': {
-					'databaseComment': '商品ハンドルコード:&nbsp;商品を識別する業務上のコード。'
+					'databaseComment': '商品を識別する業務上のコード。'
 				}
 				, 'PRODUCT_CATEGORY_CODE': {
 					'databaseComment': ''
@@ -4099,7 +4550,7 @@ function StoreClient() {
 					'databaseComment': ''
 				}
 				, 'REGULAR_PRICE': {
-					'databaseComment': '定価'
+					'databaseComment': ''
 				}
 				, 'REGISTER_DATETIME': {
 					'databaseComment': ''
@@ -4119,53 +4570,53 @@ function StoreClient() {
 			}
 		}
 		, 'product_category': {
-			'databaseComment': '商品カテゴリ:&nbsp;商品のカテゴリを表現するマスタ。<br>自己参照の階層になっている。'
+			'databaseComment': '商品のカテゴリを表現するマスタ。<br>自己参照の階層になっている。'
 			, 'columns': {
 				'PRODUCT_CATEGORY_CODE': {
-					'databaseComment': '商品カテゴリコード'
+					'databaseComment': ''
 				}
 				, 'PRODUCT_CATEGORY_NAME': {
-					'databaseComment': '商品カテゴリ名称'
+					'databaseComment': ''
 				}
 				, 'PARENT_CATEGORY_CODE': {
-					'databaseComment': '親カテゴリコード:&nbsp;最上位の場合はデータなし。'
+					'databaseComment': '最上位の場合はデータなし。'
 				}
 			}
 		}
 		, 'product_status': {
-			'databaseComment': '商品ステータス'
+			'databaseComment': ''
 			, 'columns': {
 				'PRODUCT_STATUS_CODE': {
-					'databaseComment': '商品ステータスコード'
+					'databaseComment': ''
 				}
 				, 'PRODUCT_STATUS_NAME': {
-					'databaseComment': '商品ステータス名称'
+					'databaseComment': ''
 				}
 			}
 		}
 		, 'purchase': {
-			'databaseComment': '購入:&nbsp;一つの商品に対する一回の購入を表現する。<br>一回の購入で一つの商品を複数個買うこともある。'
+			'databaseComment': '一つの商品に対する一回の購入を表現する。<br>一回の購入で一つの商品を複数個買うこともある。'
 			, 'columns': {
 				'PURCHASE_ID': {
-					'databaseComment': '購入ID:&nbsp;連番'
+					'databaseComment': '連番'
 				}
 				, 'MEMBER_ID': {
-					'databaseComment': '会員ID:&nbsp;会員を参照するID。<br>購入を識別する自然キー（複合ユニーク制約）の筆頭要素。'
+					'databaseComment': '会員を参照するID。<br>購入を識別する自然キー（複合ユニーク制約）の筆頭要素。'
 				}
 				, 'PRODUCT_ID': {
-					'databaseComment': '商品ID:&nbsp;商品を参照するID。'
+					'databaseComment': '商品を参照するID。'
 				}
 				, 'PURCHASE_DATETIME': {
-					'databaseComment': '購入日時:&nbsp;購入した瞬間の日時。'
+					'databaseComment': '購入した瞬間の日時。'
 				}
 				, 'PURCHASE_COUNT': {
-					'databaseComment': '購入数量:&nbsp;購入した商品の（一回の購入における）数量。'
+					'databaseComment': '購入した商品の（一回の購入における）数量。'
 				}
 				, 'PURCHASE_PRICE': {
-					'databaseComment': '購入価格:&nbsp;購入によって実際に会員が支払った（支払う予定の）価格。<br>基本は商品の定価に購入数量を掛けたものになるが、<br>ポイント利用や割引があったりと必ずしもそうはならない。'
+					'databaseComment': '購入によって実際に会員が支払った（支払う予定の）価格。<br>基本は商品の定価に購入数量を掛けたものになるが、<br>ポイント利用や割引があったりと必ずしもそうはならない。'
 				}
 				, 'PAYMENT_COMPLETE_FLG': {
-					'databaseComment': '支払完了フラグ:&nbsp;この購入に関しての支払いが完了しているか否か。'
+					'databaseComment': 'この購入に関しての支払いが完了しているか否か。'
 				}
 				, 'REGISTER_DATETIME': {
 					'databaseComment': ''
@@ -4185,22 +4636,22 @@ function StoreClient() {
 			}
 		}
 		, 'purchase_payment': {
-			'databaseComment': '購入支払:&nbsp;購入に対する支払。<br>分割払いもできるのでmanyとなり、会員からの孫テーブルのテストができてうれしい。'
+			'databaseComment': '購入に対する支払。<br>分割払いもできるのでmanyとなり、会員からの孫テーブルのテストができてうれしい。'
 			, 'columns': {
 				'PURCHASE_PAYMENT_ID': {
-					'databaseComment': '購入支払ID:&nbsp;連番'
+					'databaseComment': '連番'
 				}
 				, 'PURCHASE_ID': {
-					'databaseComment': '購入ID:&nbsp;支払い対象の購入へのID'
+					'databaseComment': '支払い対象の購入へのID'
 				}
 				, 'PAYMENT_AMOUNT': {
-					'databaseComment': '支払金額:&nbsp;支払った金額。さて、小数点なのはなぜでしょう？'
+					'databaseComment': '支払った金額。さて、小数点なのはなぜでしょう？'
 				}
 				, 'PAYMENT_DATETIME': {
-					'databaseComment': '支払日時:&nbsp;支払ったときの日時'
+					'databaseComment': '支払ったときの日時'
 				}
 				, 'PAYMENT_METHOD_CODE': {
-					'databaseComment': '支払方法コード:&nbsp;手渡しや銀行振込など'
+					'databaseComment': '手渡しや銀行振込など'
 				}
 				, 'REGISTER_DATETIME': {
 					'databaseComment': ''
@@ -4217,30 +4668,30 @@ function StoreClient() {
 			}
 		}
 		, 'region': {
-			'databaseComment': '地域:&nbsp;主に会員の住所に対応する地域。<br>かなりざっくりした感じではある。'
+			'databaseComment': '主に会員の住所に対応する地域。<br>かなりざっくりした感じではある。'
 			, 'columns': {
 				'REGION_ID': {
-					'databaseComment': '地域ID'
+					'databaseComment': ''
 				}
 				, 'REGION_NAME': {
-					'databaseComment': '地域名称'
+					'databaseComment': ''
 				}
 			}
 		}
 		, 'service_rank': {
-			'databaseComment': 'サービスランク:&nbsp;会員のサービスレベルを表現するランク。<br>（ゴールドとかプラチナとか）'
+			'databaseComment': '会員のサービスレベルを表現するランク。<br>（ゴールドとかプラチナとか）'
 			, 'columns': {
 				'SERVICE_RANK_CODE': {
-					'databaseComment': 'サービスランクコード:&nbsp;サービスランクを識別するコード。'
+					'databaseComment': 'サービスランクを識別するコード。'
 				}
 				, 'SERVICE_RANK_NAME': {
-					'databaseComment': 'サービスランク名称:&nbsp;サービスランクの名称。<br>（ゴールドとかプラチナとか基本的には威厳のある名前）'
+					'databaseComment': 'サービスランクの名称。<br>（ゴールドとかプラチナとか基本的には威厳のある名前）'
 				}
 				, 'SERVICE_POINT_INCIDENCE': {
-					'databaseComment': 'サービスポイント発生率:&nbsp;購入ごとのサービスポイントの発生率。<br>購入価格にこの値をかけた数が発生ポイント。'
+					'databaseComment': '購入ごとのサービスポイントの発生率。<br>購入価格にこの値をかけた数が発生ポイント。'
 				}
 				, 'NEW_ACCEPTABLE_FLG': {
-					'databaseComment': '新規受け入れ可能フラグ:&nbsp;このランクへの新規受け入れができるかどうか。'
+					'databaseComment': 'このランクへの新規受け入れができるかどうか。'
 				}
 				, 'DESCRIPTION': {
 					'databaseComment': ''
@@ -4251,16 +4702,16 @@ function StoreClient() {
 			}
 		}
 		, 'withdrawal_reason': {
-			'databaseComment': '退会理由:&nbsp;会員に選ばせる定型的な退会理由のマスタ。'
+			'databaseComment': '会員に選ばせる定型的な退会理由のマスタ。'
 			, 'columns': {
 				'WITHDRAWAL_REASON_CODE': {
-					'databaseComment': '退会理由コード'
+					'databaseComment': ''
 				}
 				, 'WITHDRAWAL_REASON_TEXT': {
-					'databaseComment': '退会理由テキスト:&nbsp;退会理由の内容。テキスト形式なので目いっぱい書けるが、<br>そうするとUI側できれいに見せるのが大変でしょうね。'
+					'databaseComment': '退会理由の内容。テキスト形式なので目いっぱい書けるが、<br>そうするとUI側できれいに見せるのが大変でしょうね。'
 				}
 				, 'DISPLAY_ORDER': {
-					'databaseComment': '表示順'
+					'databaseComment': ''
 				}
 			}
 		}
@@ -4272,10 +4723,24 @@ function StoreClient() {
 
 StoreClient.prototype = {
 	/**
-	 * Store pickup json to store
-	 * @param {Object} pickup - pickup response
+	 * Store pickup json to pickup store that used as HTML display.
+	 * @param {Object} pickup - Decomment pickup object which is virtual or embedded. (NotNull)
 	 */
-	storePickup: function (pickup) {
+	storePickup: function(pickup) {
+		// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+		// fetchVirtualPickup() // request virtual pickup to server
+		//  or
+		// reflectEmbeddedPickup() // using embedded pickup
+		//   |-reflectPickup()  // store it and reflect to html
+		//     | 
+		//     | (storeClient) 
+		//     |-storePickup()  // store the virtual pickup to pickup store
+		//     |  |-storePickupTable()
+		//     |     |-storePickupColumn()
+		//     | 
+		//     |-table.reflectToHtml() 
+		//     |-column.reflectToHtml() 
+		// _/_/_/_/_/_/_/_/
 		var that = this;
 		Array.prototype.forEach.call(pickup["tables"], function (table) {
 			that.storePickupTable(table);
@@ -4296,10 +4761,10 @@ StoreClient.prototype = {
 	},
 
 	/**
-	 * Store table
-	 * @param {Object} table - table object of pickup response
+	 * Store table to pickup store for HTML display.
+	 * @param {Object} table - The table object of pickup response, which is virtual or embedded. (NotNull)
 	 */
-	storePickupTable: function (table) {
+	storePickupTable: function(table) {
 		// init if not exists
 		var tableName = table['tableName'];
 		if (this.pickupStore[tableName] === undefined) {
@@ -4312,21 +4777,32 @@ StoreClient.prototype = {
 			return;
 		}
 
-		// get database comment
+		// get current database comment on database from pickup store
+		// (pickup store has current database comment as initialized values)
 		var tableMap = this.pickupStore[tableName];
-		var databaseComment = tableMap['databaseComment'];
+		var currentDatabaseComment = tableMap['databaseComment'];
 
 		// setup properties to store
 		var isConflict = properties.length > 1;
-		var isDatabaseCommentConflict = false;
+		var isDatabaseCommentConflict = false; // true if real DB comment was changed 
 		var decomments = [];
 		var previousPieces = [];
 		var authors = [];
 		var commentVersion = 0;
 		var that = this;
-		Array.prototype.forEach.call(properties, function (property) {
-			if (property['databaseComment'] != null && databaseComment != null && !isDatabaseCommentConflict) {
-				isDatabaseCommentConflict = DecommentUtil.escapeNewlineCharacter(databaseComment) != DecommentUtil.escapeNewlineCharacter(property['databaseComment']);
+		Array.prototype.forEach.call(properties, function(property) {
+			if (property['databaseComment'] != null && currentDatabaseComment != null && !isDatabaseCommentConflict) {
+				// it needs trim-comparing because piece file loses rear line separator as dfmap behavior
+				// https://github.com/dbflute/dbflute-core/issues/271
+				var currentEscapedDatabaseComment = DecommentUtil.escapeNewlineCharacter(currentDatabaseComment).trim();
+				var previousEscapedDatabaseComment = DecommentUtil.escapeNewlineCharacter(property['databaseComment']).trim();
+
+				if (currentEscapedDatabaseComment != '') { // conflict detect when existing only
+					// true if real DB comment was changed
+					isDatabaseCommentConflict = currentEscapedDatabaseComment != previousEscapedDatabaseComment;
+				}
+				// ignore conflect when database comment is deleted because it's probably migration to decomment
+				// https://github.com/dbflute/dbflute-core/issues/272
 			}
 			var decomment = {
 				"body": property["decomment"],
@@ -4355,9 +4831,9 @@ StoreClient.prototype = {
 	},
 
 	/**
-	 * Store column
-	 * @param {string} tableDbName - table db name
-	 * @param {Object} column - column object of pickup response
+	 * Store column to pickup store for HTML display.
+	 * @param {string} tableDbName - The DB name of table of the column. (NotNull, NotEmpty)
+	 * @param {Object} column - The column object of pickup response, which is virtual or embedded (NotNull)
 	 */
 	storePickupColumn: function (tableDbName, column) {
 		var columnName = column['columnName'];
@@ -4376,21 +4852,32 @@ StoreClient.prototype = {
 			return;
 		}
 
-		// get database comment
+		// get current database comment on database from pickup store
+		// (pickup store has current database comment as initialized values)
 		var columnMap = this.pickupStore[tableDbName]['columns'][columnName];
-		var databaseComment = columnMap['databaseComment'];
+		var currentDatabaseComment = columnMap['databaseComment'];
 
 		// setup properties to store
 		var isConflict = properties.length > 1;
-		var isDatabaseCommentConflict = false;
+		var isDatabaseCommentConflict = false; // true if real DB comment was changed
 		var decomments = [];
 		var previousPieces = [];
 		var authors = [];
 		var commentVersion = 0;
 		var that = this;
 		Array.prototype.forEach.call(properties, function (property) {
-			if (property['databaseComment'] != null && databaseComment != null && !isDatabaseCommentConflict) {
-				isDatabaseCommentConflict = DecommentUtil.escapeNewlineCharacter(databaseComment) != DecommentUtil.escapeNewlineCharacter(property['databaseComment']);
+			if (property['databaseComment'] != null && currentDatabaseComment != null && !isDatabaseCommentConflict) {
+				// it needs trim-comparing because piece file loses rear line separator as dfmap behavior
+				// https://github.com/dbflute/dbflute-core/issues/271
+				var currentEscapedDatabaseComment = DecommentUtil.escapeNewlineCharacter(currentDatabaseComment).trim();
+				var previousEscapedDatabaseComment = DecommentUtil.escapeNewlineCharacter(property['databaseComment']).trim();
+
+				if (currentEscapedDatabaseComment != '') { // conflict detect when existing only
+					// true if real DB comment was changed
+					isDatabaseCommentConflict = currentEscapedDatabaseComment != previousEscapedDatabaseComment;
+				}
+				// ignore conflect when database comment is deleted because it's probably migration to decomment
+				// https://github.com/dbflute/dbflute-core/issues/272
 			}
 			var decomment = {
 				"body": property["decomment"],
@@ -4452,11 +4939,14 @@ StoreClient.prototype = {
 	}
 }
 
+// ===================================================================================
+//                                                                     Decomment Table
+//                                                                     ===============
 function PickupTableProperty(tableDbName, json) {
 	this.tableDbName = tableDbName;
 	this.inputAuthor = null; // use when decomment server mode.
 	if (json) {
-		this.databaseComment = json.databaseComment;
+		this.databaseComment = json.databaseComment; // not null, empty allowed
 		this.isDatabaseCommentConflict = json.isDatabaseCommentConflict;
 		this.decomments = json.decomments || [];
 		this.previousPieces = json.previousPieces;
@@ -4474,6 +4964,21 @@ function PickupTableProperty(tableDbName, json) {
 PickupTableProperty.prototype = {
 
 	/**
+	 * Get current alias displayed in HTML (from table title h2)
+	 * @return {string} current alias (empty if not found)
+	 */
+	getCurrentDisplayedAlias: function() {
+		var h2Element = document.getElementById(this.tableDbName.toLowerCase());
+		if (!h2Element) {
+			return "";
+		}
+		// extract alias from h2 title - format is "(alias)TableName" when there is an alias
+		var titleText = h2Element.innerText || h2Element.textContent;
+		var aliasMatch = titleText.match(/^\(([^)]+)\)/);
+		return aliasMatch ? aliasMatch[1].trim() : "";
+	},
+
+	/**
 	 * Reflect new comment to html
 	 */
 	reflectToHtml: function () {
@@ -4489,6 +4994,74 @@ PickupTableProperty.prototype = {
 				element.className += " commentcellerror"
 			}
 		});
+
+		this.updateTableTitleAlias();
+		this.updateTableListAlias();
+	},
+
+	/**
+	 * Update table title (h2) with alias from decomment
+	 */
+	updateTableTitleAlias: function() {
+		if (this.decomments.length === 0) {
+			return;
+		}
+
+		var decommentBody = this.decomments[0].body || "";
+		var aliasFromDecomment = DecommentUtil.extractAlias(decommentBody);
+		// When there is no alias in the decomment, do nothing
+		if (!aliasFromDecomment) {
+			return;
+		}
+
+		// find the h2 title element
+		var h2Element = document.getElementById(this.tableDbName.toLowerCase());
+		if (!h2Element || !h2Element.childNodes[0]) {
+			return;
+		}
+
+		var firstTextNode = h2Element.childNodes[0];
+		var currentText = firstTextNode.nodeValue;
+		// remove all existing alias patterns at the beginning (handles multiple aliases with spaces between)
+		var tableNamePart = currentText.replace(/^(\s*\([^)]+\)\s*)+/, '');
+
+		// update with new alias
+		firstTextNode.nodeValue = '(' + aliasFromDecomment + ')' + tableNamePart;
+	},
+
+	/**
+	 * Update table list alias cell with alias from decomment
+	 */
+	updateTableListAlias: function() {
+		if (this.decomments.length === 0) {
+			return;
+		}
+
+		var decommentBody = this.decomments[0].body || "";
+		var aliasFromDecomment = DecommentUtil.extractAlias(decommentBody);
+
+		// When there is no alias in the decomment, do nothing
+		if (!aliasFromDecomment) {
+			return;
+		}
+
+		// find the table list row by table name
+		var tableListBody = document.getElementById('table-list-body');
+		if (!tableListBody) {
+			return;
+		}
+
+		var rows = tableListBody.querySelectorAll('tr');
+		for (var i = 0; i < rows.length; i++) {
+			var nameCell = rows[i].querySelector('td[data-name="' + this.tableDbName + '"]');
+			if (nameCell) {
+				var aliasCell = rows[i].querySelector('.aliascell');
+				if (aliasCell) {
+					aliasCell.innerText = aliasFromDecomment;
+				}
+				break;
+			}
+		}
 	},
 
 	/**
@@ -4520,7 +5093,9 @@ PickupTableProperty.prototype = {
 		var commentCount = this.decomments.length;
 		for (key in this.decomments) {
 			var decomment = this.decomments[key];
-			displayComment += decomment.body
+			// strip dfalias:{} or shalias:{} from display
+			var cleanBody = DecommentUtil.removeAliasFromDecomment(decomment.body);
+			displayComment += DecommentUtil.renderStrikethrough(cleanBody);
 			if (this.isConflict() && decomment.pieceGitBranch) {
 				displayComment += '\n=======' + decomment.pieceGitBranch + ' (' + decomment.pieceOwner + ')';
 				if (key < commentCount - 1) {
@@ -4536,13 +5111,11 @@ PickupTableProperty.prototype = {
 	},
 
 	/**
-	 * Get escaped database comment
-	 * @return {string} escaped database comment
+	 * Get escaped database comment. (e.g. changing br tag to real line separator)
+	 * @return {string} escaped database comment (NotNull, EmptyAllowed)
 	 */
 	getEscapedDatabaseComment: function() {
-		var escapedComment = "";
-		escapedComment = DecommentUtil.escapeNewlineCharacter(escapedComment);
-		return escapedComment;
+		return DecommentUtil.escapeNewlineCharacter(this.databaseComment);
 	},
 
 	/**
@@ -4567,11 +5140,15 @@ PickupTableProperty.prototype = {
 	 * @return {string} display html comment
 	 */
 	getDisplayHtmlComment: function() {
-		var child = this.selectTargetHtmlElements()[0].childNodes[0];
-		if (child != null && child.nodeName === "#text") {
-			return child.nodeValue.trim();
+		var element = this.selectTargetHtmlElements()[0];
+		if (!element) {
+			return "";
 		}
-		return ""
+		var html = element.innerHTML.replace(/<span>@author\([^)]*\)<\/span>/g, '').trim();
+		if (html === '&nbsp;') {
+			return '';
+		}
+		return html.replace(/<del>([\s\S]+?)<\/del>/g, '~~$1~~');
 	},
 
 	/**
@@ -4601,12 +5178,15 @@ PickupTableProperty.prototype = {
 	}
 };
 
+// ===================================================================================
+//                                                                    Decomment Column
+//                                                                    ================
 function PickupColumnProperty(tableDbName, columnName, json) {
 	this.tableDbName = tableDbName;
 	this.columnName = columnName;
 	this.inputAuthor = null; // use when decomment server mode.
 	if (json) {
-		this.databaseComment = json['databaseComment'];
+		this.databaseComment = json['databaseComment']; // not null, empty allowed
 		this.isDatabaseCommentConflict = json['isDatabaseCommentConflict'];
 		this.decomments = json['decomments'] || [];
 		this.previousPieces = json['previousPieces'];
@@ -4618,6 +5198,49 @@ function PickupColumnProperty(tableDbName, columnName, json) {
 }
 
 PickupColumnProperty.prototype = {
+
+	/**
+	 * Get current alias displayed in HTML (from column alias cell)
+	 * @return {string} current alias (empty if not found)
+	 */
+	getCurrentDisplayedAlias: function() {
+		var columnId = this.tableDbName + "_" + this.columnName;
+		columnId = columnId.toLowerCase();
+		var columnElement = document.getElementById(columnId);
+		if (!columnElement) {
+			return "";
+		}
+
+		// find the table and header to locate alias column index
+		var row = columnElement.parentElement;
+		var table = row.parentElement.parentElement; // tbody -> table
+		var headerRow = table.querySelector('thead tr');
+		if (!headerRow) {
+			return "";
+		}
+
+		// find which column index has "Alias" header
+		var headers = headerRow.querySelectorAll('th');
+		var aliasColumnIndex = -1;
+		for (var i = 0; i < headers.length; i++) {
+			if (headers[i].innerText.trim() === 'Alias') {
+				aliasColumnIndex = i;
+				break;
+			}
+		}
+
+		if (aliasColumnIndex === -1) {
+			return ""; // no alias column in this table
+		}
+
+		// get the cell at the same index in the current row
+		var cells = row.querySelectorAll('td');
+		if (aliasColumnIndex < cells.length) {
+			return cells[aliasColumnIndex].innerText.trim();
+		}
+
+		return "";
+	},
 
 	/**
 	 * Reflect new comment to html
@@ -4635,6 +5258,53 @@ PickupColumnProperty.prototype = {
 		element.innerHTML = comment;
 		if (this.isConflict()) {
 			element.className += " commentcellerror"
+		}
+
+		this.updateColumnAliasCell();
+	},
+
+	/**
+	 * Update alias cell in the table with alias from decomment
+	 */
+	updateColumnAliasCell: function() {
+		if (this.decomments.length === 0) {
+			return;
+		}
+
+		var decommentBody = this.decomments[0].body || "";
+		var aliasFromDecomment = DecommentUtil.extractAlias(decommentBody);
+
+		if (!aliasFromDecomment) {
+			return;
+		}
+
+		// find the alias cell
+		var columnId = this.tableDbName + "_" + this.columnName;
+		columnId = columnId.toLowerCase();
+		var columnElement = document.getElementById(columnId);
+
+		var row = columnElement.parentElement;
+		var table = row.parentElement.parentElement;
+		var headerRow = table.querySelector('thead tr');
+
+		// find which column index has "Alias" header
+		var headers = headerRow.querySelectorAll('th');
+		var aliasColumnIndex = -1;
+		for (var i = 0; i < headers.length; i++) {
+			if (headers[i].innerText.trim() === 'Alias') {
+				aliasColumnIndex = i;
+				break;
+			}
+		}
+
+		if (aliasColumnIndex === -1) {
+			return; // no alias column in this table
+		}
+
+		// update the alias cell with decomment alias
+		var cells = row.querySelectorAll('td');
+		if (aliasColumnIndex < cells.length) {
+			cells[aliasColumnIndex].innerText = aliasFromDecomment;
 		}
 	},
 
@@ -4668,7 +5338,9 @@ PickupColumnProperty.prototype = {
 		var commentCount = this.decomments.length;
 		for (key in this.decomments) {
 			var decomment = this.decomments[key];
-			displayComment += decomment.body
+			// strip dfalias:{} or shalias:{} from display
+			var cleanBody = DecommentUtil.removeAliasFromDecomment(decomment.body);
+			displayComment += DecommentUtil.renderStrikethrough(cleanBody);
 			if (this.isConflict() && decomment.pieceGitBranch) {
 				displayComment += '\n=======' + decomment.pieceGitBranch + ' (' + decomment.pieceOwner + ')';
 				if (key < commentCount - 1) {
@@ -4684,13 +5356,11 @@ PickupColumnProperty.prototype = {
 	},
 
 	/**
-	 * Get escaped database comment
-	 * @return {string} escaped database comment
+	 * Get escaped database comment. (e.g. changing br tag to real line separator)
+	 * @return {string} escaped database comment (NotNull, EmptyAllowed)
 	 */
 	getEscapedDatabaseComment: function() {
-		var escapedComment = "";
-		escapedComment = DecommentUtil.escapeNewlineCharacter(escapedComment);
-		return escapedComment;
+		return DecommentUtil.escapeNewlineCharacter(this.databaseComment);
 	},
 
 	/**
@@ -4712,11 +5382,15 @@ PickupColumnProperty.prototype = {
 	 * @return {string} display html comment
 	 */
 	getDisplayHtmlComment: function() {
-		var child = this.selectTargetHtmlElement().childNodes[0];
-		if (child != null && child.nodeName === "#text") {
-			return child.nodeValue.trim();
+		var element = this.selectTargetHtmlElement();
+		if (!element) {
+			return "";
 		}
-		return ""
+		var html = element.innerHTML.replace(/<span>@author\([^)]*\)<\/span>/g, '').trim();
+		if (html === '&nbsp;') {
+			return '';
+		}
+		return html.replace(/<del>([\s\S]+?)<\/del>/g, '~~$1~~');
 	},
 
 	/**
@@ -4746,9 +5420,126 @@ PickupColumnProperty.prototype = {
 	}
 };
 
+// ===================================================================================
+//                                                               Decomment Core Object
+//                                                               =====================
+// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+// [Decomment Initialization]
+//
+//                       +----------------------+
+//            +--------- | DBFlute Intro Server |
+//            | make     +----------------------+
+//            |                          |
+//            |                          | read
+//            |                          v
+//            v                      +----------------------------+
+//   +----------------+              |                            |
+//   | Virtual Pickup |              |    DBFlute Client          |
+//   +----------------+              |                            |
+//      |                            |   decomment-piece....dfmap | // as virtual pickup
+//      |                            |   decomment-pickup.dfmap   | // as virtual or embedded pickup
+//      |                            +----------------------------+
+//      |                                      |
+//      |      +-----------------+             |
+//      |      | Embedded Pickup | <-----------+
+//      |      +-----------------+ embedded from pickup file
+//      |                 |
+//      |                 |
+//      |                 |
+//      |                 |
+//      |                 | stored if plain HTML
+//      |                 v
+//      | stored       +--------------+ 
+//      |  if intro    |              | (has current database comment as initialized values)
+//      +------------> | Pickup Store | reflected to HTML display
+//                     |              |
+//                     +--------------+
+//                            |
+//   +--------+               |
+//   |  HTML  | <-------------+
+//   +--------+
+// _/_/_/_/_/_/_/_/
+//
+// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+// [Decomment Registration]
+// 
+//
+//                       +----------------------+
+//                  +--> | DBFlute Intro Server |
+//                  |    +----------------------+
+//                  |                    |
+//                  +--+                 | write piece
+//                     |                 v
+//                     |             +----------------------------+
+//                     |             |                            |
+//                     |             |    DBFlute Client          |
+//                     |             |                            |
+//                     |             |   decomment-piece....dfmap |
+//                     |             +----------------------------+
+//                     |                        
+//                     |
+//   +--------+        |
+//   |  HTML  |        |
+//   +--------+        | register piece
+//        |            |
+//        |   +------------------+
+//        +-- | Decomment Dialog |
+//            +------------------+
+//                     ^
+//             o       |
+//            /|\   ---+ input and OK
+//             /\
+//
+// _/_/_/_/_/_/_/_/
+/**
+ * Apply formatting syntax around selected text in a textarea.
+ * If no text is selected, inserts the syntax markers and places the cursor between them.
+ * @param {HTMLTextAreaElement} textarea - the textarea element containing the text to format
+ * @param {string} syntax - the wrapping marker to apply around the selected text (e.g. '~~' for strikethrough)
+ */
+function applyFormatting(textarea, syntax) {
+	var start = textarea.selectionStart;
+	var end = textarea.selectionEnd;
+	var selectedText = textarea.value.substring(start, end);
+
+	// focus first: execCommand requires the textarea to be focused to know where to act
+	textarea.focus();
+	if (selectedText.length === 0) {
+		// no selection: insert empty markers and place cursor between them (e.g. "~~~~" -> cursor in middle)
+		document.execCommand('insertText', false, syntax + syntax);
+		textarea.setSelectionRange(start + syntax.length, start + syntax.length);
+	} else {
+		var lines = selectedText.split('\n');
+		// toggle off only if every non-empty line is already wrapped
+		var allWrapped = lines.every(function(line) {
+			return line.length === 0 || (line.startsWith(syntax) && line.endsWith(syntax) && line.length > syntax.length * 2);
+		});
+		if (allWrapped) {
+			// already wrapped on all lines: strip markers from each line individually
+			var unwrapped = lines.map(function(line) {
+				return line.length === 0 ? line : line.slice(syntax.length, -syntax.length);
+			}).join('\n');
+			document.execCommand('insertText', false, unwrapped);
+			textarea.setSelectionRange(start, start + unwrapped.length);
+		} else {
+			// not wrapped: apply markers to each non-empty line individually, skipping already-wrapped lines
+			// execCommand is used instead of textarea.value= to preserve the browser's native undo stack (Cmd+Z)
+			var wrapped = lines.map(function(line) {
+				if (line.length === 0) { return line; }
+				if (line.startsWith(syntax) && line.endsWith(syntax) && line.length > syntax.length * 2) { return line; }
+				return syntax + line + syntax;
+			}).join('\n');
+			document.execCommand('insertText', false, wrapped);
+			textarea.setSelectionRange(start, start + wrapped.length);
+		}
+	}
+}
+
 /**
  * @author deco
  * @author cabos
+ * @author jflute
+ * @author shiny
  */
 function Decomment() {
 	this.storeClient = new StoreClient()
@@ -4756,25 +5547,40 @@ function Decomment() {
 Decomment.prototype = {
 
 	/**
-	 * init
+	 * initialize decomment world.
 	 */
 	init: function () {
-		if (document.getElementById("intro_opening") !== null) {
+		if (document.getElementById("intro_opening") !== null) { // #intro_opening
+			// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+			// fetchVirtualPickup() // request virtual pickup to server
+			//   |-reflectPickup()  // store it and reflect to html
+			//     | 
+			//     | (storeClient) 
+			//     |-storePickup()  // store the virtual pickup to pickup store
+			//     |  |-storePickupTable()
+			//     |     |-storePickupColumn()
+			//     | 
+			//     |-table.reflectToHtml() 
+			//     |-column.reflectToHtml() 
+			// _/_/_/_/
 			this.fetchVirtualPickup();
+
 			this.setupKeyDownEvent();
 			this.showUserNameInputIfNeed();
-		} else {
+		} else { // #plain_opening
 			this.reflectEmbeddedPickup();
 		}
+		this.setupFormattingToolbar();
 	},
 
 	/**
-	 * Fetch virtual pickup from server
+	 * Fetch virtual pickup from server and reflect the pickup to HTML display.
+	 * (The virtual pickup has saved pickup merged with saved pieces in server)
 	 */
-	fetchVirtualPickup: function () {
+	fetchVirtualPickup: function() { // entry of #intro_opening
 		var that = this;
 		new ApiClient().fetchDecomment(function(response) {
-			var decomment = JSON.parse(response);
+			var decomment = JSON.parse(response); // DecommentPickupResult of DBFlute Intro
 			that.reflectPickup(decomment);
 			that.setupSaveDecomment();
 		})
@@ -4794,23 +5600,38 @@ Decomment.prototype = {
 	},
 
 	/**
-	 * Reflect embedded pick
+	 * Reflect embedded pickup to HTML display.
 	 */
-	reflectEmbeddedPickup: function () {
+	reflectEmbeddedPickup: function () { // entry of #plain_opening
 		this.reflectPickup(this.storeClient.embeddedPickup);
 	},
 
 	/**
-	 * Reflect pickup
-	 * @param {Object} decomment - Decomment object
+	 * Reflect pickup to HTML display.
+	 * @param {Object} decomment - Decomment pickup object, which is virtual or embedded. (NotNull)
 	 */
 	reflectPickup: function (decomment) {
+		// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+		// fetchVirtualPickup() // request virtual pickup to server
+		//  or
+		// reflectEmbeddedPickup() // using embedded pickup
+		//   |-reflectPickup()  // store it and reflect to html
+		//     | 
+		//     | (storeClient) 
+		//     |-storePickup()  // store the virtual pickup to pickup store
+		//     |  |-storePickupTable()
+		//     |     |-storePickupColumn()
+		//     | 
+		//     |-table.reflectToHtml() 
+		//     |-column.reflectToHtml() 
+		// _/_/_/_/_/_/_/_/
 		var that = this;
 		this.storeClient.unmappedTableArea.clear();
 		this.storeClient.unmappedColumnArea.clear();
 		this.storeClient.storePickup(decomment);
+
 		var pickup = this.storeClient.getDecomments()
-		Array.prototype.forEach.call(pickup, function (table) {
+		Array.prototype.forEach.call(pickup, function(table) {
 			table.reflectToHtml();
 			for (var key in table.columns) {
 				var column = table.columns[key]
@@ -4840,11 +5661,22 @@ Decomment.prototype = {
 			var tableName = table.querySelector('.namecell').getAttribute('data-name');
 			var commentElement = table.querySelector('.commentcell');
 			that.setupSaveTableClickEvent(tableName, commentElement);
+			// also setup click event on alias cell if it exists
+			var aliasElement = table.querySelector('.aliascell');
+			if (aliasElement) {
+				that.setupSaveTableClickEvent(tableName, aliasElement, { focusTarget: 'alias' });
+			}
 		});
 		var commentTables = document.querySelectorAll('.tablecomment')
 		Array.prototype.forEach.call(commentTables, function (tableElement) {
 			var tableName = tableElement.getAttribute('data-name');
 			that.setupSaveTableClickEvent(tableName, tableElement);
+			// add click handler to table title (h2) to enable insert/edit decomment
+			// this enables users to insert decomment when table is comment is empty
+			var titleElement = tableElement.previousElementSibling;
+			if (titleElement && titleElement.tagName === 'H2') {
+				that.setupSaveTableClickEvent(tableName, titleElement);
+			}
 		});
 	},
 
@@ -4852,10 +5684,11 @@ Decomment.prototype = {
 	 * Setup save table comment click event to html
 	 * @param {string} tableName - Table name
 	 * @param {Object} commentElement - Comment element
+	 * @param {object} options - Options object (e.g. { focusTarget: 'alias' })
 	 */
-	setupSaveTableClickEvent: function(tableName, commentElement) {
+	setupSaveTableClickEvent: function(tableName, commentElement, options) {
 		var tableProperty = this.storeClient.getTablePickup(tableName) || new PickupTableProperty(tableName, null)
-		commentElement.onclick = this.createSaveDecommentFunction(tableProperty);
+		commentElement.onclick = this.createSaveDecommentFunction(tableProperty, options);
 	},
 
 	/**
@@ -4876,6 +5709,12 @@ Decomment.prototype = {
 				var columnName = column.querySelector('.columnnamecell').innerText.trim();
 				var columnProperty = that.storeClient.getColumnPickup(tableName, columnName) || new PickupTableProperty(tableName, columnName)
 				commentElement.onclick = that.createSaveDecommentFunction(columnProperty);
+
+				// also setup click event on alias cell if it exists
+				var aliasElement = column.querySelector('.aliascell');
+				if (aliasElement) {
+					aliasElement.onclick = that.createSaveDecommentFunction(columnProperty, { focusTarget: 'alias' });
+				}
 			});
 		});
 	},
@@ -4883,11 +5722,18 @@ Decomment.prototype = {
 	/**
  	 * Create save decomment function
 	 * param {object} commentProperty - Comment property
+	 * param {object} options - Options object (e.g. { focusTarget: 'alias' })
 	 * returns {function} Save decomment function
 	 */
-	createSaveDecommentFunction: function (commentProperty) {
+	createSaveDecommentFunction: function (commentProperty, options) {
 		var that = this;
+		options = options || {};
  		return function () {
+			// prevent modal from opening if user is selecting text (for copy/paste)
+			var selection = window.getSelection();
+			if (selection && selection.toString().length > 0) {
+				return;
+			}
 	 		var modalElement = document.getElementById("decomment-modal");
 			modalElement.style.display = "block";
 
@@ -4895,8 +5741,22 @@ Decomment.prototype = {
 
 			var inputElement = document.getElementById("decomment-input");
 			var previousWholeComment = commentProperty.getDisplayHtmlComment();
-			inputElement.value = previousWholeComment;
-			inputElement.focus();
+
+			// Clean comment without dfalias:{} or shalias:{} in textarea
+			var cleanComment = DecommentUtil.removeAliasFromDecomment(previousWholeComment);
+			inputElement.value = cleanComment;
+
+			// populate alias input
+			var aliasInputElement = document.getElementById("decomment-alias-input");
+			var previousAlias = commentProperty.getCurrentDisplayedAlias();
+			aliasInputElement.value = previousAlias;
+
+			// focus on alias input if opened from alias cell, otherwise focus on comment input
+			if (options.focusTarget === 'alias') {
+				aliasInputElement.focus();
+			} else {
+				inputElement.focus();
+			}
 
 			document.getElementById("decomment-close").onclick = function () {
 				modalElement.style.display = "none";
@@ -4904,6 +5764,8 @@ Decomment.prototype = {
 
 			document.getElementById("decomment-ok").onclick = function () {
 				var decomment = inputElement.value;
+				var aliasFromInput = aliasInputElement.value.trim();
+
 				if (DecommentUtil.isDecommentServer() && that.isUserNameEmpty()) {
 					alert('Input your user name.');
 					return;
@@ -4912,18 +5774,29 @@ Decomment.prototype = {
 					alert('Still conflicting. please resolve.')
 					return;
 				}
-				if (!that.isCommentChanged(previousWholeComment, decomment)) {
+				if (!that.isCommentChanged(previousWholeComment, decomment) && !that.isAliasChanged(previousAlias, aliasFromInput)) {
 					modalElement.style.display = "none";
 					return;
 				}
 				decomment = DecommentUtil.escapeInputText(decomment);
 				decomment = DecommentUtil.deleteUnnecessaryWhitespace(decomment);
+				decomment = DecommentUtil.removeAliasFromDecomment(decomment);
+
+				decomment = 'shalias:{' + aliasFromInput + '}\n' + decomment;
+
 				commentProperty.decomments = [{'body': decomment}]
 				commentProperty.inputAuthor = that.getUserName();
 				var params = commentProperty.toRequestParams()
+				var shouldCheckAliasColumn = aliasFromInput && aliasFromInput.length > 0;
+
 				new ApiClient().saveDecomment(params, function () {
 					that.fetchVirtualPickup();
 					that.hideUserNameInput();
+
+					// Show notification if alias saved but column doesn't exist
+					if (shouldCheckAliasColumn) {
+						that.checkAndNotifyMissingAliasColumn(params);
+					}
 				});
 				modalElement.style.display = "none";
 			};
@@ -4977,12 +5850,69 @@ Decomment.prototype = {
 	 */
 	setupKeyDownEvent : function() {
 		document.onkeydown = function (e) {
-			// ESC
-			if(e.keyCode == 27){
-				var modalElement = document.getElementById("decomment-modal");
+			var modalElement = document.getElementById("decomment-modal");
+			// ESC to close modal
+			if (e.key === 'Escape') {
 				modalElement.style.display = "none";
 			}
+			// Cmd+Enter (Mac) or Ctrl+Enter (Windows) to submit
+			if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+				if (modalElement.style.display !== "none") {
+					document.getElementById("decomment-ok").click();
+				}
+			}
 		}
+	},
+
+	/**
+	 * Check if alias column exists and notify if missing
+	 * @param {Object} params - Request params containing targetType, tableName, etc.
+	 */
+	checkAndNotifyMissingAliasColumn: function(params) {
+		var hasAliasColumn = false;
+		var message = '';
+
+		if (params.targetType === 'TABLE') {
+			var tableListBody = document.getElementById('table-list-body');
+			if (!tableListBody) {
+				return;
+			}
+			hasAliasColumn = tableListBody.querySelector('.aliascell') !== null;
+			message = 'Alias saved! Please run the Doc task to display the alias column (alias display area) in the table list.';
+		} else if (params.targetType === 'COLUMN') {
+			var tableId = this.getTableIdForSchemaHtml(params.tableName);
+			var tableHeading = document.getElementById(tableId);
+			if (!tableHeading) {
+				return;
+			}
+
+			var sibling = tableHeading.nextElementSibling;
+			while (sibling) {
+				if (sibling.tagName === 'TABLE') {
+					hasAliasColumn = sibling.querySelector('.aliascell') !== null;
+					break;
+				}
+				sibling = sibling.nextElementSibling;
+			}
+			message = 'Alias saved! Please run the Doc task to display the alias column (alias display area) in table ' + params.tableName + '.';
+		}
+
+		if (!hasAliasColumn) {
+			NotificationHandler.show(message);
+		}
+	},
+
+	/**
+	 * Get table ID for SchemaHTML (same logic as server-side)
+	 * @param {string} tableName - The table name
+	 * @return {string} table ID for HTML
+	 */
+	getTableIdForSchemaHtml: function(tableName) {
+		var normalized = tableName.toLowerCase();
+		if (normalized.indexOf('.') !== -1) {
+			normalized = normalized.replace(/\./g, '_');
+		}
+		return normalized;
 	},
 
 	/**
@@ -4993,6 +5923,24 @@ Decomment.prototype = {
 	getTableNameFromElement: function (table) {
 		var previousElement = table.previousElementSibling;
 		return previousElement.value;
+	},
+
+	/**
+	 * Setup formatting toolbar button events
+	 */
+	setupFormattingToolbar: function() {
+		var textarea = document.getElementById('decomment-input');
+		var buttons = [
+			{ id: 'decomment-toolbar-strikethrough', syntax: '~~' }
+		];
+		buttons.forEach(function(btn) {
+			var el = document.getElementById(btn.id);
+			if (!el) { return; }
+			el.addEventListener('mousedown', function(e) {
+				e.preventDefault();
+				applyFormatting(textarea, btn.syntax);
+			});
+		});
 	},
 
 	/**
@@ -5016,9 +5964,25 @@ Decomment.prototype = {
 			return previousWholeComment.trim() !== decomment.trim();
 		}
 		return decomment.trim().length != 0;
+	},
+
+	/**
+	 * Check change alias
+	 * @param {string} previousAlias - previous alias
+	 * @param {string} currentAlias - current alias
+	 * @returns {Boolean} is changed
+	 */
+	isAliasChanged: function (previousAlias, currentAlias) {
+		return previousAlias !== currentAlias;
 	}
 };
 
+// ===================================================================================
+//                                                            Decomment Unmapped Table
+//                                                            ========================
+// -----------------------------------------------------
+//                          Decomment Unmapped Table Row
+//                          ----------------------------
 /**
  * @author cabos
  */
@@ -5072,6 +6036,9 @@ UnmappedTableRow.prototype = {
 	}
 }
 
+// -----------------------------------------------------
+//                         Decomment Unmapped Table Area
+//                         -----------------------------
 /**
  * @author cabos
  */
@@ -5247,6 +6214,12 @@ UnmappedTableArea.prototype = {
 	},
 }
 
+// ===================================================================================
+//                                                           Decomment Unmapped Column
+//                                                           =========================
+// -----------------------------------------------------
+//                         Decomment Unmapped Column Row
+//                         -----------------------------
 /**
  * @author cabos
  */
@@ -5303,6 +6276,9 @@ UnmappedColumnRow.prototype = {
 	}
 }
 
+// -----------------------------------------------------
+//                        Decomment Unmapped Column Area
+//                        ------------------------------
 /**
  * @author cabos
  */
@@ -5415,7 +6391,7 @@ UnmappedColumnArea.prototype = {
 		var columnList = [];
 		for (var i = 0, max = trs.length; i < max; i++) {
 			// TODO check that column name column num is 6
-			columnList.push(trs[i].getElementsByTagName('td')[6].innerText);
+			columnList.push(trs[i].getElementsByTagName('td')[7].innerText);
 		}
 		return columnList;
 	},

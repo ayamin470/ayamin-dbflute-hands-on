@@ -95,14 +95,14 @@ public class BsPurchaseCQ extends AbstractBsPurchaseCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * PURCHASE_ID: {PK, ID, NotNull, BIGINT(19)}
+     * (購入ID)PURCHASE_ID: {PK, ID, NotNull, BIGINT(19)}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_PurchaseId_Asc() { regOBA("PURCHASE_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PURCHASE_ID: {PK, ID, NotNull, BIGINT(19)}
+     * (購入ID)PURCHASE_ID: {PK, ID, NotNull, BIGINT(19)}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_PurchaseId_Desc() { regOBD("PURCHASE_ID"); return this; }
@@ -115,14 +115,14 @@ public class BsPurchaseCQ extends AbstractBsPurchaseCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * MEMBER_ID: {UQ+, IX+, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ+, IX+, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_MemberId_Asc() { regOBA("MEMBER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * MEMBER_ID: {UQ+, IX+, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ+, IX+, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_MemberId_Desc() { regOBD("MEMBER_ID"); return this; }
@@ -135,14 +135,14 @@ public class BsPurchaseCQ extends AbstractBsPurchaseCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * PRODUCT_ID: {+UQ, IX+, NotNull, INT(10), FK to product}
+     * (商品ID)PRODUCT_ID: {+UQ, IX+, NotNull, INT(10), FK to product}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_ProductId_Asc() { regOBA("PRODUCT_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PRODUCT_ID: {+UQ, IX+, NotNull, INT(10), FK to product}
+     * (商品ID)PRODUCT_ID: {+UQ, IX+, NotNull, INT(10), FK to product}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_ProductId_Desc() { regOBD("PRODUCT_ID"); return this; }
@@ -155,14 +155,14 @@ public class BsPurchaseCQ extends AbstractBsPurchaseCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * PURCHASE_DATETIME: {+UQ, IX+, NotNull, DATETIME(19)}
+     * (購入日時)PURCHASE_DATETIME: {+UQ, IX+, NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_PurchaseDatetime_Asc() { regOBA("PURCHASE_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PURCHASE_DATETIME: {+UQ, IX+, NotNull, DATETIME(19)}
+     * (購入日時)PURCHASE_DATETIME: {+UQ, IX+, NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_PurchaseDatetime_Desc() { regOBD("PURCHASE_DATETIME"); return this; }
@@ -175,14 +175,14 @@ public class BsPurchaseCQ extends AbstractBsPurchaseCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * PURCHASE_COUNT: {NotNull, INT(10)}
+     * (購入数量)PURCHASE_COUNT: {NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_PurchaseCount_Asc() { regOBA("PURCHASE_COUNT"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PURCHASE_COUNT: {NotNull, INT(10)}
+     * (購入数量)PURCHASE_COUNT: {NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_PurchaseCount_Desc() { regOBD("PURCHASE_COUNT"); return this; }
@@ -195,14 +195,14 @@ public class BsPurchaseCQ extends AbstractBsPurchaseCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * PURCHASE_PRICE: {IX, NotNull, INT(10)}
+     * (購入価格)PURCHASE_PRICE: {IX, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_PurchasePrice_Asc() { regOBA("PURCHASE_PRICE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PURCHASE_PRICE: {IX, NotNull, INT(10)}
+     * (購入価格)PURCHASE_PRICE: {IX, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_PurchasePrice_Desc() { regOBD("PURCHASE_PRICE"); return this; }
@@ -215,14 +215,14 @@ public class BsPurchaseCQ extends AbstractBsPurchaseCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg}
+     * (支払完了フラグ)PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_PaymentCompleteFlg_Asc() { regOBA("PAYMENT_COMPLETE_FLG"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg}
+     * (支払完了フラグ)PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg}
      * @return this. (NotNull)
      */
     public BsPurchaseCQ addOrderBy_PaymentCompleteFlg_Desc() { regOBD("PAYMENT_COMPLETE_FLG"); return this; }
@@ -381,7 +381,7 @@ public class BsPurchaseCQ extends AbstractBsPurchaseCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * member by my MEMBER_ID, named 'member'.
+     * (会員)MEMBER by my MEMBER_ID, named 'member'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberCQ queryMember() {
@@ -401,7 +401,7 @@ public class BsPurchaseCQ extends AbstractBsPurchaseCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * product by my PRODUCT_ID, named 'product'.
+     * (商品)PRODUCT by my PRODUCT_ID, named 'product'.
      * @return The instance of condition-query. (NotNull)
      */
     public ProductCQ queryProduct() {

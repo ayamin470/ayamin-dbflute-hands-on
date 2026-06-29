@@ -9,7 +9,7 @@ import org.docksidestage.handson.dbflute.exentity.*;
 import org.docksidestage.handson.dbflute.cbean.*;
 
 /**
- * The referrer loader of product as TABLE.
+ * The referrer loader of (商品)PRODUCT as TABLE.
  * @author DBFlute(AutoGenerator)
  */
 public class LoaderOfProduct {
@@ -37,7 +37,7 @@ public class LoaderOfProduct {
 
     /**
      * Load referrer of purchaseList by the set-upper of referrer. <br>
-     * purchase by PRODUCT_ID, named 'purchaseList'.
+     * (購入)PURCHASE by PRODUCT_ID, named 'purchaseList'.
      * <pre>
      * <span style="color: #0000C0">productBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">productList</span>, <span style="color: #553000">productLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">productLoader</span>.<span style="color: #CC4747">loadPurchase</span>(<span style="color: #553000">purchaseCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {

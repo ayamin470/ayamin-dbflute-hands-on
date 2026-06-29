@@ -7,7 +7,7 @@ import org.docksidestage.handson.dbflute.exbhv.*;
 import org.docksidestage.handson.dbflute.exentity.*;
 
 /**
- * The referrer loader of purchase_payment as TABLE.
+ * The referrer loader of (購入支払)PURCHASE_PAYMENT as TABLE.
  * @author DBFlute(AutoGenerator)
  */
 public class LoaderOfPurchasePayment {

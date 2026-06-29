@@ -11,8 +11,7 @@ import org.docksidestage.handson.dbflute.allcommon.CDef;
 import org.docksidestage.handson.dbflute.exentity.*;
 
 /**
- * The entity of product_status as TABLE. <br>
- * 商品ステータス
+ * The entity of (商品ステータス)PRODUCT_STATUS as TABLE.
  * @author DBFlute(AutoGenerator)
  */
 public abstract class BsProductStatus extends AbstractEntity implements DomainEntity {
@@ -26,10 +25,10 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} */
+    /** (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} */
     protected String _productStatusCode;
 
-    /** PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} */
+    /** (商品ステータス名称)PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} */
     protected String _productStatusName;
 
     // ===================================================================================
@@ -59,7 +58,7 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     //                                                             =======================
     /**
      * Get the value of productStatusCode as the classification of ProductStatus. <br>
-     * PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br>
+     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br>
      * 商品ステータス。あんまり面白みのないステータス
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
@@ -70,7 +69,7 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
 
     /**
      * Set the value of productStatusCode as the classification of ProductStatus. <br>
-     * PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br>
+     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br>
      * 商品ステータス。あんまり面白みのないステータス
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
@@ -147,11 +146,11 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** product by PRODUCT_STATUS_CODE, named 'productList'. */
+    /** (商品)PRODUCT by PRODUCT_STATUS_CODE, named 'productList'. */
     protected List<Product> _productList;
 
     /**
-     * [get] product by PRODUCT_STATUS_CODE, named 'productList'.
+     * [get] (商品)PRODUCT by PRODUCT_STATUS_CODE, named 'productList'.
      * @return The entity list of referrer property 'productList'. (NotNull: even if no loading, returns empty list)
      */
     public List<Product> getProductList() {
@@ -160,7 +159,7 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     }
 
     /**
-     * [set] product by PRODUCT_STATUS_CODE, named 'productList'.
+     * [set] (商品)PRODUCT by PRODUCT_STATUS_CODE, named 'productList'.
      * @param productList The entity list of referrer property 'productList'. (NullAllowed)
      */
     public void setProductList(List<Product> productList) {
@@ -233,18 +232,16 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br>
-     * 商品ステータスコード
+     * [get] (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br>
      * @return The value of the column 'PRODUCT_STATUS_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getProductStatusCode() {
         checkSpecifiedProperty("productStatusCode");
-        return _productStatusCode;
+        return convertEmptyToNull(_productStatusCode);
     }
 
     /**
-     * [set] PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br>
-     * 商品ステータスコード
+     * [set] (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br>
      * @param productStatusCode The value of the column 'PRODUCT_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
     protected void setProductStatusCode(String productStatusCode) {
@@ -254,18 +251,16 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     }
 
     /**
-     * [get] PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} <br>
-     * 商品ステータス名称
+     * [get] (商品ステータス名称)PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} <br>
      * @return The value of the column 'PRODUCT_STATUS_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getProductStatusName() {
         checkSpecifiedProperty("productStatusName");
-        return _productStatusName;
+        return convertEmptyToNull(_productStatusName);
     }
 
     /**
-     * [set] PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} <br>
-     * 商品ステータス名称
+     * [set] (商品ステータス名称)PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} <br>
      * @param productStatusName The value of the column 'PRODUCT_STATUS_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setProductStatusName(String productStatusName) {

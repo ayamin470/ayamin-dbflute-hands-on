@@ -95,14 +95,14 @@ public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
+     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
      * @return this. (NotNull)
      */
     public BsProductStatusCQ addOrderBy_ProductStatusCode_Asc() { regOBA("PRODUCT_STATUS_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
+     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
      * @return this. (NotNull)
      */
     public BsProductStatusCQ addOrderBy_ProductStatusCode_Desc() { regOBD("PRODUCT_STATUS_CODE"); return this; }
@@ -115,14 +115,14 @@ public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)}
+     * (商品ステータス名称)PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsProductStatusCQ addOrderBy_ProductStatusName_Asc() { regOBA("PRODUCT_STATUS_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)}
+     * (商品ステータス名称)PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsProductStatusCQ addOrderBy_ProductStatusName_Desc() { regOBD("PRODUCT_STATUS_NAME"); return this; }

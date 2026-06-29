@@ -21,7 +21,7 @@ import org.docksidestage.handson.dbflute.bsentity.dbmeta.*;
 import org.docksidestage.handson.dbflute.cbean.*;
 
 /**
- * The behavior of service_rank as TABLE.
+ * The behavior of (サービスランク)SERVICE_RANK as TABLE.
  * @author DBFlute(AutoGenerator)
  */
 public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceRank, ServiceRankCB> {
@@ -93,7 +93,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
      * </pre>
      * @param cbLambda The callback for condition-bean of ServiceRank. (NotNull)
      * @return The optional entity selected by the condition. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityAlreadyDeletedException When get(), alwaysPresent() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
@@ -130,9 +130,9 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
 
     /**
      * Select the entity by the primary-key value.
-     * @param serviceRankCode : PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
+     * @param serviceRankCode (サービスランクコード): PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityAlreadyDeletedException When get(), alwaysPresent() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
@@ -161,7 +161,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
      * Select the entity by the unique-key value.
      * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityAlreadyDeletedException When get(), alwaysPresent() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
@@ -359,7 +359,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
 
     /**
      * Load referrer of memberServiceList by the set-upper of referrer. <br>
-     * member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
+     * (会員サービス)MEMBER_SERVICE by SERVICE_RANK_CODE, named 'memberServiceList'.
      * <pre>
      * <span style="color: #0000C0">serviceRankBhv</span>.<span style="color: #CC4747">loadMemberService</span>(<span style="color: #553000">serviceRankList</span>, <span style="color: #553000">serviceCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">serviceCB</span>.setupSelect...
@@ -390,7 +390,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable<ServiceR
 
     /**
      * Load referrer of memberServiceList by the set-upper of referrer. <br>
-     * member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
+     * (会員サービス)MEMBER_SERVICE by SERVICE_RANK_CODE, named 'memberServiceList'.
      * <pre>
      * <span style="color: #0000C0">serviceRankBhv</span>.<span style="color: #CC4747">loadMemberService</span>(<span style="color: #553000">serviceRank</span>, <span style="color: #553000">serviceCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">serviceCB</span>.setupSelect...

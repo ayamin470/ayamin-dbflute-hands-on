@@ -13,8 +13,7 @@ import org.docksidestage.handson.dbflute.allcommon.CDef;
 import org.docksidestage.handson.dbflute.exentity.*;
 
 /**
- * The entity of product as TABLE. <br>
- * 商品
+ * The entity of (商品)PRODUCT as TABLE.
  * @author DBFlute(AutoGenerator)
  */
 public abstract class BsProduct extends AbstractEntity implements DomainEntity {
@@ -31,10 +30,10 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     /** PRODUCT_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _productId;
 
-    /** PRODUCT_NAME: {IX, NotNull, VARCHAR(50)} */
+    /** (商品名称)PRODUCT_NAME: {IX, NotNull, VARCHAR(50)} */
     protected String _productName;
 
-    /** PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)} */
+    /** (商品ハンドルコード)PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)} */
     protected String _productHandleCode;
 
     /** PRODUCT_CATEGORY_CODE: {IX, NotNull, CHAR(3), FK to product_category} */
@@ -43,7 +42,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     /** PRODUCT_STATUS_CODE: {IX, NotNull, CHAR(3), FK to product_status, classification=ProductStatus} */
     protected String _productStatusCode;
 
-    /** REGULAR_PRICE: {INT(10)} */
+    /** (定価)REGULAR_PRICE: {INT(10)} */
     protected Integer _regularPrice;
 
     /** REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -86,7 +85,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param productHandleCode : UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param productHandleCode (商品ハンドルコード): UQ, NotNull, VARCHAR(100). (NotNull)
      */
     public void uniqueBy(String productHandleCode) {
         __uniqueDrivenProperties.clear();
@@ -184,11 +183,11 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** product_category by my PRODUCT_CATEGORY_CODE, named 'productCategory'. */
+    /** (商品カテゴリ)PRODUCT_CATEGORY by my PRODUCT_CATEGORY_CODE, named 'productCategory'. */
     protected OptionalEntity<ProductCategory> _productCategory;
 
     /**
-     * [get] product_category by my PRODUCT_CATEGORY_CODE, named 'productCategory'. <br>
+     * [get] (商品カテゴリ)PRODUCT_CATEGORY by my PRODUCT_CATEGORY_CODE, named 'productCategory'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
      * @return The entity of foreign property 'productCategory'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -198,18 +197,18 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] product_category by my PRODUCT_CATEGORY_CODE, named 'productCategory'.
+     * [set] (商品カテゴリ)PRODUCT_CATEGORY by my PRODUCT_CATEGORY_CODE, named 'productCategory'.
      * @param productCategory The entity of foreign property 'productCategory'. (NullAllowed)
      */
     public void setProductCategory(OptionalEntity<ProductCategory> productCategory) {
         _productCategory = productCategory;
     }
 
-    /** product_status by my PRODUCT_STATUS_CODE, named 'productStatus'. */
+    /** (商品ステータス)PRODUCT_STATUS by my PRODUCT_STATUS_CODE, named 'productStatus'. */
     protected OptionalEntity<ProductStatus> _productStatus;
 
     /**
-     * [get] product_status by my PRODUCT_STATUS_CODE, named 'productStatus'. <br>
+     * [get] (商品ステータス)PRODUCT_STATUS by my PRODUCT_STATUS_CODE, named 'productStatus'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
      * @return The entity of foreign property 'productStatus'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -219,7 +218,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] product_status by my PRODUCT_STATUS_CODE, named 'productStatus'.
+     * [set] (商品ステータス)PRODUCT_STATUS by my PRODUCT_STATUS_CODE, named 'productStatus'.
      * @param productStatus The entity of foreign property 'productStatus'. (NullAllowed)
      */
     public void setProductStatus(OptionalEntity<ProductStatus> productStatus) {
@@ -229,11 +228,11 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** purchase by PRODUCT_ID, named 'purchaseList'. */
+    /** (購入)PURCHASE by PRODUCT_ID, named 'purchaseList'. */
     protected List<Purchase> _purchaseList;
 
     /**
-     * [get] purchase by PRODUCT_ID, named 'purchaseList'.
+     * [get] (購入)PURCHASE by PRODUCT_ID, named 'purchaseList'.
      * @return The entity list of referrer property 'purchaseList'. (NotNull: even if no loading, returns empty list)
      */
     public List<Purchase> getPurchaseList() {
@@ -242,7 +241,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] purchase by PRODUCT_ID, named 'purchaseList'.
+     * [set] (購入)PURCHASE by PRODUCT_ID, named 'purchaseList'.
      * @param purchaseList The entity list of referrer property 'purchaseList'. (NullAllowed)
      */
     public void setPurchaseList(List<Purchase> purchaseList) {
@@ -353,18 +352,16 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [get] PRODUCT_NAME: {IX, NotNull, VARCHAR(50)} <br>
-     * 商品名称
+     * [get] (商品名称)PRODUCT_NAME: {IX, NotNull, VARCHAR(50)} <br>
      * @return The value of the column 'PRODUCT_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getProductName() {
         checkSpecifiedProperty("productName");
-        return _productName;
+        return convertEmptyToNull(_productName);
     }
 
     /**
-     * [set] PRODUCT_NAME: {IX, NotNull, VARCHAR(50)} <br>
-     * 商品名称
+     * [set] (商品名称)PRODUCT_NAME: {IX, NotNull, VARCHAR(50)} <br>
      * @param productName The value of the column 'PRODUCT_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setProductName(String productName) {
@@ -373,18 +370,18 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [get] PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)} <br>
-     * 商品ハンドルコード: 商品を識別する業務上のコード。
+     * [get] (商品ハンドルコード)PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)} <br>
+     * 商品を識別する業務上のコード。
      * @return The value of the column 'PRODUCT_HANDLE_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getProductHandleCode() {
         checkSpecifiedProperty("productHandleCode");
-        return _productHandleCode;
+        return convertEmptyToNull(_productHandleCode);
     }
 
     /**
-     * [set] PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)} <br>
-     * 商品ハンドルコード: 商品を識別する業務上のコード。
+     * [set] (商品ハンドルコード)PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)} <br>
+     * 商品を識別する業務上のコード。
      * @param productHandleCode The value of the column 'PRODUCT_HANDLE_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setProductHandleCode(String productHandleCode) {
@@ -398,7 +395,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
      */
     public String getProductCategoryCode() {
         checkSpecifiedProperty("productCategoryCode");
-        return _productCategoryCode;
+        return convertEmptyToNull(_productCategoryCode);
     }
 
     /**
@@ -416,7 +413,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
      */
     public String getProductStatusCode() {
         checkSpecifiedProperty("productStatusCode");
-        return _productStatusCode;
+        return convertEmptyToNull(_productStatusCode);
     }
 
     /**
@@ -430,8 +427,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [get] REGULAR_PRICE: {INT(10)} <br>
-     * 定価
+     * [get] (定価)REGULAR_PRICE: {INT(10)} <br>
      * @return The value of the column 'REGULAR_PRICE'. (NullAllowed even if selected: for no constraint)
      */
     public Integer getRegularPrice() {
@@ -440,8 +436,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] REGULAR_PRICE: {INT(10)} <br>
-     * 定価
+     * [set] (定価)REGULAR_PRICE: {INT(10)} <br>
      * @param regularPrice The value of the column 'REGULAR_PRICE'. (NullAllowed: null update allowed for no constraint)
      */
     public void setRegularPrice(Integer regularPrice) {
@@ -473,7 +468,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
      */
     public String getRegisterUser() {
         checkSpecifiedProperty("registerUser");
-        return _registerUser;
+        return convertEmptyToNull(_registerUser);
     }
 
     /**
@@ -509,7 +504,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
      */
     public String getUpdateUser() {
         checkSpecifiedProperty("updateUser");
-        return _updateUser;
+        return convertEmptyToNull(_updateUser);
     }
 
     /**

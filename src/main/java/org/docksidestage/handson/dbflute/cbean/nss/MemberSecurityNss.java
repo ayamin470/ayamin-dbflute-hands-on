@@ -20,7 +20,7 @@ public class MemberSecurityNss {
     //                                                                     ===============
     /**
      * With nested relation columns to select clause. <br>
-     * member by my MEMBER_ID, named 'member'.
+     * (会員)MEMBER by my MEMBER_ID, named 'member'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public MemberNss withMember() {

@@ -21,7 +21,7 @@ import org.docksidestage.handson.dbflute.bsentity.dbmeta.*;
 import org.docksidestage.handson.dbflute.cbean.*;
 
 /**
- * The behavior of member_status as TABLE.
+ * The behavior of (会員ステータス)MEMBER_STATUS as TABLE.
  * @author DBFlute(AutoGenerator)
  */
 public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable<MemberStatus, MemberStatusCB> {
@@ -93,7 +93,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable<MemberS
      * </pre>
      * @param cbLambda The callback for condition-bean of MemberStatus. (NotNull)
      * @return The optional entity selected by the condition. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityAlreadyDeletedException When get(), alwaysPresent() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
@@ -130,9 +130,9 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable<MemberS
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberStatusCode : PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
+     * @param memberStatusCode (会員ステータスコード): PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityAlreadyDeletedException When get(), alwaysPresent() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
@@ -159,9 +159,9 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable<MemberS
 
     /**
      * Select the entity by the unique-key value.
-     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
+     * @param displayOrder (表示順): UQ, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityAlreadyDeletedException When get(), alwaysPresent() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
@@ -359,7 +359,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable<MemberS
 
     /**
      * Load referrer of memberList by the set-upper of referrer. <br>
-     * member by MEMBER_STATUS_CODE, named 'memberList'.
+     * (会員)MEMBER by MEMBER_STATUS_CODE, named 'memberList'.
      * <pre>
      * <span style="color: #0000C0">memberStatusBhv</span>.<span style="color: #CC4747">loadMember</span>(<span style="color: #553000">memberStatusList</span>, <span style="color: #553000">memberCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">memberCB</span>.setupSelect...
@@ -390,7 +390,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable<MemberS
 
     /**
      * Load referrer of memberList by the set-upper of referrer. <br>
-     * member by MEMBER_STATUS_CODE, named 'memberList'.
+     * (会員)MEMBER by MEMBER_STATUS_CODE, named 'memberList'.
      * <pre>
      * <span style="color: #0000C0">memberStatusBhv</span>.<span style="color: #CC4747">loadMember</span>(<span style="color: #553000">memberStatus</span>, <span style="color: #553000">memberCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">memberCB</span>.setupSelect...
@@ -423,7 +423,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable<MemberS
 
     /**
      * Load referrer of memberLoginList by the set-upper of referrer. <br>
-     * member_login by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
+     * (会員ログイン情報)MEMBER_LOGIN by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
      * <pre>
      * <span style="color: #0000C0">memberStatusBhv</span>.<span style="color: #CC4747">loadMemberLogin</span>(<span style="color: #553000">memberStatusList</span>, <span style="color: #553000">loginCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">loginCB</span>.setupSelect...
@@ -454,7 +454,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable<MemberS
 
     /**
      * Load referrer of memberLoginList by the set-upper of referrer. <br>
-     * member_login by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
+     * (会員ログイン情報)MEMBER_LOGIN by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
      * <pre>
      * <span style="color: #0000C0">memberStatusBhv</span>.<span style="color: #CC4747">loadMemberLogin</span>(<span style="color: #553000">memberStatus</span>, <span style="color: #553000">loginCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">loginCB</span>.setupSelect...

@@ -7,7 +7,7 @@ import org.docksidestage.handson.dbflute.exbhv.*;
 import org.docksidestage.handson.dbflute.exentity.*;
 
 /**
- * The referrer loader of member_withdrawal as TABLE.
+ * The referrer loader of (会員退会情報)MEMBER_WITHDRAWAL as TABLE.
  * @author DBFlute(AutoGenerator)
  */
 public class LoaderOfMemberWithdrawal {

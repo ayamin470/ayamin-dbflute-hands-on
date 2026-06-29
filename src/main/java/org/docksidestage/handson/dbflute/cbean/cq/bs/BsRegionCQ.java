@@ -95,14 +95,14 @@ public class BsRegionCQ extends AbstractBsRegionCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * REGION_ID: {PK, NotNull, INT(10), classification=Region}
+     * (地域ID)REGION_ID: {PK, NotNull, INT(10), classification=Region}
      * @return this. (NotNull)
      */
     public BsRegionCQ addOrderBy_RegionId_Asc() { regOBA("REGION_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * REGION_ID: {PK, NotNull, INT(10), classification=Region}
+     * (地域ID)REGION_ID: {PK, NotNull, INT(10), classification=Region}
      * @return this. (NotNull)
      */
     public BsRegionCQ addOrderBy_RegionId_Desc() { regOBD("REGION_ID"); return this; }
@@ -115,14 +115,14 @@ public class BsRegionCQ extends AbstractBsRegionCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * REGION_NAME: {NotNull, VARCHAR(50)}
+     * (地域名称)REGION_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsRegionCQ addOrderBy_RegionName_Asc() { regOBA("REGION_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * REGION_NAME: {NotNull, VARCHAR(50)}
+     * (地域名称)REGION_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsRegionCQ addOrderBy_RegionName_Desc() { regOBD("REGION_NAME"); return this; }

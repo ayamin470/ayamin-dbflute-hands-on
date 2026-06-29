@@ -138,12 +138,18 @@ dl.column-content dd {
 dl.column-content dd span {
 	display: block;
 	float: left;
-	width: 6em;
+	width: 8em; /* diff title space */
 	margin-right: 1.5em;
-	border-right: dotted 2px #333;
+	border-right: dotted 2px #333; /* diff delimiter */
 	font-weight: bold;
 	font-size: 80%;
 	color: #AA7777;
+}
+
+.deprecatedtable {
+	/* more viewable than SchemaHTML because old tables are main here */
+	color: #3F7E5E; /* comment-out color */
+	font-size: 1.0em;
 }
 
 /* -------------------------------------------------
@@ -224,21 +230,21 @@ dl.column-content dd span {
 
 	<h3>Add Table</h3>
 	<ul class="table-content">
-		<li><a href="./schema-maihamadb.html#member">member</a></li>
-		<li><a href="./schema-maihamadb.html#member_address">member_address</a></li>
-		<li><a href="./schema-maihamadb.html#member_login">member_login</a></li>
-		<li><a href="./schema-maihamadb.html#member_security">member_security</a></li>
-		<li><a href="./schema-maihamadb.html#member_service">member_service</a></li>
-		<li><a href="./schema-maihamadb.html#member_status">member_status</a></li>
-		<li><a href="./schema-maihamadb.html#member_withdrawal">member_withdrawal</a></li>
-		<li><a href="./schema-maihamadb.html#product">product</a></li>
-		<li><a href="./schema-maihamadb.html#product_category">product_category</a></li>
-		<li><a href="./schema-maihamadb.html#product_status">product_status</a></li>
-		<li><a href="./schema-maihamadb.html#purchase">purchase</a></li>
-		<li><a href="./schema-maihamadb.html#purchase_payment">purchase_payment</a></li>
-		<li><a href="./schema-maihamadb.html#region">region</a></li>
-		<li><a href="./schema-maihamadb.html#service_rank">service_rank</a></li>
-		<li><a href="./schema-maihamadb.html#withdrawal_reason">withdrawal_reason</a></li>
+		<li><a href="./schema-maihamadb.html#member">MEMBER</a></li>
+		<li><a href="./schema-maihamadb.html#member_address">MEMBER_ADDRESS</a></li>
+		<li><a href="./schema-maihamadb.html#member_login">MEMBER_LOGIN</a></li>
+		<li><a href="./schema-maihamadb.html#member_security">MEMBER_SECURITY</a></li>
+		<li><a href="./schema-maihamadb.html#member_service">MEMBER_SERVICE</a></li>
+		<li><a href="./schema-maihamadb.html#member_status">MEMBER_STATUS</a></li>
+		<li><a href="./schema-maihamadb.html#member_withdrawal">MEMBER_WITHDRAWAL</a></li>
+		<li><a href="./schema-maihamadb.html#product">PRODUCT</a></li>
+		<li><a href="./schema-maihamadb.html#product_category">PRODUCT_CATEGORY</a></li>
+		<li><a href="./schema-maihamadb.html#product_status">PRODUCT_STATUS</a></li>
+		<li><a href="./schema-maihamadb.html#purchase">PURCHASE</a></li>
+		<li><a href="./schema-maihamadb.html#purchase_payment">PURCHASE_PAYMENT</a></li>
+		<li><a href="./schema-maihamadb.html#region">REGION</a></li>
+		<li><a href="./schema-maihamadb.html#service_rank">SERVICE_RANK</a></li>
+		<li><a href="./schema-maihamadb.html#withdrawal_reason">WITHDRAWAL_REASON</a></li>
 	</ul>
 </div>
 
@@ -323,6 +329,7 @@ dl.column-content dd span {
     };
     /**
      * @author hakiba
+	 * @author shiny
      */
     var HacommentUtil = new function(){
         /**
@@ -648,6 +655,11 @@ dl.column-content dd span {
         createSaveHacommentFunction: function (diffCode, diffMap) {
             var that = this;
             return function () {
+                // prevent modal from opening if user is selecting text (for copy/paste)
+                var selection = window.getSelection();
+                if (selection && selection.toString().length > 0) {
+                    return;
+                }
                 // get modal window element
                 var modalElement = document.getElementById("hacomment-modal");
                 modalElement.style.display = "block";

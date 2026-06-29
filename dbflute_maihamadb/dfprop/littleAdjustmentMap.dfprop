@@ -76,7 +76,7 @@ map:{
     #   [true]
     #     Convert empty-string data to null in entity.
     #
-    #; isEntityConvertEmptyStringToNull = false
+    ; isEntityConvertEmptyStringToNull = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -84,7 +84,7 @@ map:{
     #   [true]
     #     Table names for display, e.g. on documents, are forcedly treated as upper case.
     #
-    #; isTableDispNameUpperCase = false
+    ; isTableDispNameUpperCase = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -93,7 +93,7 @@ map:{
     #     Table names on SQL executed by condition-bean or behavior
     #     are forcedly treated as upper case. (except outside-SQL)
     #
-    #; isTableSqlNameUpperCase = false
+    ; isTableSqlNameUpperCase = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -102,7 +102,7 @@ map:{
     #     Column names on SQL executed by condition-bean or behavior
     #     are forcedly treated as upper case. (except outside-SQL)
     #
-    #; isColumnSqlNameUpperCase = false
+    ; isColumnSqlNameUpperCase = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -84,14 +84,14 @@ map:{
     #  (Is DB comment alias name when it has no alias delimiter?)
     #  This property works with 'aliasDelimiterInDbComment'.
     #
-    ; isDbCommentOnAliasBasis = false
+    ; isDbCommentOnAliasBasis = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # o isEntityJavaDocDbCommentValid: (NotRequired - Default true)
     #  Does it allow DB comment to be on java-doc?
     #
-    #; isEntityJavaDocDbCommentValid = true
+    ; isEntityJavaDocDbCommentValid = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

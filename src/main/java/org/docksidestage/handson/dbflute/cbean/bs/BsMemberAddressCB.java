@@ -85,7 +85,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param memberAddressId : PK, ID, NotNull, INT(10). (NotNull)
+     * @param memberAddressId (会員住所ID): PK, ID, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
     public MemberAddressCB acceptPK(Integer memberAddressId) {
@@ -97,8 +97,8 @@ public class BsMemberAddressCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param memberId : UQ+, NotNull, INT(10), FK to member. (NotNull)
-     * @param validBeginDate : +UQ, NotNull, DATE(10). (NotNull)
+     * @param memberId (会員ID): UQ+, NotNull, INT(10), FK to member. (NotNull)
+     * @param validBeginDate (有効開始日): +UQ, NotNull, DATE(10). (NotNull)
      * @return this. (NotNull)
      */
     public MemberAddressCB acceptUniqueOf(Integer memberId, java.time.LocalDate validBeginDate) {
@@ -262,7 +262,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br>
-     * member by my MEMBER_ID, named 'member'.
+     * (会員)MEMBER by my MEMBER_ID, named 'member'.
      * <pre>
      * <span style="color: #0000C0">memberAddressBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Member()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -286,7 +286,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
 
     /**
      * Set up relation columns to select clause. <br>
-     * region by my REGION_ID, named 'region'.
+     * (地域)REGION by my REGION_ID, named 'region'.
      * <pre>
      * <span style="color: #0000C0">memberAddressBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Region()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -352,32 +352,32 @@ public class BsMemberAddressCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * MEMBER_ADDRESS_ID: {PK, ID, NotNull, INT(10)}
+         * (会員住所ID)MEMBER_ADDRESS_ID: {PK, ID, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnMemberAddressId() { return doColumn("MEMBER_ADDRESS_ID"); }
         /**
-         * MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
+         * (会員ID)MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * VALID_BEGIN_DATE: {+UQ, NotNull, DATE(10)}
+         * (有効開始日)VALID_BEGIN_DATE: {+UQ, NotNull, DATE(10)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnValidBeginDate() { return doColumn("VALID_BEGIN_DATE"); }
         /**
-         * VALID_END_DATE: {NotNull, DATE(10)}
+         * (有効終了日)VALID_END_DATE: {NotNull, DATE(10)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnValidEndDate() { return doColumn("VALID_END_DATE"); }
         /**
-         * ADDRESS: {NotNull, VARCHAR(200)}
+         * (住所)ADDRESS: {NotNull, VARCHAR(200)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnAddress() { return doColumn("ADDRESS"); }
         /**
-         * REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region}
+         * (地域ID)REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnRegionId() { return doColumn("REGION_ID"); }
@@ -424,7 +424,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
         protected String getTableDbName() { return "member_address"; }
         /**
          * Prepare to specify functions about relation table. <br>
-         * member by my MEMBER_ID, named 'member'.
+         * (会員)MEMBER by my MEMBER_ID, named 'member'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberCB.HpSpecification specifyMember() {
@@ -444,7 +444,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br>
-         * region by my REGION_ID, named 'region'.
+         * (地域)REGION by my REGION_ID, named 'region'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public RegionCB.HpSpecification specifyRegion() {

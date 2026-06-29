@@ -9,7 +9,7 @@ import org.docksidestage.handson.dbflute.exentity.*;
 import org.docksidestage.handson.dbflute.cbean.*;
 
 /**
- * The referrer loader of product_category as TABLE.
+ * The referrer loader of (商品カテゴリ)PRODUCT_CATEGORY as TABLE.
  * @author DBFlute(AutoGenerator)
  */
 public class LoaderOfProductCategory {
@@ -37,7 +37,7 @@ public class LoaderOfProductCategory {
 
     /**
      * Load referrer of productList by the set-upper of referrer. <br>
-     * product by PRODUCT_CATEGORY_CODE, named 'productList'.
+     * (商品)PRODUCT by PRODUCT_CATEGORY_CODE, named 'productList'.
      * <pre>
      * <span style="color: #0000C0">productCategoryBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">productCategoryList</span>, <span style="color: #553000">categoryLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">categoryLoader</span>.<span style="color: #CC4747">loadProduct</span>(<span style="color: #553000">productCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
@@ -71,7 +71,7 @@ public class LoaderOfProductCategory {
 
     /**
      * Load referrer of productCategorySelfList by the set-upper of referrer. <br>
-     * product_category by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
+     * (商品カテゴリ)PRODUCT_CATEGORY by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
      * <pre>
      * <span style="color: #0000C0">productCategoryBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">productCategoryList</span>, <span style="color: #553000">categoryLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">categoryLoader</span>.<span style="color: #CC4747">loadProductCategorySelf</span>(<span style="color: #553000">categoryCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {

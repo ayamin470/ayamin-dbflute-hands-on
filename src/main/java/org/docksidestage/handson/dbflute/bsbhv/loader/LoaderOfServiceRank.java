@@ -9,7 +9,7 @@ import org.docksidestage.handson.dbflute.exentity.*;
 import org.docksidestage.handson.dbflute.cbean.*;
 
 /**
- * The referrer loader of service_rank as TABLE.
+ * The referrer loader of (サービスランク)SERVICE_RANK as TABLE.
  * @author DBFlute(AutoGenerator)
  */
 public class LoaderOfServiceRank {
@@ -37,7 +37,7 @@ public class LoaderOfServiceRank {
 
     /**
      * Load referrer of memberServiceList by the set-upper of referrer. <br>
-     * member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
+     * (会員サービス)MEMBER_SERVICE by SERVICE_RANK_CODE, named 'memberServiceList'.
      * <pre>
      * <span style="color: #0000C0">serviceRankBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">serviceRankList</span>, <span style="color: #553000">rankLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">rankLoader</span>.<span style="color: #CC4747">loadMemberService</span>(<span style="color: #553000">serviceCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {

@@ -13,8 +13,8 @@ import org.docksidestage.handson.dbflute.allcommon.CDef;
 import org.docksidestage.handson.dbflute.exentity.*;
 
 /**
- * The entity of purchase as TABLE. <br>
- * 購入: 一つの商品に対する一回の購入を表現する。<br>
+ * The entity of (購入)PURCHASE as TABLE. <br>
+ * 一つの商品に対する一回の購入を表現する。<br>
  * 一回の購入で一つの商品を複数個買うこともある。
  * @author DBFlute(AutoGenerator)
  */
@@ -29,25 +29,25 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** PURCHASE_ID: {PK, ID, NotNull, BIGINT(19)} */
+    /** (購入ID)PURCHASE_ID: {PK, ID, NotNull, BIGINT(19)} */
     protected Long _purchaseId;
 
-    /** MEMBER_ID: {UQ+, IX+, NotNull, INT(10), FK to member} */
+    /** (会員ID)MEMBER_ID: {UQ+, IX+, NotNull, INT(10), FK to member} */
     protected Integer _memberId;
 
-    /** PRODUCT_ID: {+UQ, IX+, NotNull, INT(10), FK to product} */
+    /** (商品ID)PRODUCT_ID: {+UQ, IX+, NotNull, INT(10), FK to product} */
     protected Integer _productId;
 
-    /** PURCHASE_DATETIME: {+UQ, IX+, NotNull, DATETIME(19)} */
+    /** (購入日時)PURCHASE_DATETIME: {+UQ, IX+, NotNull, DATETIME(19)} */
     protected java.time.LocalDateTime _purchaseDatetime;
 
-    /** PURCHASE_COUNT: {NotNull, INT(10)} */
+    /** (購入数量)PURCHASE_COUNT: {NotNull, INT(10)} */
     protected Integer _purchaseCount;
 
-    /** PURCHASE_PRICE: {IX, NotNull, INT(10)} */
+    /** (購入価格)PURCHASE_PRICE: {IX, NotNull, INT(10)} */
     protected Integer _purchasePrice;
 
-    /** PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} */
+    /** (支払完了フラグ)PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} */
     protected Integer _paymentCompleteFlg;
 
     /** REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -90,9 +90,9 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param memberId : UQ+, IX+, NotNull, INT(10), FK to member. (NotNull)
-     * @param productId : +UQ, IX+, NotNull, INT(10), FK to product. (NotNull)
-     * @param purchaseDatetime : +UQ, IX+, NotNull, DATETIME(19). (NotNull)
+     * @param memberId (会員ID): UQ+, IX+, NotNull, INT(10), FK to member. (NotNull)
+     * @param productId (商品ID): +UQ, IX+, NotNull, INT(10), FK to product. (NotNull)
+     * @param purchaseDatetime (購入日時): +UQ, IX+, NotNull, DATETIME(19). (NotNull)
      */
     public void uniqueBy(Integer memberId, Integer productId, java.time.LocalDateTime purchaseDatetime) {
         __uniqueDrivenProperties.clear();
@@ -107,7 +107,7 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     //                                                             =======================
     /**
      * Get the value of paymentCompleteFlg as the classification of Flg. <br>
-     * PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br>
+     * (支払完了フラグ)PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br>
      * フラグを示す
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
@@ -118,7 +118,7 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
 
     /**
      * Set the value of paymentCompleteFlg as the classification of Flg. <br>
-     * PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br>
+     * (支払完了フラグ)PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br>
      * フラグを示す
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
@@ -128,7 +128,7 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
 
     /**
      * Set the value of paymentCompleteFlg as boolean. <br>
-     * PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br>
+     * (支払完了フラグ)PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br>
      * フラグを示す
      * @param determination The determination, true or false. (NullAllowed: if null, null value is set to the column)
      */
@@ -204,11 +204,11 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** member by my MEMBER_ID, named 'member'. */
+    /** (会員)MEMBER by my MEMBER_ID, named 'member'. */
     protected OptionalEntity<Member> _member;
 
     /**
-     * [get] member by my MEMBER_ID, named 'member'. <br>
+     * [get] (会員)MEMBER by my MEMBER_ID, named 'member'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
      * @return The entity of foreign property 'member'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -218,18 +218,18 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] member by my MEMBER_ID, named 'member'.
+     * [set] (会員)MEMBER by my MEMBER_ID, named 'member'.
      * @param member The entity of foreign property 'member'. (NullAllowed)
      */
     public void setMember(OptionalEntity<Member> member) {
         _member = member;
     }
 
-    /** product by my PRODUCT_ID, named 'product'. */
+    /** (商品)PRODUCT by my PRODUCT_ID, named 'product'. */
     protected OptionalEntity<Product> _product;
 
     /**
-     * [get] product by my PRODUCT_ID, named 'product'. <br>
+     * [get] (商品)PRODUCT by my PRODUCT_ID, named 'product'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
      * @return The entity of foreign property 'product'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -239,7 +239,7 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] product by my PRODUCT_ID, named 'product'.
+     * [set] (商品)PRODUCT by my PRODUCT_ID, named 'product'.
      * @param product The entity of foreign property 'product'. (NullAllowed)
      */
     public void setProduct(OptionalEntity<Product> product) {
@@ -249,11 +249,11 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** purchase_payment by PURCHASE_ID, named 'purchasePaymentList'. */
+    /** (購入支払)PURCHASE_PAYMENT by PURCHASE_ID, named 'purchasePaymentList'. */
     protected List<PurchasePayment> _purchasePaymentList;
 
     /**
-     * [get] purchase_payment by PURCHASE_ID, named 'purchasePaymentList'.
+     * [get] (購入支払)PURCHASE_PAYMENT by PURCHASE_ID, named 'purchasePaymentList'.
      * @return The entity list of referrer property 'purchasePaymentList'. (NotNull: even if no loading, returns empty list)
      */
     public List<PurchasePayment> getPurchasePaymentList() {
@@ -262,7 +262,7 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] purchase_payment by PURCHASE_ID, named 'purchasePaymentList'.
+     * [set] (購入支払)PURCHASE_PAYMENT by PURCHASE_ID, named 'purchasePaymentList'.
      * @param purchasePaymentList The entity list of referrer property 'purchasePaymentList'. (NullAllowed)
      */
     public void setPurchasePaymentList(List<PurchasePayment> purchasePaymentList) {
@@ -356,8 +356,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] PURCHASE_ID: {PK, ID, NotNull, BIGINT(19)} <br>
-     * 購入ID: 連番
+     * [get] (購入ID)PURCHASE_ID: {PK, ID, NotNull, BIGINT(19)} <br>
+     * 連番
      * @return The value of the column 'PURCHASE_ID'. (basically NotNull if selected: for the constraint)
      */
     public Long getPurchaseId() {
@@ -366,8 +366,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] PURCHASE_ID: {PK, ID, NotNull, BIGINT(19)} <br>
-     * 購入ID: 連番
+     * [set] (購入ID)PURCHASE_ID: {PK, ID, NotNull, BIGINT(19)} <br>
+     * 連番
      * @param purchaseId The value of the column 'PURCHASE_ID'. (basically NotNull if update: for the constraint)
      */
     public void setPurchaseId(Long purchaseId) {
@@ -376,8 +376,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [get] MEMBER_ID: {UQ+, IX+, NotNull, INT(10), FK to member} <br>
-     * 会員ID: 会員を参照するID。<br>
+     * [get] (会員ID)MEMBER_ID: {UQ+, IX+, NotNull, INT(10), FK to member} <br>
+     * 会員を参照するID。<br>
      * 購入を識別する自然キー（複合ユニーク制約）の筆頭要素。
      * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -387,8 +387,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] MEMBER_ID: {UQ+, IX+, NotNull, INT(10), FK to member} <br>
-     * 会員ID: 会員を参照するID。<br>
+     * [set] (会員ID)MEMBER_ID: {UQ+, IX+, NotNull, INT(10), FK to member} <br>
+     * 会員を参照するID。<br>
      * 購入を識別する自然キー（複合ユニーク制約）の筆頭要素。
      * @param memberId The value of the column 'MEMBER_ID'. (basically NotNull if update: for the constraint)
      */
@@ -398,8 +398,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [get] PRODUCT_ID: {+UQ, IX+, NotNull, INT(10), FK to product} <br>
-     * 商品ID: 商品を参照するID。
+     * [get] (商品ID)PRODUCT_ID: {+UQ, IX+, NotNull, INT(10), FK to product} <br>
+     * 商品を参照するID。
      * @return The value of the column 'PRODUCT_ID'. (basically NotNull if selected: for the constraint)
      */
     public Integer getProductId() {
@@ -408,8 +408,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] PRODUCT_ID: {+UQ, IX+, NotNull, INT(10), FK to product} <br>
-     * 商品ID: 商品を参照するID。
+     * [set] (商品ID)PRODUCT_ID: {+UQ, IX+, NotNull, INT(10), FK to product} <br>
+     * 商品を参照するID。
      * @param productId The value of the column 'PRODUCT_ID'. (basically NotNull if update: for the constraint)
      */
     public void setProductId(Integer productId) {
@@ -418,8 +418,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [get] PURCHASE_DATETIME: {+UQ, IX+, NotNull, DATETIME(19)} <br>
-     * 購入日時: 購入した瞬間の日時。
+     * [get] (購入日時)PURCHASE_DATETIME: {+UQ, IX+, NotNull, DATETIME(19)} <br>
+     * 購入した瞬間の日時。
      * @return The value of the column 'PURCHASE_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getPurchaseDatetime() {
@@ -428,8 +428,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] PURCHASE_DATETIME: {+UQ, IX+, NotNull, DATETIME(19)} <br>
-     * 購入日時: 購入した瞬間の日時。
+     * [set] (購入日時)PURCHASE_DATETIME: {+UQ, IX+, NotNull, DATETIME(19)} <br>
+     * 購入した瞬間の日時。
      * @param purchaseDatetime The value of the column 'PURCHASE_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setPurchaseDatetime(java.time.LocalDateTime purchaseDatetime) {
@@ -438,8 +438,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [get] PURCHASE_COUNT: {NotNull, INT(10)} <br>
-     * 購入数量: 購入した商品の（一回の購入における）数量。
+     * [get] (購入数量)PURCHASE_COUNT: {NotNull, INT(10)} <br>
+     * 購入した商品の（一回の購入における）数量。
      * @return The value of the column 'PURCHASE_COUNT'. (basically NotNull if selected: for the constraint)
      */
     public Integer getPurchaseCount() {
@@ -448,8 +448,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] PURCHASE_COUNT: {NotNull, INT(10)} <br>
-     * 購入数量: 購入した商品の（一回の購入における）数量。
+     * [set] (購入数量)PURCHASE_COUNT: {NotNull, INT(10)} <br>
+     * 購入した商品の（一回の購入における）数量。
      * @param purchaseCount The value of the column 'PURCHASE_COUNT'. (basically NotNull if update: for the constraint)
      */
     public void setPurchaseCount(Integer purchaseCount) {
@@ -458,8 +458,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [get] PURCHASE_PRICE: {IX, NotNull, INT(10)} <br>
-     * 購入価格: 購入によって実際に会員が支払った（支払う予定の）価格。<br>
+     * [get] (購入価格)PURCHASE_PRICE: {IX, NotNull, INT(10)} <br>
+     * 購入によって実際に会員が支払った（支払う予定の）価格。<br>
      * 基本は商品の定価に購入数量を掛けたものになるが、<br>
      * ポイント利用や割引があったりと必ずしもそうはならない。
      * @return The value of the column 'PURCHASE_PRICE'. (basically NotNull if selected: for the constraint)
@@ -470,8 +470,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] PURCHASE_PRICE: {IX, NotNull, INT(10)} <br>
-     * 購入価格: 購入によって実際に会員が支払った（支払う予定の）価格。<br>
+     * [set] (購入価格)PURCHASE_PRICE: {IX, NotNull, INT(10)} <br>
+     * 購入によって実際に会員が支払った（支払う予定の）価格。<br>
      * 基本は商品の定価に購入数量を掛けたものになるが、<br>
      * ポイント利用や割引があったりと必ずしもそうはならない。
      * @param purchasePrice The value of the column 'PURCHASE_PRICE'. (basically NotNull if update: for the constraint)
@@ -482,8 +482,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [get] PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br>
-     * 支払完了フラグ: この購入に関しての支払いが完了しているか否か。
+     * [get] (支払完了フラグ)PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br>
+     * この購入に関しての支払いが完了しているか否か。
      * @return The value of the column 'PAYMENT_COMPLETE_FLG'. (basically NotNull if selected: for the constraint)
      */
     public Integer getPaymentCompleteFlg() {
@@ -492,8 +492,8 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br>
-     * 支払完了フラグ: この購入に関しての支払いが完了しているか否か。
+     * [set] (支払完了フラグ)PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br>
+     * この購入に関しての支払いが完了しているか否か。
      * @param paymentCompleteFlg The value of the column 'PAYMENT_COMPLETE_FLG'. (basically NotNull if update: for the constraint)
      */
     protected void setPaymentCompleteFlg(Integer paymentCompleteFlg) {
@@ -526,7 +526,7 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
      */
     public String getRegisterUser() {
         checkSpecifiedProperty("registerUser");
-        return _registerUser;
+        return convertEmptyToNull(_registerUser);
     }
 
     /**
@@ -562,7 +562,7 @@ public abstract class BsPurchase extends AbstractEntity implements DomainEntity 
      */
     public String getUpdateUser() {
         checkSpecifiedProperty("updateUser");
-        return _updateUser;
+        return convertEmptyToNull(_updateUser);
     }
 
     /**

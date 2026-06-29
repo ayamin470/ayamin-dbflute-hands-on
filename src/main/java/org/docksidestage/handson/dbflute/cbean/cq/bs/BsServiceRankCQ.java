@@ -95,14 +95,14 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
+     * (サービスランクコード)SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_ServiceRankCode_Asc() { regOBA("SERVICE_RANK_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
+     * (サービスランクコード)SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_ServiceRankCode_Desc() { regOBD("SERVICE_RANK_CODE"); return this; }
@@ -115,14 +115,14 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * SERVICE_RANK_NAME: {NotNull, VARCHAR(50)}
+     * (サービスランク名称)SERVICE_RANK_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_ServiceRankName_Asc() { regOBA("SERVICE_RANK_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * SERVICE_RANK_NAME: {NotNull, VARCHAR(50)}
+     * (サービスランク名称)SERVICE_RANK_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_ServiceRankName_Desc() { regOBD("SERVICE_RANK_NAME"); return this; }
@@ -135,14 +135,14 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * SERVICE_POINT_INCIDENCE: {NotNull, DECIMAL(5, 3)}
+     * (サービスポイント発生率)SERVICE_POINT_INCIDENCE: {NotNull, DECIMAL(5, 3)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_ServicePointIncidence_Asc() { regOBA("SERVICE_POINT_INCIDENCE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * SERVICE_POINT_INCIDENCE: {NotNull, DECIMAL(5, 3)}
+     * (サービスポイント発生率)SERVICE_POINT_INCIDENCE: {NotNull, DECIMAL(5, 3)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_ServicePointIncidence_Desc() { regOBD("SERVICE_POINT_INCIDENCE"); return this; }
@@ -155,14 +155,14 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
+     * (新規受け入れ可能フラグ)NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_NewAcceptableFlg_Asc() { regOBA("NEW_ACCEPTABLE_FLG"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
+     * (新規受け入れ可能フラグ)NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_NewAcceptableFlg_Desc() { regOBD("NEW_ACCEPTABLE_FLG"); return this; }
