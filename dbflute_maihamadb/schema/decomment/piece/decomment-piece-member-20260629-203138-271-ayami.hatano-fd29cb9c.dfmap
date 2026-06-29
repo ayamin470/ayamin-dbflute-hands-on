@@ -1,0 +1,25 @@
+map:{
+    ; formatVersion = 1.1
+    ; tableName = member
+    ; columnName = null
+    ; targetType = TABLE
+    ; decomment = shalias:\{会員\}
+あやみんテストあやみんテスト
+あやみんテスト
+あやみんテスト
+あやみんテスト
+
+会員登録時にデータが登録される。
+基本的に物理削除はなく、退会したらステータスが退会会員になる。
+    ; databaseComment = 会員登録時にデータが登録される。
+基本的に物理削除はなく、退会したらステータスが退会会員になる。
+    ; commentVersion = 0
+    ; authorList = list:{
+        ; ayami.hatano
+    }
+    ; pieceCode = fd29cb9c
+    ; pieceDatetime = 2026-06-29T20:31:38.271
+    ; pieceOwner = ayami.hatano
+    ; pieceGitBranch = master
+    ; previousPieceList = list:{}
+}

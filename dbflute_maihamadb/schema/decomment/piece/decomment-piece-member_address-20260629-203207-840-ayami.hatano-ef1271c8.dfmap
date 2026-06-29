@@ -1,0 +1,22 @@
+map:{
+    ; formatVersion = 1.1
+    ; tableName = member_address
+    ; columnName = null
+    ; targetType = TABLE
+    ; decomment = shalias:\{会員住所情報\}
+あやみんテスト
+
+会員の住所に関する情報。
+同時に有効期間ごとに履歴管理されている。
+    ; databaseComment = 会員の住所に関する情報。
+同時に有効期間ごとに履歴管理されている。
+    ; commentVersion = 0
+    ; authorList = list:{
+        ; ayami.hatano
+    }
+    ; pieceCode = ef1271c8
+    ; pieceDatetime = 2026-06-29T20:32:07.840
+    ; pieceOwner = ayami.hatano
+    ; pieceGitBranch = master
+    ; previousPieceList = list:{}
+}
