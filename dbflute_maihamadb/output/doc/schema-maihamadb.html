@@ -604,6 +604,7 @@ pre.spolicyviodisp {
 <p class="sublink">
  <a href="#cdef">Classification Definition</a>
 | <a href="#arrangequery">ArrangeQuery List</a>
+| <a href="#schemapolicy">Schema Policy</a>
 </p>
 <p class="sisterlink"><a href="./history-maihamadb.html">to HistoryHTML</a></p>
 </div>
@@ -3646,6 +3647,28 @@ pre.spolicyviodisp {
 	<dt>arrangeBankTransferPurchasedMember()</dt>
 	<dd>&nbsp;</dd>
 </dl>
+
+<h2 id="schemapolicy">Schema Policy</h2>
+<pre class="spolicydisp">
+
+[Schema Policy]
+ tableExceptList: []
+ tableTargetList: []
+ columnExceptMap: {}
+ isMainSchemaOnly: false
+ wholeMap:
+   themeList: []
+   statementList:
+ tableMap:
+   themeList: [hasPK, upperCaseBasis]
+   statementList:
+ columnMap:
+   themeList: [upperCaseBasis]
+   statementList:
+    {if:{columnName is suffix:_FLG}} {then notNull}
+    {if:{columnName is suffix:_DATE}} {then:{dbType is DATE}}
+    {if:{columnName is suffix:_DATETIME}} {then:{dbType is DATETIME}}
+</pre>
 
 <h2 id="thanks">Thanks</h2>
 <p>

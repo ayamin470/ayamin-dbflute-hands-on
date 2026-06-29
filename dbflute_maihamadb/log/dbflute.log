@@ -15369,3 +15369,121 @@ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
     repsEnvType      = ut
     refreshProject   = $$AutoDetect$$
 _/_/_/_/_/_/_/_/_/_/ {Doc}
+2026-06-29 23:32:29,038 [main] INFO  (TorqueDocumentationTask#begin():193) - +------------------------------------------+
+2026-06-29 23:32:29,039 [main] INFO  (TorqueDocumentationTask#begin():194) - |                                          |
+2026-06-29 23:32:29,039 [main] INFO  (TorqueDocumentationTask#begin():195) - |                   Doc                    |
+2026-06-29 23:32:29,039 [main] INFO  (TorqueDocumentationTask#begin():203) - |                                          |
+2026-06-29 23:32:29,039 [main] INFO  (TorqueDocumentationTask#begin():204) - +------------------------------------------+
+2026-06-29 23:32:29,045 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2026-06-29 23:32:29,045 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2026-06-29 23:32:29,046 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+2026-06-29 23:32:29,046 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = maihamadb
+2026-06-29 23:32:29,046 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():265) - 
+2026-06-29 23:32:29,046 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():266) - * * * * * * * * * * *
+2026-06-29 23:32:29,046 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():267) - *                   *
+2026-06-29 23:32:29,046 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():268) - *    Schema HTML    *
+2026-06-29 23:32:29,046 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():269) - *                   *
+2026-06-29 23:32:29,046 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():270) - * * * * * * * * * * *
+2026-06-29 23:32:29,070 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2026-06-29 23:32:29,089 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2026-06-29 23:32:29,089 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2026-06-29 23:32:29,090 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2026-06-29 23:32:29,090 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2026-06-29 23:32:29,090 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2026-06-29 23:32:29,090 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2026-06-29 23:32:29,090 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2026-06-29 23:32:29,090 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2026-06-29 23:32:29,091 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():79) - FK_MEMBER_MEMBER_ADDRESS_VALID
+2026-06-29 23:32:29,095 [main] INFO  (DfAdditionalForeignKeyInitializer#setupForeignKeyToTable():209) -   *Referrer setting was not allowed in this case
+2026-06-29 23:32:29,095 [main] INFO  (DfAdditionalForeignKeyInitializer#showResult():344) -   Add foreign key member.[MEMBER_ID] to MEMBER_ADDRESS.[MEMBER_ID]
+2026-06-29 23:32:29,095 [main] INFO  (DfAdditionalForeignKeyInitializer#showResult():346) -   with $$foreignAlias$$.VALID_BEGIN_DATE <= /*targetDate(Date)*/null\n     and $$foreignAlias$$.VALID_END_DATE >= /*targetDate(Date)*/null
+2026-06-29 23:32:29,095 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():79) - FK_MEMBER_MEMBER_LOGIN_LATEST
+2026-06-29 23:32:29,095 [main] INFO  (DfAdditionalForeignKeyInitializer#setupForeignKeyToTable():209) -   *Referrer setting was not allowed in this case
+2026-06-29 23:32:29,095 [main] INFO  (DfAdditionalForeignKeyInitializer#showResult():344) -   Add foreign key member.[MEMBER_ID] to MEMBER_LOGIN.[MEMBER_ID]
+2026-06-29 23:32:29,095 [main] INFO  (DfAdditionalForeignKeyInitializer#showResult():346) -   with $$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$\nselect max(login.LOGIN_DATETIME)\n  from MEMBER_LOGIN login\n where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID\n)$$sqend$$
+2026-06-29 23:32:29,095 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2026-06-29 23:32:29,099 [main] INFO  (DfDatabaseProperties#createMainSchemaConnection():1006) - ...Creating connection to main schema: {maihamadb.$$NoNameSchema$$ as main}
+2026-06-29 23:32:29,267 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for MemberStatus classification
+select MEMBER_STATUS_CODE as cls_code, MEMBER_STATUS_NAME as cls_name
+     , MEMBER_STATUS_NAME as cls_alias, DESCRIPTION as cls_comment, DISPLAY_ORDER as cls_displayOrder
+  from MEMBER_STATUS order by DISPLAY_ORDER
+2026-06-29 23:32:29,268 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for ServiceRank classification
+select SERVICE_RANK_CODE as cls_code, SERVICE_RANK_NAME as cls_name
+     , SERVICE_RANK_NAME as cls_alias, DESCRIPTION as cls_comment
+  from SERVICE_RANK order by DISPLAY_ORDER
+2026-06-29 23:32:29,269 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for Region classification
+select REGION_ID as cls_code, REGION_NAME as cls_name
+     , REGION_NAME as cls_alias, null as cls_comment
+  from REGION order by REGION_ID
+2026-06-29 23:32:29,270 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for WithdrawalReason classification
+select WITHDRAWAL_REASON_CODE as cls_code, WITHDRAWAL_REASON_CODE as cls_name
+     , WITHDRAWAL_REASON_CODE as cls_alias, WITHDRAWAL_REASON_TEXT as cls_comment
+  from WITHDRAWAL_REASON order by DISPLAY_ORDER
+2026-06-29 23:32:29,270 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for ProductCategory classification
+select loc.PRODUCT_CATEGORY_CODE as cls_code, loc.PRODUCT_CATEGORY_NAME as cls_name
+     , loc.PRODUCT_CATEGORY_NAME as cls_alias, concat('of ', rel.PRODUCT_CATEGORY_NAME) as cls_comment
+  from PRODUCT_CATEGORY loc left outer join PRODUCT_CATEGORY rel on loc.PARENT_CATEGORY_CODE = rel.PRODUCT_CATEGORY_CODE
+ order by loc.PARENT_CATEGORY_CODE is not null, loc.PARENT_CATEGORY_CODE
+2026-06-29 23:32:29,271 [main] INFO  (DfClsTableClassificationArranger#selectTableClassification():233) - ...Selecting for ProductStatus classification
+select PRODUCT_STATUS_CODE as cls_code, PRODUCT_STATUS_NAME as cls_name
+     , PRODUCT_STATUS_NAME as cls_alias, null as cls_comment
+  from PRODUCT_STATUS
+2026-06-29 23:32:29,275 [main] INFO  (DfClsDeploymentInitializer#initializeClassificationDeployment():67) - ...Initializing ClassificationDeployment: project=maihamadb
+2026-06-29 23:32:29,278 [main] INFO  (DfSPolicyChecker#checkPolicyIfNeeds():110) - 
+2026-06-29 23:32:29,279 [main] INFO  (DfSPolicyChecker#checkPolicyIfNeeds():111) - ...Beginning schema policy check
+2026-06-29 23:32:29,279 [main] INFO  (DfSPolicyChecker#parsePolicy():188) - ...Parsing schema policy map: [tableExceptList, tableTargetList, columnExceptMap, isMainSchemaOnly, wholeMap, tableMap, columnMap]
+2026-06-29 23:32:29,279 [main] INFO  (DfSPolicyChecker#showParsedPolicy():256) - 
+[Schema Policy]
+ tableExceptList: []
+ tableTargetList: []
+ columnExceptMap: {}
+ isMainSchemaOnly: false
+ wholeMap:
+   themeList: []
+   statementList:
+ tableMap:
+   themeList: [hasPK, upperCaseBasis]
+   statementList:
+ columnMap:
+   themeList: [upperCaseBasis]
+   statementList:
+    {if:{columnName is suffix:_FLG}} {then notNull}
+    {if:{columnName is suffix:_DATE}} {then:{dbType is DATE}}
+    {if:{columnName is suffix:_DATETIME}} {then:{dbType is DATETIME}}
+2026-06-29 23:32:29,295 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():253) - generator.parse("doc/ControlDocument.vm", ctx);
+2026-06-29 23:32:29,298 [main] INFO  (DfFlutistLog4JLogSystem#init():45) - ...Suppressing velocity.log, which is unneeded for also debug
+2026-06-29 23:32:29,321 [main] INFO  (Database#doEnableDocumentOutputDirectory():1238) - ...Setting up documentOutputDirectory: ./output/doc
+2026-06-29 23:32:29,323 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():242) - ...Loading schema history
+2026-06-29 23:32:29,328 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():246) -  -> found history: count=1
+2026-06-29 23:32:29,340 [main] INFO  (DfSchemaHtmlDataArrangeQuery#getArrangeQueryTableMap():50) -  
+2026-06-29 23:32:29,340 [main] INFO  (DfSchemaHtmlDataArrangeQuery#getArrangeQueryTableMap():51) - ...Setting up arrange queries for documents (ArrangeQueryDoc)
+2026-06-29 23:32:29,342 [main] INFO  (DfArrangeQueryDocSetupper#doExtractArrangeQuery():94) -  [MemberCQ]
+2026-06-29 23:32:29,342 [main] INFO  (DfArrangeQueryDocSetupper#doExtractArrangeQuery():97) -   o arrangeBankTransferPurchasedMember() // null
+2026-06-29 23:32:29,420 [main] INFO  (DfSPolicyChecker#lambda$checkPolicyIfNeeds$0():148) - ...Ending schema policy check: result:{violations=0}
+2026-06-29 23:32:29,421 [main] INFO  (DfSPolicyChecker#lambda$checkPolicyIfNeeds$0():154) -  -> No violation of schema policy. Good DB design! [00m00s142ms]
+2026-06-29 23:32:29,421 [main] INFO  (DfSPolicyChecker#lambda$checkPolicyIfNeeds$0():155) - 
+2026-06-29 23:32:29,422 [main] INFO  (DfRefreshResourceProcess#show():295) - /===========================================================================
+2026-06-29 23:32:29,422 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Refreshing [dbflute-hands-on] by http://localhost:8386/
+2026-06-29 23:32:29,424 [main] INFO  (DfRefreshResourceProcess#show():295) - ...Retrying refreshing by default secondary URL http://localhost:8387/
+2026-06-29 23:32:29,424 [main] INFO  (DfRefreshResourceProcess#show():295) - Failed to refresh the resources (continued): url=http://localhost:8386/, cause=ConnectException(Connection refused)
+2026-06-29 23:32:29,424 [main] INFO  (DfRefreshResourceProcess#show():295) - ==========/
+2026-06-29 23:32:29,425 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s390ms
+
+  DBFLUTE_CLIENT: {maihamadb}
+    database  = mysql
+    language  = java
+    container = lasta_di
+    package   = org.docksidestage.handson.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:43376/maihamadb?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    schema = {maihamadb.$$NoNameSchema$$ as main}
+    user   = maihamadb
+    props  = {password=maihamadb, user=maihamadb}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Doc}
