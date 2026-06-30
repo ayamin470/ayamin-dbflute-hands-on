@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- [scaffold] /purchase/list/ の画面テンプレート (Thymeleaf 想定)。
+     配置規約: src/main/webapp/WEB-INF/view/<action package>/<action>_<method>.html
+     このファイルを基に FreeGen が path_Purchase_PurchaseListHtml 定数を生成する。
+     参考: https://dbflute.seasar.org/ja/lastaflute/howto/action/makeashtml.html -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>購入一覧</title>
+</head>
+<body>
+    <h1>購入一覧</h1>
+
+    <!-- 支払方法での絞り込みフォーム (PurchaseListForm.pay に対応) -->
+    <form th:action="@{/purchase/list/}" method="get">
+        <select name="pay">
+            <option value="HAN">手渡し</option>
+            <option value="BAK">銀行振込</option>
+            <option value="CRC">クレジットカード</option>
+        </select>
+        <button type="submit">絞り込み</button>
+    </form>
+
+    <!-- 一覧表示 (Action から register された beans = List<PurchaseListRowBean>) -->
+    <table>
+        <thead>
+            <tr>
+                <th>購入ID</th>
+                <th>会員名称</th>
+                <th>商品名称</th>
+                <th>購入日時</th>
+                <th>購入価格</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="row : ${beans}">
+                <td th:text="${row.purchaseId}">1</td>
+                <td th:text="${row.memberName}">マイハマ太郎</td>
+                <td th:text="${row.productName}">アクションフィギュア</td>
+                <td th:text="${row.purchaseDatetime}">2014-10-21 12:34:56</td>
+                <td th:text="${row.purchasePrice}">1800</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
