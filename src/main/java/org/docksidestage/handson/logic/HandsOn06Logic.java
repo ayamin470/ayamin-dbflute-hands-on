@@ -11,6 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 // #1on1: logback.xmlの説明。現場でのログ設定。 (2026/06/19)
+// #1on1: テーブル名、カラム名大文字のお話 (2026/06/30)
+// #1on1: 空文字とnullのお話 (2026/06/30)
+// #1on1: DBFlute Client, DBFlute Engine, DBFlute Runtimeのお話 (2026/06/30)
+// #1on1: decommentのお話、ラフに書いて積み上げること優先 (2026/06/30)
+// #1on1: SchemaPolicyCheckのお話 (2026/06/30)
 /**
  * @author ayamin
  */
